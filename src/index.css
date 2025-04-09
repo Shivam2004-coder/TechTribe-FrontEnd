@@ -1,0 +1,50 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+.clip-slash {
+    clip-path: polygon(0% 0%, 90% 0%, 100% 100%, 0% 100%);
+}
+
+body {
+    font-family: "Playfair Display", serif;
+    
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: brightness(0.5);               /* Darken the icon */
+    background-color: #d0d0d0;             /* Light gray background (like Tailwind's bg-gray-300) */
+    padding: 5px;                          /* Padding inside the square */
+    border: 2px solid #a4a4a4;             /* Tailwind's border-gray-800 */
+    border-radius: 4px;                    /* Slightly rounded corners */
+    cursor: pointer;
+}
+  
+/* Hide scrollbar but keep scroll functionality */
+.scrollbar-hidden {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.card-wrapper {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.slide-out-right {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.slide-out-left {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+.slide-in {
+    transform: translateX(0);
+    opacity: 1;
+}
+  
