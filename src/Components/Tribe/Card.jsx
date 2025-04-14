@@ -24,22 +24,22 @@ const Card = (p) => {
     firstName,
     lastName,
     age,
-    gender,
-    profilePicture,
+    // gender,
+    // profilePicture,
     uploadedImages,
-    bio,
-    skills,
-    socialLinks,
+    // bio,
+    // skills,
+    // socialLinks,
   } = feed.feed;
 
 
-  console.log("I am in card.jsx!!");
-  console.log(feed.feed);
-  console.log(uploadedImages);
+//   console.log("I am in card.jsx!!");
+//   console.log(feed.feed);
+//   console.log(uploadedImages);
 
-  console.log(
-    gender + " " + bio + " " + skills + " " + socialLinks + " " + profilePicture + " " + uploadedImages
-  );
+//   console.log(
+//     gender + " " + bio + " " + skills + " " + socialLinks + " " + profilePicture + " " + uploadedImages
+//   );
 
   const handleRequestClick = async ({status , _id}) => {
     try {

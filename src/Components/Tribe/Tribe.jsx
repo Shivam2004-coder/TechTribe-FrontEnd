@@ -14,7 +14,7 @@ const Tribe = () => {
   const fetchTribeData = async () => {
     try {
       const response = await axios.get(BASE_URL + "user/feed" , {withCredentials: true});
-      console.log(response.data);
+      // console.log(response.data);
       dispatch(addFeed(response.data));
     } catch (error) {
       errorMessage(error.message);

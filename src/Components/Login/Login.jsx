@@ -44,11 +44,8 @@ const Login = () => {
                 withCredentials: true
               }
           )
-          .then((res) => {
-            // dispatch(addUser(res.data));
-            navigate("/profile");
-            console.log("This is Login Page !!");
-            console.log(res);
+          .then(() => {
+            window.location.href = "/tribe";
           });
         } catch (error) {
           

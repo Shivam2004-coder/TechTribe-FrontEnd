@@ -1,7 +1,18 @@
 import React from "react";
 import GoogleButton from "react-google-button";
+import { Cloudinary } from '@cloudinary/url-gen/index';
+import {AdvancedImage} from '@cloudinary/react';
+import {fill} from "@cloudinary/url-gen/actions/resize";
 
 const Form = (props) => {
+
+    // Create a Cloudinary instance and set your cloud name.
+    const cld = new Cloudinary({
+        cloud: {
+            cloudName: 'dilpkrfrb'
+        }
+    });
+
     const {
         isSignIn,
         setSignIn,
@@ -73,12 +84,17 @@ const Form = (props) => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    <img
-                        src={canSeePassword ? "/open-eye.png" : "/hidden.png"}
+                    <div className="h-4 w-4 right-2 cursor-pointer absolute" 
+                        onClick={() => setCanSeePassword(!canSeePassword)}
+                    >
+                        <AdvancedImage cldImg={cld.image(canSeePassword ? "TechTribe_User_Profile_Avatar/Logos/Logo_dc116e4b-856a-4ec0-9c74-2dbe7e9ac3a8" : "TechTribe_User_Profile_Avatar/Logos/Logo_06ba8b64-1d54-4064-9a67-198c1e761193").resize(fill().width(250).height(250))} />
+                    </div>
+                    {/* <img
+                        src={}
                         alt="Toggle visibility"
                         className="h-4 w-4 right-2 cursor-pointer absolute"
-                        onClick={() => setCanSeePassword(!canSeePassword)}
-                    />
+                        
+                    /> */}
                 </div>
             </div>
             </div>

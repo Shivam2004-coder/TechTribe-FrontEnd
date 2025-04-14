@@ -2,7 +2,7 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../utils/Constants/constants';
 import { errorMessage } from '../utils/ShowMessage';
 import {
@@ -28,18 +28,16 @@ import {
 const useFetchUserProfileData = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const location = useLocation();
+  // const location = useLocation();
   const profile = useSelector((store) => store.profile);
 
-  console.log("Hi i am in useFetchUserProfileData !!");
-
   const isProfileEmpty = () => {
-    return !profile || !profile.emailId;
+    return profile && profile.firstName && profile.firstName.length > 0 && profile.lastName && profile.lastName.length > 0 && profile.emailId && profile.emailId.length > 0;
   };
 
   const fetchUserProfileData = async () => {
     try {
-      if (isProfileEmpty()) {
+      if (!isProfileEmpty()) {
         const response = await axios.get(BASE_URL + 'profile/view', { withCredentials: true });
         const data = response.data;
 
@@ -62,15 +60,20 @@ const useFetchUserProfileData = () => {
         dispatch(setLinkedinLink(data.socialLinks?.linkedin || ''));
         dispatch(setPortfolioLink(data.socialLinks?.portfolio || ''));
 
-        console.log("Hi i have fetched and updated the redux store !!! ");
-        
+        // console.log("Hi i have fetched and updated the redux store !!! ");
+
+        if (location.pathname !== '/login') {
+          navigate(location.pathname);
+          // navigate('/tribe');
+        }
+        else{
+          navigate('/login');
+        }
+      }
+      else{
+        navigate('/tribe');
       }
 
-      if (location.pathname === '/login') {
-        navigate('/tribe');
-      } else {
-        navigate('/tribe');
-      }
     } catch (error) {
       if (error?.response?.status === 401) {
         navigate('/login');

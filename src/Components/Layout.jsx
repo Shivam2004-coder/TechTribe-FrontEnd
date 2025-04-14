@@ -5,8 +5,6 @@ import useFetchUserProfileData from "../CustomHooks/useFetchUserProfileData";
 
 const Layout = () => {
 
-    console.log("Hi i am in Layout !!");
-
     useFetchUserProfileData();
 
     return (

@@ -4,8 +4,19 @@ import { BASE_URL } from '../../utils/Constants/constants';
 import { errorMessage } from '../../utils/ShowMessage';
 import { useDispatch, useSelector } from 'react-redux';
 import { addRequest, removeRequest } from '../../utils/ReduxStore/requestSlice';
+import { Cloudinary } from '@cloudinary/url-gen/index';
+import {AdvancedImage} from '@cloudinary/react';
+import {fill} from "@cloudinary/url-gen/actions/resize";
 
 const Requests = () => {
+
+    // Create a Cloudinary instance and set your cloud name.
+    const cld = new Cloudinary({
+        cloud: {
+            cloudName: 'dilpkrfrb'
+        }
+    });
+
     const dispatch = useDispatch();
     const request = useSelector((store) => store.requests.requestContent);
     console.log("hi i am request !!");
@@ -53,11 +64,14 @@ const Requests = () => {
                         <div key={req._id} className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 p-6 flex flex-col justify-between">
                             <div>
                                 <div className="flex items-center space-x-4 mb-4">
-                                    <img
-                                        src={req.fromUserId.profilePicture?.[0] || "/user-profile-icon.jpg"}
+                                    {/* <img
+                                        src={req.fromUserId.profileImage}
                                         alt="Profile"
                                         className="w-16 h-16 rounded-full object-cover border-2 border-amber-500"
-                                    />
+                                    /> */}
+                                    <div className="w-16 h-16 rounded-full object-cover border-2 border-amber-500" >
+                                        <AdvancedImage cldImg={cld.image(req.fromUserId.profileImage).resize(fill().width(250).height(250))} />
+                                    </div>
                                     <div>
                                         <h2 className="text-xl font-semibold text-gray-800">{req.fromUserId.firstName} {req.fromUserId.lastName}</h2>
                                         <p className="text-sm text-gray-500">{req.fromUserId.bio}</p>

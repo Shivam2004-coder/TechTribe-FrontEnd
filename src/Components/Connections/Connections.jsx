@@ -9,8 +9,19 @@ import { FaGithub, FaLinkedin, FaGlobe } from 'react-icons/fa';
 import ExploreButton from './ExploreButton';
 import ChatButton from './ChatButton';
 import { motion, AnimatePresence } from "framer-motion";
+import { Cloudinary } from '@cloudinary/url-gen/index';
+import {AdvancedImage} from '@cloudinary/react';
+import {fill} from "@cloudinary/url-gen/actions/resize";
 
 const Connections = () => {
+
+     // Create a Cloudinary instance and set your cloud name.
+    const cld = new Cloudinary({
+        cloud: {
+            cloudName: 'dilpkrfrb'
+        }
+    });
+
     const connections = useSelector((store) => store.connections.connectionContent);
     const dispatch = useDispatch();
     const [layout, setLayout] = useState('grid');
@@ -32,9 +43,9 @@ const Connections = () => {
         fetchConnectionsData();
     }, []);
 
-    const getRandomProfilePic = (pictures) => {
-        return pictures[Math.floor(Math.random() * pictures.length)];
-    };
+    // const getRandomProfilePic = (pictures) => {
+    //     return pictures[Math.floor(Math.random() * pictures.length)];
+    // };
 
     return (
         <div className="min-h-screen w-full bg-gray-50 transition-all duration-500">
@@ -73,11 +84,14 @@ const Connections = () => {
                             className="bg-gray-200 rounded-2xl shadow-md p-6 hover:shadow-xl transition-shadow duration-300"
                         >
                             <div className={`flex ${layout === 'row' ? 'flex-row items-center gap-6' : 'flex-col items-center'} mb-4`}>
-                                <img
-                                    src={getRandomProfilePic(user.profilePicture)}
+                                {/* <img
+                                    src={user.profileImage}
                                     alt={`${user.firstName} ${user.lastName}`}
                                     className="w-24 h-24 object-cover rounded-full border-4 border-amber-500"
-                                />
+                                /> */}
+                                <div className="w-24 h-24 object-cover rounded-full border-4 border-amber-500" >
+                                    <AdvancedImage cldImg={cld.image(user.profileImage).resize(fill().width(250).height(250))} />
+                                </div>
                                 <div className={`text-${layout === 'row' ? 'left' : 'center'} w-full`}>
                                     <h2 className="text-xl font-semibold text-gray-800">
                                         {user.firstName} {user.lastName}, {user.age}
