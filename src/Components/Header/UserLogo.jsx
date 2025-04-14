@@ -1,8 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
+import { Cloudinary } from '@cloudinary/url-gen/index';
+import {AdvancedImage} from '@cloudinary/react';
+import {fill} from "@cloudinary/url-gen/actions/resize";
 import Menu from "./Menu";
 import { useSelector } from "react-redux";
 
 const UserLogo = () => {
+
+    // Create a Cloudinary instance and set your cloud name.
+    const cld = new Cloudinary({
+        cloud: {
+            cloudName: 'dilpkrfrb'
+        }
+    });
+
     const [isClicked, setIsClicked] = useState(false);
     const menuRef = useRef(null);
     const iconRef = useRef(null); // Ref for the user icon
@@ -36,15 +47,13 @@ const UserLogo = () => {
     return (
         <div className="mr-2">
             <div
-                className="relative p-0.5 hover:bg-gray-300 hover:rounded-full"
+                className="relative p-0.5 hover:bg-gray-300"
                 onClick={handleUserIconClick}
                 ref={iconRef} // Attach ref to user icon
             >
-                <img
-                    src={profileImage}
-                    alt="This is User Logo !!"
-                    className="rounded-full h-15 w-15 bg-gray-300 cursor-pointer object-cover"
-                />
+                <div className="h-15 w-15 object-cover rounded-lg" >
+                    <AdvancedImage cldImg={cld.image(profileImage).resize(fill().width(250).height(250))} />
+                </div>
             </div>
             {isClicked && (
                 <div ref={menuRef}>

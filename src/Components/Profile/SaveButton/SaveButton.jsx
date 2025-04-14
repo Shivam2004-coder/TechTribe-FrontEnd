@@ -18,7 +18,7 @@ const SaveButton = () => {
     const companyName = useSelector((store) => store.profile.companyName);
     const school = useSelector((store) => store.profile.school);
     const livingIn = useSelector((store) => store.profile.livingIn);
-    const socialLinks = useSelector((store) => store.socialLinks);
+    const socialLinks = useSelector((store) => store.profile.socialLinks);
     const skills = useSelector((store) => store.profile.skills);
 
 
@@ -29,7 +29,7 @@ const SaveButton = () => {
     // console.log(dateOfBirth);
     // console.log(promptContent);
     // console.log(uploadedImages);
-    // console.log(profileImage);
+    console.log(profileImage);
     // console.log(bio);
     // console.log(jobTitle);
     // console.log(companyName);
@@ -40,6 +40,15 @@ const SaveButton = () => {
 
     const handleSaveProfileClick = async () => {
         try {
+            console.log("I am in delete Function !!");
+
+            const response = await axios.post(BASE_URL + "profile/delete/savedImages", {
+                uploadedImages,
+                profileImage,
+            },{withCredentials: true});
+
+            console.log(response);
+
             const res = await axios.patch(BASE_URL + "profile/edit" , {
               firstName,
               lastName,

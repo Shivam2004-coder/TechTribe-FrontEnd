@@ -42,7 +42,7 @@ const Edit = () => {
     const userGender = useSelector((store) => store.profile.gender);
     const userDateOfBirth = useSelector((store) => store.profile.dateOfBirth);
     const userPromptContent = useSelector((store) => store.profile.promptContent);
-    // const userUploadedImages = useSelector((store) => store.profile.uploadedImages);
+    const userUploadedImages = useSelector((store) => store.profile.uploadedImages);
     const userBio = useSelector((store) => store.profile.bio);
     const userJobTitleName = useSelector((store) => store.profile.jobTitle);
     const userCompanyName = useSelector((store) => store.profile.companyName);
@@ -63,7 +63,8 @@ const Edit = () => {
     const [emailId , setEId] = useState(userEmailId || "");
     const [gender,setG] = useState(userGender || "");
     const [dateOfBirth,setdateOfBirth] = useState(userDateOfBirth || "");
-    const [images, setImages] = useState(Array(9).fill(null)); // Initialize with nulls
+    const [images, setImages] = useState(userUploadedImages); // Initialize with nulls
+    // const [images, setImages] = useState(Array(9).fill(null)); // Initialize with nulls
     const [bio , setB] = useState(userBio || "");
     const [jobTitle,setJTitle] = useState(userJobTitleName || "");
     const [company,setC] = useState(userCompanyName || "");

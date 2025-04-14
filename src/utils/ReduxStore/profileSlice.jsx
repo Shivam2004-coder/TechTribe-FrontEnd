@@ -9,7 +9,7 @@ const initialState = {
   dateOfBirth: '',
   promptContent: [], // [{ index: 0, content: "..." }]
   uploadedImages: [], // [url1, url2, ...]
-  profileImage: '/user-profile-icon.jpg', // URL string or base64
+  profileImage: '', // URL string or base64
   bio: '',
   jobTitle: '',
   companyName: '',

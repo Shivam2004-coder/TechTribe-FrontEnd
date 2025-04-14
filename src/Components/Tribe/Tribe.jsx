@@ -8,6 +8,7 @@ import { BASE_URL } from "../../utils/Constants/constants";
 
 const Tribe = () => {
   const feed = useSelector((store) => store.feed.feedContent);
+  
   const dispatch = useDispatch();
   
   const fetchTribeData = async () => {

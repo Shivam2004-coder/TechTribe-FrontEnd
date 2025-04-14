@@ -18,6 +18,7 @@ import { errorMessage } from '../../utils/ShowMessage';
 const CreateAccountButton = ({ formData, images }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  console.log(images);
 
   const handleSubmit = async () => {
     // Dispatching form data to Redux store

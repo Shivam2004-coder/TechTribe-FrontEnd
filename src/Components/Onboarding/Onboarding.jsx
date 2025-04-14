@@ -16,8 +16,7 @@ const Onboarding = () => {
     inputSkill: "",
   });
 
-  const [images, setImages] = useState([null, null, null, null, null, null]);
-
+  const [images, setImages] = useState([]);
 
   return (
     <div className="min-h-screen bg-pink-300 p-8 flex flex-col gap-6 text-gray-800 ">

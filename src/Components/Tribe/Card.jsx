@@ -26,15 +26,19 @@ const Card = (p) => {
     age,
     gender,
     profilePicture,
+    uploadedImages,
     bio,
     skills,
     socialLinks,
   } = feed.feed;
 
+
+  console.log("I am in card.jsx!!");
   console.log(feed.feed);
+  console.log(uploadedImages);
 
   console.log(
-    gender + " " + bio + " " + skills + " " + socialLinks + profilePicture[0]
+    gender + " " + bio + " " + skills + " " + socialLinks + " " + profilePicture + " " + uploadedImages
   );
 
   const handleRequestClick = async ({status , _id}) => {
@@ -62,14 +66,15 @@ const Card = (p) => {
         <div
             className="relative flex flex-col h-96 w-80 rounded-2xl overflow-hidden shadow m-3 shadow-black"
             style={{
-                backgroundImage: `url(${profilePicture[profilePictureIndex]})`,
+                backgroundImage: `url("https://res.cloudinary.com/dilpkrfrb/image/upload/v1744462596/${uploadedImages[profilePictureIndex]}")`,
+                // backgroundImage: `url(${uploadedImages[profilePictureIndex]})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
             }}
         >
             {/* Dots for Image Selection - Moved to the Top */}
             <div className="absolute top-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                {profilePicture.map((_, index) => (
+                {uploadedImages.map((_, index) => (
                 <div
                     key={index}
                     className={`h-4 w-4 rounded-full cursor-pointer shadow shadow-black ${

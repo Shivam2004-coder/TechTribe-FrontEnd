@@ -8,17 +8,17 @@ const UserCard = (feed) => {
     const [animationClass, setAnimationClass] = useState('');
 
 
-    const {profilePicture} = feed.feed;
+    const {uploadedImages} = feed.feed;
 
     const handleNext = () => {
         setProfilePictureIndex((prevIndex) =>
-            prevIndex === profilePicture.length - 1 ? 0 : prevIndex + 1
+            prevIndex === uploadedImages.length - 1 ? 0 : prevIndex + 1
         );
     };
 
     const handlePrev = () => {
         setProfilePictureIndex((prevIndex) =>
-        prevIndex === 0 ? profilePicture.length - 1 : prevIndex - 1
+        prevIndex === 0 ? uploadedImages.length - 1 : prevIndex - 1
         );
     };
 
