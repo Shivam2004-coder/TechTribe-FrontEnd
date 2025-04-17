@@ -22,7 +22,8 @@ import {
   setSkills,
   setGithubLink,
   setLinkedinLink,
-  setPortfolioLink
+  setPortfolioLink,
+  setUserId
 } from '../utils/ReduxStore/profileSlice';
 
 const useFetchUserProfileData = () => {
@@ -42,6 +43,7 @@ const useFetchUserProfileData = () => {
         const data = response.data;
 
         // Dispatch to profileSlice
+        dispatch(setUserId(data._id || ''));
         dispatch(setFirstName(data.firstName || ''));
         dispatch(setLastName(data.lastName || ''));
         dispatch(setEmailId(data.emailId || ''));

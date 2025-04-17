@@ -110,8 +110,8 @@ const Connections = () => {
                                     </div>
 
                                     <div className="mt-4 flex gap-4">
-                                        <ExploreButton onClick={() => alert(`Exploring ${user.firstName}`)} />
-                                        <ChatButton onClick={() => alert(`Chat with ${user.firstName}`)} />
+                                        <ExploreButton />
+                                        <ChatButton _id={user._id} />
                                     </div>
 
                                     <div className="mt-4 flex gap-6 text-amber-700 text-lg">

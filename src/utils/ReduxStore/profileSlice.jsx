@@ -2,6 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  userId: '',
   firstName: '',
   lastName: '',
   emailId: '',
@@ -27,6 +28,7 @@ const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
+    setUserId: (state , action) => { state.userId = action.payload; },
     setFirstName: (state, action) => { state.firstName = action.payload; },
     setLastName: (state, action) => { state.lastName = action.payload; },
     setEmailId: (state, action) => { state.emailId = action.payload; },
@@ -94,6 +96,7 @@ const profileSlice = createSlice({
 });
 
 export const {
+  setUserId,
   setFirstName,
   setLastName,
   setEmailId,
