@@ -11,6 +11,12 @@ const NavOptions = () => {
         }
     }
 
+    const handlePremiumClick = () => {
+        if ( location !== "/premium" ) {
+            navigate("/premium");
+        }
+    }
+
     // const handleAboutClick = () => {
     //     if ( location !== "/about" ) {
     //         navigate("/about")
@@ -43,6 +49,25 @@ const NavOptions = () => {
                     onClick={handleHomeClick}
                 >
                     Home
+                </button>
+            </div>
+            <div >
+                <button 
+                    className="
+                                p-2 
+                                rounded-lg 
+                                bg-red-800 
+                                shadow-inner
+                                shadow-black
+                                hover:bg-gray-700
+                                active:bg-gray-800
+                                border-2
+                                border-dashed
+                                border-gray-300
+                                cursor-pointer" 
+                    onClick={handlePremiumClick}
+                >
+                    Premium
                 </button>
             </div>
             <div >

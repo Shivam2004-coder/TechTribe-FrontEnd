@@ -7,6 +7,7 @@ import Onboarding from "./Onboarding/Onboarding";
 import Connections from "./Connections/Connections";
 import Requests from "./Requests/Requests";
 import Chat from "./Chat/Chat";
+import Premium from "./Premium/Premium";
 
 const Body = () => {
   return (
@@ -20,6 +21,8 @@ const Body = () => {
         <Route path="connections" element={<Connections/>} />
         <Route path="requests" element={<Requests/>} />
         <Route path="chat/:targetUserId" element={<Chat />} />
+        <Route path="premium" element={<Premium/>} />
+
       </Route>
     </Routes>
   );

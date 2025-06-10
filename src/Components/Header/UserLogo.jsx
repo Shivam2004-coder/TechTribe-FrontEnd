@@ -3,6 +3,7 @@ import { Cloudinary } from '@cloudinary/url-gen/index';
 import {AdvancedImage} from '@cloudinary/react';
 import {fill} from "@cloudinary/url-gen/actions/resize";
 import Menu from "./Menu";
+// import DropDown from "./DropDown";
 import { useSelector } from "react-redux";
 
 const UserLogo = () => {
@@ -58,6 +59,7 @@ const UserLogo = () => {
             {isClicked && (
                 <div ref={menuRef}>
                     <Menu />
+                    {/* <DropDown /> */}
                 </div>
             )}
         </div>
