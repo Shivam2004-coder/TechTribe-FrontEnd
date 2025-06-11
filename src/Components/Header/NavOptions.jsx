@@ -31,7 +31,7 @@ const NavOptions = () => {
 
 
     return (
-        <div className="flex items-center w-64 p-1 h-full justify-between rounded-sm" >
+        <div className="flex items-center w-10/12 p-1 h-full justify-around rounded-sm" >
             <div >
                 <button 
                     className="

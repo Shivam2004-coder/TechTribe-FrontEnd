@@ -18,7 +18,7 @@ const Header = () => {
   };
   
   return (
-    <div className="sticky z-20 flex items-center top-0 justify-between h-16 bg-gray-500 w-full opacity-95">
+    <div className="sticky z-20 flex items-center top-0 justify-between h-24 bg-gray-500 w-full opacity-95">
       <div className="
                 bg-blue-700 
                 h-full 
@@ -38,8 +38,8 @@ const Header = () => {
                 flex 
                 h-full 
                 items-center 
-                w-5/12 
-                justify-around
+                w-4/12 
+                justify-end
                 "
         >
           <NavOptions />

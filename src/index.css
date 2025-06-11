@@ -47,4 +47,28 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     transform: translateX(0);
     opacity: 1;
 }
+
+
+/**********css for sliding user-menu*****************/
+@keyframes expand-from-zero {
+  0% {
+    width: 0;
+    opacity: 0;
+    padding: 0;
+  }
+  100% {
+    width: 12rem; /* Match your menu's actual width (w-40 = 10rem) */
+    opacity: 1;
+    padding: 0.3rem; /* Match actual padding (p-2 = 0.5rem) */
+  }
+}
+
+.animate-expand-menu {
+  animation: expand-from-zero 0.25s ease-out forwards;
+  overflow: hidden;
+}
+
+
+
+
   

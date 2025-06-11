@@ -46,9 +46,9 @@ const UserLogo = () => {
     }, []);
 
     return (
-        <div className="mr-2">
+        <div className="w-2/12 h-full flex items-center justify-around relative">
             <div
-                className="relative p-0.5 hover:bg-gray-300"
+                className="absolute p-0.5 hover:bg-gray-300"
                 onClick={handleUserIconClick}
                 ref={iconRef} // Attach ref to user icon
             >
@@ -57,11 +57,19 @@ const UserLogo = () => {
                 </div>
             </div>
             {isClicked && (
-                <div ref={menuRef}>
+                <div
+                    ref={menuRef}
+                    // className="absolute top-full right-0 mt-2 z-50 animate-slide-in-right"
+                    className="absolute top-full right-0 mt-2 z-50 animate-expand-menu"
+                >
                     <Menu />
-                    {/* <DropDown /> */}
                 </div>
             )}
+            {/* { isClicked && (
+                <div ref={menuRef}>
+                    <Menu />
+                </div>
+            )} */}
         </div>
     );
 };
