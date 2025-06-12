@@ -57,7 +57,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 0;
   }
   100% {
-    width: 12rem; /* Match your menu's actual width (w-40 = 10rem) */
+    width: 20rem; /* Match your menu's actual width (w-40 = 10rem) */
     opacity: 1;
     padding: 0.3rem; /* Match actual padding (p-2 = 0.5rem) */
   }

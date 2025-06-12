@@ -59,7 +59,7 @@ const Menu = () => {
     const requestImage = "TechTribe_User_Profile_Avatar/Logos/Logo_250b49e3-cb7f-4603-82f6-5984591bd84d";
 
     return (
-        <div className=" bg-amber-600 text-black rounded-md right-0 m-1 border border-gray-700" >
+        <div className="h-screen bg-amber-600 text-black rounded-md right-0 m-1 border border-gray-700" >
             <div className="flex items-center hover:bg-slate-200 hover:rounded-md cursor-pointer hover:shadow hover:shadow-black active:shadow-gray-600"
                 onClick={handleProfileClick}
             >

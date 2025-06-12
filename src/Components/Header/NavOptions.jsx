@@ -31,81 +31,65 @@ const NavOptions = () => {
 
 
     return (
-        <div className="flex items-center w-10/12 p-1 h-full justify-around rounded-sm" >
-            <div >
-                <button 
-                    className="
-                                p-2 
-                                rounded-lg 
-                                bg-gray-800 
-                                shadow-inner
-                                shadow-black
-                                hover:bg-gray-700
-                                active:bg-gray-800
-                                border-2
-                                border-dashed
-                                border-gray-300
-                                cursor-pointer" 
-                    onClick={handleHomeClick}
-                >
-                    Home
-                </button>
-            </div>
-            <div >
-                <button 
-                    className="
-                                p-2 
-                                rounded-lg 
-                                bg-red-800 
-                                shadow-inner
-                                shadow-black
-                                hover:bg-gray-700
-                                active:bg-gray-800
-                                border-2
-                                border-dashed
-                                border-gray-300
-                                cursor-pointer" 
-                    onClick={handlePremiumClick}
-                >
-                    Premium
-                </button>
-            </div>
-            <div >
-                <button
-                    className="
-                                p-2 
-                                rounded-lg 
-                                bg-gray-800 
-                                shadow-inner
-                                shadow-black
-                                hover:bg-gray-700
-                                active:bg-gray-800
-                                border-2
-                                border-dashed
-                                border-gray-300
-                                cursor-pointer" 
-                            >
-                    About
-                </button>
-            </div>
-            <div>
-                <button
-                    className="
-                                p-2 
-                                rounded-lg 
-                                bg-gray-800 
-                                shadow-inner
-                                shadow-black
-                                hover:bg-gray-700
-                                active:bg-gray-800
-                                border-2
-                                border-dashed
-                                border-gray-300
-                                cursor-pointer"
-                            >
-                    Contact Us
-                </button>
-            </div>
+        <div className="flex items-center w-10/12 h-full rounded-sm" >
+            <button 
+                className=" hover:bg-blue-700 
+                            active:bg-blue-900 
+                            h-full 
+                            flex 
+                            items-center
+                            p-2 
+                            cursor-pointer
+                            transition-colors 
+                            duration-150 
+                            ease-in-out" 
+                onClick={handleHomeClick}
+            >
+                Home
+            </button>
+            <button 
+                className=" hover:bg-blue-700 
+                            active:bg-blue-800 
+                            h-full 
+                            flex 
+                            items-center
+                            p-2 
+                            cursor-pointer
+                            transition-colors 
+                            duration-150 
+                            ease-in-out"  
+                onClick={handlePremiumClick}
+            >
+                Premium
+            </button>
+            <button
+                className=" hover:bg-blue-700 
+                            active:bg-blue-800 
+                            h-full 
+                            flex 
+                            items-center
+                            p-2 
+                            cursor-pointer
+                            transition-colors 
+                            duration-150 
+                            ease-in-out"  
+            >
+                About
+            </button>
+            <button
+                className=" hover:bg-blue-700 
+                            active:bg-blue-800 
+                            h-full 
+                            flex 
+                            items-center
+                            p-2 
+                            cursor-pointer
+                            transition-colors 
+                            duration-150 
+                            ease-in-out" 
+            >
+                Contact Us
+            </button>
         </div>
     )
 }
