@@ -1,24 +1,21 @@
-import React from "react";
 
 const Logo = () => {
+
     return (
         <div
             className="font-bold text-2xl text-white rounded-lg 
-                       hover:bg-gray-900 
-                       hover:shadow hover:shadow-black
-                       active:bg-gray-700 active:shadow
-                       p-2
-                       w-6/12
-                       mx-4
+                       p-4
+                       w-full
                        flex justify-center
-                       cursor-pointer"
+                       cursor-pointer
+                       "
         >
             <img 
                 src="/TechTribeLogo1.jpeg" 
                 alt="WebsiteLogo" 
-                className="h-9 w-9 rounded-sm mx-1 shadow shadow-black"
+                className="h-6 w-6 md:h-9 md:w-9 mx-1 shadow shadow-black"
             />
-            <h1>Tech Tribe</h1>
+            <h1 className="text-sm md:text-2xl">TechTribe</h1>
         </div>
     );
 };

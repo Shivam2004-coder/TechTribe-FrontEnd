@@ -1,15 +1,15 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+
+/************For adding a slash with shadow*************/
 .clip-slash {
     clip-path: polygon(0% 0%, 90% 0%, 100% 100%, 0% 100%);
 }
-
 body {
     font-family: "Playfair Display", serif;
-    
+    font-size: larger;   
 }
-
 input[type="date"]::-webkit-calendar-picker-indicator {
     filter: brightness(0.5);               /* Darken the icon */
     background-color: #d0d0d0;             /* Light gray background (like Tailwind's bg-gray-300) */
@@ -18,31 +18,26 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border-radius: 4px;                    /* Slightly rounded corners */
     cursor: pointer;
 }
-  
+ 
 /* Hide scrollbar but keep scroll functionality */
 .scrollbar-hidden {
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
 }
-
 .scrollbar-hidden::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
 }
-
 .card-wrapper {
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
-
 .slide-out-right {
     transform: translateX(100%);
     opacity: 0;
 }
-
 .slide-out-left {
     transform: translateX(-100%);
     opacity: 0;
 }
-
 .slide-in {
     transform: translateX(0);
     opacity: 1;
@@ -59,13 +54,38 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   100% {
     width: 20rem; /* Match your menu's actual width (w-40 = 10rem) */
     opacity: 1;
-    padding: 0.3rem; /* Match actual padding (p-2 = 0.5rem) */
+    padding: 1rem; /* Match actual padding (p-2 = 0.5rem) */
   }
 }
-
 .animate-expand-menu {
   animation: expand-from-zero 0.25s ease-out forwards;
   overflow: hidden;
+}
+
+/********************Dynamic bg-color changing***********************/
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient-texture {
+  background: linear-gradient(
+    270deg,
+    #f43f5e,  /* rose-500 */
+    #f59e0b,  /* amber-500 */
+    #10b981, /* emerald-500 */
+    #3b82f6, /* blue-500 */
+    #8b5cf6  /* violet-500 */
+  );
+  background-size: 400% 400%;
+  animation: gradientFlow 6s ease infinite;
 }
 
 

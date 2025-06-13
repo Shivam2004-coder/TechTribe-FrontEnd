@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "./Logo";
 import NavOptions from "./NavOptions";
 import UserLogo from "./UserLogo";
@@ -9,6 +9,7 @@ const Header = () => {
   // const user = useSelector((store) => store.user.userContent);
   const profile = useSelector((store) => store.profile);
   const location = useLocation();
+  const [isClicked, setIsClicked] = useState(false);
 
   const isProfileEmpty = () => {
     if ( location === "/onboarding" ) {
@@ -18,17 +19,28 @@ const Header = () => {
   };
   
   return (
-    <div className="sticky z-20 flex items-center top-0 justify-between h-24 bg-gray-500 w-full opacity-95">
+    <div className="sticky z-20 flex items-center top-0 justify-between h-20 bg-black w-full">
       <div className="
-                bg-blue-700 
-                h-full 
-                w-4/12 
+                mx-2
+                my-2
+                bg-blue-950 
+                lg:w-3/12
+                md:w-2/12
+                w-5/12
                 flex 
                 items-center 
+                justify-center
                 font-bold 
-                clip-slash
-                shadow-inner
-                shadow-black"
+                rounded-full
+                active:scale-95 
+                transition
+                duration-150 
+                ease-in-out
+                select-none       
+                "
+          style={{
+            backgroundColor: "rgb(0, 49, 255)"  
+          }}
       >
         <Logo />
       </div>
@@ -38,12 +50,16 @@ const Header = () => {
                 flex 
                 h-full 
                 items-center 
-                w-4/12 
+                md:w-9/12
+                w-8/12 
                 justify-end
                 "
         >
-          <NavOptions />
-          <UserLogo />
+          {!isClicked && <NavOptions />}
+          <UserLogo 
+                  isClicked={isClicked}
+                  setIsClicked={setIsClicked}
+          />
         </div>
       }
     </div>

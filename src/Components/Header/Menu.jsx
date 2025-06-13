@@ -9,7 +9,7 @@ import {AdvancedImage} from '@cloudinary/react';
 import {fill} from "@cloudinary/url-gen/actions/resize";
 import {resetProfile} from "../../utils/ReduxStore/profileSlice";
 
-const Menu = () => {
+const Menu = ({setIsClicked}) => {
 
     // Create a Cloudinary instance and set your cloud name.
     const cld = new Cloudinary({
@@ -21,14 +21,21 @@ const Menu = () => {
     // const  location = useLocation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const firstName = useSelector((store) => store.profile.firstName);
+    const lastName = useSelector((store) => store.profile.lastName);
+    const emailId = useSelector((store) => store.profile.emailId);
     const profileImage = useSelector((store) => store.profile.profileImage);
 
+    const handleHomeClick = () => {
+        if ( location !== "/tribe" ) {
+            navigate("/tribe");
+        }
+    }
     const handleProfileClick = () => {
         if ( location !== "/profile" ) {
             navigate("/profile");
         }
     }
-
     const handleConnectionsClick = () => {
         if ( location !== "/connections" ) {
             navigate("/connections");
@@ -37,13 +44,11 @@ const Menu = () => {
         //     navigate("/onboarding");
         // }
     }
-
     const handleRequestsClick = () => {
         if ( location !== "/requests" ) {
             navigate("/requests");
         }
     }
-    
     const handleLogoutClick = async () => {
         try {
             const response = await axios.post(BASE_URL + "logout" , {} , {withCredentials: true});
@@ -54,55 +59,125 @@ const Menu = () => {
             errorMessage(error.message);
         }
     }
+    const handlePremiumClick = () => {
+        if( location !== "/premium" ){
+            navigate("/premium");
+        }
+    }
+    const handleAboutClick = () => {
+        
+    }
+    const handleContactUsClick = () => {
 
-    const connectionImage = "TechTribe_User_Profile_Avatar/Logos/Logo_eb57da91-f036-4ee9-b795-94506c77a832";
-    const requestImage = "TechTribe_User_Profile_Avatar/Logos/Logo_250b49e3-cb7f-4603-82f6-5984591bd84d";
+    }
+
+    // const connectionImage = "TechTribe_User_Profile_Avatar/Logos/Logo_eb57da91-f036-4ee9-b795-94506c77a832";
+    // const requestImage = "TechTribe_User_Profile_Avatar/Logos/Logo_250b49e3-cb7f-4603-82f6-5984591bd84d";
 
     return (
-        <div className="h-screen bg-amber-600 text-black rounded-md right-0 m-1 border border-gray-700" >
-            <div className="flex items-center hover:bg-slate-200 hover:rounded-md cursor-pointer hover:shadow hover:shadow-black active:shadow-gray-600"
+        <div className="h-screen right-0 m-1" >
+            <div className='flex flex-row justify-between mb-5' >
+                <div className='flex flex-row justify-between' >
+                    <AdvancedImage cldImg={cld.image(profileImage).resize(fill().width(250).height(250))} 
+                                className="h-9 w-9 mr-2 object-contain rounded-full shadow-lg shadow-black"
+                    />
+                    <div>
+                        <h1 className='font-bold' >{firstName} {lastName}</h1>
+                        <h2>{emailId}</h2>
+                    </div>
+                </div>
+                <button 
+                    className='hover:bg-gray-500 hover:rounded-lg cursor-pointer flex items-center justify-center p-2'
+                    onClick={() => {
+                    setIsClicked(false);
+                }} >
+                    <i className="material-icons">close</i>
+                </button>
+            </div>
+            <div className="flex items-center hover:bg-slate-200 hover:rounded-md cursor-pointer hover:shadow hover:shadow-black active:shadow-gray-600
+                            p-1
+                            "
+                onClick={handleHomeClick}
+            >
+                <i className="material-icons mr-1">home</i>
+                <button className="cursor-pointer" >
+                    Home
+                </button>
+            </div>
+            <hr className="font-bold border-black border-dashed my-1" />
+            <div className="flex items-center hover:bg-slate-200 hover:rounded-md cursor-pointer hover:shadow hover:shadow-black active:shadow-gray-600
+                            p-1
+                            "
                 onClick={handleProfileClick}
             >
-                {/* <img alt="userProfileIcon" src={profileImage} className="h-6 w-6 rounded-full m-2 object-contain" /> */}
-                <div className="h-6 w-6 object-contain m-2 rounded-lg" >
-                    <AdvancedImage cldImg={cld.image(profileImage).resize(fill().width(250).height(250))} />
-                </div>
-                {/* <button onClick={handleProfileClick} > */}
+                <i className="material-icons mr-1">account_circle</i>
                 <button className="cursor-pointer" >
                     Profile
                 </button>
             </div>
-            <div className="flex items-center hover:bg-slate-200 hover:rounded-md hover:bg-opacity-40 cursor-pointer hover:shadow hover:shadow-black active:shadow-gray-600"
+            <div className="flex items-center hover:bg-slate-200 hover:rounded-md hover:bg-opacity-40 cursor-pointer hover:shadow hover:shadow-black active:shadow-gray-600
+                            p-1"
                 onClick={handleConnectionsClick}
             >
-                {/* <img alt="userConnectionsIcon" src="/user-connections-icon.png" className="h-6 w-6 rounded-md m-2" /> */}
-                <div className="h-6 w-6 object-contain m-2 rounded-lg" >
-                    <AdvancedImage cldImg={cld.image(connectionImage).resize(fill().width(250).height(250))} />
-                </div>
-                {/* <button onClick={handleConnectionsClick} > */}
+                <i className="material-icons mr-1">hub</i>
                 <button className="cursor-pointer" >
                     Connections
                 </button>
             </div>
-            <div className="flex items-center hover:bg-slate-200 hover:rounded-md hover:bg-opacity-40 cursor-pointer hover:shadow hover:shadow-black active:shadow-gray-600"
+            <div className="flex items-center hover:bg-slate-200 hover:rounded-md hover:bg-opacity-40 cursor-pointer hover:shadow hover:shadow-black active:shadow-gray-600
+                            p-1"
                 onClick={handleRequestsClick}
             >
-                {/* <img alt="userRequestsIcon" src="/user-requests-icon.png" className="h-6 w-6 m-2 object-fill rounded-md" /> */}
-                <div className="h-6 w-6 object-contain m-2 rounded-lg" >
-                    <AdvancedImage cldImg={cld.image(requestImage).resize(fill().width(250).height(250))} />
-                </div>
-                {/* <button onClick={handleRequestsClick} > */}
+                <i className="material-icons mr-1">person_add</i>
                 <button className="cursor-pointer" >
                     Requests
                 </button>
             </div>
             <hr className="font-bold border-black border-dashed my-1" />
-            <p 
-                className="text-center cursor-pointer text-red-600 hover:font-bold hover:underline active:font-normal"
+            <div className="flex items-center justify-between hover:bg-slate-200 hover:rounded-md cursor-pointer hover:shadow hover:shadow-black active:shadow-gray-600
+                            p-1
+                            "
+                onClick={handlePremiumClick}
+            >
+                <div className='flex items-center'>
+                    <i className="material-icons mr-1">diamond</i>
+                    <button className="cursor-pointer" >
+                        Premium
+                    </button>
+                </div>
+                <p className="border-1 rounded-lg p-1 text-white font-bold gradient-texture  bg-clip-text ">
+                    NEW
+                </p>
+            </div>
+            <hr className="font-bold border-black border-dashed my-1" />
+            <div className="flex items-center hover:bg-slate-200 hover:rounded-md hover:bg-opacity-40 cursor-pointer hover:shadow hover:shadow-black active:shadow-gray-600
+                            p-1"
+                onClick={handleAboutClick}
+            >
+                <i className="material-icons mr-1">info</i>
+                <button className="cursor-pointer" >
+                    About
+                </button>
+            </div>
+            <div className="flex items-center hover:bg-slate-200 hover:rounded-md hover:bg-opacity-40 cursor-pointer hover:shadow hover:shadow-black active:shadow-gray-600
+                            p-1"
+                onClick={handleContactUsClick}
+            >
+                <i className="material-icons mr-1">help</i>
+                <button className="cursor-pointer" >
+                    Contact Us
+                </button>
+            </div>
+            <hr className="font-bold border-black border-dashed my-1" />
+            <div className="flex items-center hover:bg-slate-200 hover:rounded-md hover:bg-opacity-40 cursor-pointer hover:shadow hover:shadow-black active:shadow-gray-600
+                            p-1"
                 onClick={handleLogoutClick}
             >
-                LogOut
-            </p>
+                <i className="material-icons mr-1">logout</i>
+                <button className="cursor-pointer" >
+                    Sign out
+                </button>
+            </div>
         </div>
     )
 }
