@@ -62,9 +62,9 @@ const Card = (p) => {
   
 
   return (
-    <div className="p-4 border bg-gray-300 rounded-2xl shadow shadow-black m-4" >
+    <div className="p-1 border bg-gray-300 shadow-black shadow-lg m-4" >
         <div
-            className="relative flex flex-col h-96 w-80 rounded-2xl overflow-hidden shadow m-3 shadow-black"
+            className="relative flex flex-col h-96 w-80 overflow-hidden shadow m-3 shadow-black"
             style={{
                 backgroundImage: `url("https://res.cloudinary.com/dilpkrfrb/image/upload/v1744462596/${uploadedImages[profilePictureIndex]}")`,
                 // backgroundImage: `url(${uploadedImages[profilePictureIndex]})`,
@@ -87,7 +87,7 @@ const Card = (p) => {
 
             {/* Left Arrow */}
             <button
-                className="absolute left-2 top-1/2 cursor-pointer transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full opacity-70 hover:opacity-100"
+                className="absolute left-2 top-1/2 w-10 h-10 flex items-center justify-center cursor-pointer transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full opacity-70 hover:opacity-100"
                 onClick={handlePrev}
             >
                 ◀
@@ -95,46 +95,65 @@ const Card = (p) => {
 
             {/* Right Arrow */}
             <button
-                className="absolute right-2 top-1/2 cursor-pointer transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full opacity-70 hover:opacity-100"
+                className="absolute right-2 top-1/2 w-10 h-10 flex items-center justify-center cursor-pointer transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full opacity-70 hover:opacity-100"
                 onClick={handleNext}
             >
                 ▶
             </button>
 
             {/* User Info Overlay */}
-            <div className="absolute bottom-0 grid grid-cols-12 rounded-t-3xl text-white w-full bg-gray-400 opacity-95 bg-gradient-to-b from-black p-4">
+            <div className="absolute bottom-0 grid grid-cols-12 rounded-t-xl text-white w-full bg-gray-400 opacity-95 bg-gradient-to-b from-black p-4">
                 <div className="col-span-8" >
                     <h1 className="text-lg font-bold">{firstName + " " + lastName}</h1>
                     {age && <span>{age} years old</span>}
-                    <h3>🏡 Lives in Delhi</h3>
+                    <h3 className="flex items-center" ><i className="material-icons">house</i> Lives in Delhi</h3>
                 </div>
                 <div className="col-span-4 h-full flex items-center" >
-                    <button className="bg-amber-600 p-4 rounded-2xl shadow shadow-black hover:bg-amber-700 cursor-pointer active:shadow-inner active:bg-amber-700" >
+                    <button className="bg-amber-600 p-4 shadow shadow-black hover:bg-amber-700 cursor-pointer active:shadow-inner active:bg-amber-700" >
                         Know More
                     </button>
                 </div>
             </div>
         </div>
         {/* Buttons Section */}
-        <div className="flex w-full justify-around">
+        <div className="flex justify-around space-x-6">
             {/* Ignore Button */}
             <button
-                className="bg-purple-600 text-white cursor-pointer px-6 py-2 rounded-xl shadow-2xl shadow-black transform transition-all duration-300 hover:scale-105 active:shadow-none active:scale-95"
-                style={{ boxShadow: "rgb(0 0 0) -4px 4px 0px 0px" }}
-                onClick={() => handleRequestClick({status: "ignored" , _id: _id })}
+                id="ignore-btn"
+                className="group bg-red-600 h-12 w-12 flex items-center justify-center 
+                            transition-all duration-300 ease-in-out 
+                            transform hover:scale-105 active:scale-95 
+                            shadow-[rgba(0,0,0,0.6)_-4px_4px_0px_0px]"
+                onClick={() => handleRequestClick({ status: "ignored", _id: _id })}
             >
-            ❌ Ignore
+                <i
+                    className="material-icons text-white text-xl transition-all duration-300 ease-in-out 
+                            group-hover:text-black group-hover:scale-125 group-active:rotate-12"
+                >
+                    close
+                </i>
             </button>
+
 
             {/* Interested Button */}
             <button
-                className="bg-yellow-600 text-white cursor-pointer px-6 py-2 rounded-xl shadow-2xl shadow-black transform transition-all duration-300 hover:scale-105 active:shadow-none active:scale-95"
-                style={{ boxShadow: "rgb(0 0 0) -4px 4px 0px 0px" }}
-                onClick={() => handleRequestClick({status: "interested" , _id: _id })}
+                id="interested-btn"
+                className="group bg-green-600 h-12 w-12 flex items-center justify-center 
+                            transition-all duration-300 ease-in-out 
+                            transform hover:scale-105 active:scale-95 
+                            shadow-[rgba(0,0,0,0.6)_-4px_4px_0px_0px]"
+                onClick={() => handleRequestClick({ status: "interested", _id: _id })}
             >
-            💖 Interested
+                <i
+                    className="material-icons text-white text-xl transition-all duration-300 ease-in-out 
+                            group-hover:text-red-600 group-hover:scale-125 group-active:scale-90"
+                >
+                    favorite
+                </i>
             </button>
+
         </div>
+
   </div>
   );
 };

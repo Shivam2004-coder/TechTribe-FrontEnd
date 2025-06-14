@@ -19,7 +19,7 @@ const Header = () => {
   };
   
   return (
-    <div className="sticky z-20 flex items-center top-0 justify-between h-20 bg-black w-full">
+    <div className="sticky flex items-center top-0 justify-between h-20 bg-black w-full">
       <div className="
                 mx-2
                 my-2

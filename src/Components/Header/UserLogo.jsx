@@ -69,8 +69,9 @@ const UserLogo = ({isClicked, setIsClicked}) => {
                 <div
                     ref={menuRef}
                     // className="absolute top-full right-0 mt-2 z-50 animate-slide-in-right"
-                    className="bg-gray-600 text-black rounded-tl-lg rounded-bl-lg
-                                border border-gray-700 absolute top-0 
+                    className="bg-white text-black rounded-tl-lg rounded-bl-lg
+                                shadow-xl shadow-black
+                                absolute top-0 
                                 right-0 z-50 animate-expand-menu origin-right
                                 text-sm"
                 >
