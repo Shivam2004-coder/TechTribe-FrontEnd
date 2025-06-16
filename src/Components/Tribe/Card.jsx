@@ -22,7 +22,7 @@ const Card = (p) => {
 
   return (
         <div
-            className="relative flex flex-col h-full w-96 overflow-hidden rounded-3xl shadow shadow-black"
+            className="relative flex flex-col h-full w-96 overflow-hidden rounded-3xl shadow shadow-black select-none"
             style={{
                 backgroundImage: `url("https://res.cloudinary.com/dilpkrfrb/image/upload/v1744462596/${uploadedImages[profilePictureIndex]}")`,
                 // backgroundImage: `url(${uploadedImages[profilePictureIndex]})`,

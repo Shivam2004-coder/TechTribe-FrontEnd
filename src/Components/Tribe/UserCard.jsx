@@ -16,6 +16,15 @@ const UserCard = (feed) => {
   
     const [dragDirection, setDragDirection] = useState(""); // 'like', 'nope', 'superlike'
     const [dragStrength, setDragStrength] = useState(0);    // a float between 0 and 1
+    // Initialize stroke colors for both buttons
+    const [strokeColors, setStrokeColors] = useState(["#be185d", "#166534"]); // pink-800, green-800
+
+    // Handler to update stroke of specific icon
+    const updateStroke = (index, color) => {
+      const newColors = [...strokeColors];
+      newColors[index] = color;
+      setStrokeColors(newColors);
+    };
   
   
     const { _id , uploadedImages } = feed.feed;
@@ -178,33 +187,70 @@ const UserCard = (feed) => {
       </div>
 
       {/* Buttons Section - Absolutely Positioned */}
+        {/* Buttons Section - Absolutely Positioned */}
         <div className="relative h-0">
-            <div className="absolute left-1/2 transform -translate-x-1/2 bottom-[-2rem] flex space-x-32 z-10">
-                {/* Ignore Button */}
-                <button
-                    id="ignore-btn"
-                    className="group bg-gray-700 h-16 w-16 flex items-center justify-center 
-                                rounded-full cursor-pointer
-                                transition-all duration-300 ease-in-out 
-                                transform hover:scale-115 active:scale-95 shadow-lg"
-                    onClick={() => handleRequestClick({ status: "ignored", _id: _id })}
-                >
-                    <i className="material-icons text-white">close</i>
-                </button>
+          <div className="absolute left-1/2 transform -translate-x-1/2 bottom-[-2rem] flex space-x-32 z-10">
 
-                {/* Interested Button */}
-                <button
-                    id="interested-btn"
-                    className="group bg-gray-700 h-16 w-16 flex items-center justify-center 
-                                rounded-full cursor-pointer
-                                transition-all duration-300 ease-in-out 
-                                transform hover:scale-115 active:scale-95 shadow-lg "
-                    onClick={() => handleRequestClick({ status: "interested", _id: _id })}
-                >
-                    <i className="material-icons text-white">favorite</i>
-                </button>
-            </div>
+            {/* Ignore Button */}
+            <button
+              id="ignore-btn"
+              className="group bg-gray-800 h-20 w-20 flex items-center justify-center 
+                        rounded-full cursor-pointer
+                        transition-all duration-300 ease-in-out 
+                        transform hover:scale-125 active:scale-100 shadow-lg
+                        hover:bg-[#FD267A] active:bg-pink-700"
+              // onClick={() => handleRequestClick({ status: "ignored", _id: _id })}/
+              onMouseEnter={() => updateStroke(0, "white")}
+              onMouseLeave={() => updateStroke(0, "#FD267A")} // dark pink
+              onMouseDown={() => updateStroke(0, "black")}         // remove stroke
+              onMouseUp={() => updateStroke(0, "white")}    // optional reset
+            >
+              <i
+                className="material-icons font-extrabold  text-[#FD267A] 
+                          transition-all duration-300 ease-in-out transform 
+                          group-hover:scale-200 group-hover:text-white 
+                          group-active:scale-90 group-active:text-black scale-150
+                          "
+                style={{
+                  WebkitTextStroke: strokeColors[0] ? `1.2px ${strokeColors[0]}` : "0px",
+                  textShadow: "rgb(0 0 0) 0px 0px 7px",
+                }}
+              >
+                close
+              </i>
+            </button>
+
+            {/* Interested Button */}
+            <button
+              id="interested-btn"
+              className="group bg-gray-800 h-20 w-20 flex items-center justify-center 
+                        rounded-full cursor-pointer
+                        transition-all duration-300 ease-in-out 
+                        transform hover:scale-125 active:scale-100 shadow-lg
+                        hover:bg-[#167d32] active:bg-[#167d32]"
+              // onClick={() => handleRequestClick({ status: "interested", _id: _id })}
+              onMouseEnter={() => updateStroke(1, "white")}
+              onMouseLeave={() => updateStroke(1, "#167d32")} // dark green
+              onMouseDown={() => updateStroke(1, "black")} // remove stroke
+              onMouseUp={() => updateStroke(1, "white")} // optional reset
+            >
+              <i
+                className="material-icons font-extrabold text-[#167d32]
+                          transition-all duration-300 ease-in-out transform 
+                          group-hover:scale-200 group-hover:text-white 
+                          group-active:scale-90 group-active:text-black scale-150"
+                style={{
+                  WebkitTextStroke: strokeColors[1] ? `1.2px ${strokeColors[1]}` : "0px",
+                  textShadow: "rgb(0 0 0) 0px 0px 7px",
+                }}
+              >
+                favorite
+              </i>
+            </button>
+
+          </div>
         </div>
+
     </div>
   );
 };
