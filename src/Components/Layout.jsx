@@ -10,7 +10,7 @@ const Layout = () => {
     return (
         <div className="flex flex-col justify-between min-h-screen w-full bg-[#F5E1DA] bg-[radial-gradient(circle,_#000_1px,_transparent_1px)] [background-size:10px_10px]">
             <Header />
-            <div className="flex-grow h-full">
+            <div className="flex-grow flex h-screen">
                 <Outlet /> {/* ✅ This renders the child route component */}
             </div>
             <Footer />

@@ -1,11 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import Card from "./Card";
+import { errorMessage } from "../../utils/ShowMessage";
+import axios from "axios";
+import { BASE_URL } from "../../utils/Constants/constants";
+import { useDispatch } from "react-redux";
+import { removeFeed } from "../../utils/ReduxStore/feedSlice";
 
 const UserCard = (feed) => {
   const [profilePictureIndex, setProfilePictureIndex] = useState(0);
-    const [animationClass, setAnimationClass] = useState("");
     const dragThreshold = 10; // minimum pixels to consider it a drag
     const hasMoved = useRef(false);
+    const dispatch = useDispatch();
   
     const cardRef = useRef(null);
   
@@ -13,7 +18,7 @@ const UserCard = (feed) => {
     const [dragStrength, setDragStrength] = useState(0);    // a float between 0 and 1
   
   
-    const { uploadedImages } = feed.feed;
+    const { _id , uploadedImages } = feed.feed;
   
     const handleNext = () => {
       setProfilePictureIndex((prevIndex) =>
@@ -38,7 +43,7 @@ const UserCard = (feed) => {
       const y = e.type === "touchstart" ? e.touches[0].clientY : e.clientY;
       pos.current = { x, y };
     };
-  
+
   
     const onMove = (e) => {
       if (!isDragging.current) return;
@@ -116,6 +121,19 @@ const UserCard = (feed) => {
       document.getElementById("interested-btn")?.classList.remove("scale-125");
       document.getElementById("ignore-btn")?.classList.remove("scale-125");
     };
+
+    const handleRequestClick = async ({status , _id}) => {
+      try {
+          await axios.post(BASE_URL+`request/send/${status}/${_id}`,{},{
+              withCredentials: true
+          })
+          .then(() => {
+              dispatch(removeFeed(_id));
+          });
+      } catch (error) {
+          errorMessage(error.message);
+      }
+    };
   
   
     useEffect(() => {
@@ -142,63 +160,51 @@ const UserCard = (feed) => {
     }, []);
 
   return (
-    <div className={`card-wrapper ${animationClass} relative`} ref={cardRef}>
-      {/* LIKE image (top-right) */}
-      <img
-        src="/yeap.png"
-        alt="Like"
-        className="pointer-events-none z-50"
-        style={{
-          position: "absolute",
-          top: "1rem",
-          right: "1rem",
-          width: "80px",
-          transform: "rotate(10deg)",
-          opacity: dragDirection === "like" ? dragStrength : 0,
-          transition: "opacity 0.1s ease-in-out",
-        }}
-      />
+    <div className={`relative`} >
+      
 
-      {/* NOPE image (top-left) */}
-      <img
-        src="/nope.png"
-        alt="Nope"
-        className="pointer-events-none z-50"
-        style={{
-          position: "absolute",
-          top: "1rem",
-          left: "1rem",
-          width: "80px",
-          transform: "rotate(-10deg)",
-          opacity: dragDirection === "nope" ? dragStrength : 0,
-          transition: "opacity 0.1s ease-in-out",
-        }}
-      />
+    
+      <div className="p-1 border border-gray-600 bg-gray-600 shadow-black shadow-xl rounded-xl flex flex-col h-9/12 m-4" >
+        <Card
+          feed={feed}
+          profilePictureIndex={profilePictureIndex}
+          setProfilePictureIndex={setProfilePictureIndex}
+          handleNext={handleNext}
+          handlePrev={handlePrev}
+          ref={cardRef}
+          dragDirection={dragDirection}
+          dragStrength={dragStrength}
+        />
+      </div>
 
-      {/* SUPER-LIKE image (bottom-center) */}
-      <img
-        src="/like.png"
-        alt="Superlike"
-        className="pointer-events-none z-50"
-        style={{
-          position: "absolute",
-          bottom: "1rem",
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: "80px",
-          opacity: dragDirection === "superlike" ? dragStrength : 0,
-          transition: "opacity 0.1s ease-in-out",
-        }}
-      />
+      {/* Buttons Section - Absolutely Positioned */}
+        <div className="relative h-0">
+            <div className="absolute left-1/2 transform -translate-x-1/2 bottom-[-2rem] flex space-x-32 z-10">
+                {/* Ignore Button */}
+                <button
+                    id="ignore-btn"
+                    className="group bg-gray-700 h-16 w-16 flex items-center justify-center 
+                                rounded-full cursor-pointer
+                                transition-all duration-300 ease-in-out 
+                                transform hover:scale-115 active:scale-95 shadow-lg"
+                    onClick={() => handleRequestClick({ status: "ignored", _id: _id })}
+                >
+                    <i className="material-icons text-white">close</i>
+                </button>
 
-      <Card
-        feed={feed}
-        profilePictureIndex={profilePictureIndex}
-        setProfilePictureIndex={setProfilePictureIndex}
-        handleNext={handleNext}
-        handlePrev={handlePrev}
-        setAnimationClass={setAnimationClass}
-      />
+                {/* Interested Button */}
+                <button
+                    id="interested-btn"
+                    className="group bg-gray-700 h-16 w-16 flex items-center justify-center 
+                                rounded-full cursor-pointer
+                                transition-all duration-300 ease-in-out 
+                                transform hover:scale-115 active:scale-95 shadow-lg "
+                    onClick={() => handleRequestClick({ status: "interested", _id: _id })}
+                >
+                    <i className="material-icons text-white">favorite</i>
+                </button>
+            </div>
+        </div>
     </div>
   );
 };

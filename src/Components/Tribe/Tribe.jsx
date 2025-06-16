@@ -30,15 +30,15 @@ const Tribe = () => {
   }
 
   if (feed.length == 0) {
-    return <div className="flex items-center justify-center bg-slate-500 opacity-85 text-black text-2xl" >There are no more cards left to show....</div>
+    return <div className="flex items-center w-full justify-center bg-slate-500 opacity-85 text-black text-2xl" >There are no more cards left to show....</div>
   }
 
   return (
-    <div className="h-full w-full justify-center grid grid-cols-12 " >
-      <div className="col-span-4" >
+    <div className="flex-grow flex w-screen justify-center " >
+      {/* <div className="col-span-4" >
 
-      </div>
-      <div className="col-span-4 flex justify-center" >
+      </div> */}
+      <div className="col-span-4 flex flex-grow justify-center" >
         { feed &&   
             <UserCard 
               feed={feed[0]}
@@ -46,9 +46,9 @@ const Tribe = () => {
         }
       </div>
 
-      <div className="col-span-4" >
+      {/* <div className="col-span-4" >
 
-      </div>
+      </div> */}
     </div>
   );
 };
