@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState , useEffect } from "react";
 import Card from "./Card";
 import { errorMessage } from "../../utils/ShowMessage";
 import axios from "axios";
@@ -9,8 +9,6 @@ import UserProfileDetail from "./userProfileDetail";
 
 const UserCard = (feed) => {
     const [profilePictureIndex, setProfilePictureIndex] = useState(0);
-    const dragThreshold = 10; // minimum pixels to consider it a drag
-    const hasMoved = useRef(false);
     const dispatch = useDispatch();
     const [showDetails, setShowDetails] = useState(false);
     const [renderDetail, setRenderDetail] = useState(false);
@@ -18,12 +16,8 @@ const UserCard = (feed) => {
       setShowDetails((prev) => !prev);
     };
   
-    const cardRef = useRef(null);
-  
-    const [dragDirection, setDragDirection] = useState(""); // 'like', 'nope', 'superlike'
-    const [dragStrength, setDragStrength] = useState(0);    // a float between 0 and 1
     // Initialize stroke colors for both buttons
-    const [strokeColors, setStrokeColors] = useState(["#be185d", "#166534"]); // pink-800, green-800
+    const [strokeColors, setStrokeColors] = useState(["#be185d", "#166534","white"]); // pink-800, green-800
 
     // Handler to update stroke of specific icon
     const updateStroke = (index, color) => {
@@ -48,95 +42,6 @@ const UserCard = (feed) => {
     };
   
     // DRAG state
-    const pos = useRef({ x: 0, y: 0 });
-    const isDragging = useRef(false);
-  
-    const onStart = (e) => {
-      isDragging.current = true;
-      hasMoved.current = false;
-      const x = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
-      const y = e.type === "touchstart" ? e.touches[0].clientY : e.clientY;
-      pos.current = { x, y };
-    };
-
-  
-    const onMove = (e) => {
-      if (!isDragging.current) return;
-      const x = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
-      const y = e.type === "touchmove" ? e.touches[0].clientY : e.clientY;
-      const dx = x - pos.current.x;
-      const dy = y - pos.current.y;
-  
-      if (Math.abs(dx) > dragThreshold || Math.abs(dy) > dragThreshold) {
-        hasMoved.current = true; // mark drag start
-      }
-  
-  
-      cardRef.current.style.transform = `translate(${dx}px, ${dy}px) rotate(${dx / 20}deg)`;
-  
-      let direction = "";
-      let strength = 0;
-  
-      if (dx > 0 && Math.abs(dx) > Math.abs(dy)) {
-        direction = "like";
-        strength = Math.min(dx / 150, 1);
-      } else if (dx < 0 && Math.abs(dx) > Math.abs(dy)) {
-        direction = "nope";
-        strength = Math.min(-dx / 150, 1);
-      } else if (dy < 0 && Math.abs(dy) > Math.abs(dx)) {
-        direction = "superlike";
-        strength = Math.min(-dy / 150, 1);
-      }
-  
-      setDragDirection(direction);
-      setDragStrength(strength);
-  
-    };
-  
-  
-    const onEnd = (e) => {
-      if (!isDragging.current || !hasMoved.current) {
-        isDragging.current = false;
-        hasMoved.current = false;
-        return; // prevent accidental clicks
-      }
-  
-      isDragging.current = false;
-      const x = e.type === "touchend" ? e.changedTouches[0].clientX : e.clientX;
-      const dx = x - pos.current.x;
-  
-      cardRef.current.style.transition = "transform 0.3s ease";
-      cardRef.current.style.transform = "translate(0px, 0px) rotate(0deg)";
-  
-      if (dx > 150) {
-        const btn = document.getElementById("interested-btn");
-        if (btn) {
-          btn.classList.add("scale-125");
-          setTimeout(() => {
-            btn.click();
-            btn.classList.remove("scale-125");
-          }, 150);
-        }
-      } else if (dx < -150) {
-        const btn = document.getElementById("ignore-btn");
-        if (btn) {
-          btn.classList.add("scale-125");
-          setTimeout(() => {
-            btn.click();
-            btn.classList.remove("scale-125");
-          }, 150);
-        }
-      }
-  
-      setTimeout(() => {
-        cardRef.current.style.transition = "none";
-      }, 300);
-  
-      hasMoved.current = false;
-      document.getElementById("interested-btn")?.classList.remove("scale-125");
-      document.getElementById("ignore-btn")?.classList.remove("scale-125");
-    };
-
     const handleRequestClick = async ({status , _id}) => {
       try {
           await axios.post(BASE_URL+`request/send/${status}/${_id}`,{},{
@@ -153,44 +58,49 @@ const UserCard = (feed) => {
   
     useEffect(() => {
 
-        if (showDetails) {
-          setRenderDetail(true); // Mount immediately when opening
-        } else {
-          // Wait for animation to finish before unmounting
-          const timeout = setTimeout(() => setRenderDetail(false), 1000); // match transition duration
-          return () => clearTimeout(timeout);
-        }
-
-
-      const card = cardRef.current;
-      card.addEventListener("mousedown", onStart);
-      card.addEventListener("mousemove", onMove);
-      card.addEventListener("mouseup", onEnd);
-      card.addEventListener("mouseleave", onEnd);
-  
-      card.addEventListener("touchstart", onStart);
-      card.addEventListener("touchmove", onMove);
-      card.addEventListener("touchend", onEnd);
-  
-      return () => {
-        card.removeEventListener("mousedown", onStart);
-        card.removeEventListener("mousemove", onMove);
-        card.removeEventListener("mouseup", onEnd);
-        card.removeEventListener("mouseleave", onEnd);
-  
-        card.removeEventListener("touchstart", onStart);
-        card.removeEventListener("touchmove", onMove);
-        card.removeEventListener("touchend", onEnd);
-      };
+      if (showDetails) {
+        setRenderDetail(true); // Mount immediately when opening
+      } else {
+        // Wait for animation to finish before unmounting
+        const timeout = setTimeout(() => setRenderDetail(false), 1000); // match transition duration
+        return () => clearTimeout(timeout);
+      }
     }, [showDetails]);
 
   return (
     // <div className="flex flex-col h-full " >
     <div className={`h-full`} >
-      
 
-    
-      <div className="p-1 border border-gray-600 bg-gray-600 shadow-black shadow-xl rounded-xl flex flex-col md:flex-row h-9/12 m-4 transition-all duration-500 ease-in-out">
+      <div className="relative p-1 border border-gray-600 bg-gray-600 shadow-black shadow-xl rounded-xl flex flex-col md:flex-row h-9/12 m-4 transition-all duration-500 ease-in-out">
+         
+        {/* Top-right Menu Button */}
+        <div className="absolute top-2 right-2 z-20">
+          <button
+            className="group bg-white h-12 w-12 flex items-center justify-center 
+                      rounded-full cursor-pointer
+                      transition-all duration-300 ease-in-out 
+                      transform hover:scale-110 active:scale-95 shadow-lg
+                      hover:bg-black active:bg-black"
+            onMouseEnter={() => updateStroke(2, "white")}
+            onMouseLeave={() => updateStroke(2, "black")} // black
+            onMouseDown={() => updateStroke(2, "white")} // remove stroke
+            onMouseUp={() => updateStroke(2, "black")}
+            onClick={handleKnowMoreClick}
+          >
+            <i
+              className="material-icons font-extrabold text-black 
+                        transition-all duration-300 ease-in-out transform 
+                        group-hover:scale-150 group-hover:text-white 
+                        group-active:scale-90 group-active:text-white scale-125"
+              style={{
+                WebkitTextStroke: strokeColors[2] ? `1.2px ${strokeColors[2]}` : "0px",
+                // textShadow: "rgb(0 0 0) 0px 0px 7px",
+              }}
+            >
+              {showDetails ? "menu_open" : "read_more"}
+            </i>
+          </button>
+        </div>
 
         {/* Card Section */}
         <div className="h-full w-full md:w-[24rem]">
@@ -200,17 +110,13 @@ const UserCard = (feed) => {
             setProfilePictureIndex={setProfilePictureIndex}
             handleNext={handleNext}
             handlePrev={handlePrev}
-            ref={cardRef}
-            dragDirection={dragDirection}
-            dragStrength={dragStrength}
-            onKnowMoreClick={handleKnowMoreClick}
           />
         </div>
 
         {/* Details Section */}
         <div
           className={`
-            overflow-hidden bg-gray-700 rounded-xl flex-grow
+            overflow-hidden flex-grow
             transition-all md:transition-[max-width] duration-1000 ease-in-out
             ${showDetails
               ? "opacity-100 md:max-w-[32rem] max-h-[1000px]"
@@ -218,7 +124,7 @@ const UserCard = (feed) => {
           `} 
         >
           {renderDetail && (
-            <div className={`w-full h-full m-1 min-h-[20rem] md:w-[24rem] transition-all md:transition-[max-width] duration-1000 ease-in-out`}>
+            <div className={`w-full h-full m-1  min-h-[20rem] md:w-[24rem] transition-all md:transition-[max-width] duration-1000 ease-in-out`}>
               <UserProfileDetail feed={feed} />
             </div>
           )}

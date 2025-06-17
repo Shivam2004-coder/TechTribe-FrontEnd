@@ -12,6 +12,19 @@ const InfoRow = ({ label, value }) => {
   );
 };
 
+ // Calculate age
+  const calculateAge = (dob) => {
+    if (!dob) return '';
+    const birthDate = new Date(dob);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  };
+
 const UserProfileDetail = ({feed}) => {
   const profile = useSelector((state) => state.profile);
 
@@ -21,6 +34,7 @@ const UserProfileDetail = ({feed}) => {
     firstName,
     lastName,
     gender,
+    dateOfBirth,
     bio,
     jobTitle,
     companyName,
@@ -30,28 +44,84 @@ const UserProfileDetail = ({feed}) => {
     socialLinks,
   } = feed.feed;
 
-  return (
-    <div className="bg-white p-6 rounded-xl h-full shadow-md w-full flex flex-col">
-      <h2 className="text-2xl font-bold mb-4 text-blue-800">User Profile</h2>
+  console.log(dateOfBirth);
+  console.log("firstName: ", firstName);
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm sm:text-base">
-        <InfoRow label="Full Name" value={`${firstName} ${lastName}`} />
-        {/* <InfoRow label="Email ID" value={emailId} /> */}
-        <InfoRow label="Gender" value={gender} />
-        {/* <InfoRow label="Date of Birth" value={dateOfBirth} /> */}
-        <InfoRow label="Bio" value={bio} />
-        <InfoRow label="Job Title" value={jobTitle} />
-        <InfoRow label="Company" value={companyName} />
-        <InfoRow label="School" value={school} />
-        <InfoRow label="Lives In" value={livingIn} />
-        <InfoRow
-          label="Skills"
-          value={skills.length > 0 ? skills.join(", ") : null}
-        />
-        <InfoRow label="GitHub" value={socialLinks?.github} />
-        <InfoRow label="LinkedIn" value={socialLinks?.linkedin} />
-        <InfoRow label="Portfolio" value={socialLinks?.portfolio} />
+  return (
+    <div className="bg-white p-3 rounded-xl h-full shadow-md w-full flex flex-col">
+      <h2 className="text-2xl font-bold mb-4 text-blue-800">{firstName+" "+lastName+" , "+calculateAge(dateOfBirth)}</h2>
+
+      {/* This is a Bio of the user... */}
+      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-4">
+        <div className="flex items-center mb-1" >
+          <i className="material-icons mr-2" > face </i>
+          <span className="font-bold text-gray-300" >Bio</span>
+        </div>
+        <div className="" >
+          <p>{bio}</p>
+        </div>
       </div>
+      
+      {/* This is a skill of the user */}
+      {skills && skills.length > 0 && (
+        <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-4">
+          <div className="flex items-center mb-2">
+            <i className="material-icons mr-2">psychology</i>
+            <span className="font-bold text-gray-300">Skills</span>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {skills.map((skill, index) => (
+              <span
+                key={index}
+                className="px-4 py-1 bg-gray-600 text-white text-sm rounded-full whitespace-nowrap shadow-md"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+
+      {/* This is a work of the user */}
+      { jobTitle &&
+      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-4">
+        <div className="flex items-center mb-1" >
+          <i className="material-icons mr-2" > work </i>
+          <span className="font-bold text-gray-300" >Job</span>
+        </div>
+        <div>
+          <p>{jobTitle}</p>
+        </div>
+      </div>
+      } 
+
+      {/* This is a company in which the user works */}
+      { companyName &&
+      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-4">
+        <div className="flex items-center mb-1" >
+          <i className="material-icons mr-2" > domain </i>
+          <span className="font-bold text-gray-300" >Company</span>
+        </div>
+        <div>
+          <p>{companyName}</p>
+        </div>
+      </div>
+      }
+
+      {/* This is a school in which the user studied */}
+      { school &&
+      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-4">
+        <div className="flex items-center mb-1" >
+          <i className="material-icons mr-2" > school </i>
+          <span className="font-bold text-gray-300" >Education</span>
+        </div>
+        <div>
+          <p>{school}</p>
+        </div>
+      </div>
+      }
+
     </div>
   );
 };
