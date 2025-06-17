@@ -11,6 +11,7 @@ const Card = (p) => {
     ref,
     dragDirection,
     dragStrength,
+    onKnowMoreClick,
   } = p;
 
   const {
@@ -116,7 +117,9 @@ const Card = (p) => {
                     <h3 className="flex items-center" ><i className="material-icons">house</i> Lives in Delhi</h3>
                 </div>
                 <div className="col-span-4 h-full flex items-center" >
-                    <button className="bg-amber-600 p-4 shadow shadow-black hover:bg-amber-700 cursor-pointer active:shadow-inner active:bg-amber-700" >
+                    <button className="bg-amber-600 p-4 shadow shadow-black hover:bg-amber-700 cursor-pointer active:shadow-inner active:bg-amber-700" 
+                            onClick={onKnowMoreClick}
+                    >
                         Know More
                     </button>
                 </div>

@@ -5,12 +5,17 @@ import axios from "axios";
 import { BASE_URL } from "../../utils/Constants/constants";
 import { useDispatch } from "react-redux";
 import { removeFeed } from "../../utils/ReduxStore/feedSlice";
+import UserProfileDetail from "./userProfileDetail";
 
 const UserCard = (feed) => {
-  const [profilePictureIndex, setProfilePictureIndex] = useState(0);
+    const [profilePictureIndex, setProfilePictureIndex] = useState(0);
     const dragThreshold = 10; // minimum pixels to consider it a drag
     const hasMoved = useRef(false);
     const dispatch = useDispatch();
+    const [showDetails, setShowDetails] = useState(false);
+    const handleKnowMoreClick = () => {
+      setShowDetails((prev) => !prev);
+    };
   
     const cardRef = useRef(null);
   
@@ -169,11 +174,12 @@ const UserCard = (feed) => {
     }, []);
 
   return (
-    <div className={`relative`} >
+    // <div className="flex flex-col h-full " >
+    <div className={`h-full`} >
       
 
     
-      <div className="p-1 border border-gray-600 bg-gray-600 shadow-black shadow-xl rounded-xl flex flex-col h-9/12 m-4" >
+      <div className="p-1 border border-gray-600 bg-gray-600 shadow-black shadow-xl rounded-xl flex h-9/12 m-4" >
         <Card
           feed={feed}
           profilePictureIndex={profilePictureIndex}
@@ -183,7 +189,9 @@ const UserCard = (feed) => {
           ref={cardRef}
           dragDirection={dragDirection}
           dragStrength={dragStrength}
+          onKnowMoreClick={handleKnowMoreClick}
         />
+        {showDetails && <UserProfileDetail feed={feed} />}
       </div>
 
       {/* Buttons Section - Absolutely Positioned */}
@@ -251,7 +259,11 @@ const UserCard = (feed) => {
           </div>
         </div>
 
+      {/* Profile Detail Section */}
+
     </div>
+    
+    // </div>
   );
 };
 
