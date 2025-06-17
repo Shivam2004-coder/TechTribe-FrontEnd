@@ -14,19 +14,19 @@ const Profile = () => {
   
 
   return (
-    <div className="bg-gray-500" >
-      <div className="grid grid-cols-12 h-full relative " >
-        <div className="col-span-4 bg-amber-300" >
+    <div className="bg-gray-500 h-full w-full" >
+      <div className="w-full h-full relative flex" >
+        <div className="w-4/12 bg-amber-300 " >
           <EditOptions />
         </div>
-        <div className="col-span-8 start-5 bg-pink-500 flex items-center justify-center " >
+        <div className="w-8/12 bg-pink-500 flex items-center justify-center " >
           {showAvatarPage && <Accordian />}
           {showEditPage && <Edit />}
           {showPreviewPage && <PreviewPage />}
           
+          <SaveButton />
         </div>
       </div>
-      <SaveButton />
     </div>
   );
 };

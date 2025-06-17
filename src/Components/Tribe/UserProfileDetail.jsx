@@ -33,7 +33,6 @@ const UserProfileDetail = ({feed}) => {
   const {
     firstName,
     lastName,
-    gender,
     dateOfBirth,
     bio,
     jobTitle,
@@ -44,15 +43,13 @@ const UserProfileDetail = ({feed}) => {
     socialLinks,
   } = feed.feed;
 
-  console.log(dateOfBirth);
-  console.log("firstName: ", firstName);
 
-  return (
-    <div className="bg-white p-3 rounded-xl h-full shadow-md w-full flex flex-col">
-      <h2 className="text-2xl font-bold mb-4 text-blue-800">{firstName+" "+lastName+" , "+calculateAge(dateOfBirth)}</h2>
+  return ( 
+    <div className="bg-white p-3 rounded-xl h-full shadow-md w-full flex flex-col ">
+      <h2 className="p-2 text-2xl font-extrabold mb-4 text-black ">{firstName+" "+lastName+" , "+calculateAge(dateOfBirth)}</h2>
 
       {/* This is a Bio of the user... */}
-      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-4">
+      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-1">
         <div className="flex items-center mb-1" >
           <i className="material-icons mr-2" > face </i>
           <span className="font-bold text-gray-300" >Bio</span>
@@ -64,7 +61,7 @@ const UserProfileDetail = ({feed}) => {
       
       {/* This is a skill of the user */}
       {skills && skills.length > 0 && (
-        <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-4">
+        <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-1">
           <div className="flex items-center mb-2">
             <i className="material-icons mr-2">psychology</i>
             <span className="font-bold text-gray-300">Skills</span>
@@ -82,10 +79,22 @@ const UserProfileDetail = ({feed}) => {
         </div>
       )}
 
+      {/* This is a location of the user */}
+      { livingIn &&
+      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-1">
+        <div className="flex items-center mb-1" >
+          <i className="material-icons mr-2" >location_on</i>
+          <span className="font-bold text-gray-300" >Living In</span>
+        </div>
+        <div>
+          <p>{livingIn}</p>
+        </div>
+      </div>
+      } 
 
       {/* This is a work of the user */}
       { jobTitle &&
-      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-4">
+      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-1">
         <div className="flex items-center mb-1" >
           <i className="material-icons mr-2" > work </i>
           <span className="font-bold text-gray-300" >Job</span>
@@ -98,7 +107,7 @@ const UserProfileDetail = ({feed}) => {
 
       {/* This is a company in which the user works */}
       { companyName &&
-      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-4">
+      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-1">
         <div className="flex items-center mb-1" >
           <i className="material-icons mr-2" > domain </i>
           <span className="font-bold text-gray-300" >Company</span>
@@ -111,7 +120,7 @@ const UserProfileDetail = ({feed}) => {
 
       {/* This is a school in which the user studied */}
       { school &&
-      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-4">
+      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-1">
         <div className="flex items-center mb-1" >
           <i className="material-icons mr-2" > school </i>
           <span className="font-bold text-gray-300" >Education</span>
@@ -121,6 +130,37 @@ const UserProfileDetail = ({feed}) => {
         </div>
       </div>
       }
+
+      {/* This is a socialLinks which the user has */}
+      {socialLinks && Object.values(socialLinks).some(link => link) && (
+        <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-1">
+          <div className="flex items-center mb-1">
+            <i className="material-icons mr-2">link</i>
+            <span className="font-bold text-gray-300">Social Links</span>
+          </div>
+          <div className="flex flex-col space-y-1">
+            {socialLinks.github && (
+              <a href={socialLinks.github} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
+                GitHub
+              </a>
+            )}
+            {socialLinks.linkedin && (
+              <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
+                LinkedIn
+              </a>
+            )}
+            {socialLinks.portfolio && (
+              <a href={socialLinks.portfolio} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
+                Portfolio
+              </a>
+            )}
+          </div>
+        </div>
+      )}
+
+
+
+
 
     </div>
   );

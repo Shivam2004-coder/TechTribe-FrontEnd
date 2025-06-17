@@ -4,6 +4,7 @@ import {fill} from "@cloudinary/url-gen/actions/resize";
 import React from 'react';
 import { BASE_URL } from '../../../utils/Constants/constants';
 import axios from 'axios';
+import { errorMessage } from '../../../utils/ShowMessage';
 
 const UploadGrid = (props) => {
 
@@ -20,21 +21,28 @@ const UploadGrid = (props) => {
     } = props;
 
     const handleImageUpload = (e, index) => {
+        console.log("I am in image upload function !!");
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onloadend = async () => {
                 const newImages = [...images];
                 const uImg = reader.result;
-                const CloudinaryImages = await axios.post(BASE_URL + "profile/upload/image" , {
-                    image: uImg, 
-                    isProfile: false,
-                } , {withCredentials: true});
-                newImages[index] = CloudinaryImages?.data?.public_id;
-                setImages(newImages);
-            };
-            reader.readAsDataURL(file);
-        }
+                try{
+                    const CloudinaryImages = await axios.post(BASE_URL + "profile/upload/image" , {
+                        image: uImg, 
+                        isProfile: false,
+                    } , {withCredentials: true});
+                    newImages[index] = CloudinaryImages?.data?.public_id;
+                    setImages(newImages);
+                }
+                catch(err){
+                    console.error("Error uploading image:", err);
+                    errorMessage("Failed to upload image. Please try again.");
+                }
+                };
+                reader.readAsDataURL(file);
+            }
     };
     
     const handleDelete = async (index) => {
