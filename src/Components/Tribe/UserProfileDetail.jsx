@@ -29,11 +29,9 @@ const UserProfileDetail = ({feed}) => {
     skills,
     socialLinks,
   } = feed.feed;
-  console.log("UserProfileDetail feed", firstName);
-  console.log("UserProfileDetail feed", lastName);
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-md w-full max-w-4xl mx-auto mt-4 mb-6">
+    <div className="bg-white p-6 rounded-xl h-full shadow-md w-full flex flex-col">
       <h2 className="text-2xl font-bold mb-4 text-blue-800">User Profile</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm sm:text-base">

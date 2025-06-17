@@ -13,6 +13,7 @@ const UserCard = (feed) => {
     const hasMoved = useRef(false);
     const dispatch = useDispatch();
     const [showDetails, setShowDetails] = useState(false);
+    const [renderDetail, setRenderDetail] = useState(false);
     const handleKnowMoreClick = () => {
       setShowDetails((prev) => !prev);
     };
@@ -151,6 +152,16 @@ const UserCard = (feed) => {
   
   
     useEffect(() => {
+
+        if (showDetails) {
+          setRenderDetail(true); // Mount immediately when opening
+        } else {
+          // Wait for animation to finish before unmounting
+          const timeout = setTimeout(() => setRenderDetail(false), 1000); // match transition duration
+          return () => clearTimeout(timeout);
+        }
+
+
       const card = cardRef.current;
       card.addEventListener("mousedown", onStart);
       card.addEventListener("mousemove", onMove);
@@ -171,7 +182,7 @@ const UserCard = (feed) => {
         card.removeEventListener("touchmove", onMove);
         card.removeEventListener("touchend", onEnd);
       };
-    }, []);
+    }, [showDetails]);
 
   return (
     // <div className="flex flex-col h-full " >
@@ -179,20 +190,43 @@ const UserCard = (feed) => {
       
 
     
-      <div className="p-1 border border-gray-600 bg-gray-600 shadow-black shadow-xl rounded-xl flex h-9/12 m-4" >
-        <Card
-          feed={feed}
-          profilePictureIndex={profilePictureIndex}
-          setProfilePictureIndex={setProfilePictureIndex}
-          handleNext={handleNext}
-          handlePrev={handlePrev}
-          ref={cardRef}
-          dragDirection={dragDirection}
-          dragStrength={dragStrength}
-          onKnowMoreClick={handleKnowMoreClick}
-        />
-        {showDetails && <UserProfileDetail feed={feed} />}
+      <div className="p-1 border border-gray-600 bg-gray-600 shadow-black shadow-xl rounded-xl flex flex-col md:flex-row h-9/12 m-4 transition-all duration-500 ease-in-out">
+
+        {/* Card Section */}
+        <div className="h-full w-full md:w-[24rem]">
+          <Card
+            feed={feed}
+            profilePictureIndex={profilePictureIndex}
+            setProfilePictureIndex={setProfilePictureIndex}
+            handleNext={handleNext}
+            handlePrev={handlePrev}
+            ref={cardRef}
+            dragDirection={dragDirection}
+            dragStrength={dragStrength}
+            onKnowMoreClick={handleKnowMoreClick}
+          />
+        </div>
+
+        {/* Details Section */}
+        <div
+          className={`
+            overflow-hidden bg-gray-700 rounded-xl flex-grow
+            transition-all md:transition-[max-width] duration-1000 ease-in-out
+            ${showDetails
+              ? "opacity-100 md:max-w-[32rem] max-h-[1000px]"
+              : " max-h-0 md:max-h-[1000px] md:max-w-0"}
+          `} 
+        >
+          {renderDetail && (
+            <div className={`w-full h-full m-1 min-h-[20rem] md:w-[24rem] transition-all md:transition-[max-width] duration-1000 ease-in-out`}>
+              <UserProfileDetail feed={feed} />
+            </div>
+          )}
+        </div>
+
       </div>
+
+
 
       {/* Buttons Section - Absolutely Positioned */}
         {/* Buttons Section - Absolutely Positioned */}
