@@ -8,6 +8,7 @@ const Card = (p) => {
     setProfilePictureIndex,
     handleNext,
     handlePrev,
+    isHovered,
   } = p;
 
   const {
@@ -15,6 +16,7 @@ const Card = (p) => {
     lastName,
     age,
     uploadedImages,
+    livingIn,
   } = feed.feed;
 
   return (
@@ -32,7 +34,9 @@ const Card = (p) => {
                 {uploadedImages.map((_, index) => (
                 <div
                     key={index}
-                    className={`h-4 w-4 rounded-full cursor-pointer shadow shadow-black ${
+                    className={`h-4 w-4 rounded-full cursor-pointer shadow-black shadow-lg 
+                        transition-all duration-400 ease-in-out 
+                      ${isHovered ? "md:scale-100" : "md:scale-0"} ${
                     index === profilePictureIndex ? "bg-blue-500" : "bg-gray-300"
                     }`}
                     onClick={() => setProfilePictureIndex(index)}
@@ -42,29 +46,38 @@ const Card = (p) => {
 
             {/* Left Arrow */}
             <button
-                className="absolute left-2 top-1/2 w-10 h-10 flex items-center justify-center cursor-pointer transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full opacity-70 hover:opacity-100"
+                className={`absolute w-1/2 h-full  flex items-center justify-start cursor-pointer text-white p-4
+                            transition-all duration-400 ease-in-out ${isHovered ? "scale-100" : "scale-0"}  `}
                 onClick={handlePrev}
             >
-                ◀
+                <div className="flex p-2 rounded-2xl items-center justify-center bg-black opacity-0 md:opacity-100" > 
+                    ◀
+                </div>
             </button>
 
             {/* Right Arrow */}
             <button
-                className="absolute right-2 top-1/2 w-10 h-10 flex items-center justify-center cursor-pointer transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full opacity-70 hover:opacity-100"
+                className={`absolute left-1/2 w-1/2 h-full  flex items-center justify-end cursor-pointer text-white p-4
+                            transition-all duration-400 ease-in-out ${isHovered ? "scale-100" : "scale-0"}  `}
                 onClick={handleNext}
             >
-                ▶
+                <div className="flex p-2 rounded-2xl items-center justify-center bg-black opacity-0 md:opacity-100" > 
+                    ▶
+                </div>
             </button>
 
             {/* User Info Overlay */}
-            <div className="absolute bottom-0 grid grid-cols-12 rounded-t-xl text-white w-full  opacity-95  p-4">
-                <div className="col-span-8" >
+            <div className={`absolute bottom-4 grid grid-cols-12 rounded-t-xl text-white w-full  opacity-95  p-4
+                             `}>
+                <div className={`col-span-8 transition-all duration-400 ease-in-out  ${isHovered ? "md:opacity-100" : "md:opacity-0"}
+                            `} >
                     <h1 className="text-lg font-bold">{firstName + " " + lastName}</h1>
                     {age && <span>{age} years old</span>}
-                    <h3 className="flex items-center" ><i className="material-icons">house</i> Lives in Delhi</h3>
+                    <h3 className="flex items-center" ><i className="material-icons">house</i> {livingIn}</h3>
                 </div>
                 
             </div>
+
         </div>
   );
 };

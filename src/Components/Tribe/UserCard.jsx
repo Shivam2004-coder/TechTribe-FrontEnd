@@ -8,6 +8,7 @@ import { removeFeed } from "../../utils/ReduxStore/feedSlice";
 import UserProfileDetail from "./userProfileDetail";
 
 const UserCard = (feed) => {
+    const [isHovered, setIsHovered] = useState(true);
     const [profilePictureIndex, setProfilePictureIndex] = useState(0);
     const dispatch = useDispatch();
     const [showDetails, setShowDetails] = useState(false);
@@ -70,25 +71,26 @@ const UserCard = (feed) => {
   return (
     // <div className="flex flex-col h-full " >
     <div className={`h-full`} >
+      <div className="relative p-1 border border-gray-600 bg-gray-600 shadow-black shadow-xl rounded-xl flex flex-col md:flex-row h-9/12 m-4 transition-all duration-500 ease-in-out"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
 
-      <div className="relative p-1 border border-gray-600 bg-gray-600 shadow-black shadow-xl rounded-xl flex flex-col md:flex-row h-9/12 m-4 transition-all duration-500 ease-in-out">
-         
         {/* Top-right Menu Button */}
-        <div className="absolute top-2 right-2 z-20">
+        <div className="absolute top-1 right-[-2rem] z-20">
           <button
-            className="group bg-white h-12 w-12 flex items-center justify-center 
+            className={`group bg-gray-800 h-20 w-20 flex items-center justify-center 
                       rounded-full cursor-pointer
-                      transition-all duration-300 ease-in-out 
+                      transition-all duration-400 ease-in-out 
+                      ${isHovered ? "md:scale-100" : "md:scale-0"}
                       transform hover:scale-110 active:scale-95 shadow-lg
-                      hover:bg-black active:bg-black"
+                      hover:bg-gray-800 active:bg-gray-800`}
             onMouseEnter={() => updateStroke(2, "white")}
-            onMouseLeave={() => updateStroke(2, "black")} // black
-            onMouseDown={() => updateStroke(2, "white")} // remove stroke
-            onMouseUp={() => updateStroke(2, "black")}
-            onClick={handleKnowMoreClick}
+            onMouseLeave={() => updateStroke(2, "white")} 
+            onClick={handleKnowMoreClick} 
           >
             <i
-              className="material-icons font-extrabold text-black 
+              className="material-icons font-extrabold text-white 
                         transition-all duration-300 ease-in-out transform 
                         group-hover:scale-150 group-hover:text-white 
                         group-active:scale-90 group-active:text-white scale-125"
@@ -110,6 +112,7 @@ const UserCard = (feed) => {
             setProfilePictureIndex={setProfilePictureIndex}
             handleNext={handleNext}
             handlePrev={handlePrev}
+            isHovered={isHovered}
           />
         </div>
 
@@ -142,11 +145,12 @@ const UserCard = (feed) => {
             {/* Ignore Button */}
             <button
               id="ignore-btn"
-              className="group bg-gray-800 h-20 w-20 flex items-center justify-center 
+              className={`group bg-gray-800 h-20 w-20 flex items-center justify-center 
                         rounded-full cursor-pointer
-                        transition-all duration-300 ease-in-out 
+                        transition-all duration-400 ease-in-out 
+                        ${isHovered ? "md:scale-100" : "md:scale-0"}
                         transform hover:scale-125 active:scale-100 shadow-lg
-                        hover:bg-[#FD267A] active:bg-pink-700"
+                        hover:bg-[#FD267A] active:bg-pink-700`}
               // onClick={() => handleRequestClick({ status: "ignored", _id: _id })}/
               onMouseEnter={() => updateStroke(0, "white")}
               onMouseLeave={() => updateStroke(0, "#FD267A")} // dark pink
@@ -171,11 +175,12 @@ const UserCard = (feed) => {
             {/* Interested Button */}
             <button
               id="interested-btn"
-              className="group bg-gray-800 h-20 w-20 flex items-center justify-center 
+              className={`group bg-gray-800 h-20 w-20 flex items-center justify-center 
                         rounded-full cursor-pointer
-                        transition-all duration-300 ease-in-out 
+                        transition-all duration-400 ease-in-out 
+                        ${isHovered ? "md:scale-100" : "md:scale-0"}
                         transform hover:scale-125 active:scale-100 shadow-lg
-                        hover:bg-[#167d32] active:bg-[#167d32]"
+                        hover:bg-[#167d32] active:bg-[#167d32]`}
               // onClick={() => handleRequestClick({ status: "interested", _id: _id })}
               onMouseEnter={() => updateStroke(1, "white")}
               onMouseLeave={() => updateStroke(1, "#167d32")} // dark green
@@ -198,8 +203,6 @@ const UserCard = (feed) => {
 
           </div>
         </div>
-
-      {/* Profile Detail Section */}
 
     </div>
     
