@@ -15,7 +15,7 @@ const InfoRow = ({ label, value }) => {
  // Calculate age
   const calculateAge = (dob) => {
     if (!dob) return '';
-    const birthDate = new Date(dob);
+    const birthDate = new Date(dob); 
     const today = new Date();
     let age = today.getFullYear() - birthDate.getFullYear();
     const m = today.getMonth() - birthDate.getMonth();
@@ -34,22 +34,36 @@ const UserProfileDetail = ({feed}) => {
     firstName,
     lastName,
     dateOfBirth,
+    promptContent,
+    livingIn,
     bio,
     jobTitle,
     companyName,
     school,
-    livingIn,
     skills,
     socialLinks,
   } = feed.feed;
 
 
+  const promptsList = [
+    "My weakness is...",
+    "My hidden talent is...",
+    "I am passionate about...",
+    "My greatest achievement is...",
+    "I want to learn...",
+    "A project I enjoyed working on was...",
+    "The best advice I've received is...",
+    "My favorite programming language is...",
+    "The future of technology looks like...",
+  ];
+
+
   return ( 
-    <div className="bg-white p-3 rounded-xl h-full shadow-md w-full flex flex-col ">
+    <div className="bg-white p-3 rounded-xl h-full shadow-md w-full flex flex-col overflow-y-auto scrollbar-hidden">
       <h2 className="p-2 text-2xl font-extrabold mb-4 text-black ">{firstName+" "+lastName+" , "+calculateAge(dateOfBirth)}</h2>
 
       {/* This is a Bio of the user... */}
-      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-1">
+      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
         <div className="flex items-center mb-1" >
           <i className="material-icons mr-2" > face </i>
           <span className="font-bold text-gray-300" >Bio</span>
@@ -61,7 +75,7 @@ const UserProfileDetail = ({feed}) => {
       
       {/* This is a skill of the user */}
       {skills && skills.length > 0 && (
-        <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-1">
+        <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
           <div className="flex items-center mb-2">
             <i className="material-icons mr-2">psychology</i>
             <span className="font-bold text-gray-300">Skills</span>
@@ -81,7 +95,7 @@ const UserProfileDetail = ({feed}) => {
 
       {/* This is a location of the user */}
       { livingIn &&
-      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-1">
+      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
         <div className="flex items-center mb-1" >
           <i className="material-icons mr-2" >location_on</i>
           <span className="font-bold text-gray-300" >Living In</span>
@@ -94,7 +108,7 @@ const UserProfileDetail = ({feed}) => {
 
       {/* This is a work of the user */}
       { jobTitle &&
-      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-1">
+      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
         <div className="flex items-center mb-1" >
           <i className="material-icons mr-2" > work </i>
           <span className="font-bold text-gray-300" >Job</span>
@@ -107,7 +121,7 @@ const UserProfileDetail = ({feed}) => {
 
       {/* This is a company in which the user works */}
       { companyName &&
-      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-1">
+      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
         <div className="flex items-center mb-1" >
           <i className="material-icons mr-2" > domain </i>
           <span className="font-bold text-gray-300" >Company</span>
@@ -120,7 +134,7 @@ const UserProfileDetail = ({feed}) => {
 
       {/* This is a school in which the user studied */}
       { school &&
-      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-1">
+      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
         <div className="flex items-center mb-1" >
           <i className="material-icons mr-2" > school </i>
           <span className="font-bold text-gray-300" >Education</span>
@@ -131,9 +145,24 @@ const UserProfileDetail = ({feed}) => {
       </div>
       }
 
+      {/* This is a prompt content of the user */}
+      <div className="flex flex-col bg-gray-700 rounded-2xl p-2 mb-2 shadow-black shadow-lg">
+        {promptContent && promptContent.length > 0 && promptContent.map((item, idx) => (
+          <div key={idx} className="flex flex-col bg-gray-600 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
+            <div className="flex items-center mb-1">
+              ※
+              <span className="font-bold text-gray-300">{promptsList[item.index]}</span>
+            </div>
+            <div>
+              <p className="text-white">⁓ {item.content}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
       {/* This is a socialLinks which the user has */}
       {socialLinks && Object.values(socialLinks).some(link => link) && (
-        <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-1">
+        <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
           <div className="flex items-center mb-1">
             <i className="material-icons mr-2">link</i>
             <span className="font-bold text-gray-300">Social Links</span>
@@ -157,10 +186,6 @@ const UserProfileDetail = ({feed}) => {
           </div>
         </div>
       )}
-
-
-
-
 
     </div>
   );

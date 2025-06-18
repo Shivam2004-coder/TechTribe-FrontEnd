@@ -24,15 +24,15 @@ const Edit = () => {
     const dispatch = useDispatch();
 
     const promptsList = [
-        "My weakness is...",
-        "My hidden talent is...",
-        "I am passionate about...",
-        "My greatest achievement is...",
-        "I want to learn...",
-        "A project I enjoyed working on was...",
-        "The best advice I've received is...",
-        "My favorite programming language is...",
-        "The future of technology looks like...",
+      "My weakness is...",
+      "My hidden talent is...",
+      "I am passionate about...",
+      "My greatest achievement is...",
+      "I want to learn...",
+      "A project I enjoyed working on was...",
+      "The best advice I've received is...",
+      "My favorite programming language is...",
+      "The future of technology looks like...",
     ];
 
     // The user data stored in the dataBase ....
