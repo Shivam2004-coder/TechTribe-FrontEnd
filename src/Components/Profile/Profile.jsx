@@ -19,7 +19,7 @@ const Profile = () => {
         {/* <div className="w-4/12 bg-amber-300 " > */}
           <EditOptions />
         {/* </div> */}
-        <div className="w-8/12 bg-pink-500 flex items-center justify-center " >
+        <div className="w-8/12 bg-gray-500 flex flex-col items-center justify-center " >
           {showAvatarPage && <Accordian />}
           {showEditPage && <Edit />}
           {showPreviewPage && <PreviewPage />}

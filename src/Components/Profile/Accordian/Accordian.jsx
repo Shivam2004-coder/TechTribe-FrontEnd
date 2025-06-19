@@ -4,6 +4,7 @@ import { setProfileImage } from '../../../utils/ReduxStore/profileSlice';
 import { Cloudinary } from '@cloudinary/url-gen/index';
 import {AdvancedImage} from '@cloudinary/react';
 import {fill} from "@cloudinary/url-gen/actions/resize";
+import UserImage from "../EditOptions/UserImage";
 
 const avatars = [
   "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_a83fe293-40ae-458d-8423-83bfec78dbbb", "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_424fc5f1-b325-4461-bac7-749391c70640", "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_b833471e-8f1b-4fc7-82b0-caec4f8f7fee", "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_1f1c6672-b72b-4fab-8a79-157cf8c6ba64", "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_0428dab3-deaa-406c-bb8d-3668b7254f5c",
@@ -26,22 +27,24 @@ const Accordian = () => {
   const handleClick = (src) => {
     dispatch(setProfileImage(src));
   };
-
   return (
-    <div className="grid grid-cols-5 h-96 p-4 bg-gray-900 rounded-lg shadow-md overflow-y-scroll">
-      {avatars.map((avatar, index) => (
-        <div
-          key={index}
-          onClick={() => handleClick(avatar)}
-          className="relative flex justify-center items-center p-1 
-                     hover:bg-gray-800 rounded-full cursor-pointer"
-        >
-          <div className="h-25 w-25 object-cover border-2 border-transparent 
-                       hover:border-yellow-400 shadow-lg rounded-lg" >
-              <AdvancedImage cldImg={cld.image(avatar).resize(fill().width(200).height(200))} />
+    <div className="flex flex-col items-center justify-center w-full h-full p-4 rounded-lg shadow-lg">
+      <UserImage />
+      <div className="grid grid-cols-5 h-96 p-4 bg-gray-900 rounded-lg shadow-md overflow-y-scroll">
+        {avatars.map((avatar, index) => (
+          <div
+            key={index}
+            onClick={() => handleClick(avatar)}
+            className="relative flex justify-center items-center p-1 
+                      hover:bg-gray-800 rounded-full cursor-pointer"
+          >
+            <div className="h-25 w-25 object-cover border-2 border-transparent 
+                        hover:border-yellow-400 shadow-lg rounded-lg" >
+                <AdvancedImage cldImg={cld.image(avatar).resize(fill().width(200).height(200))} />
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
