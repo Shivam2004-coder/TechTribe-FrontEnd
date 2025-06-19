@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState , useEffect, useRef } from "react";
 import Card from "./Card";
 import { errorMessage } from "../../utils/ShowMessage";
 import axios from "axios";
@@ -15,6 +15,19 @@ const UserCard = (feed) => {
     const [renderDetail, setRenderDetail] = useState(false);
     const handleKnowMoreClick = () => {
       setShowDetails((prev) => !prev);
+    };
+
+    const timeoutRef = useRef(null);
+
+    const handleMouseLeave = () => {
+      timeoutRef.current = setTimeout(() => {
+        setIsHovered(false);
+      }, 2000);
+    };
+
+    const handleMouseEnter = () => {
+      clearTimeout(timeoutRef.current); // Cancel any existing timeout
+      setIsHovered(true);
     };
   
     // Initialize stroke colors for both buttons
@@ -72,8 +85,8 @@ const UserCard = (feed) => {
     // <div className="flex flex-col h-full " >
     <div className={`h-full`} >
       <div className="relative p-1 border border-gray-600 bg-gray-600 shadow-black shadow-xl rounded-xl flex flex-col md:flex-row h-9/12 m-4 transition-all duration-500 ease-in-out"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
 
         {/* Top-right Menu Button */}
