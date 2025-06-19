@@ -16,9 +16,9 @@ const Profile = () => {
   return (
     <div className="bg-gray-500 h-full w-full" >
       <div className="w-full h-full relative flex" >
-        <div className="w-4/12 bg-amber-300 " >
+        {/* <div className="w-4/12 bg-amber-300 " > */}
           <EditOptions />
-        </div>
+        {/* </div> */}
         <div className="w-8/12 bg-pink-500 flex items-center justify-center " >
           {showAvatarPage && <Accordian />}
           {showEditPage && <Edit />}

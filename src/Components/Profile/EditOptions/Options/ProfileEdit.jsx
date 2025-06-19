@@ -1,10 +1,10 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { OnlyShowEditPage } from '../../../../utils/ReduxStore/setSlice';
 
 const ProfileEdit = () => {
   
-  const showEditPage = useSelector((store) => store.set.showEditPage);
+  
   const dispatch = useDispatch();
   
   const handleProfileEditClick = () => {
@@ -19,16 +19,6 @@ const ProfileEdit = () => {
       onClick={handleProfileEditClick}
     >
       This is a profile Edit page !!!
-
-    { showEditPage ?
-      <div className="bg-white rounded-full h-9 w-2 font-extrabold" >
-        
-      </div>
-      :
-      <div className="bg-yellow-950 rounded-full h-6 w-2 font-extrabold" >
-        
-      </div>
-    }
     </div>
   )
 }
