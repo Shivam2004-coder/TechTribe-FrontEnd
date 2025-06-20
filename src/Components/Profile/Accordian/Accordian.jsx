@@ -30,8 +30,10 @@ const Accordian = () => {
     dispatch(setProfileImage(src));
   };
   return (
-    <div className="flex flex-col bg-amber-500 items-center w-full min-h-screen p-4 rounded-lg shadow-lg">
-      <UserImage />
+    <div className="flex flex-col bg-amber-500 items-center max-w-full min-h-screen p-4 rounded-lg shadow-lg">
+      <UserImage isOpen={isOpen}
+                setIsOpen={setIsOpen}    
+      />
       <div className="w-full">
         {/* Accordion Header */}
         <div
@@ -48,9 +50,10 @@ const Accordian = () => {
           </span>
         </div>
 
-        {/* Accordion Content */}
         <div
-          className={`grid grid-cols-5 gap-2 px-4 pt-4 pb-2 bg-gray-900 rounded-b-lg shadow-md w-full
+          className={`grid 
+                      grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 
+                      gap-2 bg-gray-900 rounded-b-lg shadow-md
                       transition-all duration-500 ease-in-out overflow-y-auto
                       ${isOpen ? "max-h-[30rem] opacity-100 scale-100" : "max-h-0 opacity-0 scale-90"}
           `}
@@ -60,14 +63,19 @@ const Accordian = () => {
             <div
               key={index}
               onClick={() => handleClick(avatar)}
-              className="relative flex justify-center items-center p-1 rounded-full cursor-pointer"
+              className="relative aspect-square flex justify-center items-center 
+                        p-2 rounded-full cursor-pointer hover:shadow-black hover:shadow-lg transition-shadow duration-300"
             >
-              <AdvancedImage cldImg={cld.image(avatar).resize(fill().width(200).height(200))} 
-                className="object-cover border-8 border-transparent hover:border-yellow-500 p-2 shadow-lg rounded-full" 
+              <AdvancedImage
+                cldImg={cld.image(avatar).resize(fill().width(300).height(300))}
+                className="w-full h-full md:w-[90%] md:h-[90%] object-cover border-4 border-transparent 
+                          shadow-lg rounded-full hover:scale-105"
               />
             </div>
           ))}
         </div>
+
+
       </div>
     </div>
   );

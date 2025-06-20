@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { setProfileImage } from '../../../utils/ReduxStore/profileSlice';
 import { Cloudinary } from '@cloudinary/url-gen/index';
@@ -7,7 +7,9 @@ import {fill} from "@cloudinary/url-gen/actions/resize";
 import axios from 'axios';
 import { BASE_URL } from '../../../utils/Constants/constants';
 
-const UserImage = () => {
+const UserImage = (props) => {
+
+    const { isOpen, setIsOpen } = props;
 
     // Create a Cloudinary instance and set your cloud name.
     const cld = new Cloudinary({
@@ -57,38 +59,144 @@ const UserImage = () => {
         previewFiles(file);
     };
 
+
+    // camera menu state
+    const [cameraMenuOpen, setCameraMenuOpen] = useState(false);
+
+    const toggleCameraMenu = (e) => {
+        e.stopPropagation();
+        setCameraMenuOpen((prev) => {
+            return !prev;
+        });
+    };
+
     return (
-        <div className="flex justify-center items-center h-full">
+         <div className="flex justify-center items-center h-full max-w-full mb-28 relative">
             {/* Hidden file input */}
             <input
                 type="file"
                 ref={fileInputRef}
-                accept="image/png , image/jpeg , image/jpg"
+                accept="image/png, image/jpeg, image/jpg"
                 className="hidden"
-                onChange={handleFileChange} // Handle file selection
+                onChange={handleFileChange}
             />
 
             {/* Circle Button */}
-            <div 
-                className="relative w-36 h-36 rounded-full bg-gray-300 flex items-center justify-center 
-                hover:bg-gray-400 transition-all cursor-pointer group overflow-hidden"
+            <div
+                className={`relative ${isOpen ? "w-36 h-36" : "w-52 h-52 md:w-96 md:h-96"} rounded-full bg-gray-300 flex items-center justify-center 
+                hover:bg-gray-400 transition-all duration-500 ease-in-out group overflow-visible`}
                 onClick={handleFileUpload}
             >
                 {/* User Image inside Circle */}
+                {profileImage.length > 0 && (
+                    <AdvancedImage
+                        cldImg={cld.image(profileImage).resize(fill().width(250).height(250))}
+                        className="object-cover w-full h-full rounded-full shadow-black shadow-lg"
+                    />
+                )}
 
-                { profileImage.length > 0 &&
-                    <div className="w-full h-full object-cover rounded-lg" >
-                        <AdvancedImage cldImg={cld.image(profileImage).resize(fill().width(250).height(250))} />
-                    </div>
-                }
-
-                {/* Blur effect on hover */}
+                {/* Blur effect on hover
                 <div className="absolute inset-0 rounded-full bg-black opacity-0 group-hover:opacity-40 transition-opacity"></div>
 
-                {/* Pen Icon (Appears on hover) */}
-                <p className="absolute font-bold text-2xl text-white opacity-0 group-hover:opacity-100 transition-opacity">🖊</p>
+                Pen Icon
+                <p className="absolute font-bold text-2xl text-white opacity-0 group-hover:opacity-100 transition-opacity">🖊</p> */}
+
+                {/* 🔧 New Circular-Aligned Camera Icon */}
+                <div
+                    className={`absolute ${isOpen ? "bottom-1/3 right-1/10" : "bottom-1/12 right-1/4" }  
+                                translate-x-[60%] translate-y-[60%]
+                                bg-gray-600 text-white rounded-full p-3 md:p-4 select-none flex items-center justify-center
+                                transition-all duration-500 ease-in-out cursor-pointer shadow-black shadow-lg z-30`}
+                    onClick={toggleCameraMenu}
+                >
+                    <i className={`material-icons transition-transform duration-500 ease-in-out "
+                    }`}>
+                    photo_camera
+                    </i>
+                </div>
+
+
+                {/* Floating Action Menu */}
+                <div
+                    className={`absolute ${isOpen ? "bottom-28 right-0 md:bottom-43 md:right-0" : "bottom-12 right-12" }  rounded-lg shadow-lg ${isOpen ? "translate-x-[-15%] translate-y-[100%] md:translate-x-[110%] md:translate-y-[96%]" : "translate-x-[21%] translate-y-[94%]" }  
+                                transition-all duration-500 ease-in-out flex flex-col text-black text-sm 
+                                 ${cameraMenuOpen ? "max-h-80 opacity-100 scale-100" : "max-h-0 opacity-0 scale-y-90"} `}
+                >
+
+                    <div className="px-4 py-8 flex items-center">
+
+                    </div>
+
+                    <div className='shadow-black shadow-sm bg-gray-600 p-1 rounded-t-lg' >
+                        <button
+                            className=" hover:bg-gray-300 flex p-2 font-bold text-white hover:text-black h-full rounded-lg w-full items-center"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setCameraMenuOpen(false);
+                            }}
+                        >
+                            <i className='material-icons' >delete</i> Remove Image
+                        </button>
+                    </div>
+
+                    <div className='shadow-black shadow-sm bg-gray-600 p-1 ' >
+                        <button
+                            className=" hover:bg-gray-300 flex p-2 font-bold text-white hover:text-black h-full rounded-lg w-full items-center"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setCameraMenuOpen(false);
+                            }}
+                        >
+                            <i className='material-icons' >image</i> Choose Image
+                        </button>
+                    </div>
+
+                    <div className='shadow-black shadow-sm bg-gray-600 p-1 rounded-b-lg' >
+                        <button
+                            className=" hover:bg-gray-300 flex p-2 font-bold text-white hover:text-black h-full rounded-lg w-full items-center"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setCameraMenuOpen(false);
+                                setIsOpen(true);
+                            }}
+                        >
+                            <i className='material-icons' >face_6</i> Select Avatar
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
+        // <div className="flex justify-center items-center h-full max-w-full">
+        //     {/* Hidden file input */}
+        //     <input
+        //         type="file"
+        //         ref={fileInputRef}
+        //         accept="image/png , image/jpeg , image/jpg"
+        //         className="hidden"
+        //         onChange={handleFileChange} // Handle file selection
+        //     />
+
+        //     {/* Circle Button */}
+        //     <div 
+        //         className={`relative ${ isOpen ? "w-36 h-36" : "w-52 h-52 md:w-96 md:h-96" } rounded-full bg-gray-300 flex items-center justify-center 
+        //         hover:bg-gray-400 transition-all duration-500 ease-in-out cursor-pointer group overflow-hidden`}
+        //         onClick={handleFileUpload}
+        //     >
+        //         {/* User Image inside Circle */}
+
+        //         { profileImage.length > 0 &&
+        //                 <AdvancedImage cldImg={cld.image(profileImage).resize(fill().width(250).height(250))} 
+        //                     className="object-cover w-full h-full rounded-full border-4 border-gray-200 shadow-lg"
+        //                 />
+        //         }
+
+        //         {/* Blur effect on hover */}
+        //         <div className="absolute inset-0 rounded-full bg-black opacity-0 group-hover:opacity-40 transition-opacity"></div>
+
+        //         {/* Pen Icon (Appears on hover) */}
+        //         <p className="absolute font-bold text-2xl text-white opacity-0 group-hover:opacity-100 transition-opacity">🖊</p>
+        //     </div>
+        // </div>
     )
 }
 
