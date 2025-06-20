@@ -22,7 +22,7 @@ const Profile = () => {
         {showAvatarPage && <Accordian />}
         {showEditPage && <Edit />}
         {showPreviewPage && <PreviewPage />}
-        <SaveButton />
+        {showEditPage && <SaveButton />}
       </div>
     </div>
 

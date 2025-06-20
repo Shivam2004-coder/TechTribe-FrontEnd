@@ -70,6 +70,20 @@ const UserImage = (props) => {
         });
     };
 
+    const handleRemoveImage = async (e) => {
+        e.stopPropagation();
+
+        // Call API to delete the image
+        const response = await axios.post(BASE_URL + "profile/delete/image", {
+            publicId: profileImage,
+            isProfile: true,
+            save: false,
+        }, { withCredentials: true });
+
+        console.log(response);
+        dispatch(setProfileImage("TechTribe_User_Profile_Avatar/Logos/Logo_b00c785c-9eae-43ca-b97b-4c12f4341344")); // Reset to default image
+    }
+
     return (
          <div className="flex justify-center items-center h-full max-w-full mb-28 relative">
             {/* Hidden file input */}
@@ -85,7 +99,6 @@ const UserImage = (props) => {
             <div
                 className={`relative ${isOpen ? "w-36 h-36" : "w-52 h-52 md:w-96 md:h-96"} rounded-full bg-gray-300 flex items-center justify-center 
                 hover:bg-gray-400 transition-all duration-500 ease-in-out group overflow-visible`}
-                onClick={handleFileUpload}
             >
                 {/* User Image inside Circle */}
                 {profileImage.length > 0 && (
@@ -95,11 +108,6 @@ const UserImage = (props) => {
                     />
                 )}
 
-                {/* Blur effect on hover
-                <div className="absolute inset-0 rounded-full bg-black opacity-0 group-hover:opacity-40 transition-opacity"></div>
-
-                Pen Icon
-                <p className="absolute font-bold text-2xl text-white opacity-0 group-hover:opacity-100 transition-opacity">🖊</p> */}
 
                 {/* 🔧 New Circular-Aligned Camera Icon */}
                 <div
@@ -132,6 +140,7 @@ const UserImage = (props) => {
                             className=" hover:bg-gray-300 flex p-2 font-bold text-white hover:text-black h-full rounded-lg w-full items-center"
                             onClick={(e) => {
                                 e.stopPropagation();
+                                handleRemoveImage(e);
                                 setCameraMenuOpen(false);
                             }}
                         >
@@ -144,6 +153,7 @@ const UserImage = (props) => {
                             className=" hover:bg-gray-300 flex p-2 font-bold text-white hover:text-black h-full rounded-lg w-full items-center"
                             onClick={(e) => {
                                 e.stopPropagation();
+                                handleFileUpload();
                                 setCameraMenuOpen(false);
                             }}
                         >
@@ -166,37 +176,6 @@ const UserImage = (props) => {
                 </div>
             </div>
         </div>
-        // <div className="flex justify-center items-center h-full max-w-full">
-        //     {/* Hidden file input */}
-        //     <input
-        //         type="file"
-        //         ref={fileInputRef}
-        //         accept="image/png , image/jpeg , image/jpg"
-        //         className="hidden"
-        //         onChange={handleFileChange} // Handle file selection
-        //     />
-
-        //     {/* Circle Button */}
-        //     <div 
-        //         className={`relative ${ isOpen ? "w-36 h-36" : "w-52 h-52 md:w-96 md:h-96" } rounded-full bg-gray-300 flex items-center justify-center 
-        //         hover:bg-gray-400 transition-all duration-500 ease-in-out cursor-pointer group overflow-hidden`}
-        //         onClick={handleFileUpload}
-        //     >
-        //         {/* User Image inside Circle */}
-
-        //         { profileImage.length > 0 &&
-        //                 <AdvancedImage cldImg={cld.image(profileImage).resize(fill().width(250).height(250))} 
-        //                     className="object-cover w-full h-full rounded-full border-4 border-gray-200 shadow-lg"
-        //                 />
-        //         }
-
-        //         {/* Blur effect on hover */}
-        //         <div className="absolute inset-0 rounded-full bg-black opacity-0 group-hover:opacity-40 transition-opacity"></div>
-
-        //         {/* Pen Icon (Appears on hover) */}
-        //         <p className="absolute font-bold text-2xl text-white opacity-0 group-hover:opacity-100 transition-opacity">🖊</p>
-        //     </div>
-        // </div>
     )
 }
 

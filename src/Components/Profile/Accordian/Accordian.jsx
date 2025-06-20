@@ -6,6 +6,7 @@ import {AdvancedImage} from '@cloudinary/react';
 import {fill} from "@cloudinary/url-gen/actions/resize";
 import { ChevronDown, ChevronUp } from 'lucide-react'; // Optional: Lucide icons
 import UserImage from "../EditOptions/UserImage";
+import UserAvatar from "../EditOptions/Options/UserAvatar";
 
 const avatars = [
   "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_a83fe293-40ae-458d-8423-83bfec78dbbb", "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_424fc5f1-b325-4461-bac7-749391c70640", "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_b833471e-8f1b-4fc7-82b0-caec4f8f7fee", "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_1f1c6672-b72b-4fab-8a79-157cf8c6ba64", "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_0428dab3-deaa-406c-bb8d-3668b7254f5c",
@@ -34,21 +35,31 @@ const Accordian = () => {
       <UserImage isOpen={isOpen}
                 setIsOpen={setIsOpen}    
       />
-      <div className="w-full">
+      <div className="w-full shadow-black rounded-lg shadow-md bg-gray-900">
         {/* Accordion Header */}
         <div
           className="flex justify-between items-center cursor-pointer bg-gray-800 text-white p-3 rounded-t-lg hover:bg-gray-700 transition-colors duration-300"
           onClick={() => setIsOpen(!isOpen)}
         >
           <span className="font-semibold text-lg">Avatars</span>
-          <span
-            className={`transform transition-transform duration-300 ${
-              isOpen ? "rotate-180" : ""
-            }`}
-          >
-            <ChevronDown size={20} />
-          </span>
+          <div className="flex items-center space-x-2 transition-all duration-1000 ease-in-out">
+            <div
+              className={`transition-all duration-500 ease-in-out transform ${
+                isOpen ? "opacity-0 scale-95 pointer-events-none" : "opacity-100 scale-100"
+              }`}
+            >
+              <UserAvatar />
+            </div>
+            <span
+              className={`transform transition-transform duration-300 ${
+                isOpen ? "rotate-180" : ""
+              }`}
+            >
+              <ChevronDown size={20} />
+            </span>
+          </div>
         </div>
+
 
         <div
           className={`grid 
@@ -82,20 +93,3 @@ const Accordian = () => {
 };
 
 export default Accordian;
-
-
-{/* <div className="grid grid-cols-5 h-96 p-4 bg-gray-900 rounded-lg shadow-md overflow-y-scroll">
-        {avatars.map((avatar, index) => (
-          <div
-            key={index}
-            onClick={() => handleClick(avatar)}
-            className="relative flex justify-center items-center p-1 
-                      hover:bg-gray-800 rounded-full cursor-pointer"
-          >
-            <div className="h-25 w-25 object-cover border-2 border-transparent 
-                        hover:border-yellow-400 shadow-lg rounded-lg" >
-                <AdvancedImage cldImg={cld.image(avatar).resize(fill().width(200).height(200))} />
-            </div>
-          </div>
-        ))}
-      </div> */}

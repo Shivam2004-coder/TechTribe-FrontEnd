@@ -13,13 +13,13 @@ const UserAvatar = () => {
   
 
   return (
-    <div
-      className={`flex justify-between items-center p-2 h-12 px-4 rounded-lg cursor-pointer
-        transition-all duration-300 ease-in-out shadow-md hover:shadow-lg `}
-    >
-      <span className="font-bold text-lg tracking-wide flex items-center text-center">
-        Use Avatars
-      </span>
+    // <div
+    //   className={`flex justify-between items-center p-2 h-12 px-4 rounded-lg cursor-pointer
+    //     transition-all duration-300 ease-in-out shadow-md hover:shadow-lg `}
+    // >
+    //   <span className="font-bold text-lg tracking-wide flex items-center text-center">
+    //     Use Avatars
+    //   </span>
 
           <div className="flex items-center space-x-2">
               <div className="avatar-group m-0 p-0 -space-x-3">
@@ -54,7 +54,7 @@ const UserAvatar = () => {
                   </div>
               </div>
           </div>
-    </div>
+    // </div>
   );
 };
 

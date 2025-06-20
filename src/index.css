@@ -89,6 +89,21 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 
+/* **********************Shimmer for image upload************************** */
+@keyframes shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(to right, #4b5563 0%, #6b7280 50%, #4b5563 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+}
 
 
   
