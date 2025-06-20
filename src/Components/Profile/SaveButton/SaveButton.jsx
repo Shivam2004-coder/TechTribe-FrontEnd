@@ -75,7 +75,7 @@ const SaveButton = () => {
     }
 
     return (
-        <div className="flex justify-center items-center h-20 w-full" >
+        <div className="flex justify-center items-center " >
             <button className="rounded-xl bg-green-500 p-4" 
                     onClick={handleSaveProfileClick}
             >

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setProfileImage } from '../../../utils/ReduxStore/profileSlice';
 import { Cloudinary } from '@cloudinary/url-gen/index';
 import {AdvancedImage} from '@cloudinary/react';
 import {fill} from "@cloudinary/url-gen/actions/resize";
+import { ChevronDown, ChevronUp } from 'lucide-react'; // Optional: Lucide icons
 import UserImage from "../EditOptions/UserImage";
 
 const avatars = [
@@ -23,14 +24,59 @@ const Accordian = () => {
   });
 
   const dispatch = useDispatch();
+   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = (src) => {
     dispatch(setProfileImage(src));
   };
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full p-4 rounded-lg shadow-lg">
+    <div className="flex flex-col bg-amber-500 items-center w-full min-h-screen p-4 rounded-lg shadow-lg">
       <UserImage />
-      <div className="grid grid-cols-5 h-96 p-4 bg-gray-900 rounded-lg shadow-md overflow-y-scroll">
+      <div className="w-full">
+        {/* Accordion Header */}
+        <div
+          className="flex justify-between items-center cursor-pointer bg-gray-800 text-white p-3 rounded-t-lg hover:bg-gray-700 transition-colors duration-300"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <span className="font-semibold text-lg">Avatars</span>
+          <span
+            className={`transform transition-transform duration-300 ${
+              isOpen ? "rotate-180" : ""
+            }`}
+          >
+            <ChevronDown size={20} />
+          </span>
+        </div>
+
+        {/* Accordion Content */}
+        <div
+          className={`grid grid-cols-5 gap-2 px-4 pt-4 pb-2 bg-gray-900 rounded-b-lg shadow-md w-full
+                      transition-all duration-500 ease-in-out overflow-y-auto
+                      ${isOpen ? "max-h-[30rem] opacity-100 scale-100" : "max-h-0 opacity-0 scale-90"}
+          `}
+          style={{ transitionProperty: "all" }}
+        >
+          {avatars.map((avatar, index) => (
+            <div
+              key={index}
+              onClick={() => handleClick(avatar)}
+              className="relative flex justify-center items-center p-1 rounded-full cursor-pointer"
+            >
+              <AdvancedImage cldImg={cld.image(avatar).resize(fill().width(200).height(200))} 
+                className="object-cover border-8 border-transparent hover:border-yellow-500 p-2 shadow-lg rounded-full" 
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Accordian;
+
+
+{/* <div className="grid grid-cols-5 h-96 p-4 bg-gray-900 rounded-lg shadow-md overflow-y-scroll">
         {avatars.map((avatar, index) => (
           <div
             key={index}
@@ -44,9 +90,4 @@ const Accordian = () => {
             </div>
           </div>
         ))}
-      </div>
-    </div>
-  );
-};
-
-export default Accordian;
+      </div> */}
