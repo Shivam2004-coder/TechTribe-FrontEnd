@@ -62,7 +62,6 @@ const useFetchUserProfileData = () => {
         dispatch(setLinkedinLink(data.socialLinks?.linkedin || ''));
         dispatch(setPortfolioLink(data.socialLinks?.portfolio || ''));
 
-        // console.log("Hi i have fetched and updated the redux store !!! ");
 
         if (location.pathname !== '/login') {
           navigate(location.pathname);

@@ -38,8 +38,10 @@ const useApplyAndSaveChanges = () => {
     const userCompanyName = useSelector((store) => store.profile.companyName);
     const userSchool = useSelector((store) => store.profile.school);
     const userLivingIn = useSelector((store) => store.profile.livingIn);
-    const userSocialLinks = useSelector((store) => store.socialLinks);
+    const userSocialLinks = useSelector((store) => store.profile.socialLinks);
     const userSkills = useSelector((store) => store.profile.skills);
+
+    console.log("User Social Links: ", userSocialLinks);
 
     // State variables to handle functionality
 
@@ -65,6 +67,8 @@ const useApplyAndSaveChanges = () => {
       portfolio: userSocialLinks?.portfolio || ''
     });
     
+
+    console.log("Social Links: ", socialLinks);
 
 
 

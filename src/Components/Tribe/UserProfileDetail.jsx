@@ -1,6 +1,6 @@
 // components/UserProfileDetail.jsx
 import React from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 const InfoRow = ({ label, value }) => {
   if (!value) return null;
@@ -26,9 +26,9 @@ const InfoRow = ({ label, value }) => {
   };
 
 const UserProfileDetail = ({feed}) => {
-  const profile = useSelector((state) => state.profile);
+  // const profile = useSelector((state) => state.profile);
 
-  if (!profile || !profile.firstName || !profile.lastName) return null;
+  // if (!profile || !profile.firstName || !profile.lastName) return null;
 
   const {
     firstName,
@@ -146,6 +146,7 @@ const UserProfileDetail = ({feed}) => {
       }
 
       {/* This is a prompt content of the user */}
+      { promptContent && promptContent.length > 0 &&
       <div className="flex flex-col bg-gray-700 rounded-2xl p-2 mb-2 shadow-black shadow-lg">
         {promptContent && promptContent.length > 0 && promptContent.map((item, idx) => (
           <div key={idx} className="flex flex-col bg-gray-600 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
@@ -159,6 +160,7 @@ const UserProfileDetail = ({feed}) => {
           </div>
         ))}
       </div>
+      }
 
       {/* This is a socialLinks which the user has */}
       {socialLinks && Object.values(socialLinks).some(link => link) && (

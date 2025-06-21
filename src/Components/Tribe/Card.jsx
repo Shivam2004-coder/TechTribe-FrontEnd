@@ -14,10 +14,11 @@ const Card = (p) => {
   const {
     firstName,
     lastName,
-    age,
     uploadedImages,
     livingIn,
   } = feed.feed;
+
+  console.log("uploadedImages", uploadedImages);
 
   return (
         <div
@@ -72,7 +73,6 @@ const Card = (p) => {
                 <div className={`col-span-8 transition-all duration-400 ease-in-out  ${isHovered ? "md:opacity-100" : "md:opacity-0"}
                             `} >
                     <h1 className="text-lg font-bold">{firstName + " " + lastName}</h1>
-                    {age && <span>{age} years old</span>}
                     <h3 className="flex items-center" ><i className="material-icons">house</i> {livingIn}</h3>
                 </div>
                 
