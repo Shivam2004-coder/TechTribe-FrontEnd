@@ -20,6 +20,7 @@ const PreviewPage = () => {
   const socialLinks = useSelector((store) => store.socialLinks);
 
   const userFeed = {
+    _id:"",
     firstName,
     lastName,
     emailId,
@@ -37,10 +38,11 @@ const PreviewPage = () => {
   };
 
   return (
-    <div className="flex-grow flex w-full justify-center bg-amber-500 rounded-lg" >
-      <div className="col-span-4 flex flex-grow justify-center" >
+    <div className="flex w-full justify-end md:justify-center bg-amber-500 rounded-lg" >
+      <div className="justify-center" >
         <UserCard
           feed={userFeed}
+          isProfile={true}
         />
       </div>
     </div>

@@ -6,10 +6,11 @@ import {AdvancedImage} from '@cloudinary/react';
 import {fill} from "@cloudinary/url-gen/actions/resize";
 import axios from 'axios';
 import { BASE_URL } from '../../../utils/Constants/constants';
+import useSaveImages from '../../../CustomHooks/useSaveImages';
 
 const UserImage = (props) => {
 
-    const { isOpen, setIsOpen } = props;
+    const { isOpen, setIsOpen , isSaving , setIsSaving } = props;
 
     // Create a Cloudinary instance and set your cloud name.
     const cld = new Cloudinary({
@@ -18,6 +19,7 @@ const UserImage = (props) => {
         }
     });
 
+    const { handleSaveProfileClick } = useSaveImages();
     const profileImage = useSelector((store) => store.profile.profileImage);
     console.log(profileImage);
     const dispatch = useDispatch();
@@ -30,31 +32,40 @@ const UserImage = (props) => {
     };
 
     const previewFiles = (file) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = async () => {
-            console.log("I am in delete Function !!");
+        try{
+            setIsSaving(true);
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = async () => {
+                console.log("I am in delete Function !!");
 
-            const response = await axios.post(BASE_URL + "profile/delete/image", {
-                publicId: profileImage ,
-                isProfile: true,
-                save: false,
-            },{withCredentials: true});
+                const response = await axios.post(BASE_URL + "profile/delete/image", {
+                    publicId: profileImage ,
+                    isProfile: true,
+                    save: false,
+                },{withCredentials: true});
 
-            console.log(response);
+                console.log(response);
 
-            const uImg = reader.result;
-            const CloudinaryImages = await axios.post(BASE_URL + "profile/upload/image" , {
-                image: uImg, 
-                isProfile: true,
-            } , {withCredentials: true});
-            dispatch(setProfileImage(CloudinaryImages?.data?.public_id));
+                const uImg = reader.result;
+                const CloudinaryImages = await axios.post(BASE_URL + "profile/upload/image" , {
+                    image: uImg, 
+                    isProfile: true,
+                } , {withCredentials: true});
+                dispatch(setProfileImage(CloudinaryImages?.data?.public_id));
+                await handleSaveProfileClick(); // Save the changes to the profile
+                setIsSaving(false); // stop shimmer
+            }
+        }
+        catch (error) {
+            console.error("Error previewing files:", error);
         }
     }
 
     // Function to handle file selection
     const handleFileChange = async (event) => {
         const file = event.target.files[0]; // Get the selected file
+        if (!file) return;
         // setFile(file);
         previewFiles(file);
     };
@@ -72,41 +83,43 @@ const UserImage = (props) => {
 
     const handleRemoveImage = async (e) => {
         e.stopPropagation();
+        try {
+            setIsSaving(true); // start shimmer
+            // Call API to delete the image
+            const response = await axios.post(BASE_URL + "profile/delete/image", {
+                publicId: profileImage,
+                isProfile: true,
+                save: false,
+            }, { withCredentials: true });
 
-        // Call API to delete the image
-        const response = await axios.post(BASE_URL + "profile/delete/image", {
-            publicId: profileImage,
-            isProfile: true,
-            save: false,
-        }, { withCredentials: true });
+            console.log(response);
+            dispatch(setProfileImage("TechTribe_User_Profile_Avatar/Logos/Logo_b00c785c-9eae-43ca-b97b-4c12f4341344")); // Reset to default image
+            await handleSaveProfileClick(); // Save the changes to the profile
+            setIsSaving(false); // stop shimmer
 
-        console.log(response);
-        dispatch(setProfileImage("TechTribe_User_Profile_Avatar/Logos/Logo_b00c785c-9eae-43ca-b97b-4c12f4341344")); // Reset to default image
+        } catch (error) {
+            console.error("Error removing image:", error);
+        }
     }
 
     return (
          <div className="flex justify-center items-center h-full max-w-full mb-28 relative">
-            {/* Hidden file input */}
-            <input
-                type="file"
-                ref={fileInputRef}
-                accept="image/png, image/jpeg, image/jpg"
-                className="hidden"
-                onChange={handleFileChange}
-            />
-
             {/* Circle Button */}
             <div
                 className={`relative ${isOpen ? "w-36 h-36" : "w-52 h-52 md:w-96 md:h-96"} rounded-full bg-gray-300 flex items-center justify-center 
                 hover:bg-gray-400 transition-all duration-500 ease-in-out group overflow-visible`}
             >
                 {/* User Image inside Circle */}
-                {profileImage.length > 0 && (
+                {isSaving ? (
+                <div className="w-full h-full rounded-full bg-gray-300 animate-pulse shadow-black shadow-lg" />
+                ) : (
+                profileImage.length > 0 && (
                     <AdvancedImage
                         cldImg={cld.image(profileImage).resize(fill().width(250).height(250))}
                         className="object-cover w-full h-full rounded-full shadow-black shadow-lg"
-                    />
-                )}
+                    />)
+                )
+                }
 
 
                 {/* 🔧 New Circular-Aligned Camera Icon */}
@@ -117,7 +130,7 @@ const UserImage = (props) => {
                                 transition-all duration-500 ease-in-out cursor-pointer shadow-black shadow-lg z-30`}
                     onClick={toggleCameraMenu}
                 >
-                    <i className={`material-icons transition-transform duration-500 ease-in-out "
+                    <i className={`material-icons transition-transform duration-500 ease-in-out
                     }`}>
                     photo_camera
                     </i>
@@ -149,6 +162,14 @@ const UserImage = (props) => {
                     </div>
 
                     <div className='shadow-black shadow-sm bg-gray-600 p-1 ' >
+                        {/* Hidden file input */}
+                        <input
+                            type="file"
+                            ref={fileInputRef}
+                            accept="image/png, image/jpeg, image/jpg"
+                            className="hidden"
+                            onChange={handleFileChange}
+                        />
                         <button
                             className=" hover:bg-gray-300 flex p-2 font-bold text-white hover:text-black h-full rounded-lg w-full items-center"
                             onClick={(e) => {

@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { removeFeed } from "../../utils/ReduxStore/feedSlice";
 import UserProfileDetail from "./userProfileDetail";
 
-const UserCard = (feed) => {
+const UserCard = ({feed , isProfile}) => {
     const [isHovered, setIsHovered] = useState(true);
     const [profilePictureIndex, setProfilePictureIndex] = useState(0);
     const dispatch = useDispatch();
@@ -16,6 +16,9 @@ const UserCard = (feed) => {
     const handleKnowMoreClick = () => {
       setShowDetails((prev) => !prev);
     };
+
+    const [isVisible, setIsVisible] = useState(false);
+
 
     const timeoutRef = useRef(null);
 
@@ -41,7 +44,8 @@ const UserCard = (feed) => {
     };
   
   
-    const { _id , uploadedImages } = feed.feed;
+    // console.log("feed", feed);
+    const { _id , uploadedImages } = feed;
   
     const handleNext = () => {
       setProfilePictureIndex((prevIndex) =>
@@ -55,21 +59,43 @@ const UserCard = (feed) => {
       );
     };
   
-    // DRAG state
-    const handleRequestClick = async ({status , _id}) => {
-      try {
-          await axios.post(BASE_URL+`request/send/${status}/${_id}`,{},{
-              withCredentials: true
-          })
-          .then(() => {
-              dispatch(removeFeed(_id));
-          });
-      } catch (error) {
-          errorMessage(error.message);
+    const handleRequestClick = async ({ status, _id }) => {
+      if (isProfile) {
+        // First pop out
+        setIsVisible(false);
+
+        // After a short delay, pop back in
+        setTimeout(() => {
+          setIsVisible(true);
+        }, 500); // Matches the pop-out animation time
+
+        return; // Don't proceed to actual request
       }
+
+      // Actual request flow
+      setIsVisible(false); // Start pop-out
+
+      setTimeout(async () => {
+        try {
+          await axios.post(`${BASE_URL}request/send/${status}/${_id}`, {}, { withCredentials: true });
+          dispatch(removeFeed(_id));
+        } catch (error) {
+          errorMessage(error.message);
+        }
+      }, 500); // Allow time for animation before removing
     };
+
+
+
   
-  
+    useEffect(() => {
+      const timeout = setTimeout(() => {
+        setIsVisible(true); // show the card with pop-in effect
+      }, 500); // small delay to allow transition
+
+      return () => clearTimeout(timeout);
+    }, []);
+
     useEffect(() => {
 
       if (showDetails) {
@@ -81,18 +107,27 @@ const UserCard = (feed) => {
       }
     }, [showDetails]);
 
+    // className={`relative p-1 border border-gray-600 bg-gray-600 shadow-black shadow-xl rounded-xl flex flex-col md:flex-row 
+    //                   m-4 transition-all md:h-9/12  duration-500 ease-in-out md:scale-100 ${showDetails ? "h-full md:h-10/12 scale-80" : "h-9/12 scale-90"}
+    //                   ${isVisible ? "scale-100 " : "scale-0 "} `}
+
   return (
-    // <div className="flex flex-col h-full " >
-    <div className={`h-full`} >
-      <div className="relative p-1 border border-gray-600 bg-gray-600 shadow-black shadow-xl rounded-xl flex flex-col md:flex-row h-9/12 m-4 transition-all duration-500 ease-in-out"
+    <div className={`h-[40rem] md:h-[40rem] flex flex-col md:flex-row ${isProfile ? "mr-[0.4rem]" : "mr-0"} `} > {/* << FIXED HEIGHT HERE */}
+    {/* <div className="flex w-full h-full md:flex-row flex-col"> */}
+      <div
+        className={`relative transform transition-all duration-500 ease-in-out 
+                    p-1 border border-gray-600 bg-gray-600 shadow-black shadow-xl 
+                    rounded-xl flex flex-col md:flex-row m-4 
+                    md:h-9/12 ${showDetails ? "h-full md:h-10/12" : "h-9/12"} 
+                    ${isVisible ? `${showDetails ? `${ isProfile ? "scale-75" : "scale-80"}` : `${ isProfile ? "scale-77" : "scale-90"}`}  md:scale-100 opacity-100` : "scale-0 opacity-0"}`}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
 
         {/* Top-right Menu Button */}
-        <div className="absolute top-1 right-[-2rem] z-20">
+        <div className="absolute top-1 right-[0.3rem] md:right-[-2rem] z-20">
           <button
-            className={`group bg-gray-800 h-20 w-20 flex items-center justify-center 
+            className={`group bg-gray-800 h-20 w-20 md:h-20 md:w-20 flex items-center justify-center 
                       rounded-full cursor-pointer
                       transition-all duration-400 ease-in-out 
                       ${isHovered ? "md:scale-100" : "md:scale-0"}
@@ -118,7 +153,15 @@ const UserCard = (feed) => {
         </div>
 
         {/* Card Section */}
-        <div className="h-full w-full md:w-[24rem]">
+        {/* <div className="h-full w-full md:w-[24rem]"> h-full removed and max-h-[40rem] added */}
+        <div
+          className={`
+            h-full flex-[1] md:flex-[1]
+            transition-all duration-700 ease-in-out 
+            max-w-screen
+            ${showDetails ? "w-[10rem] md:w-[24rem]" : "md:w-full"}
+          `}
+        >
           <Card
             feed={feed}
             profilePictureIndex={profilePictureIndex}
@@ -130,96 +173,89 @@ const UserCard = (feed) => {
         </div>
 
         {/* Details Section */}
+        {/* Floating Buttons Hanging from Bottom Center */}
+        <div className="absolute bottom-[-2.5rem] left-1/2 -translate-x-1/2 flex gap-20 z-10">     
+          {/* Ignore Button */}
+          <button
+            id="ignore-btn"
+            className={`group bg-gray-800 h-20 w-20 md:h-20 md:w-20 flex items-center justify-center 
+                      rounded-full cursor-pointer
+                      transition-all duration-400 ease-in-out 
+                      ${isHovered ? "md:scale-100" : "md:scale-0"}
+                      transform hover:scale-125 active:scale-100 shadow-lg
+                      hover:bg-[#FD267A] active:bg-pink-700`}
+            onMouseEnter={() => updateStroke(0, "white")}
+            onMouseLeave={() => updateStroke(0, "#FD267A")}
+            onMouseDown={() => updateStroke(0, "black")}
+            onMouseUp={() => updateStroke(0, "white")}
+            onClick={() => handleRequestClick({ status: "ignore", _id })}
+          >
+            <i
+              className="material-icons font-extrabold  text-[#FD267A] 
+                        transition-all duration-300 ease-in-out transform 
+                        group-hover:scale-200 group-hover:text-white 
+                        group-active:scale-90 group-active:text-black scale-150"
+              style={{
+                WebkitTextStroke: strokeColors[0] ? `1.2px ${strokeColors[0]}` : "0px",
+                textShadow: "rgb(0 0 0) 0px 0px 7px",
+              }}
+            >
+              close
+            </i>
+          </button>
+
+          {/* Interested Button */}
+          <button
+            id="interested-btn"
+            className={`group bg-gray-800 h-20 w-20 md:h-20 md:w-20 flex items-center justify-center 
+                      rounded-full cursor-pointer
+                      transition-all duration-400 ease-in-out 
+                      ${isHovered ? "md:scale-100" : "md:scale-0"}
+                      transform hover:scale-125 active:scale-100 shadow-lg
+                      hover:bg-[#167d32] active:bg-[#167d32]`}
+            onMouseEnter={() => updateStroke(1, "white")}
+            onMouseLeave={() => updateStroke(1, "#167d32")}
+            onMouseDown={() => updateStroke(1, "black")}
+            onMouseUp={() => updateStroke(1, "white")}
+            onClick={() => handleRequestClick({ status: "interested", _id })}
+          >
+            <i
+              className="material-icons font-extrabold text-[#167d32]
+                        transition-all duration-300 ease-in-out transform 
+                        group-hover:scale-200 group-hover:text-white 
+                        group-active:scale-90 group-active:text-black scale-150"
+              style={{
+                WebkitTextStroke: strokeColors[1] ? `1.2px ${strokeColors[1]}` : "0px",
+                textShadow: "rgb(0 0 0) 0px 0px 7px",
+              }}
+            >
+              favorite
+            </i>
+          </button>
+        </div>
+        
         <div
           className={`
-            overflow-hidden flex-grow
-            transition-all md:transition-[max-width] duration-1000 ease-in-out
-            ${showDetails
-              ? "opacity-100 md:max-w-[32rem] max-h-[1000px]"
-              : " max-h-0 md:max-h-[1000px] md:max-w-0"}
-          `} 
+            transition-all duration-700 ease-in-out
+            overflow-hidden
+            ${showDetails ? "h-9/12 w-[24rem] md:h-full md:w-[24rem] opacity-100 flex-[2]" : "flex-[0] h-0 w-[24rem] md:h-full md:w-0 opacity-0"}
+          `}
         >
           {renderDetail && (
-            <div className={`w-full h-full m-1  min-h-[20rem] md:w-[24rem] transition-all md:transition-[max-width] duration-1000 ease-in-out`}>
+            <div className="w-full h-full">
               <UserProfileDetail feed={feed} />
             </div>
           )}
+          {/* this is a details section */}
         </div>
 
       </div>
 
+      
 
-
-      {/* Buttons Section - Absolutely Positioned */}
-        {/* Buttons Section - Absolutely Positioned */}
-        <div className="relative h-0">
-          <div className="absolute left-1/2 transform -translate-x-1/2 bottom-[-2rem] flex space-x-32 z-10">
-
-            {/* Ignore Button */}
-            <button
-              id="ignore-btn"
-              className={`group bg-gray-800 h-20 w-20 flex items-center justify-center 
-                        rounded-full cursor-pointer
-                        transition-all duration-400 ease-in-out 
-                        ${isHovered ? "md:scale-100" : "md:scale-0"}
-                        transform hover:scale-125 active:scale-100 shadow-lg
-                        hover:bg-[#FD267A] active:bg-pink-700`}
-              // onClick={() => handleRequestClick({ status: "ignored", _id: _id })}/
-              onMouseEnter={() => updateStroke(0, "white")}
-              onMouseLeave={() => updateStroke(0, "#FD267A")} // dark pink
-              onMouseDown={() => updateStroke(0, "black")}         // remove stroke
-              onMouseUp={() => updateStroke(0, "white")}    // optional reset
-            >
-              <i
-                className="material-icons font-extrabold  text-[#FD267A] 
-                          transition-all duration-300 ease-in-out transform 
-                          group-hover:scale-200 group-hover:text-white 
-                          group-active:scale-90 group-active:text-black scale-150
-                          "
-                style={{
-                  WebkitTextStroke: strokeColors[0] ? `1.2px ${strokeColors[0]}` : "0px",
-                  textShadow: "rgb(0 0 0) 0px 0px 7px",
-                }}
-              >
-                close
-              </i>
-            </button>
-
-            {/* Interested Button */}
-            <button
-              id="interested-btn"
-              className={`group bg-gray-800 h-20 w-20 flex items-center justify-center 
-                        rounded-full cursor-pointer
-                        transition-all duration-400 ease-in-out 
-                        ${isHovered ? "md:scale-100" : "md:scale-0"}
-                        transform hover:scale-125 active:scale-100 shadow-lg
-                        hover:bg-[#167d32] active:bg-[#167d32]`}
-              // onClick={() => handleRequestClick({ status: "interested", _id: _id })}
-              onMouseEnter={() => updateStroke(1, "white")}
-              onMouseLeave={() => updateStroke(1, "#167d32")} // dark green
-              onMouseDown={() => updateStroke(1, "black")} // remove stroke
-              onMouseUp={() => updateStroke(1, "white")} // optional reset
-            >
-              <i
-                className="material-icons font-extrabold text-[#167d32]
-                          transition-all duration-300 ease-in-out transform 
-                          group-hover:scale-200 group-hover:text-white 
-                          group-active:scale-90 group-active:text-black scale-150"
-                style={{
-                  WebkitTextStroke: strokeColors[1] ? `1.2px ${strokeColors[1]}` : "0px",
-                  textShadow: "rgb(0 0 0) 0px 0px 7px",
-                }}
-              >
-                favorite
-              </i>
-            </button>
-
-          </div>
-        </div>
+      
 
     </div>
-    
-    // </div>
   );
 };
 

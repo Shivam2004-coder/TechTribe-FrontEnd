@@ -42,7 +42,7 @@ const UserProfileDetail = ({feed}) => {
     school,
     skills,
     socialLinks,
-  } = feed.feed;
+  } = feed;
 
 
   const promptsList = [

@@ -7,9 +7,10 @@
     clip-path: polygon(0% 0%, 90% 0%, 100% 100%, 0% 100%);
 }
 body {
-    font-family: "Playfair Display", serif;
-    font-size: larger;   
+  font-family: "Playfair Display", serif;
+  font-size: larger;
 }
+
 input[type="date"]::-webkit-calendar-picker-indicator {
   opacity: 0;
   pointer-events: none;

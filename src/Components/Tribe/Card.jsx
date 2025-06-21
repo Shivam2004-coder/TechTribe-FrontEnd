@@ -16,13 +16,11 @@ const Card = (p) => {
     lastName,
     uploadedImages,
     livingIn,
-  } = feed.feed;
-
-  console.log("uploadedImages", uploadedImages);
+  } = feed;
 
   return (
         <div
-            className="relative flex flex-col h-full w-96 overflow-hidden bg-black rounded-3xl shadow shadow-black select-none"
+            className="relative flex flex-col h-full w-96 md:w-96 overflow-hidden bg-black rounded-3xl shadow shadow-black select-none"
             style={{
                 backgroundImage: `url("https://res.cloudinary.com/dilpkrfrb/image/upload/v1744462596/${uploadedImages[profilePictureIndex]}")`,
                 backgroundSize: "contain",

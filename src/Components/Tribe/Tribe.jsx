@@ -34,14 +34,15 @@ const Tribe = () => {
   }
 
   return (
-    <div className="flex-grow flex w-screen justify-center " >
+    <div className="flex-grow flex w-full justify-center " >
       {/* <div className="col-span-4" >
 
       </div> */}
-      <div className="col-span-4 flex flex-grow justify-center" >
+      <div className="col-span-4 flex justify-center" >
         { feed &&   
             <UserCard 
               feed={feed[0]}
+              isProfile={false}
             />
         }
       </div>

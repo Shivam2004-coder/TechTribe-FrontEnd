@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setProfileImage } from '../../../utils/ReduxStore/profileSlice';
 import { Cloudinary } from '@cloudinary/url-gen/index';
 import {AdvancedImage} from '@cloudinary/react';
@@ -7,6 +7,9 @@ import {fill} from "@cloudinary/url-gen/actions/resize";
 import { ChevronDown, ChevronUp } from 'lucide-react'; // Optional: Lucide icons
 import UserImage from "../EditOptions/UserImage";
 import UserAvatar from "../EditOptions/Options/UserAvatar";
+import { BASE_URL } from "../../../utils/Constants/constants";
+import axios from "axios";
+import useSaveImages from "../../../CustomHooks/useSaveImages";
 
 const avatars = [
   "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_a83fe293-40ae-458d-8423-83bfec78dbbb", "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_424fc5f1-b325-4461-bac7-749391c70640", "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_b833471e-8f1b-4fc7-82b0-caec4f8f7fee", "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_1f1c6672-b72b-4fab-8a79-157cf8c6ba64", "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_0428dab3-deaa-406c-bb8d-3668b7254f5c",
@@ -25,15 +28,40 @@ const Accordian = () => {
   });
 
   const dispatch = useDispatch();
-   const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const profileImage = useSelector((store) => store.profile.profileImage);
+  const { handleSaveProfileClick } = useSaveImages();
 
-  const handleClick = (src) => {
-    dispatch(setProfileImage(src));
+  const handleClick = async (src) => {
+    if (src === profileImage) {
+      return; // Don't proceed if the clicked avatar is already selected
+    }
+
+    try{
+      console.log("I am in Accordian delete Function !!");
+      console.log("Profile Image: ", profileImage);
+      setIsSaving(true);
+      const response = await axios.post(BASE_URL + "profile/delete/image", {
+          publicId: profileImage,
+          isProfile: true,
+      },{withCredentials: true});
+      console.log(response);
+      dispatch(setProfileImage(src));
+      await handleSaveProfileClick();
+      setIsSaving(false);
+    }
+    catch (error) {
+      console.error("Error handling avatar click:", error);
+    }
+
   };
   return (
     <div className="flex flex-col bg-amber-500 items-center max-w-full min-h-screen p-4 rounded-lg shadow-lg">
       <UserImage isOpen={isOpen}
-                setIsOpen={setIsOpen}    
+                setIsOpen={setIsOpen}   
+                isSaving={isSaving}
+                setIsSaving={setIsSaving} 
       />
       <div className="w-full shadow-black rounded-lg shadow-md bg-gray-900">
         {/* Accordion Header */}
@@ -74,15 +102,25 @@ const Accordian = () => {
             <div
               key={index}
               onClick={() => handleClick(avatar)}
-              className="relative aspect-square flex justify-center items-center 
-                        p-2 rounded-full cursor-pointer hover:shadow-black hover:shadow-lg transition-shadow duration-300"
+              className={`relative aspect-square flex justify-center items-center 
+                          m-3 p-0 rounded-full cursor-pointer transition-all duration-300
+                          ${avatar === profileImage ? "cursor-not-allowed" : "hover:shadow-black hover:shadow-lg"}
+                          ${avatar === profileImage ? "border-4 bg-green-600 border-green-600 shadow-green-500 shadow-lg scale-105" : ""}`}
             >
+
               <AdvancedImage
                 cldImg={cld.image(avatar).resize(fill().width(300).height(300))}
-                className="w-full h-full md:w-[90%] md:h-[90%] object-cover border-4 border-transparent 
-                          shadow-lg rounded-full hover:scale-105"
+                className={`w-full h-full md:w-[90%] md:h-[90%] object-cover rounded-full transition-all duration-300
+                            ${avatar === profileImage ? "ring-4 ring-green-600" : "border-4 border-transparent hover:scale-105"}`}
               />
+
+              {avatar === profileImage && (
+                <div className="absolute bottom-1 right-1 bg-green-500 text-white text-xs px-2 py-1 rounded-full shadow-md">
+                  ✓
+                </div>
+              )}
             </div>
+
           ))}
         </div>
 
