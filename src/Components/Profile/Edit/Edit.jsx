@@ -100,12 +100,12 @@ const Edit = () => {
     }
 
     return (
-        <div className="w-full max-h-screen flex flex-col md:bg-amber-500 items-center rounded-lg" >
-          <div className="bg-gray-800 w-full md:w-5/12 h-full md:rounded-2xl shadow-xl text-white overflow-y-scroll scrollbar-hidden">
+        <div className="w-full h-full flex flex-col md:bg-amber-500 items-center rounded-lg" >
+          <div className="bg-gray-800 w-full md:w-5/12 h-screen md:rounded-2xl shadow-xl text-white overflow-y-scroll scrollbar-hidden">
             {
               editPrompt ? (
                 <EditPrompt 
-                  promptsList={promptsList}  
+                  promptsList={promptsList}   
                   setEditPrompt={setEditPrompt}
                   index={index}
                   setPromptContent={setPromptContent}

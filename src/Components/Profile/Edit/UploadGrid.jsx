@@ -109,9 +109,9 @@ const UploadGrid = (props) => {
     };
 
     return (
-        <div className="w-11/12 mx-auto px-1 py-4 rounded-2xl shadow-lg">
+        <div className="w-11/12 mx-auto px-1 py-4 rounded-2xl">
             <div className="flex justify-between items-center mb-4">
-                <h2 className="text-white text-2xl font-bold">Profile Photos</h2>
+                <h2 className="text-white text-2xl font-bold"> <i className="material-icons">photo_library</i> Profile Photos</h2>
             </div>
             <div className="grid grid-cols-3 gap-1">
                 {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((index) => (
