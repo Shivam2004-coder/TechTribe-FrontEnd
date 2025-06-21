@@ -4,7 +4,6 @@ import Edit from "./Edit/Edit";
 import { useSelector } from "react-redux";
 import PreviewPage from "./PreviewPage/PreviewPage";
 import Accordian from "./Accordian/Accordian";
-import SaveButton from "./SaveButton/SaveButton";
 
 const Profile = () => {
 
@@ -22,7 +21,6 @@ const Profile = () => {
         {showAvatarPage && <Accordian />}
         {showEditPage && <Edit />}
         {showPreviewPage && <PreviewPage />}
-        {showEditPage && <SaveButton />}
       </div>
     </div>
 

@@ -44,14 +44,15 @@ const Prompt = ({ promptsList, setIsSelectPromptClick, promptContent, setPromptC
             ))}
 
             {/* Select Prompt Button */}
-            <div className="w-11/12 p-4 mx-auto bg-gradient-to-r from-gray-700 via-zinc-500 to-slate-400 rounded-lg shadow-lg border-2 border-dashed border-amber-700">
+            <div className="w-11/12 p-3 mx-auto bg-gradient-to-r from-gray-700 via-zinc-500 to-slate-400 rounded-lg shadow-lg border-2 border-dashed border-amber-700">
                 <div 
                     className="rounded-2xl flex justify-between cursor-pointer items-center"
                     onClick={handleSelectPrompt}
                 > 
-                    <h2 className="flex justify-start font-medium">
+                     <div className="text-white text-md md:px-1 md:text-2xl font-bold md:mb-2 text-left flex items-center justify-start">
+                        <i className="material-icons flex items-center justify-center w-10 scale-90 md:scale-125">list</i>
                         Select Prompt
-                    </h2>
+                    </div>
                     <button className="bg-amber-700 h-8 w-8 md:h-10 md:w-10 rounded-full transition-transform transform hover:scale-110 shadow shadow-black cursor-pointer text-white text-sm font-bold flex items-center justify-center">
                         <i className="material-icons">add</i>
                     </button>

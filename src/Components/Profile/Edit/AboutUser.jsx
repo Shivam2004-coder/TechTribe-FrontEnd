@@ -12,11 +12,14 @@ const AboutUser = (props) => {
   }
 
   return (
-    <div className="w-11/12 p-4 mx-auto bg-gray-700 rounded-lg shadow-lg">
-        <h1 className="text-white text-2xl font-bold mb-4 text-center">About You</h1>
+    <div className="w-11/12 p-1 md:p-3 mx-auto bg-gray-700 rounded-sm shadow-lg">
+        <div className="text-white text-md md:px-1 md:text-2xl font-bold md:mb-2 text-center flex items-center justify-center">
+            <i className="material-icons flex items-center justify-center w-10 scale-90 md:scale-125">info</i>
+            About You
+        </div>
         <textarea
             placeholder="Tell us about yourself..."
-            className="w-full h-40 p-3 text-black border-none bg-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none"
+            className="w-full h-40 p-2 text-sm md:text-lg text-black border-none bg-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none"
             value={bio}
             onChange={handleBioChange}
         />

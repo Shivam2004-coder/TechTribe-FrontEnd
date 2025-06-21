@@ -9,9 +9,10 @@ const SocialLinks = ({ socialLinks, setSocialLinks }) => {
   };
 
   return (
-    <div className="w-11/12 p-4 mx-auto bg-gray-700 rounded-lg shadow-lg">
-      <div className="flex justify-between">
-        <h1 className="text-white text-2xl font-bold mb-6 text-left">Social Links</h1>
+    <div className="w-11/12 p-1 md:p-3 mx-auto bg-gray-700 rounded-sm shadow-lg">
+      <div className="text-white text-md md:px-1 md:text-2xl font-bold md:mb-2 text-left flex items-center justify-start">
+        <i className="material-icons flex items-center justify-center w-10 scale-90 md:scale-125">link</i>
+        Social Links
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -20,7 +21,7 @@ const SocialLinks = ({ socialLinks, setSocialLinks }) => {
           <input
             name="linkedin"
             placeholder="Enter your LinkedIn URL"
-            className="w-full p-3 text-black border-none bg-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            className="w-full p-2 text-sm md:text-lg text-black border-none bg-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
             value={socialLinks.linkedin}
             onChange={handleChange}
           />
@@ -31,7 +32,7 @@ const SocialLinks = ({ socialLinks, setSocialLinks }) => {
           <input
             name="github"
             placeholder="Enter your GitHub URL"
-            className="w-full p-3 text-black border-none bg-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            className="w-full p-2 text-sm md:text-lg text-black border-none bg-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
             value={socialLinks.github}
             onChange={handleChange}
           />
@@ -42,7 +43,7 @@ const SocialLinks = ({ socialLinks, setSocialLinks }) => {
           <input
             name="portfolio"
             placeholder="Enter your Portfolio URL"
-            className="w-full p-3 text-black border-none bg-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            className="w-full p-2 text-sm md:text-lg text-black border-none bg-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
             value={socialLinks.portfolio}
             onChange={handleChange}
           />
