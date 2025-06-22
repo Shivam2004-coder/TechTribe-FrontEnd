@@ -22,7 +22,7 @@ const useSaveImages = () => {
     const userSocialLinks = useSelector((store) => store.profile.socialLinks);
     const userSkills = useSelector((store) => store.profile.skills);
 
-    const handleSaveProfileClick = async () => {
+    const handleSaveProfileClick = async ( isProfile , latestProfileImage , uploadedImages ) => {
         try {
 
             console.log("Saving profile with the following data:");
@@ -34,8 +34,10 @@ const useSaveImages = () => {
                 gender: userGender,
                 dateOfBirth: userDateOfBirth,
                 promptContent: userPromptContent,
-                uploadedImages: userUploadedImages.filter(Boolean),
-                profileImage: profileImage,
+                // uploadedImages: isProfile ? userUploadedImages.filter(Boolean) : uploadedImages.filter(Boolean),
+                uploadedImages: isProfile ? userUploadedImages?.filter(Boolean) || [] : uploadedImages?.filter(Boolean) || [],
+                profileImage: isProfile ? latestProfileImage : profileImage ,
+                // profileImage: isProfile ? latestProfileImage : profileImage ,
                 bio: userBio,
                 jobTitle: userJobTitleName,
                 companyName: userCompanyName,

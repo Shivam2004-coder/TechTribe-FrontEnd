@@ -5,6 +5,9 @@ import { useState } from 'react';
 import { BASE_URL } from '../../../utils/Constants/constants';
 import axios from 'axios';
 import { errorMessage } from '../../../utils/ShowMessage';
+import { useDispatch } from 'react-redux';
+import { setUploadedImages } from '../../../utils/ReduxStore/profileSlice';
+import useSaveImages from '../../../CustomHooks/useSaveImages';
 
 const UploadGrid = (props) => {
 
@@ -21,6 +24,8 @@ const UploadGrid = (props) => {
     } = props;
 
     const [uploadingIndexes, setUploadingIndexes] = useState([]);
+    const dispatch = useDispatch();
+    const { handleSaveProfileClick } = useSaveImages();
 
 
     const handleImageUpload = (e, index) => {
@@ -40,7 +45,6 @@ const UploadGrid = (props) => {
                         await axios.post(BASE_URL + "profile/delete/image", {
                             publicId: images[index],
                             isProfile: false,
-                            save: false,
                         }, { withCredentials: true });
                     }
 
@@ -54,7 +58,8 @@ const UploadGrid = (props) => {
                     const newImages = [...images];
                     newImages[index] = response?.data?.public_id;
                     setImages(newImages);
-
+                    dispatch(setUploadedImages(newImages.filter(Boolean))); // Only keep non-null images());
+                    await handleSaveProfileClick( false , null ,newImages );
                 }
                 catch (err) {
                     console.error("Error uploading image:", err);
@@ -91,6 +96,9 @@ const UploadGrid = (props) => {
             newImages.splice(index, 1); // Remove the image at the specified index
             newImages.push(null); // Add a null at the end to maintain the size of the array
             setImages(newImages); // Update state
+            console.log(images);
+            dispatch(setUploadedImages(newImages.filter(Boolean))); // Only keep non-null images());
+            await handleSaveProfileClick( false , null ,newImages );
         }
         catch (error) {
             console.error("Error deleting image:", error);

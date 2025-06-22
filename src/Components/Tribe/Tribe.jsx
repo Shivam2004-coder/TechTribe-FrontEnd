@@ -34,11 +34,11 @@ const Tribe = () => {
   }
 
   return (
-    <div className="flex-grow flex w-full justify-center " >
+    <div className="flex-grow flex w-full items-center justify-center " >
       {/* <div className="col-span-4" >
 
       </div> */}
-      <div className="col-span-4 flex justify-center" >
+      <div className="col-span-4 flex  justify-center" >
         { feed &&   
             <UserCard 
               feed={feed[0]}

@@ -38,7 +38,7 @@ const PreviewPage = () => {
   };
 
   return (
-    <div className="flex w-full justify-end md:justify-center bg-amber-500 rounded-lg" >
+    <div className="flex w-full h-full justify-end md:justify-center items-center bg-amber-500 rounded-lg" >
       <div className="justify-center" >
         <UserCard
           feed={userFeed}
