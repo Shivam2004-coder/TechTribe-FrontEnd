@@ -6,16 +6,16 @@ import { BASE_URL } from '../../utils/Constants/constants';
 import { removeFeed } from '../../utils/ReduxStore/feedSlice';
 import { useDispatch } from 'react-redux';
 
-const ExploreButton = ({ _id }) => {
+const RejectButton = ({ _id }) => {
     const dispatch = useDispatch();
 
     const handleRequestClick = async () =>  {
         try {
-          await axios.post(`${BASE_URL}request/send/ignored/${_id}`, {}, { withCredentials: true });
+          await axios.post(`${BASE_URL}request/review/rejected/${_id}`, {}, { withCredentials: true });
           dispatch(removeFeed(_id));
         } 
         catch (error) {
-          errorMessage(error.message);
+          errorMessage("i am in the reject button  "+error.message);
         }
     };
 
@@ -29,4 +29,4 @@ const ExploreButton = ({ _id }) => {
     );
 };
 
-export default ExploreButton;
+export default RejectButton;

@@ -1,6 +1,15 @@
+import { AdvancedImage } from "@cloudinary/react";
+import { fill } from "@cloudinary/url-gen/actions/resize";
+import { Cloudinary } from "@cloudinary/url-gen/index";
 
 
 const Card = (p) => {
+
+    const cld = new Cloudinary({
+        cloud: {
+            cloudName: 'dilpkrfrb'
+        }
+    });
 
   const {
     feed,
@@ -16,6 +25,7 @@ const Card = (p) => {
     lastName,
     uploadedImages,
     livingIn,
+    profileImage,
   } = feed;
 
   return (
@@ -66,12 +76,18 @@ const Card = (p) => {
             </button>
 
             {/* User Info Overlay */}
-            <div className={`absolute bottom-4 grid grid-cols-12 rounded-t-xl text-white w-full  opacity-95  p-4
+            <div className={`absolute bottom-4 grid grid-cols-12 rounded-t-xl text-white w-full  opacity-95  p-2 mb-3
                              `}>
                 <div className={`col-span-8 transition-all duration-400 ease-in-out  ${isHovered ? "md:opacity-100" : "md:opacity-0"}
                             `} >
-                    <h1 className="text-lg font-bold">{firstName + " " + lastName}</h1>
-                    <h3 className="flex items-center" ><i className="material-icons">house</i> {livingIn}</h3>
+                    <div className="flex flex-row items-center justify-start" >
+                        <AdvancedImage
+                            cldImg={cld.image(profileImage).resize(fill().width(250).height(250))}
+                            className="object-cover h-10 w-10 mx-3 rounded-full shadow-black shadow-lg"
+                        />
+                        <h1 className="text-xl font-bold">{firstName + " " + lastName}</h1>
+                    </div>
+                    <h3 className="flex items-center ml-15 text-md " ><i className="material-icons">house</i> {livingIn}</h3>
                 </div>
                 
             </div>

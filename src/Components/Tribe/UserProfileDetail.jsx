@@ -1,4 +1,7 @@
 // components/UserProfileDetail.jsx
+import { AdvancedImage } from "@cloudinary/react";
+import { fill } from "@cloudinary/url-gen/actions/resize";
+import { Cloudinary } from "@cloudinary/url-gen/index";
 import React from "react";
 // import { useSelector } from "react-redux";
 
@@ -26,15 +29,18 @@ const InfoRow = ({ label, value }) => {
   };
 
 const UserProfileDetail = ({feed}) => {
-  // const profile = useSelector((state) => state.profile);
-
-  // if (!profile || !profile.firstName || !profile.lastName) return null;
+  const cld = new Cloudinary({
+      cloud: {
+          cloudName: 'dilpkrfrb'
+      }
+  });
 
   const {
     firstName,
     lastName,
     dateOfBirth,
     promptContent,
+    profileImage,
     livingIn,
     bio,
     jobTitle,
@@ -59,11 +65,19 @@ const UserProfileDetail = ({feed}) => {
 
 
   return ( 
-    <div className="bg-white p-3 rounded-xl h-full shadow-md w-full flex flex-col overflow-y-auto scrollbar-hidden">
-      <h2 className="p-2 text-2xl font-extrabold mb-4 text-black ">{firstName+" "+lastName+" , "+calculateAge(dateOfBirth)}</h2>
+    <div className="bg-white p-3 rounded-xl h-full shadow-md w-full flex flex-col justify-start items-center  overflow-y-auto scrollbar-hidden">
+      <div className="flex flex-row w-full items-center justify-start mb-4" >
+        <AdvancedImage
+            cldImg={cld.image(profileImage).resize(fill().width(250).height(250))}
+            className="object-cover h-10 w-10 mx-3 rounded-full shadow-black shadow-lg"
+        />
+        <h2 className="w-full text-2xl font-extrabold  text-black ">
+          {firstName+" "+lastName+" , "+calculateAge(dateOfBirth)}  
+        </h2>
+      </div>
 
       {/* This is a Bio of the user... */}
-      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
+      <div className="w-full flex flex-col bg-gray-700 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
         <div className="flex items-center mb-1" >
           <i className="material-icons mr-2" > face </i>
           <span className="font-bold text-gray-300" >Bio</span>
@@ -75,7 +89,7 @@ const UserProfileDetail = ({feed}) => {
       
       {/* This is a skill of the user */}
       {skills && skills.length > 0 && (
-        <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
+        <div className="w-full flex flex-col bg-gray-700 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
           <div className="flex items-center mb-2">
             <i className="material-icons mr-2">psychology</i>
             <span className="font-bold text-gray-300">Skills</span>
@@ -95,7 +109,7 @@ const UserProfileDetail = ({feed}) => {
 
       {/* This is a location of the user */}
       { livingIn &&
-      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
+      <div className="w-full flex flex-col bg-gray-700 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
         <div className="flex items-center mb-1" >
           <i className="material-icons mr-2" >location_on</i>
           <span className="font-bold text-gray-300" >Living In</span>
@@ -108,7 +122,7 @@ const UserProfileDetail = ({feed}) => {
 
       {/* This is a work of the user */}
       { jobTitle &&
-      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
+      <div className="h-full w-full flex flex-col bg-gray-700 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
         <div className="flex items-center mb-1" >
           <i className="material-icons mr-2" > work </i>
           <span className="font-bold text-gray-300" >Job</span>
@@ -121,7 +135,7 @@ const UserProfileDetail = ({feed}) => {
 
       {/* This is a company in which the user works */}
       { companyName &&
-      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
+      <div className="h-full w-full flex flex-col bg-gray-700 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
         <div className="flex items-center mb-1" >
           <i className="material-icons mr-2" > domain </i>
           <span className="font-bold text-gray-300" >Company</span>
@@ -134,7 +148,7 @@ const UserProfileDetail = ({feed}) => {
 
       {/* This is a school in which the user studied */}
       { school &&
-      <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
+      <div className="h-full w-full flex flex-col bg-gray-700 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
         <div className="flex items-center mb-1" >
           <i className="material-icons mr-2" > school </i>
           <span className="font-bold text-gray-300" >Education</span>
@@ -147,7 +161,7 @@ const UserProfileDetail = ({feed}) => {
 
       {/* This is a prompt content of the user */}
       { promptContent && promptContent.length > 0 &&
-      <div className="flex flex-col bg-gray-700 rounded-2xl p-2 mb-2 shadow-black shadow-lg">
+      <div className="h-full w-full flex flex-col bg-gray-700 rounded-2xl p-2 mb-2 shadow-black shadow-lg">
         {promptContent && promptContent.length > 0 && promptContent.map((item, idx) => (
           <div key={idx} className="flex flex-col bg-gray-600 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
             <div className="flex items-center mb-1">
@@ -164,7 +178,7 @@ const UserProfileDetail = ({feed}) => {
 
       {/* This is a socialLinks which the user has */}
       {socialLinks && Object.values(socialLinks).some(link => link) && (
-        <div className="flex flex-col bg-gray-700 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
+        <div className="h-full w-full flex flex-col bg-gray-700 rounded-2xl p-4 mb-2 shadow-black shadow-lg">
           <div className="flex items-center mb-1">
             <i className="material-icons mr-2">link</i>
             <span className="font-bold text-gray-300">Social Links</span>

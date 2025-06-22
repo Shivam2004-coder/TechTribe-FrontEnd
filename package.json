@@ -16,6 +16,7 @@
     "@tailwindcss/vite": "^4.0.17",
     "autoprefixer": "^10.4.21",
     "axios": "^1.8.4",
+    "emoji-picker-react": "^4.12.2",
     "framer-motion": "^12.6.3",
     "lucide-react": "^0.513.0",
     "postcss": "^8.5.3",

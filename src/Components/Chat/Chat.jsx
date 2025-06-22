@@ -1,22 +1,66 @@
-
-
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { createSocketConnection } from '../../utils/Socket/socket';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { BASE_URL } from '../../utils/Constants/constants';
+import Card from '../Tribe/Card';
+import UserCard from '../Tribe/UserCard';
+import { fill } from '@cloudinary/url-gen/actions/resize';
+import { Cloudinary } from '@cloudinary/url-gen/index';
+import { AdvancedImage } from '@cloudinary/react';
+import EmojiPicker from 'emoji-picker-react';
+
 
 const Chat = () => {
+
+    const cld = new Cloudinary({
+        cloud: {
+            cloudName: 'dilpkrfrb'
+        }
+    });
+    const messageEndRef = useRef(null);
+    const scrollToBottom = () => {
+        if (messageEndRef.current) {
+            messageEndRef.current.scrollTop = messageEndRef.current.scrollHeight;
+        }
+    };
+
+    const [isHeaderClick , setIsHeaderClick] = useState(false);
+    const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+    const handleEmojiClick = (emojiData) => {
+        setNewMessage(prev => prev + emojiData.emoji);
+    };
+
+
+
 
     const {targetUserId} = useParams();
     const [message , setMessage] = useState([]);
     const [newMessage , setNewMessage] = useState("");
     const profile = useSelector((store) => store.profile);
-    const userId = profile?.userId;
+    const connections = useSelector((store) => store.connections.currentConnection);
+    const emojiPickerRef = useRef(null);
 
+    const userId = profile?.userId;
+    console.log("I am in the chat page :");
+    console.log("This is connections");
+    console.log(connections);
     const socketRef = useRef(null);
     console.log(message);
+
+    // Calculate age
+    const calculateAge = (dob) => {
+        if (!dob) return '';
+        const birthDate = new Date(dob); 
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+        }
+        return age;
+    };
 
     const fetchChatMessages = async () => {
         const chat = await axios.get(BASE_URL + "chat/" + targetUserId, {
@@ -38,8 +82,34 @@ const Chat = () => {
       };
 
     useEffect(() => {
-    fetchChatMessages();
+        fetchChatMessages();
     }, []);
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [message]);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+            emojiPickerRef.current &&
+            !emojiPickerRef.current.contains(event.target)
+            ) {
+            setShowEmojiPicker(false);
+            }
+        };
+
+        if (showEmojiPicker) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [showEmojiPicker]);
+
 
     useEffect(() => {
         if ( !userId ) {
@@ -81,66 +151,126 @@ const Chat = () => {
         setNewMessage("");
     };
 
-  return (
-    <div className="w-full h-screen text-black flex justify-center items-center " >
-        <div className="border-2 border-gray-700 w-1/2 h-3/4 bg-gray-200 flex flex-col" >
-            <div className="border-2 border-gray-700 w-full h-2/12 flex justify-center items-center" >
-                <h1>Chat</h1>
-            </div>
-            <div className="border-2 border-gray-700 w-full h-8/12 overflow-y-scroll" >
-            {message.map((message , index) => {
-                if (message.firstName === profile.firstName) {
-                    return (
-                        <div
-                            key={index}
-                            className="w-full flex justify-end pr-4 mb-2"
-                        >
-                            <div className="flex flex-col items-end max-w-[70%]">
-                                <span className="text-sm text-gray-500 mb-1">{message.firstName}</span>
-                                <div className="bg-green-500 text-white px-4 py-2 rounded-2xl shadow-md text-sm break-words">
-                                {message.text}
-                                </div>
-                                <span className="text-xs text-gray-400 mt-1">
-                                {new Date().toLocaleTimeString()}
-                                </span>
-                            </div>
-                        </div>
-                    );
-                } else {
-                    return (
-                        <div
-                            key={index}
-                            className="w-full flex justify-start pl-4 mb-2"
-                        >
-                            <div className="flex flex-col items-start max-w-[70%]">
-                                <span className="text-sm text-gray-500 mb-1">{message.firstName}</span>
-                                <div className="bg-green-500 text-white px-4 py-2 rounded-2xl shadow-md text-sm break-words">
-                                {message.text}
-                                </div>
-                                <span className="text-xs text-gray-400 mt-1">
-                                {new Date().toLocaleTimeString()}
-                                </span>
-                            </div>
-                        </div>
-                    );
-                }
-            })}
+    const handleUserInfoClick = () => {
+        setIsHeaderClick(!isHeaderClick);
+    }
 
-            </div>
-            <div className="border-2 border-gray-700 w-full h-2/12 flex justify-around" >
-                <input  
-                    value={newMessage}
-                    onChange={(e) => setNewMessage(e.target.value)}
-                    type="text" 
-                    placeholder="Write Your message...." 
-                    className="bg-black text-white p-2 m-1 w-full border-none " 
+  return (
+    <div className="w-full h-screen  flex justify-between items-center " >
+        <div className="hidden md:flex justify-center items-center p-4 flex[1] rounded-lg" >
+            <div className="justify-center scale-125" >
+                <UserCard
+                    feed={connections}
+                    isProfile={true}
                 />
-                <button 
-                    className="p-3 hover:scale-105 active:scale-100 bg-green-600 m-1 cursor-pointer " 
-                    onClick={sendMessage}    
+            </div>
+        </div>
+        <div className='flex items-center justify-center w-full flex-[3] h-full px-1 md:px-4' >
+            <div className=" w-full h-9/10 flex flex-col" >
+                <div className=" bg-gray-700 relative w-full h-1/11 md:h-2/12 rounded-xl pl-3 flex justify-center items-center" 
+                    onClick={handleUserInfoClick}
                 >
-                    Send
-                </button>
+                    <div className="flex flex-row w-full items-center justify-start " >
+                        <AdvancedImage
+                            cldImg={cld.image(connections.profileImage).resize(fill().width(250).height(250))}
+                            className="object-cover h-12 w-12 md:h-20 md:w-20 mr-2 md:mr-3 rounded-full shadow-black shadow-lg"
+                        />
+                        <h2 className="w-full text-xl md:text-2xl font-extrabold  text-white ">
+                        {connections.firstName+" "+connections.lastName+" , "+calculateAge(connections.dateOfBirth)}  
+                        </h2>
+                    </div>
+                </div>
+
+                { isHeaderClick && 
+                    <div className={`flex items-center justify-center md:hidden z-0 transition-all duration-300 ease-in-out ${isHeaderClick ? "scale-100 opacity-100" : "scale-0 opacity-0"}`}>
+                        <div className={`justify-center transition-all duration-500 ease-in-out  ${ isHeaderClick ? "scale-100 opacity-100" : "scale-0 opacity-0" }`}>
+                            <UserCard
+                                feed={connections}
+                                isProfile={true}
+                            />
+                        </div>
+                    </div>
+                }
+
+                <div className={`transition-all w-full relative h-full duration-500 ease-in-out ${
+                    isHeaderClick && window.innerWidth < 768 ? "scale-0 opacity-0" : "scale-100 opacity-100"
+                }`}>
+                    <div 
+                        ref={messageEndRef}
+                        className={`rounded-xl bg-gray-500 p-2 md:p-4 w-full h-8/12 transition-all duration-300 ease-in-out  overflow-y-scroll scrollbar-hidden `}
+                    >
+                    {message.map((message , index) => {
+                        if (message.firstName === profile.firstName) {
+                            return (
+                                <div
+                                    key={index}
+                                    className="w-full flex justify-end pr-4 mb-2"
+                                >
+                                    <div className="flex flex-col items-end max-w-[70%]">
+                                        <div className="bg-gray-800 shadow-white shadow-inner text-white px-4 py-2 rounded-lg text-md break-words">
+                                        {message.text}
+                                        </div>
+                                        <span className="text-md text-black mt-1">
+                                        {new Date().toLocaleTimeString()}
+                                        </span>
+                                    </div>
+                                </div>
+                            );
+                        } else {
+                            return (
+                                <div
+                                    key={index}
+                                    className="w-full flex justify-start pl-4 mb-2"
+                                >
+                                    <div className="flex flex-col items-start max-w-[70%]">
+                                        <div className="bg-gray-200 shadow-black shadow-md text-black px-4 py-2 rounded-lg text-md break-words">
+                                        {message.text}
+                                        </div>
+                                        <span className="text-md text-white mt-1">
+                                        {new Date().toLocaleTimeString()}
+                                        </span>
+                                    </div>
+                                </div>
+                            );
+                        }
+                    })}
+
+                    </div>
+                    <div className={`rounded-xl bg-black w-full h-1/11 md:h-2/12 flex transition-all duration-300 ease-in-out  items-center justify-around `} >
+                        {showEmojiPicker && (
+                            <div className="bg-white rounded-xl p-2"
+                                ref={emojiPickerRef}
+                            >
+                            <EmojiPicker
+                                onEmojiClick={handleEmojiClick}
+                                height={300}
+                                width="100%"
+                            />
+                            </div>
+                        )}
+                        <div className="w-full flex items-center justify-around">
+                            <input  
+                                value={newMessage}
+                                onChange={(e) => setNewMessage(e.target.value)}
+                                type="text" 
+                                placeholder="Write Your message...." 
+                                className="text-white p-2 m-1 w-full border-none outline-none focus:outline-none focus:ring-0" 
+                            />
+                            <button
+                                className="text-2xl h-full text-white mx-2 hover:bg-gray-500 p-4 rounded-lg cursor-pointer"
+                                onClick={() => setShowEmojiPicker(prev => !prev)}
+                            >
+                            <i className='material-icons'>add_reaction</i>
+                            </button>
+                            <button 
+                                className="h-13 w-13 md:h-18 md:w-18 p-3 md:p-4 hover:scale-115 rounded-full flex items-center transition-all duration-300 ease-in-out justify-center active:scale-100 bg-green-600 m-2 md:m-4 cursor-pointer " 
+                                onClick={sendMessage}    
+                            >
+                                <i className='material-icons'>send</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

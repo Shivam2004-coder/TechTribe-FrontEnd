@@ -134,7 +134,7 @@ const Connections = () => {
 
                     <div className="mt-6 flex gap-4">
                     <RejectButton _id={user._id} />
-                    <ChatButton _id={user._id} />
+                    <ChatButton user={user} />
                     </div>
                 </div>
                 ))}
