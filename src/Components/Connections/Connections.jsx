@@ -57,26 +57,26 @@ const Connections = () => {
             <h1 className="text-center text-5xl mb-3 font-bold text-white tracking-wide">Connections</h1>
             
             <div className="relative bg-gray-300 rounded-full p-1 flex items-center w-[80px] md:w-[90px] shadow-black shadow-inner">
-                <div
-                    className={`absolute top-1 left-1 w-9 h-9 md:w-10 md:h-10 bg-amber-950 rounded-full transition-all duration-500 ease-in-out ${
-                    layout === "list" ? "translate-x-9 md:translate-x-10" : "translate-x-0"
-                    }
-                        `}
-                />
-                    <button
-                        className="z-10 w-9 h-9 md:w-10 md:h-10 text-amber-500 flex items-center justify-center cursor-pointer "
-                        onClick={() => setLayout("grid")}
-                    >
-                        <i className="material-icons">grid_on</i>
-                    </button>
-                    <button
-                        className="z-10 w-9 h-9 md:w-10 md:h-10 text-amber-500 flex items-center justify-center cursor-pointer"
-                        onClick={() => setLayout("list")}
-                    >
-                        <i className="material-icons">view_list</i>
-                    </button>
-                </div>
-        </div>
+              <div
+                  className={`absolute top-1 left-1 w-9 h-9 md:w-10 md:h-10 bg-amber-950 rounded-full transition-all duration-500 ease-in-out ${
+                  layout === "list" ? "translate-x-9 md:translate-x-10" : "translate-x-0"
+                  }
+                      `}
+              />
+                  <button
+                      className="z-10 w-9 h-9 md:w-10 md:h-10 text-amber-500 flex items-center justify-center cursor-pointer "
+                      onClick={() => setLayout("grid")}
+                  >
+                      <i className="material-icons">grid_on</i>
+                  </button>
+                  <button
+                      className="z-10 w-9 h-9 md:w-10 md:h-10 text-amber-500 flex items-center justify-center cursor-pointer"
+                      onClick={() => setLayout("list")}
+                  >
+                      <i className="material-icons">view_list</i>
+                  </button>
+              </div>
+            </div>
         {/* </div> */}
 
         <div className="max-w-7xl mx-auto px-6">

@@ -9,6 +9,7 @@ import { BASE_URL } from "../../utils/Constants/constants";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
 import { useSelector } from "react-redux";
+import { hover } from "framer-motion";
 
 const plans = [
   {
@@ -131,7 +132,6 @@ const Premium = () => {
 
   const handlePlanClick = (plan) => {
     setSelectedPlan(plan);
-    setBillingCycle("weekly"); // reset when switching
   };
 
   const handleBillingChange = (cycle) => {
@@ -165,7 +165,7 @@ const Premium = () => {
   return isPremiumMember ? (
     "YOU ARE ALREADY A PREMIUM MEMBER"
   ) : (
-    <div className="min-h-screen w-full bg-gradient-to-r from-[#0f0c29] via-[#302b63] to-[#24243e] text-white">
+    <div className="min-h-screen w-full bg-gradient-to-r from-[#0f0f0f] via-[#1c1c1c] to-[#2a2a2a] text-white">
       {/* {showConfetti && <Confetti width={width} height={height} />} */}
 
       <section className="text-center py-16 px-4">
@@ -177,25 +177,33 @@ const Premium = () => {
         </p>
       </section>
 
-      <section className="grid grid-cols-1 gap-6 max-w-6xl mx-auto px-4 pb-20">
+      <section className="grid grid-cols-1  gap-6 max-w-6xl mx-auto px-4 pb-20">
         {plans.map((plan, idx) => {
           const isSelected = plan.name === selectedPlan;
           return (
             <div
               key={idx}
-              className={`relative rounded-2xl shadow-xl p-6 border transition-transform transform hover:scale-105 cursor-pointer ${
-                isSelected ? "border-green-400" : "border-transparent"
-              } ${
-                plan.highlight
-                  ? "bg-yellow-400 text-black border-yellow-300"
-                  : "bg-gray-500 bg-opacity-10 border-gray-600 border-opacity-20"
-              }`}
+              className={`relative p-6 border-1  bg-gradient-to-b from-[#1e1e1e] via-[#3e3d3d] to-[#403e3e] rounded-2xl shadow-md hover:scale-105 transition-all duration-400 ease-in-out  transform cursor-pointer 
+                text-white 
+                ${ isSelected ? ( plan.name === "Basic" ? " border-white" : ( plan.name === "Pro" ? "border-amber-500" : "border-cyan-600") ) : "border-gray-500"}
+                ${ isSelected ? "border-8" : "border-2" }
+                `}
               onClick={() => handlePlanClick(plan.name)}
             >
-              <div className="p-1 top-0 left-0 rounded-full w-7 h-7 shadow-black shadow-inner" >
-                  <div className={` ${ isSelected ? "bg-green-600" : "bg-transparent" } transition-all duration-300 ease-in-out relative w-full h-full rounded-full`}></div>
+              <div className="p-1 top-0 left-0 rounded-full w-7 h-7 shadow-black shadow-inner flex" >
+                  <div className={` ${ isSelected ? ( plan.name === "Basic" ? " bg-white" : ( plan.name === "Pro" ? "bg-amber-500" : "bg-cyan-600") ) : "border-transparent"} transition-all duration-300 ease-in-out relative w-full h-full rounded-full`}></div>
               </div>
-              <h2 className="text-2xl font-semibold mb-4">{plan.name}</h2>
+                <h2 className="text-2xl font-semibold mb-4"> 
+                  {plan.name}
+                </h2>
+              <div className="p-1 absolute top-4 right-4 rounded-full w-13 h-13 shadow-inner shadow-white flex items-center justify-center bg-gray-800 " >
+                { plan.name === "Elite" && <i class="fa-solid fa-crown"></i> }
+                { plan.name !== "Elite" && 
+                  <i className="material-icons" >
+                    { plan.name === "Pro" ? "workspace_premium" : "eco" } 
+                  </i>  
+                }
+              </div>
               <ul className="space-y-3 mb-6">
                 {plan.features.map((feature, i) => (
                   <li key={i} className="flex items-center gap-2">
@@ -208,20 +216,30 @@ const Premium = () => {
               {plan.name !== "Basic" && isSelected && (
                 <div>
                   <div className="flex items-center justify-center mb-4 relative bg-gray-300 rounded-xl overflow-hidden">
-                    <div
-                      className={`absolute top-0 bottom-0 left-0 w-1/2 bg-black transition-all duration-300 transform ${billingCycle === "monthly" ? "translate-x-full" : "translate-x-0"}`}
-                    ></div>
-                    {['weekly', 'monthly'].map((type) => (
-                      <button
-                        key={type}
-                        className="w-1/2 z-10 py-2 text-sm font-semibold text-black"
-                        onClick={() => handleBillingChange(type)}
-                      >
-                        {type.charAt(0).toUpperCase() + type.slice(1)}
-                      </button>
-                    ))}
-                  </div>
+                    <div className="relative bg-gray-300 rounded-full p-1 flex items-center justify-between w-64 md:w-80 shadow-inner shadow-black">
+                      {/* Sliding background */}
+                        <div
+                          className={`absolute top-1 left-1 bottom-1 w-1/2 bg-amber-950 rounded-full transition-all duration-300 ease-in-out ${
+                            billingCycle === "monthly" ? "translate-x-full" : "translate-x-0"
+                          }`}
+                        />
+                          {/* Weekly Button */}
+                          <button
+                            className="z-10 w-1/2 h-10 text-sm font-medium text-amber-500 bg-transparent rounded-full focus:outline-none"
+                            onClick={() => handleBillingChange("weekly")}
+                          >
+                            Weekly
+                          </button>
 
+                          {/* Monthly Button */}
+                          <button
+                            className="z-10 w-1/2 h-10 text-sm font-medium text-amber-500 bg-transparent rounded-full focus:outline-none"
+                            onClick={() => handleBillingChange("monthly")}
+                          >
+                            Monthly
+                          </button>
+                        </div>
+                    </div>
                   {renderPriceOptions(plan.name)}
                 </div>
               )}
