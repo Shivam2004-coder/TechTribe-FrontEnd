@@ -9,7 +9,7 @@ import { BASE_URL } from "../../utils/Constants/constants";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
 import { useSelector } from "react-redux";
-import { hover } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const plans = [
   {
@@ -52,24 +52,24 @@ const plans = [
 const priceOptions = {
   Pro: {
     weekly: [
-      { label: "1 Week", price: "₹199", amount: 19900, tag: "Popular" },
-      { label: "3 Weeks", price: "₹149/week", amount: 44700, tag: "Saves 25%" }
+      { idx: "P1W" , label: "1 Week", price: "₹99.00/week", amount: 9900, tag: "Popular" },
+      { idx: "P2W" , label: "3 Weeks", price: "₹67.76/week", amount: 20300, tag: "Saves 25%" }
     ],
     monthly: [
-      { label: "1 Month", price: "₹499", amount: 49900, tag: "Saves 20%" },
-      { label: "3 Months", price: "₹399/month", amount: 119700, tag: "Saves 35%" },
-      { label: "6 Months", price: "₹349/month", amount: 209400, tag: "Best Value" }
+      { idx: "P1M" , label: "1 Month", price: "₹49.75/week", amount: 19900, tag: "Saves 20%" },
+      { idx: "P2M" , label: "3 Months", price: "₹40.83/week", amount: 49000, tag: "Saves 35%" },
+      { idx: "P3M" , label: "6 Months", price: "₹34.16/week", amount: 82000, tag: "Best Value", tag2: "Saves 50%" }
     ]
   },
   Elite: {
     weekly: [
-      { label: "1 Week", price: "₹299", amount: 29900, tag: "Popular" },
-      { label: "3 Weeks", price: "₹229/week", amount: 68700, tag: "Saves 23%" }
+      { idx: "E1W" , label: "1 Week", price: "₹159.00/week", amount: 15900, tag: "Popular" },
+      { idx: "E2W" , label: "3 Weeks", price: "₹93.33/week", amount: 28000, tag: "Saves 23%" }
     ],
     monthly: [
-      { label: "1 Month", price: "₹699", amount: 69900, tag: "Saves 20%" },
-      { label: "3 Months", price: "₹599/month", amount: 179700, tag: "Saves 35%" },
-      { label: "6 Months", price: "₹499/month", amount: 299400, tag: "Best Value" }
+      { idx: "E1M" , label: "1 Month", price: "₹79.75/week", amount: 31900, tag: "Saves 20%" },
+      { idx: "E2M" , label: "3 Months", price: "₹64.16/week", amount: 77000, tag: "Saves 35%" },
+      { idx: "E3M" , label: "6 Months", price: "₹54.16/week", amount: 130000, tag: "Best Value", tag2: "Saves 55%" }
     ]
   }
 };
@@ -79,8 +79,10 @@ const Premium = () => {
   const membershipType = useSelector((store) => store.profile.membershipType);
   const [isPremiumMember, setIsPremiumMember] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("Pro");
+  const [selectedBillingPlan , setSelectedBillingPlan] = useState("");
   const [billingCycle, setBillingCycle] = useState("weekly");
-  const [showConfetti, setShowConfetti] = useState(true);
+  // const [showConfetti, setShowConfetti] = useState(true);
+  const navigate = useNavigate();
   const { width, height } = useWindowSize();
 
   useEffect(() => {
@@ -94,11 +96,12 @@ const Premium = () => {
     if (res.data.isPremiumMember) setIsPremiumMember(true);
   };
 
-  const handlePaymentButtonClick = async (type) => {
+  const handlePaymentButtonClick = async (type,detail) => {
     console.log("Payment button clicked for type:", type);
     const order = await axios.post(BASE_URL + "payment/create", 
       {
         membershipType: type,
+        membershipDetail: detail
       },
       {
         withCredentials: true,
@@ -138,24 +141,45 @@ const Premium = () => {
     setBillingCycle(cycle);
   };
 
+  const handleBillingClick = (billingPlan) => {
+    setSelectedBillingPlan(billingPlan);
+  }
+
+  const selectedPlanDetails = priceOptions[selectedPlan]?.[billingCycle]?.find(
+    (option) => option.idx === selectedBillingPlan
+  );
+
+
   const renderPriceOptions = (plan) => {
     const options = priceOptions[plan]?.[billingCycle] || [];
     return (
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 w-full gap-4 mt-4">
         {options.map((opt, idx) => (
-          <div key={idx} className="relative bg-white text-black p-4 rounded-xl shadow-md">
-            {opt.tag === "Best Value" && (
-              <div className="absolute top-0 left-0 bg-yellow-400 px-2 py-1 text-xs font-bold rounded-br-xl">
+          <div key={idx} className={`relative bg-gray-700 text-black border-6 p-10 rounded-xl ${ selectedBillingPlan === opt.idx ? " border-white" : "border-transparent" } shadow-black shadow-md`}
+              onClick={() => handleBillingClick(opt.idx)}
+          >
+            { selectedBillingPlan === opt.idx &&
+              <div className="absolute top-0 right-0 text-sm text-white px-2 py-1 font-bold rounded-br-xl rounded-tl-lg">
+                <i className="material-icons" >check_circle</i>
+              </div>
+            }
+            { (opt.tag === "Best Value" || opt.tag === "Popular") && (
+              <div className="absolute top-0 left-0 text-sm bg-yellow-400 px-2 py-1 font-bold rounded-br-xl rounded-tl-lg">
                 {opt.tag}
               </div>
             )}
-            {opt.tag.includes("Save") && (
-              <div className="absolute bottom-2 right-2 text-xs font-bold text-green-600">
+            { opt.tag === "Best Value" && (
+              <div className="absolute top-0 left-0 text-sm bg-yellow-400 px-2 py-1 font-bold rounded-br-xl rounded-tl-lg">
                 {opt.tag}
               </div>
             )}
-            <h4 className="text-lg font-bold mb-1">{opt.label}</h4>
-            <p className="text-sm">{opt.price}</p>
+            { ( opt.tag.includes("Save") || opt?.tag2?.includes("Save") ) && (
+              <div className="absolute bottom-2 right-2 text-xs font-bold bg-black p-2 rounded-full text-green-600">
+                {(opt.tag.includes("Save") && opt.tag) || (opt?.tag2?.includes("Save") && opt.tag2) }
+              </div>
+            )}
+            <h4 className="text-2xl text-white font-bold mb-1">{opt.label}</h4>
+            <p className="text-lg text-white ">{opt.price}</p>
           </div>
         ))}
       </div>
@@ -163,10 +187,49 @@ const Premium = () => {
   };
 
   return isPremiumMember ? (
-    "YOU ARE ALREADY A PREMIUM MEMBER"
+    <div className="min-h-screen w-full flex flex-col items-center bg-gradient-to-r from-[#0f0f0f] via-[#1c1c1c] to-[#2a2a2a] text-white" >
+      {/* <Confetti width={width} height={height} /> */}
+      <section className="text-center flex flex-col items-center py-16 px-4">
+        <div className="text-4xl md:text-5xl bg-black h-25 w-25 rounded-full shadow-white shadow-inner flex items-center justify-center font-bold mb-4">
+          { membershipType === "Elite" ? <i class="fa-solid fa-crown"></i> : <i className="material-icons" >workspace_premium</i>  }
+        </div>
+        <p className="text-lg  md:text-xl text-white max-w-2xl mx-auto">
+          You are an {membershipType} member now !!!
+        </p>
+      </section>
+
+      {plans.map((plan, idx) => {
+        const isSelected = plan.name === membershipType;
+        return (
+          isSelected && (
+            <div key={idx}
+                className="relative w-3/4 p-6 border-1  bg-gradient-to-b from-[#1e1e1e] via-[#3e3d3d] to-[#403e3e] rounded-2xl shadow-md transition-all duration-400 ease-in-out  transform cursor-pointer 
+                text-white "
+            >
+              <h2 className="text-2xl font-semibold mb-4"> 
+                {plan.name}
+              </h2>
+              <ul className="space-y-3 mb-6">
+                {plan.features.map((feature, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    <CheckCircle className="w-5 h-5 text-green-400" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              
+            </div>
+          )
+        );
+      })}
+
+
+    </div>
+
+    // "YOU ARE ALREADY A PREMIUM MEMBER"
+    
   ) : (
     <div className="min-h-screen w-full bg-gradient-to-r from-[#0f0f0f] via-[#1c1c1c] to-[#2a2a2a] text-white">
-      {/* {showConfetti && <Confetti width={width} height={height} />} */}
 
       <section className="text-center py-16 px-4">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -183,16 +246,13 @@ const Premium = () => {
           return (
             <div
               key={idx}
-              className={`relative p-6 border-1  bg-gradient-to-b from-[#1e1e1e] via-[#3e3d3d] to-[#403e3e] rounded-2xl shadow-md hover:scale-105 transition-all duration-400 ease-in-out  transform cursor-pointer 
+              className={`relative p-6 border-1  bg-gradient-to-b from-[#1e1e1e] via-[#3e3d3d] to-[#403e3e] rounded-2xl shadow-md transition-all duration-400 ease-in-out  transform cursor-pointer 
                 text-white 
                 ${ isSelected ? ( plan.name === "Basic" ? " border-white" : ( plan.name === "Pro" ? "border-amber-500" : "border-cyan-600") ) : "border-gray-500"}
                 ${ isSelected ? "border-8" : "border-2" }
                 `}
               onClick={() => handlePlanClick(plan.name)}
             >
-              <div className="p-1 top-0 left-0 rounded-full w-7 h-7 shadow-black shadow-inner flex" >
-                  <div className={` ${ isSelected ? ( plan.name === "Basic" ? " bg-white" : ( plan.name === "Pro" ? "bg-amber-500" : "bg-cyan-600") ) : "border-transparent"} transition-all duration-300 ease-in-out relative w-full h-full rounded-full`}></div>
-              </div>
                 <h2 className="text-2xl font-semibold mb-4"> 
                   {plan.name}
                 </h2>
@@ -215,17 +275,19 @@ const Premium = () => {
 
               {plan.name !== "Basic" && isSelected && (
                 <div>
-                  <div className="flex items-center justify-center mb-4 relative bg-gray-300 rounded-xl overflow-hidden">
-                    <div className="relative bg-gray-300 rounded-full p-1 flex items-center justify-between w-64 md:w-80 shadow-inner shadow-black">
+                  <div className="flex items-center justify-center mb-4 relative rounded-xl overflow-hidden">
+                    <div className="relative bg-gray-400 rounded-md p-4 flex items-center justify-between w-full shadow-inner shadow-black">
                       {/* Sliding background */}
                         <div
-                          className={`absolute top-1 left-1 bottom-1 w-1/2 bg-amber-950 rounded-full transition-all duration-300 ease-in-out ${
-                            billingCycle === "monthly" ? "translate-x-full" : "translate-x-0"
-                          }`}
+                           className={`absolute top-1 bottom-1 m-1 rounded-md transition-all duration-300 ease-in-out bg-gray-950 shadow-inner shadow-white ${
+                              billingCycle === "monthly"
+                                ? "left-[52%] right-[4px]" // shifts to the right with margin
+                                : "left-[4px] right-[52%]" // stays on the left with margin
+                            }`}
                         />
                           {/* Weekly Button */}
                           <button
-                            className="z-10 w-1/2 h-10 text-sm font-medium text-amber-500 bg-transparent rounded-full focus:outline-none"
+                            className={`z-10 w-1/2 h-10 flex items-center justify-center text-md cursor-pointer font-medium ${ billingCycle === "weekly" ? "text-white" : "text-black" } transition-all duration-200 ease-in-out bg-transparent rounded-full focus:outline-none`}
                             onClick={() => handleBillingChange("weekly")}
                           >
                             Weekly
@@ -233,7 +295,7 @@ const Premium = () => {
 
                           {/* Monthly Button */}
                           <button
-                            className="z-10 w-1/2 h-10 text-sm font-medium text-amber-500 bg-transparent rounded-full focus:outline-none"
+                            className={`z-10 w-1/2 h-10 flex items-center justify-center text-md cursor-pointer font-medium ${ billingCycle !== "weekly" ? "text-white" : "text-black" } transition-all duration-200 ease-in-out bg-transparent rounded-full focus:outline-none`}
                             onClick={() => handleBillingChange("monthly")}
                           >
                             Monthly
@@ -244,19 +306,39 @@ const Premium = () => {
                 </div>
               )}
 
-              <button
-                className={`mt-6 w-full py-2 rounded-xl font-semibold transition duration-200 ${
-                  plan.highlight
-                    ? "bg-black hover:bg-gray-800 text-white"
-                    : "bg-yellow-400 hover:bg-yellow-300 text-black"
-                }`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handlePlanClick(plan.name);
-                }}
-              >
-                {plan.cta}
-              </button>
+
+
+              {plan.name !== "Basic" && isSelected && selectedPlanDetails ? 
+                <button
+                  className="mt-6 w-full p-2 rounded-xl flex items-center justify-around cursor-pointer font-semibold  text-white transition duration-200"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handlePaymentButtonClick(selectedPlan , selectedPlanDetails);
+                  }}
+                >
+                  <div className="flex flex-col justify-center w-1/2 items-center" >
+                    <p>{selectedPlanDetails.label}</p>
+                    <p>{selectedPlanDetails.price}</p>
+                  </div>
+                  <div className="bg-green-600 p-5 hover:bg-green-400 transition-all duration-300 ease-in-out shadow-black shadow-md rounded-full h-full w-1/2" >
+                    Continue
+                  </div>
+                </button>
+              : 
+              ( plan.name === "Basic" && isSelected &&
+                <button
+                  className={`mt-6 w-full py-2 rounded-xl cursor-pointer font-semibold transition duration-200 ${
+                    plan.highlight
+                      ? "bg-black hover:bg-gray-800 text-white"
+                      : "bg-yellow-400 hover:bg-yellow-300 text-black"
+                  }`}
+                  onClick={() => {
+                    navigate("/tribe");
+                  }}
+                >
+                  Get Started
+                </button>
+              ) }
             </div>
           );
         })}

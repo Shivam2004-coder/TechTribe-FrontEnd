@@ -23,7 +23,9 @@ import {
   setGithubLink,
   setLinkedinLink,
   setPortfolioLink,
-  setUserId
+  setUserId,
+  setMembershipType,
+  setSwipes
 } from '../utils/ReduxStore/profileSlice';
 
 const useFetchUserProfileData = () => {
@@ -41,6 +43,7 @@ const useFetchUserProfileData = () => {
       if (!isProfileEmpty()) {
         const response = await axios.get(BASE_URL + 'profile/view', { withCredentials: true });
         const data = response.data;
+        console.log()
 
         // Dispatch to profileSlice
         dispatch(setUserId(data._id || ''));
@@ -61,6 +64,8 @@ const useFetchUserProfileData = () => {
         dispatch(setGithubLink(data.socialLinks?.github || ''));
         dispatch(setLinkedinLink(data.socialLinks?.linkedin || ''));
         dispatch(setPortfolioLink(data.socialLinks?.portfolio || ''));
+        dispatch(setMembershipType(data.membershipType || ''));
+        dispatch(setSwipes(data.swipes || ''));
 
 
         if (location.pathname !== '/login') {
