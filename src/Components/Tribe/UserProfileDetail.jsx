@@ -63,6 +63,7 @@ const UserProfileDetail = ({feed}) => {
     "The future of technology looks like...",
   ];
 
+  
 
   return ( 
     <div className="bg-white p-3 rounded-xl h-full shadow-md w-full flex flex-col justify-start items-center  overflow-y-auto scrollbar-hidden">

@@ -10,6 +10,7 @@ const PreviewPage = () => {
   const gender = useSelector((store) => store.profile.gender);
   const dateOfBirth = useSelector((store) => store.profile.dateOfBirth);
   const promptContent = useSelector((store) => store.profile.promptContent);
+  const profileImage = useSelector((store) => store.profile.profileImage);
   const uploadedImages = useSelector((store) => store.profile.uploadedImages);
   const bio = useSelector((store) => store.profile.bio);
   const jobTitle = useSelector((store) => store.profile.jobTitle);
@@ -27,6 +28,7 @@ const PreviewPage = () => {
     gender,
     dateOfBirth,
     promptContent,  
+    profileImage,
     uploadedImages,
     bio,
     jobTitle,

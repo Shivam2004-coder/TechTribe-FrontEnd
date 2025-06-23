@@ -74,6 +74,7 @@ const UserCard = ({feed , isProfile}) => {
         try {
           await axios.post(`${BASE_URL}request/send/${status}/${_id}`, {}, { withCredentials: true });
           dispatch(removeFeed(_id));
+          // await axios.post(`${BASE_URL}request/click` , {} , { withCredentials: true } );
         } catch (error) {
           errorMessage(error.message);
         }
