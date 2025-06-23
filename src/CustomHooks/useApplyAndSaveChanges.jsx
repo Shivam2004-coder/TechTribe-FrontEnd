@@ -41,7 +41,7 @@ const useApplyAndSaveChanges = () => {
     const userSocialLinks = useSelector((store) => store.profile.socialLinks);
     const userSkills = useSelector((store) => store.profile.skills);
 
-    console.log("User Social Links: ", userSocialLinks);
+    // console.log("User Social Links: ", userSocialLinks);
 
     // State variables to handle functionality
 

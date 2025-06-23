@@ -22,6 +22,8 @@ const initialState = {
     linkedin: '',
     portfolio: '',
   },
+  membershipType: '',
+  swipes: '',
 };
 
 const profileSlice = createSlice({
@@ -91,6 +93,8 @@ const profileSlice = createSlice({
     setPortfolioLink: (state, action) => {
       state.socialLinks.portfolio = action.payload;
     },    
+    setMembershipType: (state , action) => { state.membershipType = action.payload },
+    setSwipes: (state , action) => { state.swipes = action.payload },
     resetProfile: () => initialState
   }
 });
@@ -120,6 +124,8 @@ export const {
   setGithubLink,
   setLinkedinLink,
   setPortfolioLink,
+  setMembershipType,
+  setSwipes,
   resetProfile
 } = profileSlice.actions;
 
