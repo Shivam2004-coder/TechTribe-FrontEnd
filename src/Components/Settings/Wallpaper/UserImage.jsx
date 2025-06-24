@@ -1,20 +1,16 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { setChatThemeImage } from '../../../utils/ReduxStore/profileSlice';
-import { Cloudinary } from '@cloudinary/url-gen/index';
-import {AdvancedImage} from '@cloudinary/react';
+import { setWallpaperImage } from '../../../utils/ReduxStore/profileSlice';
 import useSaveImages from '../../../CustomHooks/useSaveImages';
 
 const UserImage = (props) => {
 
     const { isOpen, setIsOpen , isSaving , setIsSaving } = props;
 
-    // Create a Cloudinary instance and set your cloud name.
-
     const { handleSaveProfileClick } = useSaveImages();
-    const chatThemeImage = useSelector((store) => store.profile.chatThemeImage);
+    const wallpaperImage = useSelector((store) => store.profile.wallpaperImage);
     console.log("i am in the Chat Theme User Image.");
-    console.log(chatThemeImage);
+    console.log(wallpaperImage);
     const dispatch = useDispatch();
 
     // camera menu state
@@ -30,8 +26,8 @@ const UserImage = (props) => {
     const handleDefaultClick = async () => {
         try {
             setIsSaving(true); // start shimmer
-            dispatch( setChatThemeImage("ChatTheme8_cqb1b5") );
-            await handleSaveProfileClick( null , null , "ChatTheme8_cqb1b5" , null , null );
+            dispatch( setWallpaperImage("Wallpaper1_aond7y") );
+            await handleSaveProfileClick( null , null , null , "Wallpaper1_aond7y" , null );
             setIsSaving(false); // stop shimmer
         } catch (error) {
             console.error("Error removing image:", error);
@@ -45,14 +41,19 @@ const UserImage = (props) => {
                 className={`relative ${isOpen ? "w-68 h-72 md:w-96" : "w-64 h-96 md:w-96 md:h-96"} rounded-xl bg-gray-300 flex items-center justify-center 
                 hover:bg-gray-400 transition-all duration-500 ease-in-out group overflow-visible`}
                 style={{
-                    backgroundImage: `url("https://res.cloudinary.com/dilpkrfrb/image/upload/v1744462596/${chatThemeImage}")`,
-                    backgroundSize: "contain",
+                    backgroundImage: `url("https://res.cloudinary.com/dilpkrfrb/image/upload/v1744462596/${wallpaperImage}")`,
+                    backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundRepeat: "repeat",
                 }}
             >
                 {/* User Image inside Circle */}
-                {isSaving ? 
+
+                {/* User Image inside Circle */}
+                {isSaving && 
+                    <div className="w-full h-full rounded-xl shimmer shadow-black shadow-lg" ></div>
+                } 
+                {/* {isSaving ? 
                     (
                         <div className="w-full h-full rounded-xl shimmer shadow-black shadow-lg" ></div>
                     ) 
@@ -90,7 +91,7 @@ const UserImage = (props) => {
                             </div>
                         )
                     )
-                }
+                } */}
 
                
 
@@ -130,7 +131,7 @@ const UserImage = (props) => {
                                 setCameraMenuOpen(false);
                             }}
                         >
-                            <i className='material-icons' >monitor</i> Default Chat Theme
+                            <i className='material-icons' >monitor</i> Default Wallpaper
                         </button>
                     </div>
 

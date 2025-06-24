@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setChatThemeImage } from '../../../utils/ReduxStore/profileSlice';
+import { setWallpaperImage } from '../../../utils/ReduxStore/profileSlice';
 import { Cloudinary } from '@cloudinary/url-gen/index';
 import {AdvancedImage} from '@cloudinary/react';
 import {fill} from "@cloudinary/url-gen/actions/resize";
@@ -8,9 +8,9 @@ import { ChevronDown, ChevronUp } from 'lucide-react'; // Optional: Lucide icons
 import UserImage from "./UserImage";
 import UserAvatar from "../../Profile/EditOptions/Options/UserAvatar";
 import useSaveImages from "../../../CustomHooks/useSaveImages";
-import { themes } from "../../../utils/Constants/constants";
+import { wallpaper } from "../../../utils/Constants/constants";
 
-const ChatTheme = () => {
+const Wallpaper = () => {
 
   // Create a Cloudinary instance and set your cloud name.
   const cld = new Cloudinary({
@@ -22,23 +22,23 @@ const ChatTheme = () => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const chatThemeImage = useSelector((store) => store.profile.chatThemeImage);
+  const wallpaperImage = useSelector((store) => store.profile.wallpaperImage);
   const { handleSaveProfileClick } = useSaveImages();
 
   const handleClick = async (src) => {
-    if (src === chatThemeImage) {
+    if (src === wallpaperImage) {
       console.log("Here the src and profileImage are the same");
-      console.log(chatThemeImage);
+      console.log(wallpaperImage);
       console.log(src);
       return; // Don't proceed if the clicked avatar is already selected
     }
 
     try{
       console.log("I am in Accordian delete Function !!");
-      console.log("Profile Image: ", chatThemeImage);
+      console.log("Profile Image: ", wallpaperImage);
       setIsSaving(true);
-      dispatch(setChatThemeImage(src));
-      await handleSaveProfileClick(null , null , src , null , null);
+      dispatch(setWallpaperImage(src));
+      await handleSaveProfileClick(null , null , null , src , null);
       setIsSaving(false);
     }
     catch (error) {
@@ -49,7 +49,7 @@ const ChatTheme = () => {
   return (
     <div className="flex flex-col items-center max-w-full min-h-screen p-4 rounded-lg shadow-lg">
       <div className=" flex items-center justify-start bg-black p-4 rounded-xl" >
-        <p>Chat Themes</p>
+        <p>Wallpaper</p>
       </div>
       <UserImage isOpen={isOpen}
                 setIsOpen={setIsOpen}   
@@ -62,7 +62,7 @@ const ChatTheme = () => {
           className="flex justify-between items-center cursor-pointer bg-gray-800 text-white p-3 rounded-t-lg hover:bg-gray-700 transition-colors duration-300"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <span className="font-semibold text-lg">Chat Themes</span>
+          <span className="font-semibold text-lg">Wallpapers</span>
           <div className="flex items-center space-x-2 transition-all duration-1000 ease-in-out">
             <div
               className={`transition-all duration-500 ease-in-out transform ${
@@ -91,23 +91,23 @@ const ChatTheme = () => {
           `}
           style={{ transitionProperty: "all" }}
         >
-          {themes.map((avatar, index) => (
+          {wallpaper.map((avatar, index) => (
             <div
               key={index}
               onClick={() => handleClick(avatar)}
               className={`relative aspect-square flex justify-center items-center 
                           m-3 p-0 rounded-full cursor-pointer transition-all duration-300
-                          ${avatar === chatThemeImage ? "cursor-not-allowed" : "hover:shadow-black hover:shadow-lg"}
-                          ${avatar === chatThemeImage ? "border-4 bg-green-600 border-green-600 shadow-green-500 shadow-lg scale-105" : ""}`}
+                          ${avatar === wallpaperImage ? "cursor-not-allowed" : "hover:shadow-black hover:shadow-lg"}
+                          ${avatar === wallpaperImage ? "border-4 bg-green-600 border-green-600 shadow-green-500 shadow-lg scale-105" : ""}`}
             >
 
               <AdvancedImage
                 cldImg={cld.image(avatar).resize(fill().width(300).height(300))}
                 className={`w-full h-full md:w-[90%] md:h-[90%] object-cover rounded-full transition-all duration-300
-                            ${avatar === chatThemeImage ? "ring-4 ring-green-600" : "border-4 border-transparent hover:scale-105"}`}
+                            ${avatar === wallpaperImage ? "ring-4 ring-green-600" : "border-4 border-transparent hover:scale-105"}`}
               />
 
-              {avatar === chatThemeImage && (
+              {avatar === wallpaperImage && (
                 <div className="absolute bottom-1 right-1 bg-green-500 text-white text-xs px-2 py-1 rounded-full shadow-md">
                   ✓
                 </div>
@@ -123,4 +123,4 @@ const ChatTheme = () => {
   );
 };
 
-export default ChatTheme;
+export default Wallpaper;

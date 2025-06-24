@@ -7,3 +7,13 @@ export const avatars = [
   "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_e52def3d-88f5-40b1-af92-2d31433a2470", "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_4b337dcf-585b-4ea0-b042-120ba44797a3", "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_3fe8eb1e-53f4-4577-892d-e05a8ca7a1b3", "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_b5e6fc47-4a17-4e1d-895c-7a267c3bf0d8", "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_3ff93015-921c-4d0f-b91c-e9b7ac8d6075",
   "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_f1fa0783-1d0a-4b2b-a06b-dae8f8630d30", "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_4b403519-a155-44b1-a661-5782fb3131f2", "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_8bce3b20-1027-4453-b192-8d11d9b9e28b", "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_702fc626-627a-41ad-b9b3-e2198d16a68f", "TechTribe_User_Profile_Avatar/User_Avatars/Profile_avatar_4c0cf563-3ad3-4736-9078-b68204a3b985"
 ];
+
+export const themes = [ 
+  "ChatTheme6_xr2dqt" , "ChatTheme10_pu5goz" , "ChatTheme3_d2szqb" , "ChatTheme9_oincpi" , "ChatTheme7_ngg5lu" , 
+  "ChatTheme4_irkuwl" , "ChatTheme5_jzuvvn" , "ChatTheme1_egmt9r" , "ChatTheme2_pckwze" , "ChatTheme8_cqb1b5"
+];
+
+export const wallpaper = [ 
+  "Wallpaper4_zuu9sf" , "Wallpaper5_rth7zp" , "Wallpaper3_cdas1g" , 
+  "Wallpaper6_xks3lv" , "Wallpaper2_lmqiwk" , "Wallpaper1_aond7y" 
+];
