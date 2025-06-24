@@ -8,6 +8,9 @@ import Requests from "./Requests/Requests";
 import Chat from "./Chat/Chat";
 import Premium from "./Premium/Premium";
 import Tribe from "./Tribe/Tribe";
+import Interested from "./Interested/Interested";
+import Ignored from "./Ignored/Ignored";
+import Settings from "./Settings/Settings";
 
 const Body = () => {
   return (
@@ -20,9 +23,11 @@ const Body = () => {
         <Route path="profile" element={<Profile />} />
         <Route path="connections" element={<Connections/>} />
         <Route path="requests" element={<Requests/>} />
+        <Route path="interested" element={<Interested />} />
+        <Route path="ignored" element={<Ignored />} />
         <Route path="chat/:targetUserId" element={<Chat />} />
+        <Route path="settings" element={<Settings />} />
         <Route path="premium" element={<Premium/>} />
-
       </Route>
     </Routes>
   );

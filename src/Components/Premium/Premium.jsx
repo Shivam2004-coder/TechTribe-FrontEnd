@@ -7,7 +7,7 @@ import { CheckCircle } from "lucide-react";
 import axios from "axios";
 import { BASE_URL } from "../../utils/Constants/constants";
 import Confetti from "react-confetti";
-import { useWindowSize } from "react-use";
+// import { useWindowSize } from "react-use";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -83,7 +83,7 @@ const Premium = () => {
   const [billingCycle, setBillingCycle] = useState("weekly");
   // const [showConfetti, setShowConfetti] = useState(true);
   const navigate = useNavigate();
-  const { width, height } = useWindowSize();
+  // const { width, height } = useWindowSize();
 
   useEffect(() => {
     verifyPremiumUser();

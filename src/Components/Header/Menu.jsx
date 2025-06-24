@@ -25,6 +25,7 @@ const Menu = ({setIsClicked}) => {
     const lastName = useSelector((store) => store.profile.lastName);
     const emailId = useSelector((store) => store.profile.emailId);
     const profileImage = useSelector((store) => store.profile.profileImage);
+    const membershipType = useSelector((store) => store.profile.membershipType);
 
     const handleHomeClick = () => {
         if ( location !== "/tribe" ) {
@@ -50,6 +51,32 @@ const Menu = ({setIsClicked}) => {
         }
         setIsClicked(false);
     }
+    const handleInterestedClick = () => {
+        if ( membershipType === "Free" ) {
+            if ( location !== "/premium" ) {
+                navigate("/premium");
+            }
+        }
+        else{
+            if ( location !== "/interested" ) {
+                navigate("/interested");
+            }
+        }
+        setIsClicked(false);
+    }
+    const handleIgnoredClick = () => {
+        if ( membershipType === "Elite" ) {
+            if ( location !== "/ignored" ) {
+                navigate("/ignored");
+            }
+        }
+        else{
+            if ( location !== "/premium" ) {
+                navigate("/premium");
+            }
+        }
+        setIsClicked(false);
+    }
     const handlePremiumClick = () => {
         if( location !== "/premium" ){
             navigate("/premium");
@@ -61,6 +88,11 @@ const Menu = ({setIsClicked}) => {
     }
     const handleContactUsClick = () => {
         setIsClicked(false);
+    }
+    const handleSettingsClick = () => {
+        if ( location !== "/settings" ) {
+            navigate("/settings");
+        }
     }
     const handleLogoutClick = async () => {
         try {
@@ -134,6 +166,30 @@ const Menu = ({setIsClicked}) => {
                     Requests
                 </button>
             </div>
+            <div className="flex items-center justify-between hover:bg-gray-400 select-none hover:rounded-sm hover:bg-opacity-40 cursor-pointer  hover:shadow-black hover:shadow-md active:bg-gray-300 active:shadow-black
+                            p-1"
+                onClick={handleInterestedClick}
+            >
+                <div className='flex items-center justify-start' >
+                     <i className="material-icons mr-1">favorite</i>
+                    <button className="cursor-pointer" >
+                        Interested
+                    </button>
+                </div>
+                { membershipType === "Free" && <i className='material-icons' >lock</i> }
+            </div>
+            <div className="flex items-center justify-between hover:bg-gray-400 select-none hover:rounded-sm hover:bg-opacity-40 cursor-pointer  hover:shadow-black hover:shadow-md active:bg-gray-300 active:shadow-black
+                            p-1"
+                onClick={handleIgnoredClick}
+            >
+                <div className='flex items-center justify-start' >
+                     <i className="material-icons mr-1">heart_broken</i>
+                    <button className="cursor-pointer" >
+                        Ignored
+                    </button>
+                </div>
+                { membershipType === "Free" && <i className='material-icons' >lock</i> }
+            </div>
             <hr className="font-bold border-black border-dashed my-1" />
             <div className="flex items-center justify-between hover:bg-gray-400 select-none hover:rounded-sm cursor-pointer  hover:shadow-black hover:shadow-md active:bg-gray-300 active:shadow-black
                             p-1"
@@ -166,6 +222,15 @@ const Menu = ({setIsClicked}) => {
                 <i className="material-icons mr-1">help</i>
                 <button className="cursor-pointer" >
                     Contact Us
+                </button>
+            </div>
+            <div className="flex items-center hover:bg-gray-400 select-none hover:rounded-sm hover:bg-opacity-40 cursor-pointer  hover:shadow-black hover:shadow-md active:bg-gray-300 active:shadow-black
+                            p-1"
+                onClick={handleSettingsClick}
+            >
+                <i className="material-icons mr-1">settings</i>
+                <button className="cursor-pointer" >
+                    Settings
                 </button>
             </div>
             <hr className="font-bold border-black border-dashed my-1" />
