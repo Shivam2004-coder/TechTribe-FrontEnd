@@ -59,7 +59,7 @@ const UploadGrid = (props) => {
                     newImages[index] = response?.data?.public_id;
                     setImages(newImages);
                     dispatch(setUploadedImages(newImages.filter(Boolean))); // Only keep non-null images());
-                    await handleSaveProfileClick( false , null ,newImages );
+                    await handleSaveProfileClick( null ,newImages , null , null , null );
                 }
                 catch (err) {
                     console.error("Error uploading image:", err);
@@ -98,7 +98,7 @@ const UploadGrid = (props) => {
             setImages(newImages); // Update state
             console.log(images);
             dispatch(setUploadedImages(newImages.filter(Boolean))); // Only keep non-null images());
-            await handleSaveProfileClick( false , null ,newImages );
+            await handleSaveProfileClick( null ,newImages , null , null , null );
         }
         catch (error) {
             console.error("Error deleting image:", error);

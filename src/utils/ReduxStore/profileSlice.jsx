@@ -24,6 +24,9 @@ const initialState = {
   },
   membershipType: '',
   swipes: '',
+  chatThemeImage: '',
+  wallpaperImage: '',
+  displayMode: '',
 };
 
 const profileSlice = createSlice({
@@ -95,6 +98,9 @@ const profileSlice = createSlice({
     },    
     setMembershipType: (state , action) => { state.membershipType = action.payload },
     setSwipes: (state , action) => { state.swipes = action.payload },
+    setChatThemeImage: (state , action) => { state.chatThemeImage = action.payload } ,
+    setWallpaperImage: (state , action) => { state.wallpaperImage = action.payload },
+    setDisplayMode: (state , action) => { state.displayMode = action.payload },
     resetProfile: () => initialState
   }
 });
@@ -126,6 +132,9 @@ export const {
   setPortfolioLink,
   setMembershipType,
   setSwipes,
+  setChatThemeImage,
+  setWallpaperImage,
+  setDisplayMode ,
   resetProfile
 } = profileSlice.actions;
 

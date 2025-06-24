@@ -1,19 +1,23 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setProfileImage } from '../../../utils/ReduxStore/profileSlice';
+import { setChatThemeImage } from '../../../utils/ReduxStore/profileSlice';
 import { Cloudinary } from '@cloudinary/url-gen/index';
 import {AdvancedImage} from '@cloudinary/react';
 import {fill} from "@cloudinary/url-gen/actions/resize";
 import { ChevronDown, ChevronUp } from 'lucide-react'; // Optional: Lucide icons
-import UserImage from "../EditOptions/UserImage";
-import UserAvatar from "../EditOptions/Options/UserAvatar";
-import { BASE_URL , avatars} from "../../../utils/Constants/constants";
-import axios from "axios";
+import UserImage from "./UserImage";
+import UserAvatar from "../../Profile/EditOptions/Options/UserAvatar";
 import useSaveImages from "../../../CustomHooks/useSaveImages";
 
 
 
-const Accordian = () => {
+const themes = [ 
+  "ChatTheme6_xr2dqt" , "ChatTheme10_pu5goz" , "ChatTheme3_d2szqb" , "ChatTheme9_oincpi" , "ChatTheme7_ngg5lu" , 
+  "ChatTheme4_irkuwl" , "ChatTheme5_jzuvvn" , "ChatTheme1_egmt9r" , "ChatTheme2_pckwze" , "ChatTheme8_cqb1b5"
+];
+
+
+const ChatTheme = () => {
 
   // Create a Cloudinary instance and set your cloud name.
   const cld = new Cloudinary({
@@ -25,30 +29,23 @@ const Accordian = () => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const profileImage = useSelector((store) => store.profile.profileImage);
+  const chatThemeImage = useSelector((store) => store.profile.chatThemeImage);
   const { handleSaveProfileClick } = useSaveImages();
 
   const handleClick = async (src) => {
-    if (src === profileImage) {
+    if (src === chatThemeImage) {
       console.log("Here the src and profileImage are the same");
-      console.log(profileImage);
+      console.log(chatThemeImage);
       console.log(src);
       return; // Don't proceed if the clicked avatar is already selected
     }
 
     try{
       console.log("I am in Accordian delete Function !!");
-      console.log("Profile Image: ", profileImage);
+      console.log("Profile Image: ", chatThemeImage);
       setIsSaving(true);
-      if( profileImage !== "TechTribe_User_Profile_Avatar/Logos/Logo_b00c785c-9eae-43ca-b97b-4c12f4341344" && !avatars.includes(profileImage) ){
-        const response = await axios.post(BASE_URL + "profile/delete/image", {
-            publicId: profileImage,
-            isProfile: true,
-        },{withCredentials: true});
-        console.log(response);
-      }
-      dispatch(setProfileImage(src));
-      await handleSaveProfileClick( src , null , null , null , null);
+      dispatch(setChatThemeImage(src));
+      await handleSaveProfileClick(null , null , src , null , null);
       setIsSaving(false);
     }
     catch (error) {
@@ -76,7 +73,7 @@ const Accordian = () => {
                 isOpen ? "opacity-0 scale-95 pointer-events-none" : "opacity-100 scale-100"
               }`}
             >
-              <UserAvatar />
+              {/* <UserAvatar /> */}
             </div>
             <span
               className={`transform transition-transform duration-300 ${
@@ -98,23 +95,23 @@ const Accordian = () => {
           `}
           style={{ transitionProperty: "all" }}
         >
-          {avatars.map((avatar, index) => (
+          {themes.map((avatar, index) => (
             <div
               key={index}
               onClick={() => handleClick(avatar)}
               className={`relative aspect-square flex justify-center items-center 
                           m-3 p-0 rounded-full cursor-pointer transition-all duration-300
-                          ${avatar === profileImage ? "cursor-not-allowed" : "hover:shadow-black hover:shadow-lg"}
-                          ${avatar === profileImage ? "border-4 bg-green-600 border-green-600 shadow-green-500 shadow-lg scale-105" : ""}`}
+                          ${avatar === chatThemeImage ? "cursor-not-allowed" : "hover:shadow-black hover:shadow-lg"}
+                          ${avatar === chatThemeImage ? "border-4 bg-green-600 border-green-600 shadow-green-500 shadow-lg scale-105" : ""}`}
             >
 
               <AdvancedImage
                 cldImg={cld.image(avatar).resize(fill().width(300).height(300))}
                 className={`w-full h-full md:w-[90%] md:h-[90%] object-cover rounded-full transition-all duration-300
-                            ${avatar === profileImage ? "ring-4 ring-green-600" : "border-4 border-transparent hover:scale-105"}`}
+                            ${avatar === chatThemeImage ? "ring-4 ring-green-600" : "border-4 border-transparent hover:scale-105"}`}
               />
 
-              {avatar === profileImage && (
+              {avatar === chatThemeImage && (
                 <div className="absolute bottom-1 right-1 bg-green-500 text-white text-xs px-2 py-1 rounded-full shadow-md">
                   ✓
                 </div>
@@ -130,4 +127,4 @@ const Accordian = () => {
   );
 };
 
-export default Accordian;
+export default ChatTheme;

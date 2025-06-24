@@ -1,11 +1,14 @@
-
-import EditOptions from "../Profile/EditOptions/EditOptions";
+import { useSelector } from "react-redux";
+import EditOptions from "./EditOptions";
+import ChatTheme from "./ChatTheme/ChatTheme";
+import Wallpaper from "./Wallpaper";
+import DisplayMode from "./DisplayMode";
 
 const Settings = () => {
 
-//   const showAvatarPage = useSelector((store) => store.set.showAvatarPage);
-//   const showEditPage = useSelector((store) => store.set.showEditPage);
-//   const showPreviewPage = useSelector((store) => store.set.showPreviewPage);
+  const showChatThemePage = useSelector((store) => store.set.showChatThemePage);
+  const showWallPaperPage = useSelector((store) => store.set.showWallPaperPage);
+  const showDisplayThemePage = useSelector((store) => store.set.showDisplayThemePage);
   
 
   return (
@@ -13,11 +16,11 @@ const Settings = () => {
       <div className="absolute left-0 top-0 h-full z-10">
         <EditOptions />
       </div>
-      {/* <div className="ml-16 w-full bg-black flex flex-col items-center transition-all duration-300 ease-in-out">
-        {showAvatarPage && <Accordian />}
-        {showEditPage && <Edit />}
-        {showPreviewPage && <PreviewPage />}
-      </div> */}
+      <div className="ml-16 w-full bg-black flex flex-col items-center transition-all duration-300 ease-in-out">
+        {showChatThemePage && <ChatTheme />}
+        {showWallPaperPage && <Wallpaper />}
+        {showDisplayThemePage && <DisplayMode />}
+      </div>
     </div>
 
   );
