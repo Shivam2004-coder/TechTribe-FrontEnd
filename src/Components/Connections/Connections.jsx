@@ -51,7 +51,7 @@ const Connections = () => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-gray-100 to-gray-200">
+    <div className="w-full min-h-screen ">
         {/* <div className="min-h-screen w-full bg-gray-50 transition-all duration-500"> */}
         <div className="bg-amber-700 shadow-md py-6 mb-8 flex flex-col items-center">
             <h1 className="text-center text-5xl mb-3 font-bold text-white tracking-wide">Connections</h1>
@@ -140,8 +140,10 @@ const Connections = () => {
                 ))}
             </div>
           ) : (
-            <div className="text-center text-gray-600 text-xl font-medium mt-20">
-              You don’t have any connections yet.
+            <div className="text-center text-white text-xl font-medium mt-20">
+              <div className='flex items-center justify-center bg-black p-6 rounded-full' >
+                You don’t have any connections yet.
+              </div>
             </div>
           )}
         </div>

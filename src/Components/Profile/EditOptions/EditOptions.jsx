@@ -14,6 +14,8 @@ const EditOptions = () => {
         });
     };
 
+    const displayMode = useSelector((store) => store.profile.displayMode);
+
     const showAvatarPage = useSelector((store) => store.set.showAvatarPage);
     const showEditPage = useSelector((store) => store.set.showEditPage);
     const showPreviewPage = useSelector((store) => store.set.showPreviewPage);
@@ -30,19 +32,22 @@ const EditOptions = () => {
     const handleNoticeClick = () => {
         if (isMenuOpen) setIsNoticeOpen((prev) => !prev);
     };
-    
+
+    const selectedStyle = displayMode === "Light" ? "bg-black text-white" : "bg-white text-black" ;
+    const hoverStyle = displayMode === "Light" ? "hover:bg-black hover:text-white" : "hover:bg-white hover:text-black" ;
+    const background = displayMode === "Light" ? "bg-white text-black" : "bg-black";
     
     return (<>
-            <div className={`flex flex-col text-sm md:text-lg items-start h-full transition-all duration-300 ease-in-out ${ isMenuOpen ? "w-52 md:w-84" : "w-16" } p-1 md:p-2 bg-black shadow-md shadow-black select-none`}
+            <div className={`flex flex-col text-sm md:text-lg items-start h-full transition-all duration-300 ease-in-out ${ isMenuOpen ? "w-52 md:w-84" : "w-16" } p-1 md:p-2 ${background} shadow-md shadow-black select-none`}
                 
             >
-                <div className="bg-black h-12 w-12 mb-12 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 ease-in-out cursor-pointer rounded-full" 
+                <div className={`${background} h-12 w-12 mb-12 flex items-center justify-center ${hoverStyle} transition-all duration-300 ease-in-out cursor-pointer rounded-full`}
                     onClick={toggleMenu}
                 >
                     <i className="material-icons">menu</i>
                 </div>
 
-                <div className={`bg-black h-12 mb-2 p-3 ${ isMenuOpen ? "w-48 md:w-80" : "w-12" } ${showAvatarPage ? "bg-white text-black" : "" } flex items-center hover:bg-white hover:text-black transition-all duration-300 ease-in-out cursor-pointer rounded-full`} 
+                <div className={`h-12 mb-2 p-3 ${ isMenuOpen ? "w-48 md:w-80" : "w-12" } ${showAvatarPage ? `${selectedStyle}` :  `${background}` } flex items-center ${hoverStyle} transition-all duration-300 ease-in-out cursor-pointer rounded-full`} 
                     onClick={handleChooseAvatarClick}
                 >
                     <i className="material-icons">face_5</i>
@@ -51,16 +56,16 @@ const EditOptions = () => {
                     </div>
                 </div>
                 
-                <div className={`bg-black h-12 mb-2 p-3  ${ isMenuOpen ? "w-48 md:w-80" : "w-12" } ${showEditPage ? "bg-white text-black" : "" } flex items-center hover:bg-white hover:text-black transition-all duration-300 ease-in-out cursor-pointer rounded-full`} 
+                <div className={` h-12 mb-2 p-3  ${ isMenuOpen ? "w-48 md:w-80" : "w-12" } ${showEditPage ? `${selectedStyle}` :  `${background}` } flex items-center ${hoverStyle} transition-all duration-300 ease-in-out cursor-pointer rounded-full`} 
                     onClick={handleProfileEditClick}
                 >
-                    <i className="material-icons">edit_document</i>
+                    <i className="material-icons ">edit_document</i>
                     <div className="mx-3 font-bold tracking-wide flex items-center text-center">
                         { isMenuOpen && "Edit Profile" }
                     </div>
                 </div>
                 
-                <div className={`bg-black h-12 mb-2 p-3 ${ isMenuOpen ? "w-48 md:w-80" : "w-12" } ${showPreviewPage ? "bg-white text-black" : "" } flex items-center hover:bg-white hover:text-black transition-all duration-300 ease-in-out cursor-pointer rounded-full`} 
+                <div className={` h-12 mb-2 p-3 ${ isMenuOpen ? "w-48 md:w-80" : "w-12" } ${showPreviewPage ? `${selectedStyle}` : `${background}` } flex items-center ${hoverStyle} transition-all duration-300 ease-in-out cursor-pointer rounded-full`} 
                     onClick={handlePreviewClick}
                 >
                     <i className="material-icons">preview</i>
@@ -71,7 +76,7 @@ const EditOptions = () => {
                 
                  {/* Notice Section */}
                 <div 
-                    className={`bg-black h-auto mb-2 p-3 ${isMenuOpen ? "w-48 md:w-80" : "w-12"} flex flex-col hover:bg-white hover:text-black transition-all duration-300 ease-in-out cursor-pointer rounded-lg`} 
+                    className={`${background} h-auto mb-2 p-3 ${isMenuOpen ? "w-48 md:w-80" : "w-12"} flex flex-col ${hoverStyle} transition-all duration-300 ease-in-out cursor-pointer rounded-lg`} 
                     onClick={handleNoticeClick}
                 >
                     <div className="flex items-center">     

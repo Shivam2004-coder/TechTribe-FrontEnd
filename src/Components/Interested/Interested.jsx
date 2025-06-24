@@ -211,8 +211,10 @@ const Interested = () => {
                 ))}
                 </div>
             ) : (
-                <div className="text-center text-gray-500 text-xl font-medium mt-20">
-                    No connection requests sent at the moment.
+                <div className="text-center text-white text-xl font-medium mt-20">
+                    <div className='flex items-center justify-center bg-black p-6 rounded-full' >
+                        No connection requests sent at the moment.
+                    </div>
                 </div>
             )}
         </div>

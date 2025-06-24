@@ -220,8 +220,10 @@ const Ignored = () => {
                 ))}
                 </div>
             ) : (
-                <div className="text-center text-gray-500 text-xl font-medium mt-20">
-                    Ignored list is Empty
+                <div className="text-center text-white text-xl font-medium mt-20">
+                    <div className='flex items-center justify-center bg-black p-6 rounded-full' >
+                        Ignored list is Empty
+                    </div>
                 </div>
             )}
         </div>

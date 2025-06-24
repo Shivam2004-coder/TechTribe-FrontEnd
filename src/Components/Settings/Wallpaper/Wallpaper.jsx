@@ -6,7 +6,7 @@ import {AdvancedImage} from '@cloudinary/react';
 import {fill} from "@cloudinary/url-gen/actions/resize";
 import { ChevronDown, ChevronUp } from 'lucide-react'; // Optional: Lucide icons
 import UserImage from "./UserImage";
-import UserAvatar from "../../Profile/EditOptions/Options/UserAvatar";
+import UserAvatar from "./UserAvatar";
 import useSaveImages from "../../../CustomHooks/useSaveImages";
 import { wallpaper } from "../../../utils/Constants/constants";
 
@@ -48,7 +48,7 @@ const Wallpaper = () => {
   };
   return (
     <div className="flex flex-col items-center max-w-full min-h-screen p-4 rounded-lg shadow-lg">
-      <div className=" flex items-center justify-start bg-black p-4 rounded-xl" >
+      <div className=" flex items-center font-bold justify-start bg-black p-4 shadow-white shadow-inner" >
         <p>Wallpaper</p>
       </div>
       <UserImage isOpen={isOpen}
@@ -62,14 +62,14 @@ const Wallpaper = () => {
           className="flex justify-between items-center cursor-pointer bg-gray-800 text-white p-3 rounded-t-lg hover:bg-gray-700 transition-colors duration-300"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <span className="font-semibold text-lg">Wallpapers</span>
+          <span className="font-semibold text-lg">Wallpaper</span>
           <div className="flex items-center space-x-2 transition-all duration-1000 ease-in-out">
             <div
               className={`transition-all duration-500 ease-in-out transform ${
                 isOpen ? "opacity-0 scale-95 pointer-events-none" : "opacity-100 scale-100"
               }`}
             >
-              {/* <UserAvatar /> */}
+              <UserAvatar />
             </div>
             <span
               className={`transform transition-transform duration-300 ${

@@ -49,7 +49,7 @@ const DisplayMode = () => {
   return (
     <div className="flex flex-col items-center w-full min-h-screen h-full p-2 rounded-lg shadow-2xl backdrop-blur-xs">
       <div className="w-full max-w-md bg-white/10 backdrop-blur-md rounded-xl p-2 border border-white/20 shadow-md">
-        <h2 className="text-xl md:text-2xl font-semibold text-center text-white mb-2 tracking-wide">
+        <h2 className=" font-semibold text-center text-white mb-2 bg-black p-4 shadow-white shadow-inner tracking-wide">
           Display Modes
         </h2>
         <div className="flex flex-col items-center justify-between">
@@ -71,7 +71,7 @@ const DisplayMode = () => {
                 `}
               >
                 <div className='bg-white h-7 w-7 rounded-full p-1 flex items-center justify-center shadow-black shadow-inner' > 
-                  <div className={`${ isSelected ? "bg-blue-800" : "bg-transparent" } h-full w-full rounded-full `} >
+                  <div className={`${ isSelected ? "border-blue-800 border-7" : "border-0" } h-full w-full rounded-full transition-all duration-400 ease-in-out `} >
                   </div>
                 </div>
                 <span className="flex text-md md:text-lg items-center gap-2 z-10">

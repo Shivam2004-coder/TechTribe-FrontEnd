@@ -69,7 +69,7 @@ const UserImage = (props) => {
                                     <div className="flex flex-col items-end max-w-[70%]">
                                         <div className="bg-gray-800 shadow-white flex flex-col shadow-inner text-white px-4 py-2 rounded-lg break-words">
                                             <span className='text-sm' > Hey !! Man</span>
-                                            <div className="text-xs flex items-end justify-end text-black mt-1">
+                                            <div className="text-xs flex items-end justify-end text-white mt-1">
                                             {new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}
                                             </div>
                                         </div>

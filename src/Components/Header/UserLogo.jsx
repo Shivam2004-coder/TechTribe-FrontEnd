@@ -18,6 +18,7 @@ const UserLogo = ({isClicked, setIsClicked}) => {
     const menuRef = useRef(null);
     const iconRef = useRef(null); // Ref for the user icon
     const profileImage = useSelector((store) => store.profile.profileImage);
+    const displayMode = useSelector((store) => store.profile.displayMode);
 
     const handleUserIconClick = (event) => {
         // Prevent the click event from bubbling up
@@ -68,21 +69,15 @@ const UserLogo = ({isClicked, setIsClicked}) => {
             {isClicked && (
                 <div
                     ref={menuRef}
-                    // className="absolute top-full right-0 mt-2 z-50 animate-slide-in-right"
-                    className="bg-white text-black rounded-tl-lg rounded-bl-lg
+                    className={` ${displayMode === "Light" ? "bg-white text-black" : "bg-gray-800 text-white" }  rounded-tl-lg rounded-bl-lg
                                 shadow-xl shadow-black
                                 absolute top-0 
                                 right-0 z-50 animate-expand-menu origin-right
-                                text-sm"
+                                text-sm`}
                 >
                     <Menu setIsClicked={setIsClicked} />
                 </div>
             )}
-            {/* { isClicked && (
-                <div ref={menuRef}>
-                    <Menu />
-                </div>
-            )} */}
         </div>
     );
 };

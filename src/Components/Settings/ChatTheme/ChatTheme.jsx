@@ -6,7 +6,7 @@ import {AdvancedImage} from '@cloudinary/react';
 import {fill} from "@cloudinary/url-gen/actions/resize";
 import { ChevronDown, ChevronUp } from 'lucide-react'; // Optional: Lucide icons
 import UserImage from "./UserImage";
-import UserAvatar from "../../Profile/EditOptions/Options/UserAvatar";
+import UserAvatar from "./UserAvatar";
 import useSaveImages from "../../../CustomHooks/useSaveImages";
 import { themes } from "../../../utils/Constants/constants";
 
@@ -48,7 +48,7 @@ const ChatTheme = () => {
   };
   return (
     <div className="flex flex-col items-center max-w-full min-h-screen p-4 rounded-lg shadow-lg">
-      <div className=" flex items-center justify-start bg-black p-4 rounded-xl" >
+      <div className=" flex items-center font-bold justify-start bg-black p-4 shadow-white shadow-inner" >
         <p>Chat Themes</p>
       </div>
       <UserImage isOpen={isOpen}
@@ -69,7 +69,7 @@ const ChatTheme = () => {
                 isOpen ? "opacity-0 scale-95 pointer-events-none" : "opacity-100 scale-100"
               }`}
             >
-              {/* <UserAvatar /> */}
+              <UserAvatar />
             </div>
             <span
               className={`transform transition-transform duration-300 ${
