@@ -47,9 +47,9 @@ const DisplayMode = () => {
   };
 
   return (
-    <div className="flex flex-col items-center w-full min-h-screen h-full p-4 rounded-lg shadow-2xl backdrop-blur-xs">
-      <div className="w-full max-w-md bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 shadow-md">
-        <h2 className="text-xl md:text-2xl font-semibold text-center text-white mb-6 tracking-wide">
+    <div className="flex flex-col items-center w-full min-h-screen h-full p-2 rounded-lg shadow-2xl backdrop-blur-xs">
+      <div className="w-full max-w-md bg-white/10 backdrop-blur-md rounded-xl p-2 border border-white/20 shadow-md">
+        <h2 className="text-xl md:text-2xl font-semibold text-center text-white mb-2 tracking-wide">
           Display Modes
         </h2>
         <div className="flex flex-col items-center justify-between">
@@ -63,7 +63,7 @@ const DisplayMode = () => {
                 onClick={() => handleModeChange(name)}
                 disabled={isLoading}
                 className={`
-                  w-full p-10 rounded-lg font-medium text-center m-2 md:m-5 flex items-center justify-start gap-2 relative overflow-hidden
+                  w-full rounded-lg font-medium text-center h-20 m-1 flex items-center justify-start gap-4 px-2 relative overflow-hidden
                   transition-all duration-300
                   ${getGradient(name)}
                   ${isSelected ? 'border-6 border-slate-700' : 'border-2 border-transparent hover:border-slate-600'}
@@ -71,11 +71,10 @@ const DisplayMode = () => {
                 `}
               >
                 <div className='bg-white h-7 w-7 rounded-full p-1 flex items-center justify-center shadow-black shadow-inner' > 
-                  <div className={`${ isSelected ? "bg-amber-600" : "bg-transparent" } h-full w-full rounded-full `} >
-
+                  <div className={`${ isSelected ? "bg-blue-800" : "bg-transparent" } h-full w-full rounded-full `} >
                   </div>
                 </div>
-                <span className="flex items-center gap-2 z-10">
+                <span className="flex text-md md:text-lg items-center gap-2 z-10">
                   {icon} {name}
                 </span>
                 {isLoading && (

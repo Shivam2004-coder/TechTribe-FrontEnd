@@ -13,11 +13,11 @@ const Profile = () => {
   
 
   return (
-    <div className="relative min-h-screen w-full bg-gray-500 flex">
+    <div className="relative min-h-screen w-full flex">
       <div className="absolute left-0 top-0 h-full z-10">
         <EditOptions />
       </div>
-      <div className="ml-16 w-full bg-black flex flex-col items-center transition-all duration-300 ease-in-out">
+      <div className="ml-16 w-full flex flex-col items-center transition-all duration-300 ease-in-out">
         {showAvatarPage && <Accordian />}
         {showEditPage && <Edit />}
         {showPreviewPage && <PreviewPage />}

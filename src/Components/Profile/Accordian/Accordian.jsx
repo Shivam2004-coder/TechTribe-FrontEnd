@@ -57,7 +57,7 @@ const Accordian = () => {
 
   };
   return (
-    <div className="flex flex-col bg-amber-500 items-center max-w-full min-h-screen p-4 rounded-lg shadow-lg">
+    <div className="flex flex-col items-center max-w-full min-h-screen p-4 rounded-lg shadow-lg">
       <UserImage isOpen={isOpen}
                 setIsOpen={setIsOpen}   
                 isSaving={isSaving}

@@ -63,7 +63,7 @@ const Edit = () => {
     const [index,setIndex] = useState(null);
 
     return (
-        <div className="w-full h-full flex flex-col md:bg-amber-500 items-center rounded-lg" >
+        <div className="w-full h-full flex flex-col items-center rounded-lg" >
           <div className="bg-gray-800 w-full md:w-5/12 h-screen md:rounded-2xl shadow-xl text-white overflow-y-scroll scrollbar-hidden">
             {
               editPrompt ? (

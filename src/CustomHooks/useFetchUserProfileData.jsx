@@ -25,7 +25,10 @@ import {
   setPortfolioLink,
   setUserId,
   setMembershipType,
-  setSwipes
+  setSwipes,
+  setChatThemeImage,
+  setWallpaperImage,
+  setDisplayMode,
 } from '../utils/ReduxStore/profileSlice';
 
 const useFetchUserProfileData = () => {
@@ -66,7 +69,9 @@ const useFetchUserProfileData = () => {
         dispatch(setPortfolioLink(data.socialLinks?.portfolio || ''));
         dispatch(setMembershipType(data.membershipType || ''));
         dispatch(setSwipes(data.swipes || ''));
-
+        dispatch(setChatThemeImage(data.chatThemeImage || ''));
+        dispatch(setWallpaperImage(data.wallpaperImage || ''));
+        dispatch(setDisplayMode(data.displayMode || ''));
 
         if (location.pathname !== '/login') {
           navigate(location.pathname);
