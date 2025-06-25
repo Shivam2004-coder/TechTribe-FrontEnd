@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import UploadImage from './UploadImage';
 import Form from './Form';
 import CreateAccountButton from './CreateAccountButton';
+import { useSelector } from 'react-redux';
 
 const Onboarding = () => {
 
+  const firstName = useSelector((store) => store.profile.firstName);
+  const lastName = useSelector((store) => store.profile.lastName);
+
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    firstName: firstName,
+    lastName: lastName,
     dob: "",
     gender: "",
     location: "",
@@ -19,12 +23,20 @@ const Onboarding = () => {
   const [images, setImages] = useState([]);
 
   return (
-    <div className="min-h-screen bg-pink-300 p-8 flex flex-col gap-6 text-gray-800 ">
-        <div className="flex" >
+    <div className="min-h-screen h-full w-full bg-white p-8 flex flex-col gap-6 text-gray-800 "
+         style={{
+          backgroundImage: "url('/onBoardingImage.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+    
+    >
+        {/* <div className="flex" >
             <div className="text-2xl md:text-5xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 p-2 shadow shadow-black">
                 Welcome To Tech Tribe
             </div>
-        </div>
+        </div> */}
         <Form formData={formData} 
               setFormData={setFormData} 
               images={images}

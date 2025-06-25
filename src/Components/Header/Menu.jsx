@@ -29,8 +29,8 @@ const Menu = ({setIsClicked}) => {
     const displayMode = useSelector((store) => store.profile.displayMode);
 
     const handleHomeClick = () => {
-        if ( location !== "/tribe" ) {
-            navigate("/tribe");
+        if ( location !== "/onboarding" ) {
+            navigate("/onboarding");
         }
         setIsClicked(false);
     }
@@ -110,7 +110,7 @@ const Menu = ({setIsClicked}) => {
     // const connectionImage = "TechTribe_User_Profile_Avatar/Logos/Logo_eb57da91-f036-4ee9-b795-94506c77a832";
     // const requestImage = "TechTribe_User_Profile_Avatar/Logos/Logo_250b49e3-cb7f-4603-82f6-5984591bd84d";
     const style = "flex items-center hover:bg-gray-400 select-none hover:rounded-sm cursor-pointer  hover:shadow-black hover:shadow-md active:bg-gray-300 active:shadow-black p-1";
-    const lineStyle = "font-bold border-black border-dashed my-1";
+    const lineStyle = `font-bold ${ displayMode === "Light" ? "border-black" : "border-white" } border-dashed my-1`;
     const iconStyle = displayMode === "Light" ? "bg-gray-800 shadow-inner shadow-white text-white" : "bg-white shadow-xl shadow-black text-black" ;
 
     return (
@@ -121,10 +121,12 @@ const Menu = ({setIsClicked}) => {
                     <AdvancedImage cldImg={cld.image(profileImage).resize(fill().width(250).height(250))} 
                                 className="h-25 w-25 object-contain rounded-full mb-4 shadow-lg shadow-black"
                     />
-                    <div className={`p-1 absolute top-4 left-4 rounded-full w-13 h-13  flex items-center justify-center ${iconStyle} `} >
-                        { membershipType === "Elite" && <i class="fa-solid fa-crown"></i> }
-                        { membershipType === "Pro" &&  <i className="material-icons" >workspace_premium</i> }
-                    </div>
+                    { membershipType !== "Free" && 
+                        <div className={`p-1 absolute top-4 left-4 rounded-full w-13 h-13  flex items-center justify-center ${iconStyle} `} >
+                            { membershipType === "Elite" && <i class="fa-solid fa-crown"></i> }
+                            { membershipType === "Pro" &&  <i className="material-icons" >workspace_premium</i> }
+                        </div>
+                    }
                     <div className='flex flex-col items-center justify-center' >
                         <h1 className='font-bold' >{firstName} {lastName}</h1>
                         <h2>{emailId}</h2>

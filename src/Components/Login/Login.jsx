@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 // import { addUser } from "../../utils/ReduxStore/userSlice";
 import { useNavigate } from "react-router-dom";
 import {BASE_URL} from "../../utils/Constants/constants";
-import { setEmailId, setFirstName, setLastName } from "../../utils/ReduxStore/profileSlice";
+import { setBio, setChatThemeImage, setCompanyName, setDateOfBirth, setDisplayMode, setEmailId, setFirstName, setGender, setGithubLink, setJobTitle, setLastName, setLinkedinLink, setLivingIn, setMembershipType, setPortfolioLink, setProfileImage, setPromptUserContent, setSchool, setSkills, setSwipes, setUploadedImages, setWallpaperImage } from "../../utils/ReduxStore/profileSlice";
 
 const Login = () => {
     const [isSignIn , setSignIn] = useState(null);
@@ -79,9 +79,30 @@ const Login = () => {
               withCredentials: true
             }
         );
+
+        const data = res.data.data;
         dispatch(setFirstName(userName));
         dispatch(setLastName(lastName));
         dispatch(setEmailId(emailId));
+        dispatch(setGender(data.gender || ''));
+        dispatch(setDateOfBirth(data.dateOfBirth || ''));
+        dispatch(setPromptUserContent(data.promptContent || []));
+        dispatch(setUploadedImages(data.uploadedImages || []));
+        dispatch(setProfileImage(data.profileImage || ''));
+        dispatch(setBio(data.bio || ''));
+        dispatch(setJobTitle(data.jobTitle || ''));
+        dispatch(setCompanyName(data.companyName || ''));
+        dispatch(setSchool(data.school || ''));
+        dispatch(setLivingIn(data.livingIn || ''));
+        dispatch(setSkills(data.skills || []));
+        dispatch(setGithubLink(data.socialLinks?.github || ''));
+        dispatch(setLinkedinLink(data.socialLinks?.linkedin || ''));
+        dispatch(setPortfolioLink(data.socialLinks?.portfolio || ''));
+        dispatch(setMembershipType(data.membershipType || ''));
+        dispatch(setSwipes(data.swipes || ''));
+        dispatch(setChatThemeImage(data.chatThemeImage || ''));
+        dispatch(setWallpaperImage(data.wallpaperImage || ''));
+        dispatch(setDisplayMode(data.displayMode || ''));
         navigate("/onboarding");
         console.log("This is Login Page !!");
         console.log(res);

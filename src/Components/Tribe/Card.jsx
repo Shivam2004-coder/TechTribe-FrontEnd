@@ -91,11 +91,12 @@ const Card = (p) => {
                             />
                             <h1 className="text-xl font-bold">{firstName + " " + lastName}</h1>
                         </div>
-                        <div className="p-1 absolute top-4 right-4 rounded-full w-13 h-13 shadow-inner shadow-white flex items-center justify-center bg-gray-800 "  >
-                            { membershipType === "Elite" && <i class="fa-solid fa-crown"></i> }
-                            { membershipType === "Pro" &&  <i className="material-icons" >workspace_premium</i> }
-                        </div>
-
+                        { membershipType !== "Free" && 
+                            <div className="p-1 absolute top-4 right-4 rounded-full w-13 h-13 shadow-inner shadow-white flex items-center justify-center bg-gray-800 "  >
+                                { membershipType === "Elite" && <i class="fa-solid fa-crown"></i> }
+                                { membershipType === "Pro" &&  <i className="material-icons" >workspace_premium</i> }
+                            </div>
+                        }
                     </div>
                     <h3 className="flex items-center ml-15 text-md " ><i className="material-icons">house</i> {livingIn}</h3>
                 </div>

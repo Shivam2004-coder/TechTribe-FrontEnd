@@ -108,7 +108,6 @@ const UploadGrid = (props) => {
             // Stop shimmer
             setUploadingIndexes((prev) => prev.filter(i => i !== index));
         }
-
     };
     
 
@@ -144,15 +143,17 @@ const UploadGrid = (props) => {
                                 cldImg={cld.image(images[index]).resize(fill().width(400).height(500))}
                                 className="w-full h-full object-cover rounded-lg transition-transform hover:scale-105"
                             />
-                            <button
-                                onClick={(e) => {
-                                e.stopPropagation();
-                                handleDelete(index);
-                                }}
-                                className="absolute bottom-2 right-2 bg-white text-black rounded-full w-8 h-8 flex items-center justify-center shadow-lg hover:bg-red-700 hover:text-white transition-all"
-                            >
-                                <i className="material-icons text-sm">delete</i>
-                            </button>
+                            {images.filter(Boolean).length > 2 &&
+                                <button
+                                    onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleDelete(index);
+                                    }}
+                                    className="absolute bottom-2 right-2 bg-white text-black rounded-full w-8 h-8 flex items-center justify-center shadow-lg hover:bg-red-700 hover:text-white transition-all"
+                                >
+                                    <i className="material-icons text-sm">delete</i>
+                                </button>
+                            }
                         </>
                     ) : (
                         <>

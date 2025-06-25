@@ -46,7 +46,8 @@ const useFetchUserProfileData = () => {
       if (!isProfileEmpty()) {
         const response = await axios.get(BASE_URL + 'profile/view', { withCredentials: true });
         const data = response.data;
-        console.log()
+        console.log("i am in a useFetchData Page !!");
+        console.log(data);
 
         // Dispatch to profileSlice
         dispatch(setUserId(data._id || ''));
@@ -57,7 +58,7 @@ const useFetchUserProfileData = () => {
         dispatch(setDateOfBirth(data.dateOfBirth || ''));
         dispatch(setPromptUserContent(data.promptContent || []));
         dispatch(setUploadedImages(data.uploadedImages || []));
-        dispatch(setProfileImage(data.profileImage || '/user-profile-icon.jpg'));
+        dispatch(setProfileImage(data.profileImage || ''));
         dispatch(setBio(data.bio || ''));
         dispatch(setJobTitle(data.jobTitle || ''));
         dispatch(setCompanyName(data.companyName || ''));

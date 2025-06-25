@@ -1,5 +1,14 @@
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Logo = () => {
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const handleLogoClick = () => {
+        if ( location !== "/tribe" ) {
+            navigate("/tribe");
+        }
+    }
 
     return (
         <div
@@ -9,6 +18,7 @@ const Logo = () => {
                        flex justify-center
                        cursor-pointer
                        "
+            onClick={handleLogoClick}
         >
             <img 
                 src="/TechTribeLogo1.jpeg" 

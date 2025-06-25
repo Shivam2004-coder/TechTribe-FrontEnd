@@ -18,9 +18,45 @@ import { errorMessage } from '../../utils/ShowMessage';
 const CreateAccountButton = ({ formData, images }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log(images);
 
   const handleSubmit = async () => {
+    const requiredFields = [
+      { key: 'firstName', label: 'First name' },
+      { key: 'lastName', label: 'Last name' },
+      { key: 'dob', label: 'Date of birth' },
+      { key: 'gender', label: 'Gender' },
+      { key: 'location', label: 'Location' },
+      { key: 'bio', label: 'Bio' },
+      { key: 'skills', label: 'Skills' },
+    ];
+
+    // Check for first missing field
+    for (let field of requiredFields) {
+      const value = formData[field.key];
+      if (!value || value.toString().trim() === '') {
+        errorMessage(`${field.label} should not be empty`);
+        return;
+      }
+
+      // Extra check: validate date format if field is dob
+      if (field.key === 'dob') {
+        const date = new Date(value);
+        const isValidDate = !isNaN(date.getTime());
+
+        if (!isValidDate) {
+          errorMessage("Please enter a valid date of birth");
+          return;
+        }
+      }
+    }
+
+    // Check if at least two images are uploaded
+    const validImages = images.filter(Boolean);
+    if (validImages.length < 2) {
+      errorMessage("Please upload at least two images");
+      return;
+    }
+
     // Dispatching form data to Redux store
     dispatch(setFirstName(formData.firstName));
     dispatch(setLastName(formData.lastName));
@@ -29,35 +65,37 @@ const CreateAccountButton = ({ formData, images }) => {
     dispatch(setLivingIn(formData.location));
     dispatch(setBio(formData.bio));
     dispatch(setSkills(formData.skills));
-    dispatch(setUploadedImages(images.filter(Boolean))); // Only keep non-null images
+    dispatch(setUploadedImages(validImages));
 
     try {
-      const res = await axios.patch(BASE_URL + "profile/edit" , {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        dateOfBirth: formData.dob,
-        gender: formData.gender,
-        livingIn: formData.location,
-        bio: formData.bio,
-        skills: formData.skills,
-        uploadedImages: images
-      } , {withCredentials: true});
-  
-      console.log(res);
+      const res = await axios.patch(
+        BASE_URL + "profile/edit",
+        {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          dateOfBirth: formData.dob,
+          gender: formData.gender,
+          livingIn: formData.location,
+          bio: formData.bio,
+          skills: formData.skills,
+          uploadedImages: validImages,
+        },
+        { withCredentials: true }
+      );
 
+      console.log(res);
+      navigate('/tribe');
     } catch (error) {
       errorMessage(error.message);
     }
-
-    // Navigate after dispatching
-    navigate('/tribe');
   };
+
 
   return (
     <div className="flex justify-center mt-6">
       <button
         onClick={handleSubmit}
-        className="bg-green-600 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition"
+        className="bg-green-600 text-white p-10 rounded-lg hover:shadow-black hover:shadow-lg hover:rounded-full text-lg font-semibold hover:bg-green-700 cursor-pointer" 
       >
         CREATE ACCOUNT
       </button>
