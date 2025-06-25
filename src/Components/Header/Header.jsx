@@ -18,8 +18,10 @@ const Header = () => {
     return profile && profile.emailId;
   };
   
+
+  // ${profile.displayMode === "Light" ? "bg-white text-black" : "bg-black" }
   return (
-    <div className={`flex items-center top-0 justify-between h-20 ${profile.displayMode === "Light" ? "bg-white text-black" : "bg-black" } w-full`}>
+    <div className={`flex items-center top-0 justify-between h-20  backdrop-blur-xs w-full`}>
       <div className="
                 mx-2
                 my-2

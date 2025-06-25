@@ -7,10 +7,10 @@ const Footer = () => {
 
     const displayMode = useSelector((store) => store.profile.displayMode);
 
-    const style = displayMode === "Light" ? "bg-white text-black" : "bg-gray-800 text-white";
+    // const style = displayMode === "Light" ? "bg-white text-black" : "bg-gray-800 text-white";
 
     return (
-        <footer className={`${style} w-full py-1 bottom-0`}>
+        <footer className={` w-full py-1 bottom-0 `}>
             <div className=" mx-auto flex flex-col justify-between items-center px-2">
                 {/* Logo/Brand Name */}
                 {/* <div className="w-6/12">

@@ -15,7 +15,8 @@ const Layout = () => {
     return (
         <div className="flex flex-col justify-between min-h-screen max-w-screen overflow-x-clip "
             style={{
-                backgroundImage: `url("https://res.cloudinary.com/dilpkrfrb/image/upload/v1744462596/${wallpaperImage}")`,
+                // backgroundImage: `url("https://res.cloudinary.com/dilpkrfrb/image/upload/v1744462596/${wallpaperImage}")`,
+                backgroundImage: "url('/loginBackground3.jpg')",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "repeat",

@@ -111,9 +111,18 @@ const Login = () => {
       }
     }
 
+    // loginBackground
 
     return (
-      <Form 
+      <div className="flex h-full w-full items-center justify-center " 
+        // style={{
+        //   backgroundImage: "url('/loginBackground.jpg')",
+        //   backgroundSize: "cover",
+        //   backgroundPosition: "center",
+        //   backgroundRepeat: "no-repeat",
+        // }}
+      >
+        <Form 
           isSignIn={isSignIn}
           setSignIn={setSignIn}
           userName={userName}
@@ -128,7 +137,8 @@ const Login = () => {
           setCanSeePassword={setCanSeePassword}
           handleSignInSubmitButton={handleSignInSubmitButton}
           handleSignUpSubmitButton={handleSignUpSubmitButton}
-      />
+        />
+      </div>
     );
 };
 
