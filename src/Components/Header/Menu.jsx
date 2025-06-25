@@ -119,6 +119,8 @@ const Menu = ({setIsClicked}) => {
                     <AdvancedImage cldImg={cld.image(profileImage).resize(fill().width(250).height(250))} 
                                 className="h-25 w-25 object-contain rounded-full mb-4 shadow-lg shadow-black"
                     />
+                    { membershipType === "Elite" && <i class="fa-solid fa-crown"></i> }
+                    { membershipType === "Pro" &&  <i className="material-icons" >workspace_premium</i> }
                     <div className='flex flex-col items-center justify-center' >
                         <h1 className='font-bold' >{firstName} {lastName}</h1>
                         <h2>{emailId}</h2>

@@ -26,7 +26,10 @@ const Card = (p) => {
     uploadedImages,
     livingIn,
     profileImage,
+    membershipType,
   } = feed;
+
+  console.log()
 
   return (
         <div
@@ -80,12 +83,19 @@ const Card = (p) => {
                              `}>
                 <div className={`col-span-8 transition-all duration-400 ease-in-out  ${isHovered ? "md:opacity-100" : "md:opacity-0"}
                             `} >
-                    <div className="flex flex-row items-center justify-start" >
-                        <AdvancedImage
-                            cldImg={cld.image(profileImage).resize(fill().width(250).height(250))}
-                            className="object-cover h-10 w-10 mx-3 rounded-full shadow-black shadow-lg"
-                        />
-                        <h1 className="text-xl font-bold">{firstName + " " + lastName}</h1>
+                    <div className="flex flex-row items-center justify-between  " >
+                        <div className="flex items-center justify-start" >
+                            <AdvancedImage
+                                cldImg={cld.image(profileImage).resize(fill().width(250).height(250))}
+                                className="object-cover h-10 w-10 mx-3 rounded-full shadow-black shadow-lg"
+                            />
+                            <h1 className="text-xl font-bold">{firstName + " " + lastName}</h1>
+                        </div>
+                        <div className="p-1 absolute top-4 right-4 rounded-full w-13 h-13 shadow-inner shadow-white flex items-center justify-center bg-gray-800 "  >
+                            { membershipType === "Elite" && <i class="fa-solid fa-crown"></i> }
+                            { membershipType === "Pro" &&  <i className="material-icons" >workspace_premium</i> }
+                        </div>
+
                     </div>
                     <h3 className="flex items-center ml-15 text-md " ><i className="material-icons">house</i> {livingIn}</h3>
                 </div>

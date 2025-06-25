@@ -1,10 +1,29 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 
 const NavOptions = () => {
     // const location = useLocation();
     const navigate = useNavigate();
     const [zoomLevel, setZoomLevel] = useState(100); // Default to 100%
+    const displayMode = useSelector((store) => store.profile.displayMode);
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const updateZoomAndWidth = () => {
+            const zoom = Math.round((window.outerWidth / window.innerWidth) * 100);
+            setZoomLevel(zoom);
+            setScreenWidth(window.innerWidth);
+        };
+
+        updateZoomAndWidth(); // Initial check
+        window.addEventListener('resize', updateZoomAndWidth);
+
+        return () => {
+            window.removeEventListener('resize', updateZoomAndWidth);
+        };
+    }, []);
+
 
     useEffect(() => {
         const updateZoom = () => {
@@ -32,25 +51,18 @@ const NavOptions = () => {
         }
     }
 
+    const hoverStyle = `${displayMode === "Light" ? "hover:text-white" : "hover:text-black" } transition-colors duration-400 ease-in-out `;
+
     const renderContent = (text, IconName) => {
-        if (zoomLevel <= 67) {
-            return <span className="hover:text-black
-                                    transition-colors 
-                                    duration-400 
-                                    ease-in-out" 
-                    >
-                        {text}
-                    </span>;
+        // 👇 Only icons on small screens (mobile < 768px)
+        if (screenWidth < 768) {
+            return <i className={`${hoverStyle} material-icons`}>{IconName}</i>;
         }
-        else {
-            return <i className="material-icons 
-                                hover:text-black
-                                transition-colors 
-                                duration-400 
-                                ease-in-out"
-                    >
-                    {IconName}
-                    </i>
+        // 👇 Icons or text on larger screens based on zoom level
+        if (zoomLevel <= 67) {
+            return <span className={`${hoverStyle}`}>{text}</span>;
+        } else {
+            return <i className={`${hoverStyle} material-icons`}>{IconName}</i>;
         }
     };
 

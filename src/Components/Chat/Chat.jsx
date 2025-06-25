@@ -40,6 +40,7 @@ const Chat = () => {
     const [newMessage , setNewMessage] = useState("");
     const profile = useSelector((store) => store.profile);
     const connections = useSelector((store) => store.connections.currentConnection);
+    const chatThemeImage = useSelector((store) => store.profile.chatThemeImage);
     const emojiPickerRef = useRef(null);
 
     const userId = profile?.userId;
@@ -71,11 +72,12 @@ const Chat = () => {
         console.log(chat.data.messages);
     
         const chatMessages = chat?.data?.messages.map((msg) => {
-          const { senderId, text } = msg;
+          const { senderId, text , createdAt  } = msg;
           return {
             firstName: senderId?.firstName,
             lastName: senderId?.lastName,
             text,
+            timestamp: createdAt, // ✅ save this
           };
         });
         setMessage(chatMessages);
@@ -127,9 +129,17 @@ const Chat = () => {
         // As soon as the page loaded , the socket connection is made and joinChat event is emitted.....
         socket.emit("joinChat" , {firstName , userId , targetUserId} );
 
-        socket.on("messageReceived" , ({ firstName , text }) => {
+        socket.on("messageReceived" , ({ firstName , text , timestamp}) => {
             console.log(firstName+" "+text);
-            setMessage((messages) => [...messages , {firstName , text}]);
+            // setMessage((messages) => [...messages , {firstName , text}]);
+            setMessage((messages) => [
+                ...messages,
+                {
+                    firstName,
+                    text,
+                    timestamp, // save timestamp with message
+                },
+            ]);
         });
 
         return () => {
@@ -141,11 +151,14 @@ const Chat = () => {
         const socket = socketRef.current;
         if (!socket) return;
 
+        const timestamp = new Date().toISOString(); // use ISO for consistency
+
         socket.emit("sendMessage" , {
             firstName: profile.firstName,
             userId,
             targetUserId,
-            text: newMessage
+            text: newMessage,
+            timestamp,
         });
 
         setNewMessage("");
@@ -197,22 +210,34 @@ const Chat = () => {
                 }`}>
                     <div 
                         ref={messageEndRef}
-                        className={`rounded-xl bg-gray-500 p-2 md:p-4 w-full h-8/12 transition-all duration-300 ease-in-out  overflow-y-scroll scrollbar-hidden `}
+                        className={`rounded-xl bg-white p-2 md:p-4 w-full h-8/12 transition-all duration-300 ease-in-out  overflow-y-scroll scrollbar-hidden `}
+                        style={{
+                            backgroundImage: `url("https://res.cloudinary.com/dilpkrfrb/image/upload/v1744462596/${chatThemeImage}")`,
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                            backgroundRepeat: "repeat",
+                        }}
                     >
+                            {/* <img
+                                src={`https://res.cloudinary.com/dilpkrfrb/image/upload/v1744462596/${chatThemeImage}`}
+                                alt="chat background"
+                                className="absolute inset-0 w-full h-full object-cover pointer-events-none rounded-xl z-0"
+                            /> */}
+
                     {message.map((message , index) => {
                         if (message.firstName === profile.firstName) {
                             return (
                                 <div
                                     key={index}
-                                    className="w-full flex justify-end pr-4 mb-2"
+                                    className="w-full flex justify-end pr-4 mb-2 "
                                 >
-                                    <div className="flex flex-col items-end max-w-[70%]">
+                                    <div className="flex flex-col items-end max-w-[70%] z-1">
                                         <div className="bg-gray-800 shadow-white shadow-inner text-white px-4 py-2 rounded-lg text-md break-words">
-                                        {message.text}
+                                            {message.text}
+                                            <div className="text-xs flex items-end justify-end text-white mt-1">
+                                               {message.timestamp ? new Date(message.timestamp).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) : ''}
+                                            </div>
                                         </div>
-                                        <span className="text-md text-black mt-1">
-                                        {new Date().toLocaleTimeString()}
-                                        </span>
                                     </div>
                                 </div>
                             );
@@ -222,13 +247,13 @@ const Chat = () => {
                                     key={index}
                                     className="w-full flex justify-start pl-4 mb-2"
                                 >
-                                    <div className="flex flex-col items-start max-w-[70%]">
-                                        <div className="bg-gray-200 shadow-black shadow-md text-black px-4 py-2 rounded-lg text-md break-words">
-                                        {message.text}
+                                    <div className="flex flex-col items-start max-w-[70%] z-1">
+                                        <div className="bg-gray-200 shadow-black shadow-xl text-black px-4 py-2 rounded-lg text-md break-words">
+                                            {message.text}
+                                            <div className="text-xs flex items-end justify-end text-black mt-1">
+                                               {message.timestamp ? new Date(message.timestamp).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) : ''}
+                                            </div>
                                         </div>
-                                        <span className="text-md text-white mt-1">
-                                        {new Date().toLocaleTimeString()}
-                                        </span>
                                     </div>
                                 </div>
                             );

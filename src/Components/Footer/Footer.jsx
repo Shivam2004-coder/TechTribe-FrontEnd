@@ -1,13 +1,44 @@
 import React from 'react';
 import Logo from '../Header/Logo';
+import { useSelector } from 'react-redux';
 
 const Footer = () => {
+
+
+    const displayMode = useSelector((store) => store.profile.displayMode);
+
+    const style = displayMode === "Light" ? "bg-white text-black" : "bg-gray-800 text-white";
+
     return (
-        <footer className="bg-gray-800 w-full text-white py-1 bottom-0">
+        <footer className={`${style} w-full py-1 bottom-0`}>
             <div className=" mx-auto flex flex-col justify-between items-center px-2">
                 {/* Logo/Brand Name */}
-                <div className="w-6/12">
+                {/* <div className="w-6/12">
                     <Logo />
+                </div> */}
+                <div className="
+                        mx-2
+                        my-2
+                        bg-blue-950 
+                        lg:w-3/12
+                        md:w-2/12
+                        w-5/12
+                        flex 
+                        items-center 
+                        justify-center
+                        font-bold 
+                        rounded-full
+                        active:scale-95 
+                        transition
+                        duration-150 
+                        ease-in-out
+                        select-none       
+                        "
+                    style={{
+                    backgroundColor: "rgb(0, 49, 255)"  
+                    }}
+                >
+                <Logo />
                 </div>
 
                 {/* Social Media Icons */}
@@ -27,7 +58,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="text-center mt-4">
-                <p className="text-gray-400 text-sm">© {new Date().getFullYear()} Tech Tribe. All rights reserved.</p>
+                <p className={`${ displayMode === "Light" ? "text-black" : "text-white" } text-sm`}>© {new Date().getFullYear()} Tech Tribe. All rights reserved.</p>
             </div>
         </footer>
     );

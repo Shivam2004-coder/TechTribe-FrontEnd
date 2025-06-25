@@ -19,6 +19,9 @@ const PreviewPage = () => {
   const livingIn = useSelector((store) => store.profile.livingIn);
   const skills = useSelector((store) => store.profile.skills);
   const socialLinks = useSelector((store) => store.socialLinks);
+  const membershipType = useSelector((store) => store.profile.membershipType);
+  const chatThemeImage = useSelector((store) => store.profile.chatThemeImage);
+  const wallpaperImage = useSelector((store) => store.profile.wallpaperImage);
 
   const userFeed = {
     _id:"",
@@ -36,7 +39,10 @@ const PreviewPage = () => {
     school,
     livingIn,
     skills,
-    socialLinks
+    socialLinks,
+    membershipType,
+    chatThemeImage,
+    wallpaperImage
   };
 
   return (
