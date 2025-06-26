@@ -10,7 +10,7 @@ const Footer = () => {
     // const style = displayMode === "Light" ? "bg-white text-black" : "bg-gray-800 text-white";
 
     return (
-        <footer className={` w-full py-1 bottom-0 `}>
+        <footer className={` w-full py-1 bottom-0 h-80  backdrop-blur-xs `}>
             <div className=" mx-auto flex flex-col justify-between items-center px-2">
                 {/* Logo/Brand Name */}
                 {/* <div className="w-6/12">

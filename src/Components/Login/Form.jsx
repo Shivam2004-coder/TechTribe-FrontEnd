@@ -33,7 +33,7 @@ const Form = (props) => {
     return (
         <div className="flex justify-center m-2">
         <form 
-            className="w-96 bg-[oklch(0.38_0.07_18.95_)] rounded-md shadow shadow-black p-7 flex flex-col items-center"
+            className="w-96 bg-gradient-to-r from-[#1f1f1f] via-[#2e2e2e] to-[#3d3d3d] shadow-2xl shadow-black p-7 flex flex-col items-center"
             onSubmit={(e) => e.preventDefault()}
         >
             <h1 className="font-bold text-2xl">
@@ -47,7 +47,7 @@ const Form = (props) => {
                     <input
                     type="text"
                     placeholder="Enter Your FirstName"
-                    className="p-2 rounded-md text-white bg-gray-600 shadow-inner shadow-black"
+                    className="p-2 text-white bg-gray-600 shadow-inner shadow-black"
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
                     />
@@ -57,7 +57,7 @@ const Form = (props) => {
                     <input
                     type="text"
                     placeholder="Enter Your LastName"
-                    className="p-2 shadow-inner shadow-black rounded-md text-white bg-gray-600"
+                    className="p-2 shadow-inner shadow-black text-white bg-gray-600"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                     />
@@ -69,7 +69,7 @@ const Form = (props) => {
                 <input
                 type="text"
                 placeholder="Enter Your Email"
-                className="p-2 shadow-inner shadow-black rounded-md text-white bg-gray-600"
+                className="p-2 shadow-inner shadow-black text-white bg-gray-600"
                 value={emailId}
                 onChange={(e) => setEmailId(e.target.value)}
                 />
@@ -80,7 +80,7 @@ const Form = (props) => {
                     <input
                         type={canSeePassword ? "text" : "password"}
                         placeholder="Enter Your Password"
-                        className="p-2 shadow-inner shadow-black rounded-md text-white bg-gray-600 pr-10 w-full"
+                        className="p-2 shadow-inner shadow-black text-white bg-gray-600 pr-10 w-full"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
@@ -101,7 +101,8 @@ const Form = (props) => {
 
             <div className="w-full flex flex-col items-center mt-2">
                 <button
-                    className="p-3 w-5/12 shadow shadow-yellow-950 text-lg rounded-md bg-yellow-600 cursor-pointer hover:bg-yellow-700 active:bg-yellow-600"
+                    className="p-3 w-5/12 shadow shadow-yellow-950 text-lg bg-yellow-600 cursor-pointer 
+                                hover:rounded-full transition-all duration-300 ease-in-out hover:bg-yellow-700 active:bg-yellow-600"
                     onClick={ isSignIn ? handleSignUpSubmitButton :  handleSignInSubmitButton}
                 >
                     {isSignIn ? "Sign Up" : "Sign In"}

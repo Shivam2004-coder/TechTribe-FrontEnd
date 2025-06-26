@@ -23,7 +23,7 @@ const Layout = () => {
             }}
         >
             <Header />
-            <div className="flex-grow w-full flex items-center">  {/* removed the h-screen and flex and added w-full */}
+            <div className="flex-grow w-full flex items-center ">  {/* removed the h-screen and flex and added w-full */}
                 <Outlet /> {/* ✅ This renders the child route component */}
             </div>
             <Footer />
