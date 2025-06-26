@@ -9,16 +9,9 @@ const Settings = () => {
   const showChatThemePage = useSelector((store) => store.set.showChatThemePage);
   const showWallPaperPage = useSelector((store) => store.set.showWallPaperPage);
   const showDisplayThemePage = useSelector((store) => store.set.showDisplayThemePage);
-  const wallpaperImage = useSelector((store) => store.profile.wallpaperImage);
 
   return (
-    <div className="relative min-h-screen w-full bg-gray-500 flex"
-      style={{
-          backgroundImage: `url("https://res.cloudinary.com/dilpkrfrb/image/upload/v1744462596/${wallpaperImage}")`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "repeat",
-      }}
+    <div className="relative min-h-screen h-full w-full flex"
     >
       <div className="absolute left-0 top-0 h-full z-10">
         <EditOptions />

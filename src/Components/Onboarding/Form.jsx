@@ -40,23 +40,23 @@ const Form = ({formData, setFormData , images, setImages}) => {
                     </div>
                 </div>
 
-                <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder="First Name" className="bg-white shadow-black shadow-xl mb-2 p-3 border-2 border-gray-800 hover:bg-gray-100 text-black text-xl w-full" 
+                <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder="First Name" className="bg-gray-300 shadow-black shadow-xl mb-2 p-3 border-2 border-gray-800 hover:bg-gray-100 text-black text-xl w-full" 
                     style={{
                         boxShadow: '-5px 5px 0px rgba(0, 0, 0)',
                     }}
                 />
-                <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Last Name" className="bg-white shadow-black shadow-xl mb-2 p-3 border-2 border-gray-800 hover:bg-gray-100 text-black text-xl w-full" 
+                <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Last Name" className="bg-gray-300 shadow-black shadow-xl mb-2 p-3 border-2 border-gray-800 hover:bg-gray-100 text-black text-xl w-full" 
                     style={{
                         boxShadow: '-5px 5px 0px rgba(0, 0, 0)',
                     }}
                 />
 
-                <input type="date" name="dob" value={formData.dob} onChange={handleChange} className="bg-white shadow-black shadow-xl mb-2 p-3 border-2 border-gray-800 hover:bg-gray-100 text-gray-500 text-xl w-full" 
+                <input type="date" name="dob" value={formData.dob} onChange={handleChange} className="bg-gray-300 shadow-black shadow-xl mb-2 p-3 border-2 border-gray-800 hover:bg-gray-100 text-gray-500 text-xl w-full" 
                     style={{
                         boxShadow: '-5px 5px 0px rgba(0, 0, 0)',
                     }}
                 />
-                <select name="gender" value={formData.gender} onChange={handleChange} className="bg-white shadow-black shadow-xl mb-2 p-3 border-2 border-gray-800 hover:bg-gray-100 text-gray-500 text-xl w-full"
+                <select name="gender" value={formData.gender} onChange={handleChange} className="bg-gray-300 shadow-black shadow-xl mb-2 p-3 border-2 border-gray-800 hover:bg-gray-100 text-gray-500 text-xl w-full"
                     style={{
                         boxShadow: '-5px 5px 0px rgba(0, 0, 0)',
                     }}
@@ -66,7 +66,7 @@ const Form = ({formData, setFormData , images, setImages}) => {
                     <option value="Female">Female</option>
                     <option value="Other">Other</option>
                 </select>
-                <input type="text" name="location" value={formData.location} onChange={handleChange} placeholder="Location" className="bg-white shadow-black shadow-xl mb-2 p-3 border-2 border-gray-800 hover:bg-gray-100 text-black text-xl w-full" 
+                <input type="text" name="location" value={formData.location} onChange={handleChange} placeholder="Location" className="bg-gray-300 shadow-black shadow-xl mb-2 p-3 border-2 border-gray-800 hover:bg-gray-100 text-black text-xl w-full" 
                     style={{
                         boxShadow: '-5px 5px 0px rgba(0, 0, 0)',
                     }}
@@ -78,7 +78,7 @@ const Form = ({formData, setFormData , images, setImages}) => {
         </div>
         <div className="flex flex-col justify-between p-1 pl-0 h-full" >
 
-            <textarea placeholder="Bio" name="bio" value={formData.bio} onChange={handleChange} className="bg-white shadow-black shadow-xl mb-2 p-3 border-2 border-gray-800 hover:bg-gray-100 text-black text-xl md:col-span-2" rows={4}
+            <textarea placeholder="Bio" name="bio" value={formData.bio} onChange={handleChange} className="bg-gray-300 shadow-black shadow-xl mb-2 p-3 border-2 border-gray-800 hover:bg-gray-100 text-black text-xl md:col-span-2" rows={4}
                 style={{
                     boxShadow: '-5px 5px 0px rgba(0, 0, 0)',
                 }}
@@ -92,7 +92,7 @@ const Form = ({formData, setFormData , images, setImages}) => {
                         placeholder="Enter a skill"
                         value={formData.inputSkill || ''}
                         onChange={handleChange}
-                        className="flex-1 bg-white shadow-black shadow-xl p-3 border-2 border-gray-800 hover:bg-gray-100 text-black text-xl"
+                        className="flex-1 bg-gray-300 shadow-black shadow-xl p-3 border-2 border-gray-800 hover:bg-gray-100 text-black text-xl"
                         style={{
                             boxShadow: '-5px 5px 0px rgba(0, 0, 0)',
                         }}

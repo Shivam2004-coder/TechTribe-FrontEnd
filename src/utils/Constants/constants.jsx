@@ -14,6 +14,6 @@ export const themes = [
 ];
 
 export const wallpaper = [ 
-  "Wallpaper4_zuu9sf" , "Wallpaper5_rth7zp" , "Wallpaper3_cdas1g" , 
-  "Wallpaper6_xks3lv" , "Wallpaper2_lmqiwk" , "Wallpaper1_aond7y" 
+  "Wallpaper_4_qqiil0" , "Wallpaper_3_ttljm4" , "Wallpaper_6_jux0dz" ,  "Wallpaper_10_sk2831" , "Wallpaper_7_l90zxp" ,
+  "Wallpaper_1_el9epm" , "Wallpaper_5_byfhem" , "Wallpaper_8_xu4clm" , "Wallpaper_2_vktiub" , "Wallpaper_9_hdgdao"
 ];

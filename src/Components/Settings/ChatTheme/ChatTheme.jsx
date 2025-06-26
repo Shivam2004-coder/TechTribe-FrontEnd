@@ -47,7 +47,7 @@ const ChatTheme = () => {
 
   };
   return (
-    <div className="flex flex-col items-center max-w-full min-h-screen p-4 rounded-lg shadow-lg">
+    <div className="flex flex-col items-center max-w-full min-h-screen p-4 rounded-lg">
       <div className=" flex items-center font-bold justify-start bg-black p-4 shadow-white shadow-inner" >
         <p>Chat Themes</p>
       </div>

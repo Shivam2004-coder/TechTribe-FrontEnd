@@ -51,18 +51,19 @@ const NavOptions = () => {
         }
     }
 
-    const hoverStyle = `${displayMode === "Light" ? "hover:text-white" : "hover:text-black" } transition-colors duration-400 ease-in-out `;
+    // const hoverStyle = displayMode === "Light" ? "hover:text-white" : "hover:text-black";
+    const hoverStyle = "";
 
     const renderContent = (text, IconName) => {
         // 👇 Only icons on small screens (mobile < 768px)
         if (screenWidth < 768) {
-            return <i className={`${hoverStyle} material-icons`}>{IconName}</i>;
+            return <i className={`${hoverStyle} hover:text-white text-black  material-icons transition-colors duration-400 ease-in-out `}>{IconName}</i>;
         }
         // 👇 Icons or text on larger screens based on zoom level
         if (zoomLevel <= 67) {
-            return <span className={`${hoverStyle}`}>{text}</span>;
+            return <span className={`${hoverStyle} hover:text-white text-black transition-colors duration-400 ease-in-out `}>{text}</span>;
         } else {
-            return <i className={`${hoverStyle} material-icons`}>{IconName}</i>;
+            return <i className={`${hoverStyle} hover:text-white text-black  material-icons transition-colors duration-400 ease-in-out `}>{IconName}</i>;
         }
     };
 

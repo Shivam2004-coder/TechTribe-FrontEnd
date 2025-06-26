@@ -38,7 +38,7 @@ const EditOptions = () => {
     const background = displayMode === "Light" ? "bg-white text-black" : "bg-black";
     
     return (<>
-            <div className={`flex flex-col text-sm md:text-lg items-start h-full transition-all duration-300 ease-in-out ${ isMenuOpen ? "w-52 md:w-84" : "w-16" } p-1 md:p-2 ${background} shadow-md shadow-black select-none`}
+            <div className={`flex flex-col text-sm md:text-lg items-start h-full transition-all duration-300 ease-in-out ${ isMenuOpen ? "w-52 md:w-84" : "w-16" } p-1 md:p-2 ${background} select-none`}
                 
             >
                 <div className={`${background} h-12 w-12 mb-12 flex items-center justify-center ${hoverStyle} transition-all duration-300 ease-in-out cursor-pointer rounded-full`}

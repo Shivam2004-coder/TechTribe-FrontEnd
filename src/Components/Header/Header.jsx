@@ -21,11 +21,10 @@ const Header = () => {
 
   // ${profile.displayMode === "Light" ? "bg-white text-black" : "bg-black" }
   return (
-    <div className={`flex items-center top-0 justify-between h-20 backdrop-blur-xs w-full z-20`}>
+    <div className={`flex items-center top-0 justify-between h-20 bg-white/20 backdrop-blur-xs w-full z-20`}>
       <div className="
                 mx-2
                 my-2
-                bg-blue-950 
                 lg:w-3/12
                 md:w-2/12
                 w-5/12
@@ -40,9 +39,9 @@ const Header = () => {
                 ease-in-out
                 select-none       
                 "
-          style={{
-            backgroundColor: "rgb(0, 49, 255)"  
-          }}
+          // style={{
+          //   backgroundColor: "rgb(0, 49, 255)"  
+          // }}
       >
         <Logo />
       </div>

@@ -73,7 +73,7 @@ const Tribe = () => {
   // ✅ Case 2: No feed but swipes are still allowed
   if (feed.length === 0) {
     return (
-      <div className="w-full h-full flex flex-col items-center justify-center bg-white text-black text-xl p-10 rounded-xl shadow-xl">
+      <div className="w-1/2 h-full flex flex-col items-center justify-center bg-white/40 backdrop-blur-sm text-black text-xl p-10 rounded-xl shadow-xl">
         <div className="text-3xl font-bold mb-4 text-gray-600 animate-pulse">
           😕 No one to connect with right now!
         </div>

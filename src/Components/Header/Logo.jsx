@@ -16,16 +16,17 @@ const Logo = () => {
                        p-4
                        w-full
                        flex justify-center
+                       items-center
                        cursor-pointer
                        "
             onClick={handleLogoClick}
         >
             <img 
-                src="/TechTribeLogo1.jpeg" 
+                src="/techTribeLogo1.png" 
                 alt="WebsiteLogo" 
-                className="h-6 w-6 md:h-9 md:w-9 mx-1 shadow shadow-black"
+                className="h-6 w-6 md:h-15 md:w-15 mx-1"
             />
-            <h1 className="text-sm md:text-2xl">TechTribe</h1>
+            <h1 className="text-sm md:text-4xl">techTribe</h1>
         </div>
     );
 };
