@@ -39,7 +39,6 @@ const Body = () => {
       </GoogleOAuthProvider>
     )
   }
-
   const PrivateRoute = ({ element }) => {
 		return isAuthenticated ? element : <Navigate to="/login" />
 	}
@@ -81,7 +80,7 @@ const Body = () => {
         </Route>
       </Routes>
     </>
-  );
+  )
 };
 
 export default Body;
