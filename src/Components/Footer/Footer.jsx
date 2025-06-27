@@ -4,11 +4,11 @@ import Logo from "../Header/Logo";
 
 const Footer = () => {
   const displayMode = useSelector((store) => store.profile.displayMode);
-  const textColor = displayMode === "Light" ? "text-black" : "text-white";
+  // const textColor = displayMode === "Light" ? "text-black" : "text-white";
   const borderColor = displayMode === "Light" ? "border-gray-300" : "border-gray-700";
 
   return (
-    <footer className={`w-full bg-white/30 px-4 py-8 ${textColor} backdrop-blur-md `}>
+    <footer className={`w-full bg-black px-4 py-8 text-white backdrop-blur-md `}>
 
       {/* Grid Sections */}
       <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
