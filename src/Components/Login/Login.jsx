@@ -7,6 +7,7 @@ import { invalidMessage, successMessage } from "../../utils/ShowMessage";
 import { setFirstName, setLastName, setEmailId } from "../../utils/ReduxStore/profileSlice";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
+// import useFetchUserProfileData from "../../CustomHooks/useFetchUserProfileData";
 import { fetchAndStoreUserProfile } from "../../CustomHooks/fetchAndStoreUserProfile";
 
 const Login = () => {
@@ -49,7 +50,6 @@ const Login = () => {
       }
     } catch (error) {
       const errMessage = error.response?.data?.message || "Something went wrong. Please try again.";
-      console.log(error);
       console.log("ERROR in handleSignInButton : "+error.message);
       invalidMessage(errMessage);
     }

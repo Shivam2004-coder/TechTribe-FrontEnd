@@ -92,8 +92,9 @@ const Ignored = () => {
             
             {/* <div className="flex justify-between items-center mb-10">
                 <h1 className="text-3xl md:text-4xl font-bold text-gray-800 underline decoration-amber-500">
-                    
+                    Ignored List
                 </h1>
+
                 <div className="relative bg-gray-300 rounded-full p-1 flex items-center w-[80px] md:w-[90px] shadow-black shadow-inner">
                     <div
                         className={`absolute top-1 left-1 w-9 h-9 md:w-10 md:h-10 bg-black rounded-full transition-all duration-500 ease-in-out ${
