@@ -93,7 +93,7 @@ const Wallpaper = () => {
           `}
           style={{ transitionProperty: "all" }}
         >
-          {wallpaper.map((avatar, index) => (
+          {import.meta.env.VITE_WALLPAPER.map((avatar, index) => (
             <div
               key={index}
               onClick={() => handleClick(avatar)}

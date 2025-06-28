@@ -103,7 +103,7 @@ const Accordian = () => {
           `}
           style={{ transitionProperty: "all" }}
         >
-          {avatars.map((avatar, index) => (
+          {import.meta.env.VITE_AVATARS.map((avatar, index) => (
             <div
               key={index}
               onClick={() => handleClick(avatar)}

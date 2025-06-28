@@ -94,7 +94,7 @@ const ChatTheme = () => {
           `}
           style={{ transitionProperty: "all" }}
         >
-          {themes.map((avatar, index) => (
+          {import.meta.env.VITE_THEMES.map((avatar, index) => (
             <div
               key={index}
               onClick={() => handleClick(avatar)}
