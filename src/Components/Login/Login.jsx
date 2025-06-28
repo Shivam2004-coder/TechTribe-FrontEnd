@@ -7,7 +7,6 @@ import { invalidMessage, successMessage } from "../../utils/ShowMessage";
 import { setFirstName, setLastName, setEmailId } from "../../utils/ReduxStore/profileSlice";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
-// import useFetchUserProfileData from "../../CustomHooks/useFetchUserProfileData";
 import { fetchAndStoreUserProfile } from "../../CustomHooks/fetchAndStoreUserProfile";
 
 const Login = () => {
