@@ -106,6 +106,7 @@ const Menu = ({setIsClicked}) => {
             const response = await axios.post(import.meta.env.VITE_BASE_URL + "logout" , {} , {withCredentials: true});
             console.log(response);
             dispatch(resetProfile());
+
             localStorage.removeItem('user-info');
             navigate("/login");
         } catch (error) {
