@@ -49,6 +49,7 @@ const Login = () => {
       }
     } catch (error) {
       const errMessage = error.response?.data?.message || "Something went wrong. Please try again.";
+      console.log(error);
       console.log("ERROR in handleSignInButton : "+error.message);
       invalidMessage(errMessage);
     }
