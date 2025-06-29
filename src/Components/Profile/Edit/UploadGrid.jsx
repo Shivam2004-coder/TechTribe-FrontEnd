@@ -62,7 +62,7 @@ const UploadGrid = (props) => {
                 }
                 catch (err) {
                     console.error("Error uploading image:", err);
-                    errorMessage("Failed to upload image. Please try again.");
+                    errorMessage("Failed to upload image. "+err?.response?.data?.message);
                 }
                 finally {
                     // Stop shimmer

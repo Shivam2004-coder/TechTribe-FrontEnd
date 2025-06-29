@@ -31,11 +31,11 @@ const EditOptions = () => {
     console.log(showDeleteAccountPage);
 
     const selectedStyle = displayMode === "Light" ? "bg-black text-white" : "bg-white text-black" ;
-    const hoverStyle = displayMode === "Light" ? "hover:bg-black hover:text-white" : "hover:bg-white hover:text-black" ;
+    const hoverStyle = displayMode === "Light" ? "hover:bg-black hover:text-white text-black" : "hover:bg-white hover:text-black text-white" ;
     const background = displayMode === "Light" ? "bg-white text-black" : "bg-black";
     
     return (<>
-            <div className={`flex absolute flex-col text-sm md:text-lg z-50 items-start h-full transition-all duration-300 ease-in-out ${ showSettingsMenu ? "w-52 md:w-84" : "w-16" } p-1 md:p-2 ${background} select-none`}
+            <div className={`flex fixed flex-col text-sm md:text-lg z-30 items-start h-full transition-all duration-300 ease-in-out ${ showSettingsMenu ? "w-52 md:w-84" : "w-16" } p-1 md:p-2 ${background} select-none`}
             >
                     <div
                         className={`${background} h-12 mb-12 ${
@@ -51,7 +51,7 @@ const EditOptions = () => {
                             <img
                                 src="/techTribeLogo1.png"
                                 alt="WebsiteLogo"
-                                className="h-6 w-6 md:h-15 md:w-15 mx-1"
+                                className={`h-6 w-6 md:h-15 md:w-15 mx-1 ${ displayMode === "Light" ? "bg-black rounded-md" : "bg-transparent" } `}
                             />
                             
                             </>

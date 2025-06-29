@@ -35,16 +35,16 @@ const EditOptions = () => {
     }
 
     const selectedStyle = displayMode === "Light" ? "bg-black text-white" : "bg-white text-black" ;
-    const hoverStyle = displayMode === "Light" ? "hover:bg-black hover:text-white" : "hover:bg-white hover:text-black" ;
+    const hoverStyle = displayMode === "Light" ? "hover:bg-black hover:text-white text-black" : "hover:bg-white hover:text-black text-white" ;
     const background = displayMode === "Light" ? "bg-white text-black" : "bg-black";
     
     return (<>
-            <div className={`fixed flex flex-col text-sm md:text-lg items-start z-40 h-full transition-all duration-300 ease-in-out ${ showProfileMenu ? "w-52 md:w-84" : "w-16" } p-1 md:p-2 ${background} select-none`}
+            <div className={`fixed flex flex-col text-sm md:text-lg items-start z-30 h-full transition-all duration-300 ease-in-out ${ showProfileMenu ? "w-64 md:w-84" : "w-16" } p-1 md:p-2 ${background} select-none`}
             >
 
                 <div
                     className={`${background} h-12 mb-12 ${
-                        showProfileMenu ? "w-48 md:w-80 justify-between mt-3" : `w-12 justify-center ${hoverStyle}`
+                        showProfileMenu ? "w-60 md:w-80 justify-between mt-3" : `w-12 justify-center ${hoverStyle}`
                     } flex items-center transition-all duration-300 ease-in-out cursor-pointer rounded-full`}
                     onClick={!showProfileMenu ? openMenu : undefined} // Apply click only when menu is closed
                 >
@@ -55,7 +55,7 @@ const EditOptions = () => {
                         <img
                             src="/techTribeLogo1.png"
                             alt="WebsiteLogo"
-                            className="h-6 w-6 md:h-15 md:w-15 mx-1"
+                            className={`h-10 w-10 md:h-15 md:w-15 mx-2 ${ displayMode === "Light" ? "bg-black rounded-md" : "bg-transparent" } `}  
                         />
                         </>
                     )}
@@ -63,7 +63,7 @@ const EditOptions = () => {
                 { showProfileMenu &&
                     <div className="absolute flex items-center justify-center top-4 right-4" >
                         <i
-                            className={`material-icons ${hoverStyle} transition-all duration-300 ease-in-out rounded-xl p-3 text-white`}
+                            className={`material-icons ${hoverStyle} transition-all duration-300 ease-in-out rounded-xl p-3`}
                             onClick={closeMenu} // Apply click only to delete icon
                         >
                             close

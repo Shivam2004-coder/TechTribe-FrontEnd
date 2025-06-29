@@ -63,6 +63,9 @@ const Accordian = () => {
 
   return (
     <div className="flex flex-col items-center w-full  min-h-screen p-4 rounded-lg shadow-lg">
+      <div className=" flex items-center font-bold justify-start mb-10 bg-black p-4 shadow-white shadow-inner" >
+        <p>Use Avatars</p>
+      </div>
       <UserImage isOpen={isOpen}
                 setIsOpen={setIsOpen}   
                 isSaving={isSaving}

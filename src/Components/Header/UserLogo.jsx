@@ -49,10 +49,9 @@ const UserLogo = () => {
     }, []);
 
     return (
-        <div className="w-3/12 md:w-1/12 h-full flex items-center justify-center relative">
+        <div className="w-full  md:w-1/12 h-full flex items-center justify-center ">
             <div
                 className={`
-                            absolute
                             transition-opacity 
                             duration-300 
                             ease-in-out 
@@ -75,8 +74,9 @@ const UserLogo = () => {
                     className={` ${displayMode === "Light" ? "bg-white text-black" : "bg-gray-800 text-white" }  rounded-tl-lg rounded-bl-lg
                                 shadow-xl shadow-black
                                 absolute top-0 
-                                right-0 z-50 animate-expand-menu origin-right
+                                right-0 animate-expand-menu origin-right
                                 text-sm`}
+                    style={{ zIndex: 999 }}
                 >
                     <Menu />
                 </div>

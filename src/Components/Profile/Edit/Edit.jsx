@@ -77,6 +77,9 @@ const Edit = () => {
 
     return (
         <div className="w-full h-full flex flex-col items-center rounded-lg" >
+          <div className=" flex items-center font-bold justify-start mb-10 bg-black p-4 shadow-white shadow-inner" >
+            <p>Edit Profile</p>
+          </div>
           <div className="bg-gray-800 w-full md:w-5/12 h-screen md:rounded-2xl shadow-xl text-white overflow-y-scroll scrollbar-hidden">
             {
               editPrompt ? (

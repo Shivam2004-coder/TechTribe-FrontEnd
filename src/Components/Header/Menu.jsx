@@ -123,7 +123,7 @@ const Menu = () => {
 
     return (
         // <div className="h-screen right-0 m-1" >
-        <div className="right-0 top-20 bottom-0 max-w-md w-full z-30 p-2 rounded-tl-lg rounded-bl-lg">
+        <div className="right-0 top-20 bottom-0 max-w-md w-full p-2 rounded-tl-lg rounded-bl-lg">
             <div className='flex flex-row justify-center mb-5' >
                 <div className='flex flex-col  items-center justify-center' >
                     <AdvancedImage cldImg={cld.image(profileImage).resize(fill().width(250).height(250))} 

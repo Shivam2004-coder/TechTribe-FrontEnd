@@ -30,7 +30,7 @@ const Layout = () => {
   return (
 
     <div className=" flex flex-col min-h-screen max-w-screen overflow-x-clip" >
-      <div className="flex flex-row min-h-screen bg-amber-500 h-full w-full overflow-x-clip" >
+      <div className="flex flex-row min-h-screen h-full w-full overflow-x-clip" >
         {/* { location.pathname === "/profile" ?
           <EditOptions />
           : location.pathname === "/settings" ?
@@ -41,17 +41,15 @@ const Layout = () => {
         } */}
 
           {location.pathname === "/profile" ? (
-            // <div className="h-[63rem] md:h-[55rem] z-50 absolute bg-black ">
               <EditOptions />
-            // </div>
           ) : location.pathname === "/settings" ? (
-            <div className="min-h-screen">
+            // <div className="min-h-screen">
               <EditOption />
-            </div>
+            // </div>
           ) : null}
 
         <div
-          className={`flex flex-col justify-between w-full min-h-screen max-w-screen overflow-x-clip`}
+          className={`flex flex-col justify-between w-full min-h-screen max-w-screen overflow-x-clip ${ useBackgroundImage ? {} : bgClass } `}
           style={ useBackgroundImage
               ? {
                   backgroundImage: bgImage,
