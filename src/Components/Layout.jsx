@@ -2,6 +2,8 @@ import { Outlet, useLocation } from "react-router-dom";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import { useSelector } from "react-redux";
+import EditOptions from "./Profile/EditOptions/EditOptions";
+import EditOption from "./Settings/EditOptions";
 
 const Layout = () => {
   let wallpaperImage = useSelector((store) => store.profile.wallpaperImage);
@@ -26,7 +28,59 @@ const Layout = () => {
   }
 
   return (
-    <div
+
+    <div className=" flex flex-col min-h-screen max-w-screen overflow-x-clip" >
+      <div className="flex flex-row min-h-screen bg-amber-500 h-full w-full overflow-x-clip" >
+        {/* { location.pathname === "/profile" ?
+          <EditOptions />
+          : location.pathname === "/settings" ?
+          <EditOption />
+          :
+          <>
+          </>
+        } */}
+
+          {location.pathname === "/profile" ? (
+            // <div className="h-[63rem] md:h-[55rem] z-50 absolute bg-black ">
+              <EditOptions />
+            // </div>
+          ) : location.pathname === "/settings" ? (
+            <div className="min-h-screen">
+              <EditOption />
+            </div>
+          ) : null}
+
+        <div
+          className={`flex flex-col justify-between w-full min-h-screen max-w-screen overflow-x-clip`}
+          style={ useBackgroundImage
+              ? {
+                  backgroundImage: bgImage,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "repeat",
+                  backgroundAttachment: "fixed",
+                }
+                : {}
+          }
+        >
+            <Header />
+            <div className="flex-grow w-full h-full min-h-screen flex items-center justify-center">
+              <Outlet />
+            </div>
+
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
+};
+
+export default Layout;
+
+
+
+
+{/* <div
       className={`flex flex-col justify-between min-h-screen max-w-screen overflow-x-clip ${!useBackgroundImage ? bgClass : ""}`}
       style={
         useBackgroundImage
@@ -40,13 +94,13 @@ const Layout = () => {
           : {}
       }
     >
+      { location === "/profile" && 
+        <EditOptions />
+
+      }
       <Header />
       <div className="flex-grow w-full h-full min-h-screen flex items-center justify-center">
         <Outlet />
       </div>
       <Footer />
-    </div>
-  );
-};
-
-export default Layout;
+    </div> */}

@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const NavOptions = () => {
-    // const location = useLocation();
+    const location = useLocation();
     const navigate = useNavigate();
     const [zoomLevel, setZoomLevel] = useState(100); // Default to 100%
-    const displayMode = useSelector((store) => store.profile.displayMode);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
     useEffect(() => {
@@ -51,19 +49,19 @@ const NavOptions = () => {
         }
     }
 
-    // const hoverStyle = displayMode === "Light" ? "hover:text-white" : "hover:text-black";
-    const hoverStyle = "";
+
+    const hoverStyle = "text-white hover:text-black";
 
     const renderContent = (text, IconName) => {
         // 👇 Only icons on small screens (mobile < 768px)
         if (screenWidth < 768) {
-            return <i className={`${hoverStyle} hover:text-white text-black  material-icons transition-colors duration-400 ease-in-out `}>{IconName}</i>;
+            return <i className={`${hoverStyle} material-icons transition-colors duration-400 ease-in-out `}>{IconName}</i>;
         }
         // 👇 Icons or text on larger screens based on zoom level
         if (zoomLevel <= 67) {
-            return <span className={`${hoverStyle} hover:text-white text-black transition-colors duration-400 ease-in-out `}>{text}</span>;
+            return <span className={`${hoverStyle} transition-colors duration-400 ease-in-out `}>{text}</span>;
         } else {
-            return <i className={`${hoverStyle} hover:text-white text-black  material-icons transition-colors duration-400 ease-in-out `}>{IconName}</i>;
+            return <i className={`${hoverStyle}   material-icons transition-colors duration-400 ease-in-out `}>{IconName}</i>;
         }
     };
 

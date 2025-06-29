@@ -16,7 +16,7 @@ const Settings = () => {
     <div className="relative min-h-screen h-full w-full flex"
     >
       <div className="absolute left-0 top-0 h-full z-10">
-        <EditOptions />
+        {/* <EditOptions /> */}
       </div>
       <div className="ml-16 w-full flex flex-col items-center transition-all duration-300 ease-in-out">
         {showChatThemePage && <ChatTheme />}

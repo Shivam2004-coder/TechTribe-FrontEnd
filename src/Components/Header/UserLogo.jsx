@@ -4,9 +4,10 @@ import {AdvancedImage} from '@cloudinary/react';
 import {fill} from "@cloudinary/url-gen/actions/resize";
 import Menu from "./Menu";
 // import DropDown from "./DropDown";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleMenu } from "../../utils/ReduxStore/setSlice";
 
-const UserLogo = ({isClicked, setIsClicked}) => {
+const UserLogo = () => {
 
     // Create a Cloudinary instance and set your cloud name.
     const cld = new Cloudinary({
@@ -15,16 +16,18 @@ const UserLogo = ({isClicked, setIsClicked}) => {
         }
     });
 
+    const dispatch = useDispatch();
     const menuRef = useRef(null);
     const iconRef = useRef(null); // Ref for the user icon
     const profileImage = useSelector((store) => store.profile.profileImage);
     const displayMode = useSelector((store) => store.profile.displayMode);
+    const showMenu = useSelector((store) => store.set.showMenu);
 
     const handleUserIconClick = (event) => {
         // Prevent the click event from bubbling up
         event.stopPropagation();
         // Toggle the menu state
-        setIsClicked((prev) => !prev);
+        dispatch(toggleMenu(true));
     };
 
     // Close the menu if clicked outside of the menu and user icon
@@ -34,7 +37,7 @@ const UserLogo = ({isClicked, setIsClicked}) => {
             menuRef.current && !menuRef.current.contains(event.target) &&
             iconRef.current && !iconRef.current.contains(event.target)
         ) {
-            setIsClicked(false);
+            dispatch(toggleMenu(false));
         }
     };
 
@@ -53,7 +56,7 @@ const UserLogo = ({isClicked, setIsClicked}) => {
                             transition-opacity 
                             duration-300 
                             ease-in-out 
-                            ${isClicked ? "opacity-0" : "opacity-100"} 
+                            ${showMenu ? "opacity-0" : "opacity-100"} 
                             hover:bg-gray-300
                             rounded-4xl
                             cursor-pointer`}
@@ -66,7 +69,7 @@ const UserLogo = ({isClicked, setIsClicked}) => {
                     />
                 {/* </div> */}
             </div>
-            {isClicked && (
+            {showMenu && (
                 <div
                     ref={menuRef}
                     className={` ${displayMode === "Light" ? "bg-white text-black" : "bg-gray-800 text-white" }  rounded-tl-lg rounded-bl-lg
@@ -75,7 +78,7 @@ const UserLogo = ({isClicked, setIsClicked}) => {
                                 right-0 z-50 animate-expand-menu origin-right
                                 text-sm`}
                 >
-                    <Menu setIsClicked={setIsClicked} />
+                    <Menu />
                 </div>
             )}
         </div>

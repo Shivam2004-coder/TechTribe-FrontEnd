@@ -1,16 +1,9 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { OnlyShowChatThemePage, OnlyShowWallPaperPage, OnlyShowDisplayThemePage, OnlyShowDeleteAccountPage } from "../../utils/ReduxStore/setSlice";
+import { OnlyShowChatThemePage, OnlyShowWallPaperPage, OnlyShowDisplayThemePage, OnlyShowDeleteAccountPage, toggleSettingsMenu } from "../../utils/ReduxStore/setSlice";
 
 const EditOptions = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const showSettingsMenu = useSelector((store) => store.set.showSettingsMenu);
     const dispatch = useDispatch();
-    const toggleMenu = () => {
-        setIsMenuOpen((prev) => {
-            // Collapse notice when closing menu
-            return !prev;
-        });
-    };
 
     const displayMode = useSelector((store) => store.profile.displayMode);
 
@@ -32,6 +25,9 @@ const EditOptions = () => {
         dispatch(OnlyShowDeleteAccountPage());
     }
 
+    const openMenu = () => dispatch(toggleSettingsMenu(true));
+    const closeMenu = () => dispatch(toggleSettingsMenu(false));
+
     console.log(showDeleteAccountPage);
 
     const selectedStyle = displayMode === "Light" ? "bg-black text-white" : "bg-white text-black" ;
@@ -39,47 +35,71 @@ const EditOptions = () => {
     const background = displayMode === "Light" ? "bg-white text-black" : "bg-black";
     
     return (<>
-            <div className={`flex flex-col text-sm md:text-lg items-start h-full transition-all duration-300 ease-in-out ${ isMenuOpen ? "w-52 md:w-84" : "w-16" } p-1 md:p-2 ${background} select-none`}
-                
+            <div className={`flex absolute flex-col text-sm md:text-lg z-50 items-start h-full transition-all duration-300 ease-in-out ${ showSettingsMenu ? "w-52 md:w-84" : "w-16" } p-1 md:p-2 ${background} select-none`}
             >
-                <div className={`${background} h-12 w-12 mb-12 flex items-center justify-center  ${hoverStyle} transition-all duration-300 ease-in-out cursor-pointer rounded-full`}
-                    onClick={toggleMenu}
-                >
-                    <i className="material-icons">menu</i>
-                </div>
+                    <div
+                        className={`${background} h-12 mb-12 ${
+                            showSettingsMenu ? "w-48 md:w-80 justify-between mt-3" : `w-12 justify-center ${hoverStyle}`
+                        } flex items-center transition-all duration-300 ease-in-out cursor-pointer rounded-full`}
+                        onClick={!showSettingsMenu ? openMenu : undefined}
+                    >
+                        {!showSettingsMenu ? (
+                            <i className={`material-icons`}
+                            >menu</i>
+                        ) : (
+                            <>
+                            <img
+                                src="/techTribeLogo1.png"
+                                alt="WebsiteLogo"
+                                className="h-6 w-6 md:h-15 md:w-15 mx-1"
+                            />
+                            
+                            </>
+                        )}
+                    </div> 
+                    { showSettingsMenu &&
+                        <div className="absolute flex items-center justify-center top-4 right-4" >
+                            <i
+                                className={`material-icons ${hoverStyle} transition-all duration-300 ease-in-out rounded-xl p-3`}
+                                onClick={closeMenu} // Apply click only to delete icon
+                            >
+                                close
+                            </i>
+                        </div>
+                    }
 
-                <div className={`h-12 mb-2 p-3 ${ isMenuOpen ? "w-48 md:w-80" : "w-12" } ${showChatThemePage ? `${selectedStyle}` :  `${background}` } flex items-center ${hoverStyle} transition-all duration-300 ease-in-out cursor-pointer rounded-full`} 
+                <div className={`h-12 mb-2 p-3 ${ showSettingsMenu ? "w-48 md:w-80" : "w-12" } ${showChatThemePage ? `${selectedStyle}` :  `${background}` } flex items-center ${hoverStyle} transition-all duration-300 ease-in-out cursor-pointer rounded-full`} 
                     onClick={handleChatThemeClick}
                 >
                     <i className="material-icons">chat</i>
                     <div className="mx-3 font-bold tracking-wide flex items-center text-center">
-                        { isMenuOpen && "Chat Theme" }
+                        { showSettingsMenu && "Chat Theme" }
                     </div>
                 </div>
                 
-                <div className={`h-12 mb-2 p-3  ${ isMenuOpen ? "w-48 md:w-80" : "w-12" } ${showWallPaperPage ? `${selectedStyle}` :  `${background}` } flex items-center ${hoverStyle} transition-all duration-300 ease-in-out cursor-pointer rounded-full`} 
+                <div className={`h-12 mb-2 p-3  ${ showSettingsMenu ? "w-48 md:w-80" : "w-12" } ${showWallPaperPage ? `${selectedStyle}` :  `${background}` } flex items-center ${hoverStyle} transition-all duration-300 ease-in-out cursor-pointer rounded-full`} 
                     onClick={handleWallPaperClick}
                 >
                     <i className="material-icons">wallpaper</i>
                     <div className="mx-3 font-bold tracking-wide flex items-center text-center">
-                        { isMenuOpen && "Wallpaper" }
+                        { showSettingsMenu && "Wallpaper" }
                     </div>
                 </div>
                 
-                <div className={`bg-black h-12 mb-2 p-3 ${ isMenuOpen ? "w-48 md:w-80" : "w-12" } ${showDisplayThemePage ? `${selectedStyle}` :  `${background}` } flex items-center ${hoverStyle} transition-all duration-300 ease-in-out cursor-pointer rounded-full`} 
+                <div className={`bg-black h-12 mb-2 p-3 ${ showSettingsMenu ? "w-48 md:w-80" : "w-12" } ${showDisplayThemePage ? `${selectedStyle}` :  `${background}` } flex items-center ${hoverStyle} transition-all duration-300 ease-in-out cursor-pointer rounded-full`} 
                     onClick={handleDisplayThemeClick}
                 >
                     <i className="material-icons">brightness_6</i>
                     <div className="mx-3 font-bold tracking-wide flex items-center text-center">
-                        { isMenuOpen && "Display Mode" }
+                        { showSettingsMenu && "Display Mode" }
                     </div>
                 </div>
-                <div className={`bg-black h-12 mb-2 p-3 ${ isMenuOpen ? "w-48 md:w-80" : "w-12" } ${showDeleteAccountPage ? `${selectedStyle}` :  `${background}` } flex items-center ${hoverStyle} transition-all duration-300 ease-in-out cursor-pointer rounded-full`} 
+                <div className={`bg-black h-12 mb-2 p-3 ${ showSettingsMenu ? "w-48 md:w-80" : "w-12" } ${showDeleteAccountPage ? `${selectedStyle}` :  `${background}` } flex items-center ${hoverStyle} transition-all duration-300 ease-in-out cursor-pointer rounded-full`} 
                     onClick={handleDeleteAccountClick}
                 >
                     <i className="material-icons">delete</i>
                     <div className="mx-3 font-bold tracking-wide flex items-center text-center">
-                        { isMenuOpen && "Delete Account" }
+                        { showSettingsMenu && "Delete Account" }
                     </div>
                 </div>
             </div>

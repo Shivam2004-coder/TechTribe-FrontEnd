@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Logo from "./Logo";
 import NavOptions from "./NavOptions";
 import UserLogo from "./UserLogo";
@@ -6,11 +5,9 @@ import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 const Header = () => {
-  // const user = useSelector((store) => store.user.userContent);
   const profile = useSelector((store) => store.profile);
   const location = useLocation();
-  const [isClicked, setIsClicked] = useState(false);
-
+  const showMenu = useSelector((store) => store.set.showMenu);
   const isProfileEmpty = () => {
     if ( location === "/onboarding" ) {
       return false;
@@ -22,8 +19,15 @@ const Header = () => {
   // ${profile.displayMode === "Light" ? "bg-white text-black" : "bg-black" }
   return (
     // <div className={`flex items-center top-0 justify-between h-20 bg-white/40 backdrop-blur-xs w-full z-20 shadow-[inset_0_-8px_12px_rgba(0,0,0,0.3)]`}>
-    <div className={`relative flex items-center top-0 justify-between h-20 bg-white/20  backdrop-blur-xs w-full z-20 `}>
-
+    <div className={`relative flex items-center top-0 justify-between h-20  w-full z-20 `}>
+      {/* Blur Layer */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0))"
+        }}
+      >
+      </div>
 
       <div className="
                 mx-2
@@ -32,6 +36,7 @@ const Header = () => {
                 md:w-2/12
                 w-5/12
                 flex 
+                z-20
                 items-center 
                 justify-center
                 font-bold 
@@ -59,11 +64,8 @@ const Header = () => {
                 justify-end
                 "
         >
-          {!isClicked && <NavOptions />}
-          <UserLogo 
-                  isClicked={isClicked}
-                  setIsClicked={setIsClicked}
-          />
+          {!showMenu && <NavOptions />}
+          <UserLogo />
         </div>
       }
     </div>

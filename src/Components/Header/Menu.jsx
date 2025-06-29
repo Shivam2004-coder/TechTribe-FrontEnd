@@ -7,8 +7,9 @@ import { Cloudinary } from '@cloudinary/url-gen/index';
 import {AdvancedImage} from '@cloudinary/react';
 import {fill} from "@cloudinary/url-gen/actions/resize";
 import {resetProfile} from "../../utils/ReduxStore/profileSlice";
+import { toggleMenu } from '../../utils/ReduxStore/setSlice'
 
-const Menu = ({setIsClicked}) => {
+const Menu = () => {
 
     // Create a Cloudinary instance and set your cloud name.
     const cld = new Cloudinary({
@@ -31,25 +32,25 @@ const Menu = ({setIsClicked}) => {
         if ( location !== "/onboarding" ) {
             navigate("/onboarding");
         }
-        setIsClicked(false);
+        dispatch(toggleMenu(false));
     }
     const handleProfileClick = () => {
         if ( location !== "/profile" ) {
             navigate("/profile");
         }
-        setIsClicked(false);
+        dispatch(toggleMenu(false));
     }
     const handleConnectionsClick = () => {
         if ( location !== "/connections" ) {
             navigate("/connections");
         }
-        setIsClicked(false);
+        dispatch(toggleMenu(false));
     }
     const handleRequestsClick = () => {
         if ( location !== "/requests" ) {
             navigate("/requests");
         }
-        setIsClicked(false);
+        dispatch(toggleMenu(false));
     }
     const handleInterestedClick = () => {
         if ( membershipType === "Free" ) {
@@ -62,7 +63,7 @@ const Menu = ({setIsClicked}) => {
                 navigate("/interested");
             }
         }
-        setIsClicked(false);
+        dispatch(toggleMenu(false));
     }
     const handleIgnoredClick = () => {
         if ( membershipType === "Elite" ) {
@@ -75,31 +76,31 @@ const Menu = ({setIsClicked}) => {
                 navigate("/premium");
             }
         }
-        setIsClicked(false);
+        dispatch(toggleMenu(false));
     }
     const handlePremiumClick = () => {
         if( location !== "/premium" ){
             navigate("/premium");
         }
-        setIsClicked(false);
+        dispatch(toggleMenu(false));
     }
     const handleAboutClick = () => {
         if ( location !== "/about-us" ) {
             navigate("/about-us");
         }
-        setIsClicked(false);
+        dispatch(toggleMenu(false));
     }
     const handleContactUsClick = () => {
         if ( location !== "/contact" ) {
             navigate("/contact");
         }
-        setIsClicked(false);
+        dispatch(toggleMenu(false));
     }
     const handleSettingsClick = () => {
         if ( location !== "/settings" ) {
             navigate("/settings");
         }
-        setIsClicked(false);
+        dispatch(toggleMenu(false));
     }
     const handleLogoutClick = async () => {
         try {
@@ -142,7 +143,7 @@ const Menu = ({setIsClicked}) => {
                 <button 
                     className='hover:bg-gray-500 absolute top-2 right-2 hover:rounded-lg cursor-pointer flex items-center justify-center p-2'
                     onClick={() => {
-                    setIsClicked(false);
+                    dispatch(toggleMenu(false));
                 }} >
                     <i className="material-icons">close</i>
                 </button>

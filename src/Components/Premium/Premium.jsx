@@ -193,7 +193,7 @@ const Premium = () => {
 
   return isPremiumMember ? (
 
-      <div className="min-h-screen w-full flex flex-col items-center bg-gradient-to-r from-[#0f0f0f] via-[#1c1c1c] to-[#2a2a2a] text-white" >
+      <div className="min-h-screen w-full flex flex-col items-center text-white" >
         {/* <Confetti width={width} height={height} /> */}
         <section className="text-center flex flex-col items-center py-16 px-4">
           <div className="text-4xl md:text-5xl bg-black h-25 w-25 rounded-full shadow-white shadow-inner flex items-center justify-center font-bold mb-4">

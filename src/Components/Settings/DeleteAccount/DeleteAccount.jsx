@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { resetProfile } from "../../../utils/ReduxStore/profileSlice";
 import { errorMessage, successMessage } from "../../../utils/ShowMessage";
@@ -67,8 +67,10 @@ const DeleteAccount = () => {
     setShowModal(true);
   };
 
+  const displayMode = useSelector((store) => store.profile.displayMode);
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-white px-4 py-10 text-black">
+    <div className={`min-h-screen flex flex-col items-center justify-center px-4 py-10 ${displayMode === "Light" ? "text-black" : "text-white"}`}>
       <h1 className="text-3xl font-bold mb-6">Delete Account</h1>
 
       {/* Step 1: Select reason */}

@@ -47,7 +47,7 @@ const DisplayMode = () => {
   };
 
   return (
-    <div className="flex flex-col items-center w-full min-h-screen h-full p-2 rounded-lg shadow-2xl backdrop-blur-xs">
+    <div className="flex flex-col justify-center items-center w-full min-h-screen h-full p-2 rounded-lg shadow-2xl backdrop-blur-xs">
       <div className="w-full max-w-md bg-white/10 backdrop-blur-md rounded-xl p-2 border border-white/20 shadow-md">
         <h2 className=" font-semibold text-center text-white mb-2 bg-black p-4 shadow-white shadow-inner tracking-wide">
           Display Modes
