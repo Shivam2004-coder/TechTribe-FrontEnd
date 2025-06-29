@@ -27,7 +27,8 @@ const Form = (props) => {
         canSeePassword,
         setCanSeePassword,
         handleSignInSubmitButton,
-        handleSignUpSubmitButton
+        handleSignUpSubmitButton,
+        handleGoogleSignInAndSignUp
     } = props;
 
     return (
@@ -108,11 +109,17 @@ const Form = (props) => {
                     {isSignIn ? "Sign Up" : "Sign In"}
                 </button>
 
-                <p className="mt-6 text-yellow-500">----- OR -----</p>
-                
-                <GoogleButton
-                    label= {isSignIn ? "Sign Up with Google" : "Sign In with Google" }
-                />
+                { !isSignIn && 
+                    <>
+                        <p className="mt-6 text-yellow-500">----- OR -----</p>
+                        
+                        <GoogleButton
+                            onClick={handleGoogleSignInAndSignUp}
+                            label= "Sign In with Google"
+                        />
+                    </>
+                }
+
 
                 <p className="text-white mt-7">
                     {isSignIn ? "Already Registered ? " : "New to Tech Tribe ? "}

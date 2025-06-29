@@ -21,7 +21,10 @@ const Header = () => {
 
   // ${profile.displayMode === "Light" ? "bg-white text-black" : "bg-black" }
   return (
-    <div className={`flex items-center top-0 justify-between h-20 bg-white/20 backdrop-blur-xs w-full z-20`}>
+    // <div className={`flex items-center top-0 justify-between h-20 bg-white/40 backdrop-blur-xs w-full z-20 shadow-[inset_0_-8px_12px_rgba(0,0,0,0.3)]`}>
+    <div className={`relative flex items-center top-0 justify-between h-20 bg-white/20  backdrop-blur-xs w-full z-20 `}>
+
+
       <div className="
                 mx-2
                 my-2

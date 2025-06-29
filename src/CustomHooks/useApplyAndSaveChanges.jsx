@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { setBio, setCompanyName, setDateOfBirth, setEmailId, setFirstName, setGender, setGithubLink, setJobTitle, setLastName, setLinkedinLink, setLivingIn, setPortfolioLink, setPromptUserContent, setSchool, setSkills, setUploadedImages } from '../utils/ReduxStore/profileSlice';
 import axios from 'axios';
-import { BASE_URL } from '../utils/Constants/constants';
 import { errorMessage } from '../utils/ShowMessage';
 
 const useApplyAndSaveChanges = () => {
@@ -45,28 +44,109 @@ const useApplyAndSaveChanges = () => {
 
     // State variables to handle functionality
 
-    const [promptContent , setPromptContent] = useState(userPromptContent || []);
+    // const [promptContent , setPromptContent] = useState(userPromptContent || []);
 
     // State variables to handle user input
-    const [fName,setFName] = useState(userFirstName || "");
-    const [lName,setLName] = useState(userLastName || "");
-    const [emailId , setEId] = useState(userEmailId || "");
-    const [gender,setG] = useState(userGender || "");
-    const [dateOfBirth,setdateOfBirth] = useState(userDateOfBirth || "");
-    const [images, setImages] = useState(userUploadedImages); // Initialize with nulls
-    // const [images, setImages] = useState(Array(9).fill(null)); // Initialize with nulls
-    const [bio , setB] = useState(userBio || "");
-    const [jobTitle,setJTitle] = useState(userJobTitleName || "");
-    const [company,setC] = useState(userCompanyName || "");
-    const [skills, setS] = useState(userSkills || []);
-    const [schoolName,setSchoolName] = useState(userSchool || "");
-    const [livingIn , setLI] = useState(userLivingIn || "");
-    const [socialLinks, setSL] = useState({
-      linkedin: userSocialLinks?.linkedin || '',
-      github: userSocialLinks?.github || '',
-      portfolio: userSocialLinks?.portfolio || ''
-    });
+    // const [fName,setFName] = useState(userFirstName || "");
+    // const [lName,setLName] = useState(userLastName || "");
+    // const [emailId , setEId] = useState(userEmailId || "");
+    // const [gender,setG] = useState(userGender || "");
+    // const [dateOfBirth,setdateOfBirth] = useState(userDateOfBirth || "");
+    // const [images, setImages] = useState(userUploadedImages); // Initialize with nulls
+    // // const [images, setImages] = useState(Array(9).fill(null)); // Initialize with nulls
+    // const [bio , setB] = useState(userBio || "");
+    // const [jobTitle,setJTitle] = useState(userJobTitleName || "");
+    // const [company,setC] = useState(userCompanyName || "");
+    // const [skills, setS] = useState(userSkills || []);
+    // const [schoolName,setSchoolName] = useState(userSchool || "");
+    // const [livingIn , setLI] = useState(userLivingIn || "");
+    // const [socialLinks, setSL] = useState({
+    //   linkedin: userSocialLinks?.linkedin || '',
+    //   github: userSocialLinks?.github || '',
+    //   portfolio: userSocialLinks?.portfolio || ''
+    // });
+
     
+    // Example for first name
+    const [fName, setFName] = useState("");
+    useEffect(() => {
+        setFName(userFirstName || "");
+    }, [userFirstName]);
+
+    // Repeat this for all fields
+    const [lName, setLName] = useState("");
+    useEffect(() => {
+        setLName(userLastName || "");
+    }, [userLastName]);
+
+    const [emailId, setEId] = useState("");
+    useEffect(() => {
+        setEId(userEmailId || "");
+    }, [userEmailId]);
+
+    const [gender, setG] = useState("");
+    useEffect(() => {
+        setG(userGender || "");
+    }, [userGender]);
+
+    const [dateOfBirth, setdateOfBirth] = useState("");
+    useEffect(() => {
+        setdateOfBirth(userDateOfBirth || "");
+    }, [userDateOfBirth]);
+
+    const [images, setImages] = useState([]);
+    useEffect(() => {
+        setImages(userUploadedImages || []);
+    }, [userUploadedImages]);
+
+    const [bio, setB] = useState("");
+    useEffect(() => {
+        setB(userBio || "");
+    }, [userBio]);
+
+    const [jobTitle, setJTitle] = useState("");
+    useEffect(() => {
+        setJTitle(userJobTitleName || "");
+    }, [userJobTitleName]);
+
+    const [company, setC] = useState("");
+    useEffect(() => {
+        setC(userCompanyName || "");
+    }, [userCompanyName]);
+
+    const [schoolName, setSchoolName] = useState("");
+    useEffect(() => {
+        setSchoolName(userSchool || "");
+    }, [userSchool]);
+
+    const [livingIn, setLI] = useState("");
+    useEffect(() => {
+        setLI(userLivingIn || "");
+    }, [userLivingIn]);
+
+    const [skills, setS] = useState([]);
+    useEffect(() => {
+        setS(userSkills || []);
+    }, [userSkills]);
+
+    const [promptContent, setPromptContent] = useState([]);
+    useEffect(() => {
+        setPromptContent(userPromptContent || []);
+    }, [userPromptContent]);
+
+    const [socialLinks, setSL] = useState({
+        linkedin: '',
+        github: '',
+        portfolio: ''
+    });
+    useEffect(() => {
+        setSL({
+            linkedin: userSocialLinks?.linkedin || '',
+            github: userSocialLinks?.github || '',
+            portfolio: userSocialLinks?.portfolio || ''
+        });
+    }, [userSocialLinks]);
+
 
     console.log("Social Links: ", socialLinks);
 
@@ -92,6 +172,42 @@ const useApplyAndSaveChanges = () => {
     }
 
      const handleSaveProfileClick = async () => {
+        // Individual field validations with specific messages
+        if (!fName.trim()) {
+            errorMessage("First Name cannot be empty.");
+            return;
+        }
+
+        if (!lName.trim()) {
+            errorMessage("Last Name cannot be empty.");
+            return;
+        }
+
+        if (!emailId.trim()) {
+            errorMessage("Email ID cannot be empty.");
+            return;
+        }
+
+        if (!gender.trim()) {
+            errorMessage("Please select a Gender.");
+            return;
+        }
+
+        if (!dateOfBirth.trim()) {
+            errorMessage("Date of Birth cannot be empty.");
+            return;
+        }
+
+        if (!bio.trim()) {
+            errorMessage("Bio cannot be empty.");
+            return;
+        }
+
+        if (!skills.length) {
+            errorMessage("Please add at least one Skill.");
+            return;
+        }
+
         try {
 
             setIsSaving(true); // start shimmer
@@ -100,14 +216,14 @@ const useApplyAndSaveChanges = () => {
 
             console.log("I am in delete Function !!");
 
-            const response = await axios.post(BASE_URL + "profile/delete/savedImages", {
+            const response = await axios.post(import.meta.env.VITE_BASE_URL + "profile/delete/savedImages", {
                 uploadedImages: images.filter(Boolean),
                 profileImage,
             },{withCredentials: true});
 
             console.log(response);
 
-            const res = await axios.patch(BASE_URL + "profile/edit", {
+            const res = await axios.patch(import.meta.env.VITE_BASE_URL + "profile/edit", {
                 firstName: fName,
                 lastName: lName,
                 emailId,
@@ -132,7 +248,8 @@ const useApplyAndSaveChanges = () => {
       
         } 
         catch (error) {
-            errorMessage(error.message);
+            const errMessage = error.response?.data?.message || "Something went wrong. Please try again.";
+            errorMessage(errMessage);
         }    
         finally {
             setIsSaving(false); // stop shimmer

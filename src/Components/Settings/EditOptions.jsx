@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { OnlyShowChatThemePage, OnlyShowWallPaperPage, OnlyShowDisplayThemePage } from "../../utils/ReduxStore/setSlice";
+import { OnlyShowChatThemePage, OnlyShowWallPaperPage, OnlyShowDisplayThemePage, OnlyShowDeleteAccountPage } from "../../utils/ReduxStore/setSlice";
 
 const EditOptions = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,6 +17,7 @@ const EditOptions = () => {
     const showChatThemePage = useSelector((store) => store.set.showChatThemePage);
     const showWallPaperPage = useSelector((store) => store.set.showWallPaperPage);
     const showDisplayThemePage = useSelector((store) => store.set.showDisplayThemePage);
+    const showDeleteAccountPage = useSelector((store) => store.set.showDeleteAccountPage);
     
     const handleChatThemeClick = () => {
         dispatch(OnlyShowChatThemePage());
@@ -27,6 +28,11 @@ const EditOptions = () => {
     const handleDisplayThemeClick = () => {
         dispatch(OnlyShowDisplayThemePage());
     };
+    const handleDeleteAccountClick = () => {
+        dispatch(OnlyShowDeleteAccountPage());
+    }
+
+    console.log(showDeleteAccountPage);
 
     const selectedStyle = displayMode === "Light" ? "bg-black text-white" : "bg-white text-black" ;
     const hoverStyle = displayMode === "Light" ? "hover:bg-black hover:text-white" : "hover:bg-white hover:text-black" ;
@@ -66,6 +72,14 @@ const EditOptions = () => {
                     <i className="material-icons">brightness_6</i>
                     <div className="mx-3 font-bold tracking-wide flex items-center text-center">
                         { isMenuOpen && "Display Mode" }
+                    </div>
+                </div>
+                <div className={`bg-black h-12 mb-2 p-3 ${ isMenuOpen ? "w-48 md:w-80" : "w-12" } ${showDeleteAccountPage ? `${selectedStyle}` :  `${background}` } flex items-center ${hoverStyle} transition-all duration-300 ease-in-out cursor-pointer rounded-full`} 
+                    onClick={handleDeleteAccountClick}
+                >
+                    <i className="material-icons">delete</i>
+                    <div className="mx-3 font-bold tracking-wide flex items-center text-center">
+                        { isMenuOpen && "Delete Account" }
                     </div>
                 </div>
             </div>

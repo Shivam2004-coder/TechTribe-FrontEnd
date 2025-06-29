@@ -1,25 +1,25 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom"; // 👈 Import Link
 import Logo from "../Header/Logo";
 
 const Footer = () => {
   const displayMode = useSelector((store) => store.profile.displayMode);
-  // const textColor = displayMode === "Light" ? "text-black" : "text-white";
   const borderColor = displayMode === "Light" ? "border-gray-300" : "border-gray-700";
+  const bgColor = displayMode === "Light" ? "bg-white text-black" : "bg-black text-white" ;
 
   return (
-    <footer className={`w-full bg-black px-4 py-8 text-white backdrop-blur-md `}>
-
-      {/* Grid Sections */}
+    <footer className={`w-full px-4 py-8 ${bgColor} backdrop-blur-md`}>
       <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
+        
         {/* Legal */}
         <div>
           <h3 className="font-semibold mb-2">Legal</h3>
           <ul className="space-y-1">
-            <li><a href="#" className="hover:underline">Privacy</a></li>
-            <li><a href="#" className="hover:underline">Terms</a></li>
-            <li><a href="#" className="hover:underline">Cookie Policy</a></li>
-            <li><a href="#" className="hover:underline">Intellectual Property</a></li>
+            <li><Link to="/privacy" className="hover:underline">Privacy</Link></li>
+            <li><Link to="/terms" className="hover:underline">Terms</Link></li>
+            <li><Link to="/cookie-policy" className="hover:underline">Cookie Policy</Link></li>
+            <li><Link to="/intellectual-property" className="hover:underline">Intellectual Property</Link></li>
           </ul>
         </div>
 
@@ -27,8 +27,8 @@ const Footer = () => {
         <div>
           <h3 className="font-semibold mb-2">Careers</h3>
           <ul className="space-y-1">
-            <li><a href="#" className="hover:underline">Careers Portal</a></li>
-            <li><a href="#" className="hover:underline">Tech Blog</a></li>
+            <li><Link to="/careers" className="hover:underline">Careers Portal</Link></li>
+            <li><Link to="/tech-blog" className="hover:underline">Tech Blog</Link></li>
           </ul>
         </div>
 
@@ -52,15 +52,15 @@ const Footer = () => {
         <div>
           <h3 className="font-semibold mb-2">More</h3>
           <ul className="space-y-1">
-            <li><a href="#" className="hover:underline">FAQ</a></li>
-            <li><a href="#" className="hover:underline">Contact</a></li>
-            <li><a href="#" className="hover:underline">Press Room</a></li>
-            <li><a href="#" className="hover:underline">Promo Code</a></li>
+            <li><Link to="/faq" className="hover:underline">FAQ</Link></li>
+            <li><Link to="/contact" className="hover:underline">Contact</Link></li>
+            <li><Link to="/press-room" className="hover:underline">Press Room</Link></li>
+            <li><Link to="/promo-code" className="hover:underline">Promo Code</Link></li>
           </ul>
         </div>
       </div>
 
-      {/* Paragraph */}
+      {/* Paragraph and Footer Info */}
       <div className="max-w-4xl mx-auto mt-10 text-xs text-center leading-relaxed">
         <p>
           Tech Tribe is your space for connection, growth, and exploration. Whether you’re looking to discover insightful articles,
@@ -69,10 +69,8 @@ const Footer = () => {
         </p>
       </div>
 
-      {/* Divider */}
       <div className={`my-6 border-t ${borderColor}`}></div>
 
-      {/* Footer Bottom Line */}
       <div className="text-center text-xs">
         <p>© {new Date().getFullYear()} Tech Tribe. All rights reserved.</p>
       </div>
@@ -81,87 +79,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React from 'react';
-// import Logo from '../Header/Logo';
-// import { useSelector } from 'react-redux';
-
-// const Footer = () => {
-
-
-//     const displayMode = useSelector((store) => store.profile.displayMode);
-
-//     // const style = displayMode === "Light" ? "bg-white text-black" : "bg-gray-800 text-white";
-
-//     return (
-//         <footer className={` w-full py-1 bottom-0 h-80  `}>
-//             <div className=" mx-auto flex flex-col justify-between items-center px-2">
-//                 {/* Logo/Brand Name */}
-//                 {/* <div className="w-6/12">
-//                     <Logo />
-//                 </div> */}
-//                 <div className="
-//                         mx-2
-//                         my-2
-//                         bg-blue-950 
-//                         lg:w-3/12
-//                         md:w-2/12
-//                         w-5/12
-//                         flex 
-//                         items-center 
-//                         justify-center
-//                         font-bold 
-//                         rounded-full
-//                         active:scale-95 
-//                         transition
-//                         duration-150 
-//                         ease-in-out
-//                         select-none       
-//                         "
-//                     style={{
-//                     backgroundColor: "rgb(0, 49, 255)"  
-//                     }}
-//                 >
-//                 <Logo />
-//                 </div>
-
-//                 {/* Social Media Icons */}
-//                 <div className="flex space-x-4">
-//                     <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 transition text-xl">
-//                         {/* <FaTwitter /> */}
-//                         <i className="fa-brands fa-x-twitter"></i>
-//                     </a>
-//                     <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400 transition text-xl">
-//                         {/* <FaGithub /> */}
-//                         <i className="fa-brands fa-github"></i>
-//                     </a>
-//                     <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition text-xl">
-//                         {/* <FaLinkedin /> */}
-//                         <i className="fa-brands fa-linkedin"></i>
-//                     </a>
-//                 </div>
-//             </div>
-//             <div className="text-center mt-4">
-//                 <p className={`${ displayMode === "Light" ? "text-black" : "text-white" } text-sm`}>© {new Date().getFullYear()} Tech Tribe. All rights reserved.</p>
-//             </div>
-//         </footer>
-//     );
-// };
-
-// export default Footer;

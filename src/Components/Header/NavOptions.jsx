@@ -67,17 +67,17 @@ const NavOptions = () => {
         }
     };
 
-    // const handleAboutClick = () => {
-    //     if ( location !== "/about" ) {
-    //         navigate("/about")
-    //     }
-    // }
+    const handleAboutClick = () => {
+        if ( location !== "/about-us" ) {
+            navigate("/about-us")
+        }
+    }
 
-    // const handleContactUsClick = () => {
-    //     if ( location !== "/contactus" ) {
-    //         navigate("/contactus");
-    //     }
-    // }
+    const handleContactUsClick = () => {
+        if ( location !== "/contact" ) {
+            navigate("/contact");
+        }
+    }
 
 
     return (
@@ -130,6 +130,7 @@ const NavOptions = () => {
                             transition-colors 
                             duration-150 
                             ease-in-out"  
+                onClick={handleAboutClick}
             >
                 {renderContent("About","info")}
             </button>
@@ -146,6 +147,7 @@ const NavOptions = () => {
                             transition-colors 
                             duration-150 
                             ease-in-out" 
+                onClick={handleContactUsClick}
             >
                 {renderContent("Contact Us","help")}
             </button>

@@ -2,7 +2,6 @@
 import React from 'react';
 import { errorMessage } from '../../utils/ShowMessage';
 import axios from 'axios';
-import { BASE_URL } from '../../utils/Constants/constants';
 import { removeFeed } from '../../utils/ReduxStore/feedSlice';
 import { useDispatch } from 'react-redux';
 
@@ -11,7 +10,7 @@ const RejectButton = ({ _id }) => {
 
     const handleRequestClick = async () =>  {
         try {
-          await axios.post(`${BASE_URL}request/review/rejected/${_id}`, {}, { withCredentials: true });
+          await axios.post(`${import.meta.env.VITE_BASE_URL}request/review/rejected/${_id}`, {}, { withCredentials: true });
           dispatch(removeFeed(_id));
         } 
         catch (error) {

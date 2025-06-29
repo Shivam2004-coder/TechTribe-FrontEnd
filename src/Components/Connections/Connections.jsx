@@ -1,7 +1,6 @@
 // Connections.jsx
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { BASE_URL } from "../../utils/Constants/constants";
 import { errorMessage } from "../../utils/ShowMessage";
 import { useDispatch, useSelector } from 'react-redux';
 import { addConnection } from '../../utils/ReduxStore/connectionSlice';
@@ -37,7 +36,7 @@ const Connections = () => {
 
   const fetchConnectionsData = async () => {
     try {
-      const res = await axios.get(BASE_URL + "user/requests/connections", {
+      const res = await axios.get(import.meta.env.VITE_BASE_URL + "user/requests/connections", {
         withCredentials: true
       });
       dispatch(addConnection(res.data.data));
@@ -53,7 +52,7 @@ const Connections = () => {
   return (
     <div className="w-full min-h-screen ">
         {/* <div className="min-h-screen w-full bg-gray-50 transition-all duration-500"> */}
-        <div className="bg-amber-700 shadow-md py-6 mb-8 flex flex-col items-center">
+        <div className="shadow-md py-6 mb-8 flex flex-col items-center">
             <h1 className="text-center text-5xl mb-3 font-bold text-white tracking-wide">Connections</h1>
             
             <div className="relative bg-gray-300 rounded-full p-1 flex items-center w-[80px] md:w-[90px] shadow-black shadow-inner">

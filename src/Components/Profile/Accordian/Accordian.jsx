@@ -7,9 +7,9 @@ import {fill} from "@cloudinary/url-gen/actions/resize";
 import { ChevronDown, ChevronUp } from 'lucide-react'; // Optional: Lucide icons
 import UserImage from "../EditOptions/UserImage";
 import UserAvatar from "../EditOptions/Options/UserAvatar";
-import { BASE_URL , avatars} from "../../../utils/Constants/constants";
 import axios from "axios";
 import useSaveImages from "../../../CustomHooks/useSaveImages";
+import { errorMessage } from "../../../utils/ShowMessage";
 
 
 
@@ -27,6 +27,8 @@ const Accordian = () => {
   const [isSaving, setIsSaving] = useState(false);
   const profileImage = useSelector((store) => store.profile.profileImage);
   const { handleSaveProfileClick } = useSaveImages();
+  const avatars = import.meta.env.VITE_AVATARS?.split(",") || [];
+  console.log(avatars);
 
   const handleClick = async (src) => {
     if (src === profileImage) {
@@ -40,8 +42,8 @@ const Accordian = () => {
       console.log("I am in Accordian delete Function !!");
       console.log("Profile Image: ", profileImage);
       setIsSaving(true);
-      if( profileImage !== "TechTribe_User_Profile_Avatar/Logos/Logo_b00c785c-9eae-43ca-b97b-4c12f4341344" && !avatars.includes(profileImage) ){
-        const response = await axios.post(BASE_URL + "profile/delete/image", {
+      if( profileImage !== import.meta.env.VITE_DEFAULT_AVATAR && !avatars.includes(profileImage) ){
+        const response = await axios.post(import.meta.env.VITE_BASE_URL + "profile/delete/image", {
             publicId: profileImage,
             isProfile: true,
         },{withCredentials: true});
@@ -53,11 +55,14 @@ const Accordian = () => {
     }
     catch (error) {
       console.error("Error handling avatar click:", error);
+      errorMessage("Error uploading the image!");
     }
 
   };
+
+
   return (
-    <div className="flex flex-col items-center max-w-full min-h-screen p-4 rounded-lg shadow-lg">
+    <div className="flex flex-col items-center w-full  min-h-screen p-4 rounded-lg shadow-lg">
       <UserImage isOpen={isOpen}
                 setIsOpen={setIsOpen}   
                 isSaving={isSaving}

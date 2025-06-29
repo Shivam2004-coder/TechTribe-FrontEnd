@@ -27,6 +27,9 @@ const initialState = {
   chatThemeImage: '',
   wallpaperImage: '',
   displayMode: '',
+
+  // ✅ Add this
+  isLoaded: false
 };
 
 const profileSlice = createSlice({
@@ -101,6 +104,7 @@ const profileSlice = createSlice({
     setChatThemeImage: (state , action) => { state.chatThemeImage = action.payload } ,
     setWallpaperImage: (state , action) => { state.wallpaperImage = action.payload },
     setDisplayMode: (state , action) => { state.displayMode = action.payload },
+    setProfileLoaded: (state, action) => { state.isLoaded = action.payload } ,
     resetProfile: () => initialState
   }
 });
@@ -135,7 +139,8 @@ export const {
   setChatThemeImage,
   setWallpaperImage,
   setDisplayMode ,
-  resetProfile
+  resetProfile ,
+  setProfileLoaded ,
 } = profileSlice.actions;
 
 export default profileSlice.reducer;

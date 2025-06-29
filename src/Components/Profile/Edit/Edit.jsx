@@ -17,6 +17,7 @@ import SocialLinks from './SocialLinks';
 import EmailId from './EmailId';
 import useApplyAndSaveChanges from '../../../CustomHooks/useApplyAndSaveChanges';
 import ShimmerButton from '../SaveButton/ShimmerButton';
+import { useSelector } from 'react-redux';
 
 
 const Edit = () => {
@@ -61,6 +62,18 @@ const Edit = () => {
     const [isSelectPromptClick , setIsSelectPromptClick] = useState(false);
     const [editPrompt , setEditPrompt] = useState(false);
     const [index,setIndex] = useState(null);
+
+
+    // ✅ Conditionally show form only after profile is ready
+    const isProfileLoaded = useSelector((store) => store.profile.isLoaded);
+
+    if (!isProfileLoaded) {
+      return (
+        <div className="w-full h-full flex items-center justify-center text-white">
+          <p>Loading your profile...</p>
+        </div>
+      );
+    }
 
     return (
         <div className="w-full h-full flex flex-col items-center rounded-lg" >

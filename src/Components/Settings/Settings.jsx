@@ -3,12 +3,14 @@ import EditOptions from "./EditOptions";
 import ChatTheme from "./ChatTheme/ChatTheme";
 import Wallpaper from "./Wallpaper/Wallpaper";
 import DisplayMode from "./DisplayMode";
+import DeleteAccount from "./DeleteAccount/DeleteAccount";
 
 const Settings = () => {
 
   const showChatThemePage = useSelector((store) => store.set.showChatThemePage);
   const showWallPaperPage = useSelector((store) => store.set.showWallPaperPage);
   const showDisplayThemePage = useSelector((store) => store.set.showDisplayThemePage);
+  const showDeleteAccountPage = useSelector((store) => store.set.showDeleteAccountPage);
 
   return (
     <div className="relative min-h-screen h-full w-full flex"
@@ -20,6 +22,7 @@ const Settings = () => {
         {showChatThemePage && <ChatTheme />}
         {showWallPaperPage && <Wallpaper />}
         {showDisplayThemePage && <DisplayMode />}
+        {showDeleteAccountPage && <DeleteAccount /> }
       </div>
     </div>
 

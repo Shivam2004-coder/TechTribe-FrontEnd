@@ -13,8 +13,7 @@ const Logo = () => {
     return (
         <div
             className="font-bold text-2xl text-white rounded-lg 
-                       p-4
-                       w-full
+                       w-full 
                        flex justify-center
                        items-center
                        cursor-pointer
@@ -26,7 +25,7 @@ const Logo = () => {
                 alt="WebsiteLogo" 
                 className="h-6 w-6 md:h-15 md:w-15 mx-1"
             />
-            <h1 className="text-sm md:text-4xl">techTribe</h1>
+            <h1 className="text-md md:text-4xl ">techTribe</h1>
         </div>
     );
 };

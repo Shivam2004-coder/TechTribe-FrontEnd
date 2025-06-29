@@ -1,9 +1,7 @@
 // useFetchUserProfileData.jsx
 import axios from 'axios';
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { BASE_URL } from '../utils/Constants/constants';
+import { useDispatch } from 'react-redux';
 import { errorMessage } from '../utils/ShowMessage';
 import {
   setFirstName,
@@ -29,23 +27,17 @@ import {
   setChatThemeImage,
   setWallpaperImage,
   setDisplayMode,
+  setProfileLoaded,
 } from '../utils/ReduxStore/profileSlice';
 
 const useFetchUserProfileData = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const location = useLocation();
-  const profile = useSelector((store) => store.profile);
 
-  const isProfileEmpty = () => {
-    return profile && profile.firstName && profile.firstName.length > 0 && profile.lastName && profile.lastName.length > 0 && profile.emailId && profile.emailId.length > 0;
-  };
 
   const fetchUserProfileData = async () => {
     try {
-      if (!isProfileEmpty()) {
-        const response = await axios.get(BASE_URL + 'profile/view', { withCredentials: true });
-        const data = response.data;
+        const response = await axios.get(import.meta.env.VITE_BASE_URL + 'profile/view', { withCredentials: true });
+        const data = response.data.user;
         console.log("i am in a useFetchData Page !!");
         console.log(data);
 
@@ -73,25 +65,11 @@ const useFetchUserProfileData = () => {
         dispatch(setChatThemeImage(data.chatThemeImage || ''));
         dispatch(setWallpaperImage(data.wallpaperImage || ''));
         dispatch(setDisplayMode(data.displayMode || ''));
+        dispatch(setProfileLoaded(true));
 
-        if (location.pathname !== '/login') {
-          navigate(location.pathname);
-          // navigate('/tribe');
-        }
-        else{
-          navigate('/login');
-        }
-      }
-      else{
-        navigate('/tribe');
-      }
-
-    } catch (error) {
-      if (error?.response?.status === 401) {
-        navigate('/login');
-      } else {
-        errorMessage(error.message);
-      }
+    }
+    catch (error) {
+      errorMessage(error.message);
     }
   };
 
@@ -101,53 +79,3 @@ const useFetchUserProfileData = () => {
 };
 
 export default useFetchUserProfileData;
-
-
-
-
-
-
-
-
-
-
-// import axios from 'axios';
-// import React, { useEffect } from 'react'
-// import { useDispatch, useSelector } from 'react-redux';
-// import { useLocation, useNavigate } from 'react-router-dom';
-// import { BASE_URL } from '../utils/Constants/constants';
-// import { addUser } from '../utils/ReduxStore/userSlice';
-// import { errorMessage } from '../utils/ShowMessage';
-
-// const useFetchUserProfileData = () => {
-//     const navigate = useNavigate();
-//     const dispatch = useDispatch();
-//     const location = useLocation();
-//     const user = useSelector((store) => store.user.userContent);
-
-//     const fetchUserProfileData = async () => {
-//         try {
-//             if ( !user ) {
-//                 const response = await axios.get(BASE_URL + "profile/view" , {withCredentials: true});
-//                 dispatch(addUser(response.data));
-//             }
-//             if ( location.pathname === "/login" ) {
-//             //     navigate("/tribe");
-//             }
-//             navigate("/tribe");
-//         } catch (error) {
-//             if ( error?.response?.status === 401 ) {
-//                 navigate("/login");
-//             }
-//             else{
-//                 errorMessage(error.message);
-//             }
-//         }
-//     }
-
-//     useEffect(() => {
-//         fetchUserProfileData()
-//     }, []); // ✅ Dependency array
-// }
-
-// export default useFetchUserProfileData

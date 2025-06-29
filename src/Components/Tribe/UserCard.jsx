@@ -2,7 +2,6 @@ import React, { useState , useEffect, useRef } from "react";
 import Card from "./Card";
 import { errorMessage } from "../../utils/ShowMessage";
 import axios from "axios";
-import { BASE_URL } from "../../utils/Constants/constants";
 import { useDispatch } from "react-redux";
 import { removeFeed } from "../../utils/ReduxStore/feedSlice";
 import UserProfileDetail from "./userProfileDetail";
@@ -72,7 +71,7 @@ const UserCard = ({feed , isProfile}) => {
 
       setTimeout(async () => {
         try {
-          await axios.post(`${BASE_URL}request/send/${status}/${_id}`, {}, { withCredentials: true });
+          await axios.post(`${import.meta.env.VITE_BASE_URL}request/send/${status}/${_id}`, {}, { withCredentials: true });
           dispatch(removeFeed(_id));
           setIsVisible(true);
           // await axios.post(`${BASE_URL}request/click` , {} , { withCredentials: true } );

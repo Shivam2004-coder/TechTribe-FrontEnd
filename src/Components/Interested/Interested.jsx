@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { BASE_URL } from "../../utils/Constants/constants";
 import { errorMessage } from "../../utils/ShowMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { addRequestInterested, removeRequestInterested } from "../../utils/ReduxStore/requestSlice";
@@ -34,7 +33,7 @@ const Interested = () => {
 
     const fetchRequestSentData = async () => {
         try {
-            const res = await axios.get(BASE_URL + "user/sent/requests/interested", {
+            const res = await axios.get(import.meta.env.VITE_BASE_URL + "user/sent/requests/interested", {
                 withCredentials: true,
             });
             dispatch(addRequestInterested(res?.data?.data));
@@ -48,7 +47,7 @@ const Interested = () => {
     const handleRequestReviewClick = async ({ review, _id }) => {
         try {
         await axios.post(
-            `${BASE_URL}request/review/${review}/${_id}`,
+            `${import.meta.env.VITE_BASE_URL}request/review/${review}/${_id}`,
             {},
             {
             withCredentials: true,
@@ -65,13 +64,36 @@ const Interested = () => {
     }, []);
 
     return (
-        <div className="w-full min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 p-6">
-            <div className="flex justify-between items-center mb-10">
+        <div className="w-full min-h-screen">
+            <div className="shadow-md py-6 mb-8 flex flex-col items-center">
+                <h1 className="text-center text-5xl mb-3 font-bold text-white tracking-wide">Interested List</h1>
+                
+                <div className="relative bg-gray-300 rounded-full p-1 flex items-center w-[80px] md:w-[90px] shadow-black shadow-inner">
+                    <div
+                        className={`absolute top-1 left-1 w-9 h-9 md:w-10 md:h-10 bg-amber-950 rounded-full transition-all duration-500 ease-in-out ${
+                        viewMode === "list" ? "translate-x-9 md:translate-x-10" : "translate-x-0"
+                        }
+                        `}
+                    />
+                        <button
+                            className="z-10 w-9 h-9 md:w-10 md:h-10 text-amber-500 flex items-center justify-center cursor-pointer "
+                            onClick={() => setViewMode("grid")}
+                        >
+                            <i className="material-icons">grid_on</i>
+                        </button>
+                        <button
+                            className="z-10 w-9 h-9 md:w-10 md:h-10 text-amber-500 flex items-center justify-center cursor-pointer"
+                            onClick={() => setViewMode("list")}
+                        >
+                            <i className="material-icons">view_list</i>
+                        </button>
+                </div>
+            </div>
+            {/* <div className="flex justify-between items-center mb-10">
                 <h1 className="text-3xl md:text-4xl font-bold text-gray-800 underline decoration-amber-500">
                     Connection Request Sent
                 </h1>
 
-                {/* View Toggle */}
                 <div className="relative bg-gray-300 rounded-full p-1 flex items-center w-[80px] md:w-[90px] shadow-black shadow-inner">
                     <div
                         className={`absolute top-1 left-1 w-9 h-9 md:w-10 md:h-10 bg-black rounded-full transition-all duration-500 ease-in-out ${
@@ -90,8 +112,8 @@ const Interested = () => {
                         >
                             <i className="material-icons">view_list</i>
                         </button>
-                    </div>
                 </div>
+            </div> */}
 
             {request?.length > 0 ? (
                 <div

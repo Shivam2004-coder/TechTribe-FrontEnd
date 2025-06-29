@@ -10,9 +10,21 @@ import {
   setBio,
   setSkills,
   setUploadedImages,
+  setProfileImage,
+  setPromptUserContent,
+  setCompanyName,
+  setJobTitle,
+  setSchool,
+  setGithubLink,
+  setLinkedinLink,
+  setPortfolioLink,
+  setMembershipType,
+  setSwipes,
+  setChatThemeImage,
+  setWallpaperImage,
+  setDisplayMode,
 } from "../../utils/ReduxStore/profileSlice"; // Adjust the path if needed
 import axios from 'axios';
-import { BASE_URL } from '../../utils/Constants/constants';
 import { errorMessage } from '../../utils/ShowMessage';
 
 const CreateAccountButton = ({ formData, images }) => {
@@ -69,7 +81,7 @@ const CreateAccountButton = ({ formData, images }) => {
 
     try {
       const res = await axios.patch(
-        BASE_URL + "profile/edit",
+        import.meta.env.VITE_BASE_URL + "profile/edit",
         {
           firstName: formData.firstName,
           lastName: formData.lastName,
@@ -82,6 +94,31 @@ const CreateAccountButton = ({ formData, images }) => {
         },
         { withCredentials: true }
       );
+
+      const updatedUser = res.data.data;
+
+      // Dispatch all fields to Redux
+      dispatch(setFirstName(updatedUser.firstName));
+      dispatch(setLastName(updatedUser.lastName));
+      dispatch(setDateOfBirth(updatedUser.dateOfBirth));
+      dispatch(setGender(updatedUser.gender));
+      dispatch(setLivingIn(updatedUser.livingIn));
+      dispatch(setBio(updatedUser.bio));
+      dispatch(setSkills(updatedUser.skills));
+      dispatch(setUploadedImages(updatedUser.uploadedImages));
+      dispatch(setProfileImage(updatedUser.profileImage)); // if profile image is handled
+      dispatch(setPromptUserContent(updatedUser.promptContent)); // optional
+      dispatch(setCompanyName(updatedUser.companyName));
+      dispatch(setJobTitle(updatedUser.jobTitle));
+      dispatch(setSchool(updatedUser.school));
+      dispatch(setGithubLink(updatedUser.socialLinks?.github || ''));
+      dispatch(setLinkedinLink(updatedUser.socialLinks?.linkedin || ''));
+      dispatch(setPortfolioLink(updatedUser.socialLinks?.portfolio || ''));
+      dispatch(setMembershipType(updatedUser.membershipType || ''));
+      dispatch(setSwipes(updatedUser.swipes || ''));
+      dispatch(setChatThemeImage(updatedUser.chatThemeImage || ''));
+      dispatch(setWallpaperImage(updatedUser.wallpaperImage || ''));
+      dispatch(setDisplayMode(updatedUser.displayMode || ''));
 
       console.log(res);
       navigate('/tribe');

@@ -26,8 +26,8 @@ const UserImage = (props) => {
     const handleDefaultClick = async () => {
         try {
             setIsSaving(true); // start shimmer
-            dispatch( setWallpaperImage("Wallpaper1_aond7y") );
-            await handleSaveProfileClick( null , null , null , "Wallpaper1_aond7y" , null );
+            dispatch( setWallpaperImage(import.meta.env.VITE_DEFAULT_WALLPAPER) );
+            await handleSaveProfileClick( null , null , null , import.meta.env.VITE_DEFAULT_WALLPAPER , null );
             setIsSaving(false); // stop shimmer
         } catch (error) {
             console.error("Error removing image:", error);

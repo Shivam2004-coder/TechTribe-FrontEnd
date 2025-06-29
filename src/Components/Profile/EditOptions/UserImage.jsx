@@ -5,8 +5,8 @@ import { Cloudinary } from '@cloudinary/url-gen/index';
 import {AdvancedImage} from '@cloudinary/react';
 import {fill} from "@cloudinary/url-gen/actions/resize";
 import axios from 'axios';
-import { avatars, BASE_URL } from '../../../utils/Constants/constants';
 import useSaveImages from '../../../CustomHooks/useSaveImages';
+import { errorMessage } from '../../../utils/ShowMessage';
 
 const UserImage = (props) => {
 
@@ -18,6 +18,8 @@ const UserImage = (props) => {
             cloudName: 'dilpkrfrb'
         }
     });
+
+    const avatars = import.meta.env.VITE_AVATARS?.split(",") || [];
 
     const { handleSaveProfileClick } = useSaveImages();
     const profileImage = useSelector((store) => store.profile.profileImage);
@@ -39,8 +41,8 @@ const UserImage = (props) => {
             reader.readAsDataURL(file);
             reader.onloadend = async () => {
                 console.log("I am in delete Function !!");
-                if( profileImage !== "TechTribe_User_Profile_Avatar/Logos/Logo_b00c785c-9eae-43ca-b97b-4c12f4341344" && !avatars.includes(profileImage) ){
-                    const response = await axios.post(BASE_URL + "profile/delete/image", {
+                if( profileImage !== import.meta.env.VITE_DEFAULT_AVATAR && !avatars.includes(profileImage) ){
+                    const response = await axios.post(import.meta.env.VITE_BASE_URL + "profile/delete/image", {
                         publicId: profileImage ,
                         isProfile: true,
                     },{withCredentials: true});
@@ -49,17 +51,22 @@ const UserImage = (props) => {
                 }
 
                 const uImg = reader.result;
-                const CloudinaryImages = await axios.post(BASE_URL + "profile/upload/image" , {
+                const CloudinaryImages = await axios.post(import.meta.env.VITE_BASE_URL + "profile/upload/image" , {
                     image: uImg, 
                     isProfile: true,
                 } , {withCredentials: true});
-                dispatch(setProfileImage(CloudinaryImages?.data?.public_id));
-                await handleSaveProfileClick( CloudinaryImages?.data?.public_id , null , null , null , null ); // Save the changes to the profile
+
+                console.log("CloudinaryImage : ");
+                console.log(CloudinaryImages);
+
+                dispatch(setProfileImage(CloudinaryImages?.data?.uploadResult?.public_id));
+                await handleSaveProfileClick( CloudinaryImages?.data?.uploadResult?.public_id, null , null , null , null ); // Save the changes to the profile
                 setIsSaving(false); // stop shimmer
             }
         }
         catch (error) {
             console.error("Error previewing files:", error);
+            errorMessage("Failed to upload an image !!");
         }
     }
 
@@ -87,19 +94,20 @@ const UserImage = (props) => {
         try {
             setIsSaving(true); // start shimmer
             // Call API to delete the image
-            if( profileImage !== "TechTribe_User_Profile_Avatar/Logos/Logo_b00c785c-9eae-43ca-b97b-4c12f4341344" && !avatars.includes(profileImage) ){
-                const response = await axios.post(BASE_URL + "profile/delete/image", {
+            if( profileImage !== import.meta.env.VITE_DEFAULT_AVATAR && !avatars.includes(profileImage) ){
+                const response = await axios.post(import.meta.env.VITE_BASE_URL + "profile/delete/image", {
                     publicId: profileImage,
                     isProfile: true,
                 }, { withCredentials: true });
                 console.log(response);
             }
-            dispatch(setProfileImage("TechTribe_User_Profile_Avatar/Logos/Logo_b00c785c-9eae-43ca-b97b-4c12f4341344")); // Reset to default image
-            await handleSaveProfileClick( "TechTribe_User_Profile_Avatar/Logos/Logo_b00c785c-9eae-43ca-b97b-4c12f4341344" , null , null , null , null ); // Save the changes to the profile
+            dispatch(setProfileImage(import.meta.env.VITE_DEFAULT_AVATAR)); // Reset to default image
+            await handleSaveProfileClick( import.meta.env.VITE_DEFAULT_AVATAR, null , null , null , null ); // Save the changes to the profile
             setIsSaving(false); // stop shimmer
 
         } catch (error) {
             console.error("Error removing image:", error);
+            errorMessage("Failed to delete and image!!");
         }
     }
 

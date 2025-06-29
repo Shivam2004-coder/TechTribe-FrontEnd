@@ -3,8 +3,19 @@ import UploadImage from './UploadImage';
 import Form from './Form';
 import CreateAccountButton from './CreateAccountButton';
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Onboarding = () => {
+
+  const gender = useSelector((store) => store.profile.gender);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (gender && gender.length > 0) {
+      navigate('/tribe');
+    }
+  }, [gender,navigate]);
 
   const firstName = useSelector((store) => store.profile.firstName);
   const lastName = useSelector((store) => store.profile.lastName);

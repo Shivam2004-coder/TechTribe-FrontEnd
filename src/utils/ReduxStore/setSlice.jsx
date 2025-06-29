@@ -7,9 +7,11 @@ const setSlice = createSlice({
         showAvatarPage : false,
         showEditPage : true,
         showPreviewPage : false,
+
         showChatThemePage : true,
         showWallPaperPage : false,
         showDisplayThemePage : false,
+        showDeleteAccountPage : false,
     },
     reducers: {
         addImageUrl:(state ,action) => {
@@ -34,16 +36,25 @@ const setSlice = createSlice({
             state.showChatThemePage = true;
             state.showWallPaperPage = false;
             state.showDisplayThemePage = false;
+            state.showDeleteAccountPage = false;
         },
         OnlyShowWallPaperPage: (state) => {
             state.showChatThemePage = false;
             state.showWallPaperPage = true;
             state.showDisplayThemePage = false;
+            state.showDeleteAccountPage = false;
         },
         OnlyShowDisplayThemePage: (state) => {
             state.showChatThemePage = false;
             state.showWallPaperPage = false;
             state.showDisplayThemePage = true;
+            state.showDeleteAccountPage = false;
+        },
+        OnlyShowDeleteAccountPage: (state) => {
+            state.showChatThemePage = false;
+            state.showWallPaperPage = false;
+            state.showDisplayThemePage = false;
+            state.showDeleteAccountPage = true;
         }
     },
 });
@@ -56,6 +67,7 @@ export const {
     OnlyShowChatThemePage ,
     OnlyShowWallPaperPage ,
     OnlyShowDisplayThemePage ,
+    OnlyShowDeleteAccountPage,
 } = setSlice.actions;
 
 export default setSlice.reducer;

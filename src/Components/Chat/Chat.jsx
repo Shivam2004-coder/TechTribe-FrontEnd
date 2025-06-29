@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom'
 import { createSocketConnection } from '../../utils/Socket/socket';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import { BASE_URL } from '../../utils/Constants/constants';
 import Card from '../Tribe/Card';
 import UserCard from '../Tribe/UserCard';
 import { fill } from '@cloudinary/url-gen/actions/resize';
@@ -64,7 +63,7 @@ const Chat = () => {
     };
 
     const fetchChatMessages = async () => {
-        const chat = await axios.get(BASE_URL + "chat/" + targetUserId, {
+        const chat = await axios.get(import.meta.env.VITE_BASE_URL + "chat/" + targetUserId, {
           withCredentials: true,
         });
     

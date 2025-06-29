@@ -112,4 +112,39 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 
-  
+/****************loader styling********************/
+
+
+/* Preloader styles */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#preloader img {
+  width: 100px;
+  height: 100px;
+  animation: blurFade 2s ease-in-out infinite;
+  filter: blur(0px);
+}
+
+@keyframes blurFade {
+  0%, 100% {
+    filter: blur(0px);
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    filter: blur(2px);
+    transform: scale(1.5);
+    opacity: 0.6;
+  }
+}

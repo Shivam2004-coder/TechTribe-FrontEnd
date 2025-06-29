@@ -1,6 +1,5 @@
 import axios from 'axios'
 import React from 'react'
-import { BASE_URL } from '../../utils/Constants/constants'
 import { errorMessage } from '../../utils/ShowMessage'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -85,9 +84,15 @@ const Menu = ({setIsClicked}) => {
         setIsClicked(false);
     }
     const handleAboutClick = () => {
+        if ( location !== "/about-us" ) {
+            navigate("/about-us");
+        }
         setIsClicked(false);
     }
     const handleContactUsClick = () => {
+        if ( location !== "/contact" ) {
+            navigate("/contact");
+        }
         setIsClicked(false);
     }
     const handleSettingsClick = () => {
@@ -98,9 +103,11 @@ const Menu = ({setIsClicked}) => {
     }
     const handleLogoutClick = async () => {
         try {
-            const response = await axios.post(BASE_URL + "logout" , {} , {withCredentials: true});
+            const response = await axios.post(import.meta.env.VITE_BASE_URL + "logout" , {} , {withCredentials: true});
             console.log(response);
             dispatch(resetProfile());
+
+            localStorage.removeItem('user-info');
             navigate("/login");
         } catch (error) {
             errorMessage(error.message);

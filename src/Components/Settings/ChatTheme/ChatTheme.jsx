@@ -8,7 +8,6 @@ import { ChevronDown, ChevronUp } from 'lucide-react'; // Optional: Lucide icons
 import UserImage from "./UserImage";
 import UserAvatar from "./UserAvatar";
 import useSaveImages from "../../../CustomHooks/useSaveImages";
-import { themes } from "../../../utils/Constants/constants";
 
 const ChatTheme = () => {
 
@@ -46,8 +45,12 @@ const ChatTheme = () => {
     }
 
   };
+
+
+  const themes = import.meta.env.VITE_THEMES?.split(',') || [];
+
   return (
-    <div className="flex flex-col items-center max-w-full min-h-screen p-4 rounded-lg">
+    <div className="flex flex-col items-center w-full min-h-screen p-4 rounded-lg">
       <div className=" flex items-center font-bold justify-start bg-black p-4 shadow-white shadow-inner" >
         <p>Chat Themes</p>
       </div>
