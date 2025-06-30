@@ -4,7 +4,7 @@ import { errorMessage } from "../../utils/ShowMessage";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { removeFeed } from "../../utils/ReduxStore/feedSlice";
-import UserProfileDetail from "./userProfileDetail";
+import UserProfileDetail from "./UserProfileDetail";
 
 const UserCard = ({feed , isProfile}) => {
     const [isHovered, setIsHovered] = useState(true);
