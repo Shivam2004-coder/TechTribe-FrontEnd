@@ -30,6 +30,16 @@ const Layout = () => {
   return (
 
     <div className=" flex flex-col min-h-screen max-w-screen overflow-x-clip" >
+
+      {useBackgroundImage && (
+        <div
+          className="fixed top-0 left-0 w-full h-full -z-10 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: bgImage,
+          }}
+        />
+      )}
+
       <div className="flex flex-row min-h-screen h-full w-full overflow-x-clip" >
         {/* { location.pathname === "/profile" ?
           <EditOptions />
@@ -61,16 +71,6 @@ const Layout = () => {
           //       : {}
           // }
         >
-
-            {useBackgroundImage && (
-              <div
-                className="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat"
-                style={{
-                  backgroundImage: bgImage,
-                }}
-              />
-            )}
-            
             <Header />
             <div className="flex-grow w-full h-full min-h-screen flex items-center justify-center">
               <Outlet />
