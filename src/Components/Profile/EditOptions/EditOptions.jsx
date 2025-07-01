@@ -35,16 +35,16 @@ const EditOptions = () => {
     }
 
     const selectedStyle = displayMode === "Light" ? "bg-black text-white" : "bg-white text-black" ;
-    const hoverStyle = displayMode === "Light" ? "hover:bg-black hover:text-white text-black" : "hover:bg-white hover:text-black text-white" ;
-    const background = displayMode === "Light" ? "bg-white text-black" : "bg-black";
+    const hoverStyle = displayMode === "Light" ? "hover:bg-black hover:text-white " : "hover:bg-white hover:text-black " ;
+    const background = displayMode === "Light" ? "bg-white text-black" : "bg-black text-white";
     
     return (<>
-            <div className={`fixed flex flex-col text-sm md:text-lg items-start z-30 h-full transition-all duration-300 ease-in-out ${ showProfileMenu ? "w-64 md:w-84" : "w-16" } p-1 md:p-2 ${background} select-none`}
+            <div className={`fixed flex flex-col text-sm md:text-lg items-start z-30 h-full transition-all duration-300 ease-in-out ${ showProfileMenu ? "w-52 md:w-84" : "w-16" } p-1 md:p-2 ${background} select-none`}
             >
 
                 <div
                     className={`${background} h-12 mb-12 ${
-                        showProfileMenu ? "w-60 md:w-80 justify-between mt-3" : `w-12 justify-center ${hoverStyle}`
+                        showProfileMenu ? "w-48 md:w-80 justify-between mt-3" : `w-12 justify-center ${hoverStyle}`
                     } flex items-center transition-all duration-300 ease-in-out cursor-pointer rounded-full`}
                     onClick={!showProfileMenu ? openMenu : undefined} // Apply click only when menu is closed
                 >
@@ -81,7 +81,7 @@ const EditOptions = () => {
                     </div>
                 </div>
                 
-                <div className={` h-12 mb-2 p-3  ${ showProfileMenu ? "w-48 md:w-80" : "w-12" } ${showEditPage ? `${selectedStyle}` :  `${background}` } flex items-center ${hoverStyle} transition-all duration-300 ease-in-out cursor-pointer rounded-full`} 
+                <div className={` h-12 mb-2  p-3  ${ showProfileMenu ? "w-48 md:w-80" : "w-12" } ${showEditPage ? `${selectedStyle}` :  `${background}` } flex items-center ${hoverStyle} transition-all duration-300 ease-in-out cursor-pointer rounded-full`} 
                     onClick={handleProfileEditClick}
                 >
                     <i className="material-icons ">edit_document</i>
@@ -90,7 +90,7 @@ const EditOptions = () => {
                     </div>
                 </div>
                 
-                <div className={` h-12 mb-2 p-3 ${ showProfileMenu ? "w-48 md:w-80" : "w-12" } ${showPreviewPage ? `${selectedStyle}` : `${background}` } flex items-center ${hoverStyle} transition-all duration-300 ease-in-out cursor-pointer rounded-full`} 
+                <div className={` h-12 mb-2  p-3 ${ showProfileMenu ? "w-48 md:w-80" : "w-12" } ${showPreviewPage ? `${selectedStyle}` : `${background}` } flex items-center ${hoverStyle} transition-all duration-300 ease-in-out cursor-pointer rounded-full`} 
                     onClick={handlePreviewClick}
                 >
                     <i className="material-icons">preview</i>

@@ -46,7 +46,7 @@ const PreviewPage = () => {
   };
 
   return (
-    <div className="flex flex-col w-full h-full justify-end md:justify-center items-center rounded-lg" >
+    <div className="flex flex-col w-full h-full justify-center items-center rounded-lg" > {/** added max-w-screen  */}
       <div className=" flex items-center font-bold justify-start mb-10 bg-black p-4 shadow-white shadow-inner" >
         <p>Preview</p>
       </div>
