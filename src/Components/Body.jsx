@@ -46,7 +46,7 @@ const Body = () => {
   return (
     <>
       <RefreshHandler setIsAuthenticated={setIsAuthenticated} />
-      <Routes>
+      <Routes  >
         {/* ✅ Parent Route with Layout */}
         <Route path="/" element={<Layout />}>
           {/* <Route path="/" element={<Navigate to="/login" />} /> */}
