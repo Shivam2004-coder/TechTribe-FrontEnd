@@ -86,9 +86,9 @@ const Card = (p) => {
                             transition-all duration-500 ease-in-out 
                             bottom-0 grid grid-cols-12 rounded-3xl text-white w-full 
                             bg-gradient-to-t from-black/70 via-black/40 to-transparent 
-                            backdrop-blur-2xl p-2 pb-10`}
+                            backdrop-blur-2xl p-2 pb-10 ${isHovered ? "md:opacity-100" : "md:opacity-0"} `}
             >
-                <div className={`col-span-8 transition-all duration-400 ease-in-out  ${isHovered ? "md:opacity-100" : "md:opacity-0"}
+                <div className={`col-span-8 transition-all duration-400 ease-in-out  
                             `} >
                     <div className="flex flex-row items-center justify-between  " >
                         <div className="flex items-center justify-start" >
