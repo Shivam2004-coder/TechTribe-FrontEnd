@@ -89,6 +89,8 @@ const Premium = () => {
   const dispatch = useDispatch();
   // const { width, height } = useWindowSize();
 
+  console.log("MemberShipExpiresAt : "+membershipExpiresAt);
+
   useEffect(() => {
     verifyPremiumUser();
   }, []);

@@ -34,6 +34,7 @@ export const fetchAndStoreUserProfile = async (dispatch) => {
     dispatch(setProfileLoaded(false));
     const response = await axios.get(import.meta.env.VITE_BASE_URL + "profile/view", { withCredentials: true });
     const data = response.data.user;
+    console.log(data);
   
     dispatch(setUserId(data._id || ''));
     dispatch(setFirstName(data.firstName || ''));
