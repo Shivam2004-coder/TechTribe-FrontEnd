@@ -42,7 +42,7 @@ const Payment = ({ selectedPlan, selectedPlanDetails, handlePaymentButtonClick ,
   const perWeekAmount = (finalAmount / weeks).toFixed(2);
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-[#1a1a1a] via-[#1f1f1f] to-[#2a2a2a] text-white px-4 py-12 flex flex-col justify-center items-center">
+    <div className="min-h-screen text-white px-4 py-12 flex flex-col justify-center items-center">
         <div className="w-full flex items-center justify-start py-3" >
             {/* Back Button */}
             <button
