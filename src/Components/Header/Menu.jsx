@@ -196,12 +196,14 @@ const Menu = () => {
                 onClick={handleIgnoredClick}
             >
                 <div className='flex items-center justify-start' >
-                     <i className="material-icons mr-1">heart_broken</i>
+                    <i className="material-icons mr-1">heart_broken</i>
                     <button className="cursor-pointer" >
                         Ignored
                     </button>
                 </div>
-                { membershipType === "Free" && <i className='material-icons' >lock</i> }
+                { (membershipType === "Free" || membershipType === "Pro") && (
+                    <i className="material-icons">lock</i>
+                )}
             </div>
             <hr className={`${lineStyle}`} />
             <div className={`${style} justify-between`}

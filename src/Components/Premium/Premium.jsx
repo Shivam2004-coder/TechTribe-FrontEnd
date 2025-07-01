@@ -199,6 +199,51 @@ const Premium = () => {
     );
   };
 
+  // Format membershipExpiresAt
+  const formatExpiryDate = (dateStr) => {
+    if (!dateStr) return "";
+    const date = new Date(dateStr);
+
+    return date.toLocaleString("en-US", {
+      weekday: "long",     // Tuesday
+      year: "numeric",     // 2025
+      month: "long",       // July
+      day: "numeric",      // 2
+      hour: "numeric",     // 4
+      minute: "2-digit",   // 15
+      hour12: true         // PM
+    });
+  };
+
+  const getTimeLeft = (dateStr) => {
+    if (!dateStr) return "";
+    const now = new Date();
+    const expiry = new Date(dateStr);
+  
+    const diff = expiry - now;
+    if (diff <= 0) return "Expired";
+  
+    const minutes = Math.floor(diff / (1000 * 60)) % 60;
+    const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  
+    return `${days} day${days !== 1 ? "s" : ""}, ${hours} hour${hours !== 1 ? "s" : ""}, and ${minutes} minute${minutes !== 1 ? "s" : ""} left`;
+  };
+
+  const [timeLeft, setTimeLeft] = useState(getTimeLeft(membershipExpiresAt));
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimeLeft(getTimeLeft(membershipExpiresAt));
+    }, 1000); // update every minute
+
+    return () => clearInterval(interval);
+  }, [membershipExpiresAt]);
+
+
+
+
+
   return isPremiumMember ? (
 
       <div className="min-h-screen w-full flex flex-col items-center text-white" >
@@ -237,6 +282,14 @@ const Premium = () => {
           );
         })}
 
+        <div className="bg-black border border-gray-600 rounded-xl px-6 py-4 mt-4 shadow-md w-full max-w-md text-center">
+          <p className="text-lg text-yellow-400 font-semibold">
+            Expires on: {formatExpiryDate(membershipExpiresAt)}
+          </p>
+          <p className="text-sm text-green-400 mt-2">
+            ⏳ {timeLeft}
+          </p>
+        </div>
 
       </div>
 
