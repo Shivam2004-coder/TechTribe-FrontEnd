@@ -148,3 +148,22 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 0.6;
   }
 }
+
+
+
+/* Autofill background fix for Chrome */
+input:-webkit-autofill {
+  background-color: #d1d5db !important; /* Same as Tailwind bg-gray-300 */
+  -webkit-box-shadow: 0 0 0px 1000px #d1d5db inset !important;
+  color: #000000 !important;
+  caret-color: #000000;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Optional: for textarea or select if needed */
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  background-color: #d1d5db !important;
+  -webkit-box-shadow: 0 0 0px 1000px #d1d5db inset !important;
+  color: #000000 !important;
+}

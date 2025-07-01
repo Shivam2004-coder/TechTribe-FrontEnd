@@ -243,7 +243,7 @@ const Premium = () => {
 
   ) : (
 
-    <div className="min-h-screen w-full bg-gradient-to-r from-[#0f0f0f] via-[#1c1c1c] to-[#2a2a2a] text-white">
+    <div className="min-h-screen w-full text-white">
 
       <section className="text-center py-16 px-4">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">

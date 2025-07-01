@@ -29,8 +29,8 @@ const Menu = () => {
     const displayMode = useSelector((store) => store.profile.displayMode);
 
     const handleHomeClick = () => {
-        if ( location !== "/onboarding" ) {
-            navigate("/onboarding");
+        if ( location !== "/tribe" ) {
+            navigate("/tribe");
         }
         dispatch(toggleMenu(false));
     }

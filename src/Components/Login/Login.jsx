@@ -84,7 +84,7 @@ const Login = () => {
     try {
 
       if (authResult["code"]) {
-				const result = await axios.get( `${import.meta.env.VITE_BASE_URL}auth/google?code=${authResult.code}` );
+				const result = await axios.get( `${import.meta.env.VITE_BASE_URL}auth/google?code=${authResult.code}` , { withCredentials: true } );
         successMessage(result.data.message);
 
         const token = result.data.token;
