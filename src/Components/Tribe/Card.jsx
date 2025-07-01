@@ -18,6 +18,7 @@ const Card = (p) => {
     handleNext,
     handlePrev,
     isHovered,
+    showAbout,
   } = p;
 
   const {
@@ -79,8 +80,14 @@ const Card = (p) => {
             </button>
 
             {/* User Info Overlay */}
-            <div className={`absolute bottom-4 grid grid-cols-12 rounded-t-xl text-white w-full  opacity-95  p-2 mb-3
-                             `}>
+            <div 
+                className={`absolute
+                            ${showAbout ? "scale-100 opacity-95" : "scale-0 opacity-0"} 
+                            transition-all duration-500 ease-in-out 
+                            bottom-0 grid grid-cols-12 rounded-3xl text-white w-full 
+                            bg-gradient-to-t from-black/70 via-black/40 to-transparent 
+                            backdrop-blur-2xl p-2 pb-10`}
+            >
                 <div className={`col-span-8 transition-all duration-400 ease-in-out  ${isHovered ? "md:opacity-100" : "md:opacity-0"}
                             `} >
                     <div className="flex flex-row items-center justify-between  " >
@@ -98,7 +105,7 @@ const Card = (p) => {
                             </div>
                         }
                     </div>
-                    <h3 className="flex items-center ml-15 text-md " ><i className="material-icons">house</i> {livingIn}</h3>
+                    <h3 className="flex items-start ml-15 text-md " ><i class="fa-solid fa-house-chimney m-2"></i> {livingIn}</h3>
                 </div>
                 
             </div>

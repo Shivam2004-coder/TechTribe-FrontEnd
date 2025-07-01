@@ -17,6 +17,7 @@ const UserCard = ({feed , isProfile}) => {
     };
 
     const [isVisible, setIsVisible] = useState(false);
+    const [showAbout , setShowAbout] = useState(true);
 
 
     const timeoutRef = useRef(null);
@@ -163,12 +164,13 @@ const UserCard = ({feed , isProfile}) => {
             handleNext={handleNext}
             handlePrev={handlePrev}
             isHovered={isHovered}
+            showAbout={showAbout}
           />
         </div>
 
         {/* Details Section */}
         {/* Floating Buttons Hanging from Bottom Center */}
-        <div className="absolute bottom-[-2.5rem] left-1/2 -translate-x-1/2 flex gap-20 z-10">     
+        <div className="absolute bottom-[-2.5rem] left-1/2 -translate-x-1/2 flex gap-10 z-10">     
           {/* Ignore Button */}
           <button
             id="ignore-btn"
@@ -195,6 +197,37 @@ const UserCard = ({feed , isProfile}) => {
               }}
             >
               close
+            </i>
+          </button>
+
+          {/* Show Button */}
+          <button
+            id="interested-btn"
+            className={`group bg-gray-800 h-15 w-15 md:h-15 md:w-15 flex items-center justify-center 
+                      rounded-xl cursor-pointer
+                      transition-all duration-400 ease-in-out 
+                      ${isHovered ? "md:scale-100" : "md:scale-0"}
+                      transform hover:scale-110 active:scale-95 shadow-lg
+                      hover:bg-gray-800 active:bg-gray-800`}
+            onMouseEnter={() => updateStroke(2, "white")}
+            onMouseLeave={() => updateStroke(2, "white")} 
+            onClick={() => setShowAbout(!showAbout) }
+          >
+            {  showAbout ? 
+              <i class="fa-solid fa-square-minus md:scale-150"></i>
+              :
+              <i class="fa-solid fa-square-caret-up md:scale-150"></i>
+            }
+            <i
+              className="material-icons font-extrabold text-[#167d32]
+                        transition-all duration-300 ease-in-out transform 
+                        group-hover:scale-200 group-hover:text-white 
+                        group-active:scale-90 group-active:text-black scale-150"
+              style={{
+                WebkitTextStroke: strokeColors[1] ? `1.2px ${strokeColors[1]}` : "0px",
+                textShadow: "rgb(0 0 0) 0px 0px 7px",
+              }}
+            >
             </i>
           </button>
 
