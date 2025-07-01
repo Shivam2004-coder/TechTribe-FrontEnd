@@ -33,9 +33,10 @@ const Layout = () => {
 
       {useBackgroundImage && (
         <div
-          className="fixed top-0 left-0 w-full h-full -z-10 bg-cover bg-center bg-no-repeat"
+          className="fixed top-0 bottom-0 w-full h-full -z-10 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage: bgImage,
+            backgroundSize: "cover",
             backgroundAttachment: "fixed",
           }}
         />
