@@ -23,6 +23,7 @@ const initialState = {
     portfolio: '',
   },
   membershipType: '',
+  membershipExpiresAt: '',
   swipes: '',
   chatThemeImage: '',
   wallpaperImage: '',
@@ -100,6 +101,7 @@ const profileSlice = createSlice({
       state.socialLinks.portfolio = action.payload;
     },    
     setMembershipType: (state , action) => { state.membershipType = action.payload },
+    setMembershipExpiresAt: (state , action) => { state.membershipExpiresAt = action.payload },
     setSwipes: (state , action) => { state.swipes = action.payload },
     setChatThemeImage: (state , action) => { state.chatThemeImage = action.payload } ,
     setWallpaperImage: (state , action) => { state.wallpaperImage = action.payload },
@@ -135,6 +137,7 @@ export const {
   setLinkedinLink,
   setPortfolioLink,
   setMembershipType,
+  setMembershipExpiresAt,
   setSwipes,
   setChatThemeImage,
   setWallpaperImage,

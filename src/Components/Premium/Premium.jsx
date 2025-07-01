@@ -7,9 +7,10 @@ import { CheckCircle } from "lucide-react";
 import axios from "axios";
 import Confetti from "react-confetti";
 // import { useWindowSize } from "react-use";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Payment from "./Payment";
+import { fetchAndStoreUserProfile } from "../../CustomHooks/fetchAndStoreUserProfile";
 
 const plans = [
   {
@@ -77,6 +78,7 @@ const priceOptions = {
 
 const Premium = () => {
   const membershipType = useSelector((store) => store.profile.membershipType);
+  const membershipExpiresAt = useSelector((store) => store.profile.membershipExpiresAt);
   const [isPremiumMember, setIsPremiumMember] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("Pro");
   const [selectedBillingPlan , setSelectedBillingPlan] = useState("");
@@ -84,6 +86,7 @@ const Premium = () => {
   const [isContinueClick , setIsContinueClick] = useState(false);
   // const [showConfetti, setShowConfetti] = useState(true);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   // const { width, height } = useWindowSize();
 
   useEffect(() => {
@@ -94,7 +97,10 @@ const Premium = () => {
     const res = await axios.get(import.meta.env.VITE_BASE_URL + "payment/verify", {
       withCredentials: true,
     });
-    if (res.data.isPremiumMember) setIsPremiumMember(true);
+    if (res.data.isPremiumMember){
+      await fetchAndStoreUserProfile(dispatch); 
+      setIsPremiumMember(true);
+    };
   };
 
   const handlePaymentButtonClick = async (type,detail) => {

@@ -25,6 +25,7 @@ import {
   setWallpaperImage,
   setDisplayMode,
   setProfileLoaded,
+  setMembershipExpiresAt,
 } from "../utils/ReduxStore/profileSlice";
 import { errorMessage } from "../utils/ShowMessage";
 
@@ -53,6 +54,7 @@ export const fetchAndStoreUserProfile = async (dispatch) => {
     dispatch(setLinkedinLink(data.socialLinks?.linkedin || ''));
     dispatch(setPortfolioLink(data.socialLinks?.portfolio || ''));
     dispatch(setMembershipType(data.membershipType || ''));
+    dispatch(setMembershipExpiresAt(data.membershipExpiresAt || ''));
     dispatch(setSwipes(data.swipes || ''));
     dispatch(setChatThemeImage(data.chatThemeImage || ''));
     dispatch(setWallpaperImage(data.wallpaperImage || ''));
