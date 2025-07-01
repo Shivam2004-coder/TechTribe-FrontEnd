@@ -26,7 +26,7 @@ const UserAvatar = () => {
                       <div className="w-10  md:w-13 rounded-md">
                         {/* <img src="/boyAvatar1.jpg" alt="BoyAvatar1" /> */}
                         <div className="w-full h-full object-cover rounded-lg" >
-                            <AdvancedImage cldImg={cld.image("Wallpaper4_zuu9sf").resize(fill().width(250).height(250))} />
+                            <AdvancedImage cldImg={cld.image("Wallpaper_4_qqiil0").resize(fill().width(250).height(250))} />
                         </div>
                       </div>
                   </div>
@@ -34,7 +34,7 @@ const UserAvatar = () => {
                       <div className="w-10  md:w-13 rounded-md">
                         {/* <img src="/boyAvatar2.jpg" alt="BoyAvatar2" /> */}
                         <div className="w-full h-full object-cover rounded-lg" >
-                            <AdvancedImage cldImg={cld.image("Wallpaper5_rth7zp").resize(fill().width(250).height(250))} />
+                            <AdvancedImage cldImg={cld.image("Wallpaper_3_ttljm4").resize(fill().width(250).height(250))} />
                         </div>
                       </div>
                   </div>
@@ -42,7 +42,7 @@ const UserAvatar = () => {
                       <div className="w-10  md:w-13 rounded-md">
                       {/* <img src="/boyAvatar3.jpg" alt="BoyAvatar3" /> */}
                       <div className="w-full h-full object-cover rounded-lg" >
-                          <AdvancedImage cldImg={cld.image("Wallpaper3_cdas1g").resize(fill().width(250).height(250))} />
+                          <AdvancedImage cldImg={cld.image("Wallpaper_6_jux0dz").resize(fill().width(250).height(250))} />
                       </div>
                       </div>
                   </div>
