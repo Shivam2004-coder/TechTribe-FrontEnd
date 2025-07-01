@@ -35,12 +35,23 @@ const UserImage = (props) => {
     };
 
     const previewFiles = (file) => {
-        try{
-            setIsSaving(true);
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onloadend = async () => {
+        setIsSaving(true);
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = async () => {
+            try{
                 console.log("I am in delete Function !!");
+
+                const uImg = reader.result;
+
+                console.log("OK");
+                const isOk = await axios.post(import.meta.env.VITE_BASE_URL + "profile/check/image" , {
+                    image: uImg, 
+                } , {withCredentials: true});
+
+                console.log(isOk);
+
+
                 if( profileImage !== import.meta.env.VITE_DEFAULT_AVATAR && !avatars.includes(profileImage) ){
                     const response = await axios.post(import.meta.env.VITE_BASE_URL + "profile/delete/image", {
                         publicId: profileImage ,
@@ -50,7 +61,6 @@ const UserImage = (props) => {
                     console.log(response);
                 }
 
-                const uImg = reader.result;
                 const CloudinaryImages = await axios.post(import.meta.env.VITE_BASE_URL + "profile/upload/image" , {
                     image: uImg, 
                     isProfile: true,
@@ -63,10 +73,13 @@ const UserImage = (props) => {
                 await handleSaveProfileClick( CloudinaryImages?.data?.uploadResult?.public_id, null , null , null , null ); // Save the changes to the profile
                 setIsSaving(false); // stop shimmer
             }
-        }
-        catch (error) {
-            console.error("Error previewing files:", error);
-            errorMessage("Failed to upload an image !!");
+            catch (error) {
+                setIsSaving(false); // 🔴 Important!
+                const errMessage = error.response?.data?.message || "Something went wrong. Please try again.";
+                console.log(error);
+                console.log("ERROR in handleSignInButton : "+error.message);
+                errorMessage(errMessage);
+            }
         }
     }
 

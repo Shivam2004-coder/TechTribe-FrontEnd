@@ -36,6 +36,12 @@ const UploadGrid = (props) => {
 
                 try {
 
+                    const isOk = await axios.post(import.meta.env.VITE_BASE_URL + "profile/check/image" , {
+                        image: uImg, 
+                    } , {withCredentials: true});
+
+                    console.log(isOk);
+
                     // Start shimmer
                     setUploadingIndexes((prev) => [...prev, index]);
 
