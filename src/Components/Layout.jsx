@@ -50,17 +50,27 @@ const Layout = () => {
 
         <div
           className={`flex flex-col justify-between w-full min-h-screen max-w-screen overflow-x-clip ${ useBackgroundImage ? {} : bgClass } `}
-          style={ useBackgroundImage
-              ? {
-                  backgroundImage: bgImage,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  backgroundRepeat: "repeat",
-                  backgroundAttachment: "fixed",
-                }
-                : {}
-          }
+          // style={ useBackgroundImage
+          //     ? {
+          //         backgroundImage: bgImage,
+          //         backgroundSize: "cover",
+          //         backgroundPosition: "center",
+          //         backgroundRepeat: "repeat",
+          //         backgroundAttachment: "fixed",
+          //       }
+          //       : {}
+          // }
         >
+
+            {useBackgroundImage && (
+              <div
+                className="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat"
+                style={{
+                  backgroundImage: bgImage,
+                }}
+              />
+            )}
+            
             <Header />
             <div className="flex-grow w-full h-full min-h-screen flex items-center justify-center">
               <Outlet />
