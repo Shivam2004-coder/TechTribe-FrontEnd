@@ -34,7 +34,7 @@ export const fetchAndStoreUserProfile = async (dispatch) => {
     dispatch(setProfileLoaded(false));
     const response = await axios.get(import.meta.env.VITE_BASE_URL + "profile/view", { withCredentials: true });
     const data = response.data.user;
-    console.log(data);
+    // console.log(data);
   
     dispatch(setUserId(data._id || ''));
     dispatch(setFirstName(data.firstName || ''));
@@ -64,7 +64,7 @@ export const fetchAndStoreUserProfile = async (dispatch) => {
 
   } catch (err) {
     const errMessage = err.response?.data?.message || "Something went wrong. Please try again.";
-    console.log("ERROR in handleSignInButton : "+err.message);
+    // console.log("ERROR in handleSignInButton : "+err.message);
     errorMessage(errMessage);
   }
 };

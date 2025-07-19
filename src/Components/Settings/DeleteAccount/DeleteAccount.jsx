@@ -52,7 +52,7 @@ const DeleteAccount = () => {
         navigate("/login");
     } 
     catch (err) {
-        console.log("Delete Account : "+err);
+        // console.log("Delete Account : "+err);
         errorMessage(err.response?.data?.message || "Failed to delete account.");
     } 
     finally {

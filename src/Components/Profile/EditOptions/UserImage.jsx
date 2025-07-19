@@ -23,8 +23,8 @@ const UserImage = (props) => {
 
     const { handleSaveProfileClick } = useSaveImages();
     const profileImage = useSelector((store) => store.profile.profileImage);
-    console.log("i am in the UserImage.");
-    console.log(profileImage);
+    // console.log("i am in the UserImage.");
+    // console.log(profileImage);
     const dispatch = useDispatch();
 
     const fileInputRef = useRef(null);
@@ -40,16 +40,16 @@ const UserImage = (props) => {
         reader.readAsDataURL(file);
         reader.onloadend = async () => {
             try{
-                console.log("I am in delete Function !!");
+                // console.log("I am in delete Function !!");
 
                 const uImg = reader.result;
 
-                console.log("OK");
+                // console.log("OK");
                 const isOk = await axios.post(import.meta.env.VITE_BASE_URL + "profile/check/image" , {
                     image: uImg, 
                 } , {withCredentials: true});
 
-                console.log(isOk);
+                // console.log(isOk);
 
 
                 if( profileImage !== import.meta.env.VITE_DEFAULT_AVATAR && !avatars.includes(profileImage) ){
@@ -58,7 +58,7 @@ const UserImage = (props) => {
                         isProfile: true,
                     },{withCredentials: true});
 
-                    console.log(response);
+                    // console.log(response);
                 }
 
                 const CloudinaryImages = await axios.post(import.meta.env.VITE_BASE_URL + "profile/upload/image" , {
@@ -66,8 +66,8 @@ const UserImage = (props) => {
                     isProfile: true,
                 } , {withCredentials: true});
 
-                console.log("CloudinaryImage : ");
-                console.log(CloudinaryImages);
+                // console.log("CloudinaryImage : ");
+                // console.log(CloudinaryImages);
 
                 dispatch(setProfileImage(CloudinaryImages?.data?.uploadResult?.public_id));
                 await handleSaveProfileClick( CloudinaryImages?.data?.uploadResult?.public_id, null , null , null , null ); // Save the changes to the profile
@@ -76,8 +76,8 @@ const UserImage = (props) => {
             catch (error) {
                 setIsSaving(false); // 🔴 Important!
                 const errMessage = error.response?.data?.message || "Something went wrong. Please try again.";
-                console.log(error);
-                console.log("ERROR in handleSignInButton : "+error.message);
+                // console.log(error);
+                // console.log("ERROR in handleSignInButton : "+error.message);
                 errorMessage(errMessage);
             }
         }
@@ -112,7 +112,7 @@ const UserImage = (props) => {
                     publicId: profileImage,
                     isProfile: true,
                 }, { withCredentials: true });
-                console.log(response);
+                // console.log(response);
             }
             dispatch(setProfileImage(import.meta.env.VITE_DEFAULT_AVATAR)); // Reset to default image
             await handleSaveProfileClick( import.meta.env.VITE_DEFAULT_AVATAR, null , null , null , null ); // Save the changes to the profile

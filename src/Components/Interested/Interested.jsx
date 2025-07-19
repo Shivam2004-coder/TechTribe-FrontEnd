@@ -37,7 +37,7 @@ const Interested = () => {
                 withCredentials: true,
             });
             dispatch(addRequestInterested(res?.data?.data));
-            console.log(res?.data?.data);
+            // console.log(res?.data?.data);
         } 
         catch (error) {
             errorMessage(error.message);

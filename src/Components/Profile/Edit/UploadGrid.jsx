@@ -40,7 +40,7 @@ const UploadGrid = (props) => {
                         image: uImg, 
                     } , {withCredentials: true});
 
-                    console.log(isOk);
+                    // console.log(isOk);
 
                     // Start shimmer
                     setUploadingIndexes((prev) => [...prev, index]);
@@ -88,7 +88,7 @@ const UploadGrid = (props) => {
 
             const newImages = [...images];
             
-            console.log("I am in delete Function !!");
+            // console.log("I am in delete Function !!");
             
             const response = await axios.post(import.meta.env.VITE_BASE_URL + "profile/delete/image", {
                 publicId: newImages[index] ,
@@ -96,12 +96,12 @@ const UploadGrid = (props) => {
                 save: false,
             },{withCredentials: true});
             
-            console.log(response);
+            // console.log(response);
             
             newImages.splice(index, 1); // Remove the image at the specified index
             newImages.push(null); // Add a null at the end to maintain the size of the array
             setImages(newImages); // Update state
-            console.log(images);
+            // console.log(images);
             dispatch(setUploadedImages(newImages.filter(Boolean))); // Only keep non-null images());
             await handleSaveProfileClick( null ,newImages , null , null , null );
         }

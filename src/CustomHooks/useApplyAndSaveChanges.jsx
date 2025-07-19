@@ -148,7 +148,7 @@ const useApplyAndSaveChanges = () => {
     }, [userSocialLinks]);
 
 
-    console.log("Social Links: ", socialLinks);
+    // console.log("Social Links: ", socialLinks);
 
 
 
@@ -214,14 +214,14 @@ const useApplyAndSaveChanges = () => {
             setSaveSuccess(false);
             handleApplyChangesClick(); // Apply changes to the Redux store
 
-            console.log("I am in delete Function !!");
+            // console.log("I am in delete Function !!");
 
             const response = await axios.post(import.meta.env.VITE_BASE_URL + "profile/delete/savedImages", {
                 uploadedImages: images.filter(Boolean),
                 profileImage,
             },{withCredentials: true});
 
-            console.log(response);
+            // console.log(response);
 
             const res = await axios.patch(import.meta.env.VITE_BASE_URL + "profile/edit", {
                 firstName: fName,
@@ -242,7 +242,7 @@ const useApplyAndSaveChanges = () => {
             }, { withCredentials: true });
 
         
-            console.log(res);
+            // console.log(res);
             setSaveSuccess(true);
             setTimeout(() => setSaveSuccess(false), 2000);
       

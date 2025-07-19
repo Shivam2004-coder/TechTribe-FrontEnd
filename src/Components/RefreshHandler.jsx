@@ -56,13 +56,13 @@ function RefreshHandler({ setIsAuthenticated }) {
 
     } catch (err) {
 
-      console.log("Session expired or user not found"+err.message);
+      // console.log("Session expired or user not found"+err.message);
       localStorage.removeItem('user-info');
       setIsAuthenticated(false);
       navigate('/login', { replace: true });
 
       const errMessage = err.response?.data?.message || "Something went wrong. Please try again.";
-      console.log("ERROR in handleSignInButton : "+err.message);
+      // console.log("ERROR in handleSignInButton : "+err.message);
       errorMessage(errMessage);
     }
   };

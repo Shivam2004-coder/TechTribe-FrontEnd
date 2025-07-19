@@ -9,8 +9,8 @@ const UserImage = (props) => {
 
     const { handleSaveProfileClick } = useSaveImages();
     const wallpaperImage = useSelector((store) => store.profile.wallpaperImage);
-    console.log("i am in the Chat Theme User Image.");
-    console.log(wallpaperImage);
+    // console.log("i am in the Chat Theme User Image.");
+    // console.log(wallpaperImage);
     const dispatch = useDispatch();
 
     // camera menu state

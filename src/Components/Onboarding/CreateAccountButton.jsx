@@ -120,7 +120,7 @@ const CreateAccountButton = ({ formData, images }) => {
       dispatch(setWallpaperImage(updatedUser.wallpaperImage || ''));
       dispatch(setDisplayMode(updatedUser.displayMode || ''));
 
-      console.log(res);
+      // console.log(res);
       navigate('/tribe');
     } catch (error) {
       errorMessage(error.message);

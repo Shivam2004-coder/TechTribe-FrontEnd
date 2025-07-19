@@ -49,8 +49,8 @@ const Login = () => {
       }
     } catch (error) {
       const errMessage = error.response?.data?.message || "Something went wrong. Please try again.";
-      console.log(error);
-      console.log("ERROR in handleSignInButton : "+error.message);
+      // console.log(error);
+      // console.log("ERROR in handleSignInButton : "+error.message);
       invalidMessage(errMessage);
     }
   };
@@ -100,13 +100,13 @@ const Login = () => {
         }
 
 			} else {
-				console.log(authResult);
+				// console.log(authResult);
 				throw new Error(authResult);
 			}
       
       // console.log("Auth result : "+authResult);
     } catch (error) {
-      console.log("Error while requesting google code : "+error);
+      // console.log("Error while requesting google code : "+error);
       const errMessage = error.response?.data?.message || "Something went wrong. Please try again.";
       invalidMessage(errMessage);
     }

@@ -38,8 +38,8 @@ const useFetchUserProfileData = () => {
     try {
         const response = await axios.get(import.meta.env.VITE_BASE_URL + 'profile/view', { withCredentials: true });
         const data = response.data.user;
-        console.log("i am in a useFetchData Page !!");
-        console.log(data);
+        // console.log("i am in a useFetchData Page !!");
+        // console.log(data);
 
         // Dispatch to profileSlice
         dispatch(setUserId(data._id || ''));

@@ -26,15 +26,15 @@ const ChatTheme = () => {
 
   const handleClick = async (src) => {
     if (src === chatThemeImage) {
-      console.log("Here the src and profileImage are the same");
-      console.log(chatThemeImage);
-      console.log(src);
+      // console.log("Here the src and profileImage are the same");
+      // console.log(chatThemeImage);
+      // console.log(src);
       return; // Don't proceed if the clicked avatar is already selected
     }
 
     try{
-      console.log("I am in Accordian delete Function !!");
-      console.log("Profile Image: ", chatThemeImage);
+      // console.log("I am in Accordian delete Function !!");
+      // console.log("Profile Image: ", chatThemeImage);
       setIsSaving(true);
       dispatch(setChatThemeImage(src));
       await handleSaveProfileClick(null , null , src , null , null);

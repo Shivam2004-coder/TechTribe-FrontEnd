@@ -105,7 +105,7 @@ const Menu = () => {
     const handleLogoutClick = async () => {
         try {
             const response = await axios.post(import.meta.env.VITE_BASE_URL + "logout" , {} , {withCredentials: true});
-            console.log(response);
+            // console.log(response);
             dispatch(resetProfile());
 
             localStorage.removeItem('user-info');

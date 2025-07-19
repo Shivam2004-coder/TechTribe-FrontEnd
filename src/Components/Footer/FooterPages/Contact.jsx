@@ -29,7 +29,7 @@ const Contact = () => {
 
     try {
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}contact/message`, formData , { withCredentials: true });
-      console.log(response);
+      // console.log(response);
       setStatus("Message sent successfully!");
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {

@@ -27,11 +27,11 @@ const useSaveImages = () => {
             const finalWallpaperImage = wallpaperImage ?? storedWallpaperImage;
             const finalDisplayMode = displayMode ?? storedDisplayMode;
 
-            console.log( "finalProfileImage : "+finalProfileImage );
-            console.log( "finalUploadedImages : "+finalUploadedImages );
-            console.log( "finalChatThemeImage : "+finalChatThemeImage );
-            console.log( "finalWallpaperImage : "+finalWallpaperImage );
-            console.log( "finalDisplayMode : "+finalDisplayMode );
+            // console.log( "finalProfileImage : "+finalProfileImage );
+            // console.log( "finalUploadedImages : "+finalUploadedImages );
+            // console.log( "finalChatThemeImage : "+finalChatThemeImage );
+            // console.log( "finalWallpaperImage : "+finalWallpaperImage );
+            // console.log( "finalDisplayMode : "+finalDisplayMode );
             
 
 
@@ -46,7 +46,7 @@ const useSaveImages = () => {
                 },
                 { withCredentials: true }
             );
-            console.log('Profile updated:', res);
+            // console.log('Profile updated:', res);
         } catch (error) {
             errorMessage(error.message);
         }

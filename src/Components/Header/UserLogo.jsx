@@ -23,8 +23,8 @@ const UserLogo = () => {
     const displayMode = useSelector((store) => store.profile.displayMode);
     const showMenu = useSelector((store) => store.set.showMenu);
 
-    console.log("I am inside the UserLogo !!");
-    console.log("This is user's profile Image : "+profileImage);
+    // console.log("I am inside the UserLogo !!");
+    // console.log("This is user's profile Image : "+profileImage);
 
     const handleUserIconClick = (event) => {
         // Prevent the click event from bubbling up

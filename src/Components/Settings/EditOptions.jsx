@@ -28,7 +28,7 @@ const EditOptions = () => {
     const openMenu = () => dispatch(toggleSettingsMenu(true));
     const closeMenu = () => dispatch(toggleSettingsMenu(false));
 
-    console.log(showDeleteAccountPage);
+    // console.log(showDeleteAccountPage);
 
     const selectedStyle = displayMode === "Light" ? "bg-black text-white" : "bg-white text-black" ;
     const hoverStyle = displayMode === "Light" ? "hover:bg-black hover:text-white " : "hover:bg-white hover:text-black " ;

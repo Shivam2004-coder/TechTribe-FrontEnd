@@ -25,7 +25,7 @@ const Tribe = () => {
       dispatch(addFeed(users));
     } catch (err) {
       const errMessage = err.response?.data?.message || "Something went wrong. Please try again.";
-      console.log("ERROR in handleSignInButton : "+err.message);
+      // console.log("ERROR in handleSignInButton : "+err.message);
       errorMessage(errMessage);
     }
   };

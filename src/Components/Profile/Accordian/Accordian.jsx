@@ -28,26 +28,26 @@ const Accordian = () => {
   const profileImage = useSelector((store) => store.profile.profileImage);
   const { handleSaveProfileClick } = useSaveImages();
   const avatars = import.meta.env.VITE_AVATARS?.split(",") || [];
-  console.log(avatars);
+  // console.log(avatars);
 
   const handleClick = async (src) => {
     if (src === profileImage) {
-      console.log("Here the src and profileImage are the same");
-      console.log(profileImage);
-      console.log(src);
+      // console.log("Here the src and profileImage are the same");
+      // console.log(profileImage);
+      // console.log(src);
       return; // Don't proceed if the clicked avatar is already selected
     }
 
     try{
-      console.log("I am in Accordian delete Function !!");
-      console.log("Profile Image: ", profileImage);
+      // console.log("I am in Accordian delete Function !!");
+      // console.log("Profile Image: ", profileImage);
       setIsSaving(true);
       if( profileImage !== import.meta.env.VITE_DEFAULT_AVATAR && !avatars.includes(profileImage) ){
         const response = await axios.post(import.meta.env.VITE_BASE_URL + "profile/delete/image", {
             publicId: profileImage,
             isProfile: true,
         },{withCredentials: true});
-        console.log(response);
+        // console.log(response);
       }
       dispatch(setProfileImage(src));
       await handleSaveProfileClick( src , null , null , null , null);

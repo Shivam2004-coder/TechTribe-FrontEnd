@@ -30,7 +30,6 @@ const Card = (p) => {
     membershipType,
   } = feed;
 
-  console.log()
 
   return (
         <div

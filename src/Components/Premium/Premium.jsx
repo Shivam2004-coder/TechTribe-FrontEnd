@@ -89,7 +89,7 @@ const Premium = () => {
   const dispatch = useDispatch();
   // const { width, height } = useWindowSize();
 
-  console.log("MemberShipExpiresAt : "+membershipExpiresAt);
+  // console.log("MemberShipExpiresAt : "+membershipExpiresAt);
 
   useEffect(() => {
     verifyPremiumUser();
@@ -106,7 +106,7 @@ const Premium = () => {
   };
 
   const handlePaymentButtonClick = async (type,detail) => {
-    console.log("Payment button clicked for type:", type);
+    // console.log("Payment button clicked for type:", type);
     const order = await axios.post(import.meta.env.VITE_BASE_URL + "payment/create", 
       {
         membershipType: type,

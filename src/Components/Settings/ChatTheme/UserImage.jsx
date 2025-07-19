@@ -13,8 +13,8 @@ const UserImage = (props) => {
 
     const { handleSaveProfileClick } = useSaveImages();
     const chatThemeImage = useSelector((store) => store.profile.chatThemeImage);
-    console.log("i am in the Chat Theme User Image.");
-    console.log(chatThemeImage);
+    // console.log("i am in the Chat Theme User Image.");
+    // console.log(chatThemeImage);
     const dispatch = useDispatch();
 
     // camera menu state
