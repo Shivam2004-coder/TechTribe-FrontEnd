@@ -48,7 +48,7 @@ const UserAvatar = () => {
                   </div>
                   <div className="avatar avatar-placeholder h-12">
                       <div className="bg-neutral text-neutral-content w-10 rounded-md  border-white">
-                      <span>+3</span>
+                      <span>+7</span>
                       </div>
                   </div>
               </div>
