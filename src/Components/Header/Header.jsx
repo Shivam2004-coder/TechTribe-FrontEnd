@@ -11,11 +11,14 @@ const Header = () => {
   const showProfileMenu = useSelector((store) => store.set.showProfileMenu);
   const showSettingsMenu = useSelector((store) => store.set.showSettingsMenu); 
   const isProfileEmpty = () => {
-    if ( location === "/onboarding" ) {
+    if ( location.pathname === "/onboarding" ) {
       return false;
     }
     return profile && profile.emailId;
   };
+
+
+  console.log("location: ", location);
   
 
   // ${profile.displayMode === "Light" ? "bg-white text-black" : "bg-black" }

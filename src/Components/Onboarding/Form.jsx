@@ -35,7 +35,7 @@ const Form = ({formData, setFormData , images, setImages}) => {
         <div className="md:grid md:grid-cols-2 justify-between pb-2 w-full h-full" >
             <div className=" flex flex-col col-span-1 pl-0 pt-0 pr-0 items-start justify-between" >
                 <div className="flex mb-20" >
-                    <div className="text-2xl md:text-5xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 p-2 shadow shadow-black">
+                    <div className="text-2xl md:text-5xl font-extrabold text-center  bg-black text-white p-2 shadow shadow-black">
                         Welcome To Tech Tribe
                     </div>
                 </div>

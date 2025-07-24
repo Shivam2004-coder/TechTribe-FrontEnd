@@ -11,10 +11,10 @@ import { fetchAndStoreUserProfile } from "../../CustomHooks/fetchAndStoreUserPro
 
 const Login = () => {
   const [isSignIn, setSignIn] = useState(null);
-  const [userName, setUName] = useState("Shivam");
-  const [lastName, setLName] = useState("Vaishnav");
-  const [emailId, setEId] = useState("harsh@example.com");
-  const [password, setPassword] = useState("Harsh@123");
+  const [userName, setUName] = useState("Manav");
+  const [lastName, setLName] = useState("Patel");
+  const [emailId, setEId] = useState("manav@example.com");
+  const [password, setPassword] = useState("Manav@123");
   const [canSeePassword, setCanSeePassword] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // shimmer state
   const gender = useSelector((store) => store.profile.gender); // 👈 may be empty initially
@@ -168,11 +168,11 @@ const Login = () => {
 
         </div>
       ) : (
-      <div className="w-full  md:w-1/2 p-8 text-white backdrop-blur-lg bg-white/10">
+      <div className="w-full  md:w-1/2 p-8 text-white backdrop-blur-lg bg-white/20">
         <h2 className="text-4xl font-bold mb-4 text-center">
           { !isSignIn ? "Welcome Back!" : "Get Started"}
         </h2>
-        <p className="text-sm text-gray-300 text-center mb-6">
+        <p className="text-sm text-gray-300 text-center mb-12">
           { !isSignIn ? "Login to continue" : "Create your account"}
         </p>
 

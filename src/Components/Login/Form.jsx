@@ -32,9 +32,16 @@ const Form = (props) => {
     } = props;
 
     return (
-        <div className="flex justify-center m-2">
+        <div className="flex flex-col items-center justify-center m-2 relative">
+        <div className="absolute -top-10">
+            <img 
+            src="/loginImage2.png" 
+            alt="loginImage"
+            className="h-20 w-20 rounded-full border-4 bg-white shadow-lg shadow-black/50 border-white/20"
+            />
+        </div>
         <form 
-            className="w-96 bg-gradient-to-r from-[#1f1f1f] via-[#2e2e2e] to-[#3d3d3d] shadow-2xl shadow-black p-7 flex flex-col items-center"
+            className="w-96 bg-gradient-to-r from-[#1f1f1f] via-[#2e2e2e] to-[#3d3d3d] shadow-2xl shadow-black pt-16 pb-7 px-7 flex flex-col items-center"
             onSubmit={(e) => e.preventDefault()}
         >
             <h1 className="font-bold text-2xl">

@@ -16,9 +16,13 @@ const Layout = () => {
   let bgImage = "";
   let useBackgroundImage = true;
 
-  if (path === "/login" || path === "/onboarding") {
-    useBackgroundImage = true;
-    bgImage = "url('/loginBackground3.jpg')";
+  if(path === "/login" || path === "/onboarding") {
+    useBackgroundImage = false;
+    bgClass = "bg-gradient-to-r from-zinc-400 via-gray-500 to-neutral-600";
+  // }
+  // if (path === "/login" || path === "/onboarding") {
+  //   useBackgroundImage = true;
+  //   bgImage = "url('/loginBackground3.jpg')";
   } else if (path === "/tribe") {
     useBackgroundImage = true;
     bgImage = `url("https://res.cloudinary.com/dilpkrfrb/image/upload/v1744462596/${wallpaperImage}")`;

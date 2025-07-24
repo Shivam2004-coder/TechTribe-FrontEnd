@@ -5,7 +5,7 @@ const Logo = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const handleLogoClick = () => {
-        if ( location !== "/tribe" ) {
+        if ( location.pathname !== "/tribe" ) {
             navigate("/tribe");
         }
     }

@@ -50,9 +50,26 @@ function RefreshHandler({ setIsAuthenticated }) {
         }
       }
 
+      // 👤 User is logged in but hasn't finished onboarding
+      if (!hasCompletedOnboarding) {
+        if (location.pathname !== "/onboarding") {
+          errorMessage("Please complete the onboarding details.");
+          navigate("/onboarding");
+        }
+        return;
+      }
+
+      // // ✅ User is authenticated and has completed onboarding
+      // if (location.pathname !== "/tribe") {
+      //   navigate("/tribe");
+      // }
+
+
       if (location.pathname === '/onboarding' && hasCompletedOnboarding) {
         navigate('/tribe', { replace: true });
       }
+
+
 
     } catch (err) {
 
