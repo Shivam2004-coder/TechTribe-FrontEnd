@@ -41,7 +41,7 @@ const Form = (props) => {
             />
         </div>
         <form 
-            className="w-96 bg-gradient-to-r from-[#1f1f1f] via-[#2e2e2e] to-[#3d3d3d] shadow-2xl shadow-black pt-16 pb-7 px-7 flex flex-col items-center"
+            className="w-96 bg-gradient-to-r from-[#1f1f1f] via-[#2e2e2e] to-[#3d3d3d] shadow-2xl shadow-black pt-16 pb-7 px-7 flex flex-col items-center rounded-4xl"
             onSubmit={(e) => e.preventDefault()}
         >
             <h1 className="font-bold text-2xl">

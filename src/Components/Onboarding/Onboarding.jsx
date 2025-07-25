@@ -34,7 +34,7 @@ const Onboarding = () => {
   const [images, setImages] = useState([]);
 
   return (
-    <div className="min-h-screen h-full p-8 md:justify-center  flex flex-col gap-6 backdrop-blur-lg bg-white/20 w-[60%] text-gray-800 "    
+    <div className="min-h-screen h-full p-8 md:justify-center  flex flex-col gap-6 backdrop-blur-lg bg-white/50 w-[60%] text-gray-800 "    
     >
         {/* <div className="flex" >
             <div className="text-2xl md:text-5xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 p-2 shadow shadow-black">

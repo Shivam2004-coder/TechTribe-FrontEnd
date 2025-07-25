@@ -168,11 +168,11 @@ const Login = () => {
 
         </div>
       ) : (
-      <div className="w-full  md:w-1/2 p-8 text-white backdrop-blur-lg bg-white/20">
-        <h2 className="text-4xl font-bold mb-4 text-center">
+      <div className="w-full  md:w-1/2 p-8 text-white">
+        <h2 className="text-4xl font-bold text-black mb-4 text-center">
           { !isSignIn ? "Welcome Back!" : "Get Started"}
         </h2>
-        <p className="text-sm text-gray-300 text-center mb-12">
+        <p className="text-sm text-black text-center mb-12">
           { !isSignIn ? "Login to continue" : "Create your account"}
         </p>
 

@@ -31,9 +31,10 @@ const Form = ({formData, setFormData , images, setImages}) => {
     
 
   return (
-    <div className="flex flex-col p-1">
+    <form className="flex flex-col p-1"
+        autoComplete="off"
+    >
         <div className="md:grid md:grid-cols-2 justify-between pb-2 w-full h-full" 
-                autoComplete="off"
         >
             <div className=" flex flex-col col-span-1 pl-0 pt-0 pr-0 items-start justify-between" >
                 <div className="flex mb-20" >
@@ -101,7 +102,7 @@ const Form = ({formData, setFormData , images, setImages}) => {
                 </div>
                 <div className="flex flex-wrap gap-2">
                     {formData.skills.map((skill, index) => (
-                    <div key={index} className="bg-white px-3 py-1 rounded-full flex items-center gap-2">
+                    <div key={index} className="bg-gray-500 text-white px-3 py-1 rounded-lg flex items-center gap-2">
                         <span>{skill}</span>
                         <button
                             type="button"
@@ -121,7 +122,8 @@ const Form = ({formData, setFormData , images, setImages}) => {
 
         </div>
 
-      </div>
+    
+    </form>
 
   )
 }

@@ -18,7 +18,8 @@ const Layout = () => {
 
   if(path === "/login" || path === "/onboarding") {
     useBackgroundImage = false;
-    bgClass = "bg-gradient-to-r from-zinc-400 via-gray-500 to-neutral-600";
+    bgClass = "bg-gray-300";
+    // bgClass = "bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300";
   // }
   // if (path === "/login" || path === "/onboarding") {
   //   useBackgroundImage = true;
