@@ -136,7 +136,11 @@ const UploadImage = (props) => {
 
   return (
     <div className="flex items-center justify-center md:w-11/12 " >
-        <div className="flex flex-col items-center bg-gray-400 shadow-black shadow-xl p-3 rounded-md border-2 border-gray-600">
+        <div className="flex flex-col items-center bg-gray-400 shadow-black shadow-xl p-3 rounded-xl border-2 border-gray-600"
+            style={{
+                boxShadow: '-5px 5px 0px rgba(0, 0, 0)',
+            }}
+        >
             <div className="flex justify-between items-center mb-4 w-full">
                 <h2 className="text-white text-lg font-semibold">Upload at least 2 images</h2>
                 <span

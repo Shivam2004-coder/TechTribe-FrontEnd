@@ -15,6 +15,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   opacity: 0;
   pointer-events: none;
 }
+
+
+/* browsers auto-fill stying */
+
+
+
+
+
  
 /* Hide scrollbar but keep scroll functionality */
 .scrollbar-hidden {

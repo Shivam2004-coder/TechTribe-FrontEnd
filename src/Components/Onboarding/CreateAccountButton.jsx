@@ -45,7 +45,12 @@ const CreateAccountButton = ({ formData, images }) => {
     // Check for first missing field
     for (let field of requiredFields) {
       const value = formData[field.key];
+      console.log(value);
       if (!value || value.toString().trim() === '') {
+        if (field.key === 'dob') {
+          errorMessage("Please enter a valid date of birth");
+          return;
+        }
         errorMessage(`${field.label} should not be empty`);
         return;
       }
@@ -59,6 +64,17 @@ const CreateAccountButton = ({ formData, images }) => {
           errorMessage("Please enter a valid date of birth");
           return;
         }
+
+        // ✅ New check: date should not be in the future
+        const today = new Date();
+        // clear time part for today
+        today.setHours(0, 0, 0, 0);
+
+        if (date > today) {
+          errorMessage("Date of birth cannot be in the future");
+          return;
+        }
+
       }
     }
 
