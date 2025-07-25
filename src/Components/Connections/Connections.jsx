@@ -10,6 +10,9 @@ import ChatButton from './ChatButton';
 import { Cloudinary } from '@cloudinary/url-gen/index';
 import { AdvancedImage } from '@cloudinary/react';
 import { fill } from '@cloudinary/url-gen/actions/resize';
+import Lottie from "lottie-react";
+import emptyBoxAnimation from "../../assets/Empty Box.json"; // adjust path if needed
+
 
 const Connections = () => {
   const cld = new Cloudinary({
@@ -50,42 +53,65 @@ const Connections = () => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen ">
+    <div className="w-full min-h-screen flex flex-col items-center ">
         {/* <div className="min-h-screen w-full bg-gray-50 transition-all duration-500"> */}
-        <div className="shadow-md py-6 mb-8 flex flex-col items-center">
+        <div className="shadow-md py-6 mb-8 flex flex-col md:w-[80%] items-center rounded-2xl bg-black/60">
             <h1 className="text-center text-5xl mb-3 font-bold text-white tracking-wide">Connections</h1>
             
             <div className="relative bg-gray-300 rounded-full p-1 flex items-center w-[80px] md:w-[90px] shadow-black shadow-inner">
               <div
-                  className={`absolute top-1 left-1 w-9 h-9 md:w-10 md:h-10 bg-amber-950 rounded-full transition-all duration-500 ease-in-out ${
+                  className={`absolute top-1 left-1 w-9 h-9 md:w-10 md:h-10 bg-black rounded-full transition-all duration-500 ease-in-out ${
                   layout === "list" ? "translate-x-9 md:translate-x-10" : "translate-x-0"
                   }
                       `}
               />
                   <button
-                      className="z-10 w-9 h-9 md:w-10 md:h-10 text-amber-500 flex items-center justify-center cursor-pointer "
-                      onClick={() => setLayout("grid")}
+                    onClick={() => setLayout("grid")}
+                    className={`z-10 w-9 h-9 md:w-10 md:h-10 flex items-center justify-center cursor-pointer 
+                        transition-colors duration-300 ease-in-out
+                      ${
+                      layout === "grid" ? "text-white" : "text-black" 
+                    }`}
                   >
-                      <i className="material-icons">grid_on</i>
+                    <i className="material-icons">grid_on</i>
                   </button>
+
                   <button
-                      className="z-10 w-9 h-9 md:w-10 md:h-10 text-amber-500 flex items-center justify-center cursor-pointer"
-                      onClick={() => setLayout("list")}
+                    onClick={() => setLayout("list")}
+                    className={`z-10 w-9 h-9 md:w-10 md:h-10 flex items-center justify-center cursor-pointer 
+                      transition-colors duration-300 ease-in-out
+                      ${
+                      layout === "list" ? "text-white" : "text-black"
+                    }`}
                   >
-                      <i className="material-icons">view_list</i>
+                    <i className="material-icons">view_list</i>
                   </button>
+
               </div>
             </div>
         {/* </div> */}
 
-        <div className="max-w-7xl mx-auto px-6">
+        {/* <div className="max-w-7xl mx-auto px-6"> */}
           {connections?.length > 0 ? (
-            <div className={`${layout === 'grid' ? 'grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'flex flex-col gap-6'}`}>
-                {connections?.map((user) => (
                 <div
-                    key={user._id}
-                    className={`bg-violet-400 rounded-2xl shadow-black shadow-md p-6 hover:shadow-xl transition-shadow duration-300 ${layout === 'row' ? 'flex flex-col md:flex-row items-center gap-6 scale-[1.01]' : 'flex flex-col scale-100'}`}
+                  key={layout} // key forces re-render on toggle for a clean animation
+                  className={`transition-all duration-500 ease-in-out transform ${
+                    layout === 'grid'
+                      ? 'grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+                      : 'flex flex-col gap-6'
+                  }`}
                 >
+
+                {connections?.map((user) => (
+                  <div
+                    key={user._id}
+                    className={`bg-amber-500 rounded-2xl shadow-black shadow-lg hover:shadow-2xl transition-all duration-500 p-6 justify-between transform ${
+                      layout === 'list'
+                        ? 'flex flex-col md:flex-row items-center gap-6 scale-[1.01]'
+                        : 'flex flex-col scale-100'
+                    }`}
+                  >
+
                     <div className="flex items-center gap-4 w-full md:w-auto">
                     <AdvancedImage
                         cldImg={cld.image(user.profileImage).resize(fill().width(250).height(250))}
@@ -139,14 +165,23 @@ const Connections = () => {
                 ))}
             </div>
           ) : (
-            <div className="text-center text-white text-xl font-medium mt-20">
-              <div className='flex items-center justify-center bg-black p-6 rounded-full' >
-                You don’t have any connections yet.
+            <div className="w-full h-full flex flex-col items-center justify-center mt-20">
+              {/* 👇 Lottie animation */}
+              <div className="w-64 h-64 mb-6">
+                <Lottie animationData={emptyBoxAnimation} loop={true} />
               </div>
+              
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                😕 No Connections Yet
+              </h2>
+              <p className="text-md text-gray-700">
+                Start interacting and your connections will appear here!
+              </p>
             </div>
+
           )}
         </div>
-    </div>
+    // </div>
   );
 };
 

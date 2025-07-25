@@ -7,6 +7,9 @@ import { Cloudinary } from "@cloudinary/url-gen/index";
 import { AdvancedImage } from "@cloudinary/react";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 
+import Lottie from "lottie-react";
+import emptyBoxAnimation from "../../assets/Empty Box.json"; // adjust path if needed
+
 const Requests = () => {
   const cld = new Cloudinary({
     cloud: {
@@ -61,27 +64,36 @@ const Requests = () => {
     }, []);
 
     return (
-        <div className="w-full min-h-screen">
+        <div className="w-full min-h-screen flex flex-col items-center">
 
-            <div className="shadow-md py-6 mb-8 flex flex-col items-center">
+            <div className="shadow-md py-6 mb-8 flex flex-col items-center md:w-[80%] rounded-2xl bg-black/60">
                 <h1 className="text-center text-5xl mb-3 font-bold text-white tracking-wide">Requests</h1>
                 
                 <div className="relative bg-gray-300 rounded-full p-1 flex items-center w-[80px] md:w-[90px] shadow-black shadow-inner">
                     <div
-                        className={`absolute top-1 left-1 w-9 h-9 md:w-10 md:h-10 bg-amber-950 rounded-full transition-all duration-500 ease-in-out ${
+                        className={`absolute top-1 left-1 w-9 h-9 md:w-10 md:h-10 bg-black rounded-full transition-all duration-500 ease-in-out ${
                         viewMode === "list" ? "translate-x-9 md:translate-x-10" : "translate-x-0"
                         }
                             `}
                     />
-                        <button
-                            className="z-10 w-9 h-9 md:w-10 md:h-10 text-amber-500 flex items-center justify-center cursor-pointer "
+                       <button
                             onClick={() => setViewMode("grid")}
+                            className={`z-10 w-9 h-9 md:w-10 md:h-10 flex items-center justify-center cursor-pointer 
+                                transition-colors duration-300 ease-in-out
+                            ${
+                            viewMode === "grid" ? "text-white" : "text-black" 
+                            }`}
                         >
                             <i className="material-icons">grid_on</i>
                         </button>
+
                         <button
-                            className="z-10 w-9 h-9 md:w-10 md:h-10 text-amber-500 flex items-center justify-center cursor-pointer"
                             onClick={() => setViewMode("list")}
+                            className={`z-10 w-9 h-9 md:w-10 md:h-10 flex items-center justify-center cursor-pointer 
+                            transition-colors duration-300 ease-in-out
+                            ${
+                            viewMode === "list" ? "text-white" : "text-black"
+                            }`}
                         >
                             <i className="material-icons">view_list</i>
                         </button>
@@ -212,11 +224,20 @@ const Requests = () => {
                 ))}
                 </div>
             ) : (
-                <div className="text-center text-white text-xl font-medium mt-20">
-                    <div className='flex items-center justify-center bg-black p-6 rounded-full' >
-                        No connection requests at the moment.
+                <div className="w-full h-full flex flex-col items-center justify-center mt-20">
+                    {/* 👇 Lottie animation */}
+                    <div className="w-64 h-64 mb-6">
+                        <Lottie animationData={emptyBoxAnimation} loop={true} />
                     </div>
+
+                    <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                        📭 No Connection Requests
+                    </h2>
+                    <p className="text-md text-gray-700 text-center max-w-md">
+                        It seems quiet here. Once someone sends you a request, it will appear on this page!
+                    </p>
                 </div>
+
             )}
         </div>
   );

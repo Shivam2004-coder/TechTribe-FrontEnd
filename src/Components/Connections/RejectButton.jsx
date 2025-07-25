@@ -1,8 +1,8 @@
 // ExploreButton.jsx
 import React from 'react';
-import { errorMessage } from '../../utils/ShowMessage';
+import { errorMessage, successMessage } from '../../utils/ShowMessage';
 import axios from 'axios';
-import { removeFeed } from '../../utils/ReduxStore/feedSlice';
+import { removeC } from '../../utils/ReduxStore/connectionSlice';
 import { useDispatch } from 'react-redux';
 
 const RejectButton = ({ _id }) => {
@@ -11,7 +11,8 @@ const RejectButton = ({ _id }) => {
     const handleRequestClick = async () =>  {
         try {
           await axios.post(`${import.meta.env.VITE_BASE_URL}request/review/rejected/${_id}`, {}, { withCredentials: true });
-          dispatch(removeFeed(_id));
+          successMessage("Request Rejected Successfully");
+          dispatch(removeC(_id));
         } 
         catch (error) {
           errorMessage("i am in the reject button  "+error.message);

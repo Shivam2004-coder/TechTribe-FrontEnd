@@ -8,6 +8,12 @@ import UserCard from "./UserCard";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
 
+import Lottie from "lottie-react";
+// 👇 import your downloaded Lottie JSON file
+import emptyBoxAnimation from "../../assets/Empty box by partho.json";
+
+
+
 const Tribe = () => {
   const feed = useSelector((store) => store.feed.feedContent);
   const swipes = useSelector((store) => store.profile.swipes);
@@ -17,6 +23,9 @@ const Tribe = () => {
   const [showConfetti, setShowConfetti] = useState(false);
   const [countdown, setCountdown] = useState("");
   const { width, height } = useWindowSize();
+
+    // 🎯 New state for animation
+  const [playAnimation, setPlayAnimation] = useState(true);
 
   const fetchTribeData = async () => {
     try {
@@ -56,6 +65,17 @@ const Tribe = () => {
     }
   }, [swipes]);
 
+  // 🪄 Stop animation after 3 seconds
+  useEffect(() => {
+    let timer;
+    if (playAnimation) {
+      timer = setTimeout(() => {
+        setPlayAnimation(false);
+      }, 3000); // animation plays for 3s then stops
+    }
+    return () => clearTimeout(timer);
+  }, [playAnimation]);
+
   if (!feed) return null;
 
   // ✅ Case 1: Limit reached (swipes > 30)
@@ -79,6 +99,12 @@ const Tribe = () => {
         <div className="text-3xl font-bold mb-4 text-gray-600 animate-pulse">
           😕 No one to connect with right now!
         </div>
+
+        {/* 👇 Lottie animation container */}
+        <div className="w-48 h-48 my-4">
+          <Lottie animationData={emptyBoxAnimation} loop={true} />
+        </div>
+
         <p className="text-lg mb-2">Try again later — new profiles are updated regularly.</p>
         <p className="text-md text-gray-600 mt-4 animate-bounce">Keep exploring the tribe!</p>
       </div>

@@ -25,11 +25,13 @@ const Layout = () => {
   //   useBackgroundImage = true;
   //   bgImage = "url('/loginBackground3.jpg')";
   } else if (path === "/tribe") {
-    useBackgroundImage = true;
-    bgImage = `url("https://res.cloudinary.com/dilpkrfrb/image/upload/v1744462596/${wallpaperImage}")`;
+    useBackgroundImage = false;
+    // bgImage = `url("https://res.cloudinary.com/dilpkrfrb/image/upload/v1744462596/${wallpaperImage}")`;
+    bgClass = "bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300";
   } else {
     useBackgroundImage = false;
-    bgClass = displayMode === "Light" ? "bg-gradient-to-r from-zinc-400 via-gray-500 to-neutral-600" : "bg-gradient-to-r from-zinc-800 via-gray-800 to-neutral-900";
+    bgClass = displayMode === "Light" ? "bg-gray-500" : "bg-gradient-to-r from-zinc-800 via-gray-800 to-neutral-900";
+    // bgClass = displayMode === "Light" ? "bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300" : "bg-gradient-to-r from-zinc-800 via-gray-800 to-neutral-900";
   }
 
   return (

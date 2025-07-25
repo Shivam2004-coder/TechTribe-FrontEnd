@@ -25,13 +25,13 @@ const requestSlice = createSlice({
         },
         removeRequestInterested: (state , action) => {
             // console.log("Before removal:", state.requestContent);
-            const newArray = state.requestInterestedContent.filter((request) => request.fromUserId._id !== action.payload);
+            const newArray = state.requestInterestedContent.filter((request) => request.toUserId._id !== action.payload);
             // console.log("After removal:", newArray);
             state.requestInterestedContent = newArray;
         },
         removeRequestIgnored: (state , action) => {
             // console.log("Before removal:", state.requestContent);
-            const newArray = state.requestIgnoredContent.filter((request) => request.fromUserId._id !== action.payload);
+            const newArray = state.requestIgnoredContent.filter((request) => request.toUserId._id !== action.payload);
             // console.log("After removal:", newArray);
             state.requestIgnoredContent = newArray;
         }
