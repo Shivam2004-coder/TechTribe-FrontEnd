@@ -11,10 +11,10 @@ import { fetchAndStoreUserProfile } from "../../CustomHooks/fetchAndStoreUserPro
 
 const Login = () => {
   const [isSignIn, setSignIn] = useState(null);
-  const [userName, setUName] = useState("Manav");
-  const [lastName, setLName] = useState("Patel");
-  const [emailId, setEId] = useState("manav@example.com");
-  const [password, setPassword] = useState("Manav@123");
+  const [userName, setUName] = useState("");
+  const [lastName, setLName] = useState("");
+  const [emailId, setEId] = useState("");
+  const [password, setPassword] = useState("");
   const [canSeePassword, setCanSeePassword] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // shimmer state
   const gender = useSelector((store) => store.profile.gender); // 👈 may be empty initially
