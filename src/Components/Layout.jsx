@@ -18,19 +18,19 @@ const Layout = () => {
 
   if(path === "/login" || path === "/onboarding") {
     useBackgroundImage = false;
-    bgClass = "bg-gray-300";
+    bgClass = "bg-gray-200";
     // bgClass = "bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300";
   // }
   // if (path === "/login" || path === "/onboarding") {
   //   useBackgroundImage = true;
   //   bgImage = "url('/loginBackground3.jpg')";
   } else if (path === "/tribe") {
-    useBackgroundImage = false;
-    // bgImage = `url("https://res.cloudinary.com/dilpkrfrb/image/upload/v1744462596/${wallpaperImage}")`;
-    bgClass = "bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300";
+    useBackgroundImage = true;
+    bgImage = `url("https://res.cloudinary.com/dilpkrfrb/image/upload/v1744462596/${wallpaperImage}")`;
+    // bgClass = "bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300";
   } else {
     useBackgroundImage = false;
-    bgClass = displayMode === "Light" ? "bg-gray-500" : "bg-gradient-to-r from-zinc-800 via-gray-800 to-neutral-900";
+    bgClass = displayMode === "Light" ? "bg-gray-300" : "bg-gradient-to-r from-zinc-800 via-gray-800 to-neutral-900";
     // bgClass = displayMode === "Light" ? "bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300" : "bg-gradient-to-r from-zinc-800 via-gray-800 to-neutral-900";
   }
 

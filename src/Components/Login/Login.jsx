@@ -123,15 +123,15 @@ const Login = () => {
 
        {/* SHIMMER OVERLAY */}
       {isLoading ? (
-        <div className="w-full  md:w-1/2 p-8 text-white backdrop-blur-lg bg-white/10">
-          <h2 className="text-4xl font-bold mb-4 text-center">
+        <div className="w-full  md:w-1/2 p-8 text-white">
+          <h2 className="text-4xl font-bold mb-4 text-center text-black">
           { !isSignIn ? "Welcome Back!" : "Get Started"}
         </h2>
-        <p className="text-sm text-gray-300 text-center mb-6">
+        <p className="text-sm text-gray-900 text-center mb-6">
           { !isSignIn ? "Login to continue" : "Create your account"}
         </p>
           <div className=" flex items-center justify-center">
-            <div className="w-96 p-6 rounded-xl bg-gradient-to-r from-[#1f1f1f] via-[#2e2e2e] to-[#3d3d3d] space-y-6  shadow-md">
+            <div className="w-96 p-6 rounded-4xl bg-gradient-to-r from-[#1f1f1f] via-[#2e2e2e] to-[#3d3d3d] space-y-6  shadow-md">
 
               {/* Title */}
               <div className="h-10 w-1/2 border border-black/2 mx-auto bg-gray-600 rounded-md relative overflow-hidden ">

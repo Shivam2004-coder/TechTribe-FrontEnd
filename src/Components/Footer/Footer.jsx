@@ -4,9 +4,13 @@ import { Link } from "react-router-dom"; // 👈 Import Link
 import Logo from "../Header/Logo";
 
 const Footer = () => {
-  const displayMode = useSelector((store) => store.profile.displayMode);
+  const rawDisplayMode = useSelector((store) => store.profile.displayMode);
+  const displayMode = rawDisplayMode || "Light";
   const borderColor = displayMode === "Light" ? "border-gray-300" : "border-gray-700";
   const bgColor = displayMode === "Light" ? "bg-white text-black" : "bg-black text-white" ;
+
+  console.log("Footer Rendered");
+  console.log("Display Mode:", displayMode);
 
   return (
     <footer className={`w-full px-4 py-8 ${bgColor} backdrop-blur-md z-40`}>

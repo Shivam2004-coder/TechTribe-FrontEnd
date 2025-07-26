@@ -1,16 +1,17 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../../utils/ReduxStore/feedSlice";
 import { errorMessage } from "../../utils/ShowMessage";
 import UserCard from "./UserCard";
 // import useFetchUserProfileData from "../../CustomHooks/useFetchUserProfileData";
 import Confetti from "react-confetti";
-import { useWindowSize } from "react-use";
+// import { useWindowSize } from "react-use";
 
 import Lottie from "lottie-react";
 // 👇 import your downloaded Lottie JSON file
 import emptyBoxAnimation from "../../assets/Empty box by partho.json";
+import trafficPoliceAnimation from "../../assets/Traffic Police Animation.json";
 
 
 
@@ -22,10 +23,21 @@ const Tribe = () => {
 
   const [showConfetti, setShowConfetti] = useState(false);
   const [countdown, setCountdown] = useState("");
-  const { width, height } = useWindowSize();
+  // const { width, height } = useWindowSize();
 
     // 🎯 New state for animation
   const [playAnimation, setPlayAnimation] = useState(true);
+
+  const boxRef = useRef(null);
+  const [boxSize, setBoxSize] = useState({ width: 0, height: 0 });
+
+  useLayoutEffect(() => {
+    if (boxRef.current) {
+      const { width, height } = boxRef.current.getBoundingClientRect();
+      setBoxSize({ width, height });
+    }
+  }, []);
+
 
   const fetchTribeData = async () => {
     try {
@@ -80,17 +92,40 @@ const Tribe = () => {
 
   // ✅ Case 1: Limit reached (swipes > 30)
   if (swipes > 30) {
+
     return (
-      <div className="relative w-full h-full flex flex-col items-center justify-center bg-white text-black text-xl p-10 rounded-xl shadow-xl">
-        {showConfetti && <Confetti width={width} height={height} />}
-        <div className="text-3xl font-bold mb-4 text-pink-600 animate-pulse">
+      <div
+        ref={boxRef} // 👈 attach the ref
+        className="relative w-9/10 md:w-1/2 h-2/5 md:h-1/2 flex flex-col items-center justify-center bg-white/40 backdrop-blur-sm text-black text-xl p-10 rounded-xl shadow-xl"
+        // style={{ width: boxWidth, height: boxHeight }}
+      >
+        {/* Confetti will now be restricted to this box */}
+        {showConfetti && (
+          <Confetti
+            width={boxSize.width}    // 👈 dynamic width
+            height={boxSize.height}  // 👈 dynamic height
+            recycle={false}      // confetti falls once
+            numberOfPieces={200} // adjust particle count
+          />
+        )}
+
+        {/* 👇 Traffic Police Lottie animation */}
+        <div className="w-48 h-48 z-10">
+          <Lottie animationData={trafficPoliceAnimation} loop={true} />
+        </div>
+
+        <div className="text-3xl font-bold mb-4 text-pink-600 animate-pulse z-10">
           🎉 You've explored all cards for today!
         </div>
-        <p className="text-lg mb-4">Your daily pop-in limit has been reached.</p>
-        <p className="text-md">It will reset at <strong>12:00 AM</strong> — in <span className="text-yellow-400">{countdown}</span></p>
+        <p className="text-lg mb-4 z-10">Your daily pop-in limit has been reached.</p>
+        <p className="text-md z-10">
+          It will reset at <strong>12:00 AM</strong> — in{" "}
+          <span className="text-yellow-900">{countdown}</span>
+        </p>
       </div>
     );
   }
+
 
   // ✅ Case 2: No feed but swipes are still allowed
   if (feed.length === 0) {

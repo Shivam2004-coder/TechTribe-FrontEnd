@@ -13,7 +13,7 @@ const AboutUs = () => {
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-yellow-400 mb-4">About Tech Tribe</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-yellow-500 mb-4">About Tech Tribe</h1>
           <p className={`text-lg ${subTextColor}`}>
             A community-driven platform where real connections begin.
           </p>
