@@ -42,7 +42,7 @@ const FAQ = () => {
   const headingText = displayMode === "Light" ? "text-black" : "text-white";
   const subText = displayMode === "Light" ? "text-gray-800" : "text-gray-300";
   const answerText = displayMode === "Light" ? "text-gray-700" : "text-gray-400";
-  const footerText = displayMode === "Light" ? "text-gray-600" : "text-gray-400";
+  const footerText = displayMode === "Light" ? "text-gray-700" : "text-gray-300";
 
   // Box background based on mode
   const boxBg =
@@ -55,7 +55,7 @@ const FAQ = () => {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className={`text-4xl md:text-5xl font-bold text-yellow-400 mb-4 ${headingText}`}>
+          <h1 className={`text-4xl md:text-5xl font-bold text-yellow-500 mb-4 ${headingText}`}>
             Frequently Asked Questions
           </h1>
           <p className={`text-lg ${subText}`}>
@@ -83,7 +83,7 @@ const FAQ = () => {
         <div className="mt-16 text-center">
           <p className={`text-sm ${footerText}`}>
             Still have questions? Reach out{" "}
-            <Link to="/contact" className="text-yellow-400 hover:underline">
+            <Link to="/contact" className="text-yellow-500 hover:underline">
               here
             </Link>
           </p>

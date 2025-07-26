@@ -13,7 +13,7 @@ const PromoCode = () => {
     <div className="min-h-screen px-6 py-20">
       <div className="max-w-2xl mx-auto text-center">
         {/* Header */}
-        <h1 className={`text-4xl font-bold text-yellow-400 mb-4 ${mainText}`}>
+        <h1 className={`text-4xl font-bold text-yellow-500 mb-4 ${mainText}`}>
           Promo Codes
         </h1>
         <p className={`mb-10 text-lg ${softText}`}>

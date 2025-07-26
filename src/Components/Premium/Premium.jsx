@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import Payment from "./Payment";
 import { fetchAndStoreUserProfile } from "../../CustomHooks/fetchAndStoreUserProfile";
 
+
 const plans = [
   {
     name: "Basic",
@@ -85,6 +86,7 @@ const Premium = () => {
   const [billingCycle, setBillingCycle] = useState("weekly");
   const [isContinueClick , setIsContinueClick] = useState(false);
   // const [showConfetti, setShowConfetti] = useState(true);
+  const displayMode = useSelector((store) => store.profile.displayMode);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // const { width, height } = useWindowSize();
@@ -307,10 +309,10 @@ const Premium = () => {
     <div className="min-h-screen w-full text-white">
 
       <section className="text-center py-16 px-4">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          Upgrade to <span className="text-yellow-400">Premium</span>
+        <h1 className={`text-4xl ${ displayMode === "Light" ? "text-black" : "text-white" } md:text-5xl font-bold mb-4`}>
+          Upgrade to <span className="text-yellow-500">Premium</span>
         </h1>
-        <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
+        <p className={`text-lg md:text-xl ${ displayMode === "Light" ? "text-black" : "text-white" } max-w-2xl mx-auto`}>
           Unlock exclusive features, boost your visibility, and connect with the best devs out there.
         </p>
       </section>

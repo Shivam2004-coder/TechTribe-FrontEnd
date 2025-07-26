@@ -8,21 +8,21 @@ const Privacy = () => {
   const mainText = displayMode === "Light" ? "text-gray-900" : "text-white";
   const subText = displayMode === "Light" ? "text-gray-800" : "text-gray-300";
   const listText = displayMode === "Light" ? "text-gray-700" : "text-gray-400";
-  const noteText = displayMode === "Light" ? "text-gray-500" : "text-gray-400";
+  const noteText = displayMode === "Light" ? "text-gray-700" : "text-gray-300";
 
   return (
     <div className="min-h-screen px-6 py-12">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-10">
-          <h1 className={`text-4xl md:text-5xl font-bold text-yellow-400 mb-4 ${mainText}`}>Privacy Policy</h1>
+          <h1 className={`text-4xl md:text-5xl font-bold text-yellow-500 mb-4 ${mainText}`}>Privacy Policy</h1>
           <p className={`text-lg ${subText}`}>Last updated: June 28, 2025</p>
         </div>
 
         {/* Introduction */}
         <section className="mb-10">
           <p className={`${listText} leading-relaxed`}>
-            At <span className="text-yellow-300 font-medium">Tech Tribe</span>, your privacy is important to us. This Privacy Policy explains how we collect,
+            At <span className="text-yellow-500 font-medium">Tech Tribe</span>, your privacy is important to us. This Privacy Policy explains how we collect,
             use, and protect your personal data when you use our platform. By accessing or using Tech Tribe, you agree to the terms outlined in this policy.
           </p>
         </section>
@@ -98,7 +98,7 @@ const Privacy = () => {
         <section className={`text-sm text-center mt-16 ${noteText}`}>
           <p>
             For privacy-related questions, feel free to contact us at{" "}
-            <a href="mailto:privacy@techtribe.com" className="text-yellow-400 underline">
+            <a href="mailto:privacy@techtribe.com" className="text-yellow-500 underline">
               privacy@techtribe.com
             </a>.
           </p>

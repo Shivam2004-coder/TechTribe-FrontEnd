@@ -7,14 +7,14 @@ const PressRoom = () => {
   // Dynamic text classes
   const mainText = displayMode === "Light" ? "text-gray-900" : "text-white";
   const subText = displayMode === "Light" ? "text-gray-700" : "text-gray-400";
-  const lightText = displayMode === "Light" ? "text-gray-500" : "text-gray-500";
+  const lightText = displayMode === "Light" ? "text-gray-700" : "text-gray-300";
 
   return (
     <div className="min-h-screen px-6 py-12">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className={`text-4xl md:text-5xl font-bold text-yellow-400 mb-4 ${mainText}`}>
+          <h1 className={`text-4xl md:text-5xl font-bold text-yellow-500 mb-4 ${mainText}`}>
             Tech Tribe Press Room
           </h1>
           <p className={`text-lg max-w-2xl mx-auto ${subText}`}>
@@ -40,7 +40,7 @@ const PressRoom = () => {
           </p>
           <a
             href="mailto:press@techtribe.com"
-            className="text-yellow-400 font-medium underline"
+            className="text-yellow-500 font-medium underline"
           >
             press@techtribe.com
           </a>
@@ -103,7 +103,7 @@ const PressRoom = () => {
         <section className={`text-center mt-16 text-sm ${lightText}`}>
           <p>
             For urgent press requests, please contact us directly at{" "}
-            <a href="mailto:press@techtribe.com" className="text-yellow-400 underline">
+            <a href="mailto:press@techtribe.com" className="text-yellow-500 underline">
               press@techtribe.com
             </a>.
           </p>

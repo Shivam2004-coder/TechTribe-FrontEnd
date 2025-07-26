@@ -23,7 +23,7 @@ const AboutUs = () => {
         <section className="mb-10">
           <h2 className={`text-2xl font-semibold mb-3 ${headingTextColor}`}>Our Purpose</h2>
           <p className={`${paragraphTextColor} leading-relaxed`}>
-            <span className="text-yellow-300 font-medium">Tech Tribe</span> isn't just another social app —
+            <span className="text-yellow-500 font-medium">Tech Tribe</span> isn't just another social app —
             it's a dedicated space where developers, tech enthusiasts, and curious minds come together to
             connect, communicate, and collaborate. Whether you're looking to find like-minded people,
             start meaningful conversations, or just expand your circle, this is the place for you.
@@ -54,7 +54,7 @@ const AboutUs = () => {
           <h2 className={`text-2xl font-semibold mb-3 ${headingTextColor}`}>Our Vision</h2>
           <p className={`${paragraphTextColor} leading-relaxed`}>
             We envision a tech community that thrives on meaningful human connection.
-            In a digital world often dominated by content, <span className="text-yellow-300">Tech Tribe</span> shifts the spotlight
+            In a digital world often dominated by content, <span className="text-yellow-500">Tech Tribe</span> shifts the spotlight
             back to people — giving everyone a chance to be seen, heard, and understood.
           </p>
         </section>
@@ -68,7 +68,7 @@ const AboutUs = () => {
           </p>
           <Link
             to="/tribe"
-            className="inline-block mt-3 px-6 py-2 bg-yellow-400 text-black font-semibold rounded-full hover:bg-yellow-300 transition duration-300"
+            className="inline-block mt-3 px-6 py-2 bg-yellow-500 text-black font-semibold rounded-full hover:bg-yellow-600 transition duration-300"
           >
             Explore Tribe
           </Link>

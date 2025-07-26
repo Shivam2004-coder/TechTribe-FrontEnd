@@ -7,14 +7,14 @@ const IntellectualProperty = () => {
   // Choose text colors based on display mode
   const mainText = displayMode === "Light" ? "text-gray-800" : "text-white";
   const subText = displayMode === "Light" ? "text-gray-700" : "text-gray-400";
-  const lightText = displayMode === "Light" ? "text-gray-600" : "text-gray-500";
+  const lightText = displayMode === "Light" ? "text-gray-700" : "text-gray-300";
 
   return (
     <div className="min-h-screen px-6 py-12">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-10">
-          <h1 className={`text-4xl md:text-5xl font-bold text-yellow-400 mb-4 ${mainText}`}>
+          <h1 className={`text-4xl md:text-5xl font-bold text-yellow-500 mb-4 ${mainText}`}>
             Intellectual Property Policy
           </h1>
           <p className={`text-lg ${subText}`}>

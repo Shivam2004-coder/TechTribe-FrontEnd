@@ -13,7 +13,7 @@ const Careers = () => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-yellow-400 mb-4">Careers at Tech Tribe</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-yellow-500 mb-4">Careers at Tech Tribe</h1>
           <p className={`text-lg max-w-2xl mx-auto ${subText}`}>
             We’re building a space where people connect deeply, grow personally, and thrive professionally.
           </p>
@@ -23,7 +23,7 @@ const Careers = () => {
         <section className="mb-12">
           <h2 className={`text-2xl font-semibold mb-3 ${headingText}`}>Our Mission</h2>
           <p className={`leading-relaxed ${paraText}`}>
-            At <span className="text-yellow-300 font-medium">Tech Tribe</span>, we believe meaningful human connections
+            At <span className="text-yellow-500 font-medium">Tech Tribe</span>, we believe meaningful human connections
             drive innovation. Our platform enables users to meet, engage, and build authentic tech communities. 
             We’re passionate about empowering people — and we’re always open to connecting with those who share that passion.
           </p>
@@ -44,7 +44,7 @@ const Careers = () => {
           <p className={`mb-4 ${paraText}`}>
             If you believe you’d be a great fit for Tech Tribe, we’d still love to hear from you.
             Send us your resume or drop us a line at 
-            <span className="text-yellow-400 font-medium"> careers@techtribe.com</span>, and we’ll reach out
+            <span className="text-yellow-500 font-medium"> careers@techtribe.com</span>, and we’ll reach out
             when a matching opportunity arises.
           </p>
           <Link

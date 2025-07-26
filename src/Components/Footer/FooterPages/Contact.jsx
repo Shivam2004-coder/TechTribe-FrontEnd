@@ -44,14 +44,14 @@ const Contact = () => {
   const headingText = displayMode === "Light" ? "text-black" : "text-white";
   const subText = displayMode === "Light" ? "text-gray-800" : "text-gray-300";
   const paraText = displayMode === "Light" ? "text-gray-700" : "text-gray-400";
-  const noteText = displayMode === "Light" ? "text-gray-600" : "text-gray-500";
+  const noteText = displayMode === "Light" ? "text-gray-700" : "text-gray-300";
 
   return (
     <div className="min-h-screen px-6 py-12">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className={`text-4xl md:text-5xl font-bold text-yellow-400 mb-4 ${headingText}`}>Get in Touch</h1>
+          <h1 className={`text-4xl md:text-5xl font-bold text-yellow-500 mb-4 ${headingText}`}>Get in Touch</h1>
           <p className={`text-lg max-w-2xl mx-auto ${subText}`}>
             Whether you have a question, feedback, partnership idea, or just want to say hello —
             we’d love to hear from you.
@@ -65,7 +65,7 @@ const Contact = () => {
             <ul className={`space-y-3 text-base ${subText}`}>
               <li>
                 📧 Email:{" "}
-                <a href="mailto:support@techtribe.com" className="text-yellow-400 hover:underline">
+                <a href="mailto:support@techtribe.com" className="text-yellow-500 hover:underline">
                   support@techtribe.com
                 </a>
               </li>
@@ -90,7 +90,7 @@ const Contact = () => {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Your Name"
-                className="w-full bg-[#1f1f1f] border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                className="w-full bg-[#1f1f1f] border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
                 required
               />
               <input
@@ -99,7 +99,7 @@ const Contact = () => {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Your Email"
-                className="w-full bg-[#1f1f1f] border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                className="w-full bg-[#1f1f1f] border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
                 required
               />
               <textarea
@@ -108,7 +108,7 @@ const Contact = () => {
                 value={formData.message}
                 onChange={handleChange}
                 placeholder="Your Message"
-                className="w-full bg-[#1f1f1f] border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                className="w-full bg-[#1f1f1f] border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
                 required
               />
               <button

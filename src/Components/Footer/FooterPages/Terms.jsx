@@ -5,13 +5,13 @@ import { useSelector } from "react-redux";
 const Terms = () => {
   const displayMode = useSelector((state) => state.profile.displayMode);
   const mainText = displayMode === "Light" ? "text-gray-900" : "text-white";
-  const subText = displayMode === "Light" ? "text-gray-800" : "text-gray-400";
+  const subText = displayMode === "Light" ? "text-gray-800" : "text-gray-300";
 
   return (
     <div className="min-h-screen px-6 py-20">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <h1 className={`text-4xl md:text-5xl font-bold text-yellow-400 mb-6 text-center ${mainText}`}>
+        <h1 className={`text-4xl md:text-5xl font-bold text-yellow-500 mb-6 text-center ${mainText}`}>
           Terms and Conditions
         </h1>
         <p className={`text-center mb-12 max-w-3xl mx-auto ${subText}`}>
@@ -98,7 +98,7 @@ const Terms = () => {
           <h2 className={`text-xl font-semibold mb-2 ${mainText}`}>Questions?</h2>
           <p className={`${subText}`}>
             If you have any questions about these Terms or our platform, please reach out to us{" "}
-            <Link to="/contact" className="text-yellow-400 underline">
+            <Link to="/contact" className="text-yellow-500 underline">
               here
             </Link>.
           </p>
