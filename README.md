@@ -40,7 +40,7 @@ TechTribe is a developer-focused collaboration platform that enables users to co
 ## 🛠️ Installation & Setup
 
 # 1. Clone the repository
-git clone https://github.com/your-username/techtribe-frontend.git
+git clone https://github.com/Shivam2004-coder/TechTribe-FrontEnd.git
 cd techtribe-frontend
 
 # 2. Install dependencies
