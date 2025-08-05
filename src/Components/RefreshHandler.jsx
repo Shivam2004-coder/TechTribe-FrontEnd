@@ -50,7 +50,7 @@ function RefreshHandler({ setIsAuthenticated }) {
         }
       }
 
-      // 👤 User is logged in but hasn't finished onboarding
+      // User is logged in but hasn't finished onboarding
       if (!hasCompletedOnboarding) {
         if (location.pathname !== "/onboarding") {
           errorMessage("Please complete the onboarding details.");
