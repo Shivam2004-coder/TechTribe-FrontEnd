@@ -10,10 +10,9 @@ TechTribe is a developer-focused collaboration platform that enables users to co
 - 💬 Real-time one-on-one chat using Socket.IO
 - 💳 Razorpay integration for premium subscriptions
 - 📁 Profile management with image upload & deletion
-- 🧠 Mood-based feed & personalized developer suggestions
 - ✅ Protected routes using session & localStorage
 - 🌐 Responsive, modern UI with Tailwind CSS
-- 🔎 Search and connection request system
+- 🔎 Connection request system
 
 ---
 
