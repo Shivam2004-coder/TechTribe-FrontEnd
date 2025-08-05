@@ -67,9 +67,13 @@ const Footer = () => {
       {/* Paragraph and Footer Info */}
       <div className="max-w-4xl mx-auto mt-10 text-xs text-center leading-relaxed">
         <p>
-          Tech Tribe is your space for connection, growth, and exploration. Whether you’re looking to discover insightful articles,
-          read trending news, or explore your next favorite book, we’ve got you covered. Our platform brings people of all backgrounds together to engage,
-          learn, and stay informed — all in one place. Join the tribe that thrives on curiosity, creativity, and community.
+          <p>
+            Tech Tribe is a collaborative platform built for developers to connect, learn, and grow together. 
+            Whether you're contributing to projects, sharing insights, or exploring new tools and technologies, 
+            Tech Tribe empowers you to be part of a vibrant, supportive developer community. 
+            Join the tribe that thrives on innovation, knowledge sharing, and meaningful collaboration.
+          </p>
+
         </p>
       </div>
 
